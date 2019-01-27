@@ -1,18 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar_main" />
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edit_text_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:hint="@string/mencari_karangan"
+            android:inputType="text" />
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="11dp"
+                android:orientation="vertical"
+                android:padding="7dp"
+                android:paddingBottom="3dp">
+
+                <TextView
+                    android:id="@+id/text_view_data_is_not_found"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="17dp"
+                    android:gravity="center"
+                    android:text="@string/data_is_not_found"
+                    android:visibility="gone" />
+
+                <ProgressBar
+                    android:id="@+id/progressbar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-7dp"
+                    android:indeterminate="true"
+                    android:max="100"
+                    android:visibility="invisible" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_tajuk1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_tajuk2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recycler_view_tajuk3"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recycler_view_tajuk4"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recycler_view_tajuk5"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recycler_view_tajuk6"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recycler_view_tajuk7"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recycler_view_tajuk8"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recycler_view_tajuk9"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--&lt;!&ndash; Deskripsi part &ndash;&gt;-->
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recycler_view_deskripsi1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recycler_view_deskripsi2"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recycler_view_deskripsi3"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recycler_view_deskripsi4"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recycler_view_deskripsi5"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recycler_view_deskripsi6"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recycler_view_deskripsi7"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recycler_view_deskripsi8"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recycler_view_deskripsi9"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+            </LinearLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </LinearLayout>
+</LinearLayout>

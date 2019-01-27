@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Karangan Cemerlang SPM</string>
+    <string name="administrator">Administrator</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+
+    <string name="karangan">Karangan</string>
+    <string name="add">Add</string>
+    <string name="update">Update</string>
+    <string name="true_false">true/false</string>
+    <string name="versi">versi</string>
+    <string name="edit">Edit</string>
+    <string name="mencari_karangan">Mencari Karangan</string>
+    <string name="like">LIKE</string>
+    <string name="action_about">About</string>
+    <string name="data_is_not_found">Data is not found</string>
 </resources>
