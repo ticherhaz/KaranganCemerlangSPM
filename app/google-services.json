@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "604166798511",
+    "firebase_url": "https://karangan-cemerlang-spm.firebaseio.com",
+    "project_id": "karangan-cemerlang-spm",
+    "storage_bucket": "karangan-cemerlang-spm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604166798511:android:a743dc6a5ea034cc",
+        "android_client_info": {
+          "package_name": "net.ticherhaz.karangancemerlangspm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "604166798511-n25b56scpehqpie6kr8htrol7256sacc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.ticherhaz.karangancemerlangspm",
+            "certificate_hash": "aecc0904d58814597b51955b73c65053fe0bf8ec"
+          }
+        },
+        {
+          "client_id": "604166798511-v1bq0neds3un3bblpt8a7gqhuni68106.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfFZJA_odhXpnBAgmVkd-ET2YJUgXPOgo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "604166798511-v1bq0neds3un3bblpt8a7gqhuni68106.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604166798511:android:781927e03fa00fed",
+        "android_client_info": {
+          "package_name": "net.ticherhaz.karangancemerlangspmadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "604166798511-n9np774rkoasl7bq5ubgcujfe076a4mr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.ticherhaz.karangancemerlangspmadmin",
+            "certificate_hash": "aecc0904d58814597b51955b73c65053fe0bf8ec"
+          }
+        },
+        {
+          "client_id": "604166798511-v1bq0neds3un3bblpt8a7gqhuni68106.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfFZJA_odhXpnBAgmVkd-ET2YJUgXPOgo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "604166798511-v1bq0neds3un3bblpt8a7gqhuni68106.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
