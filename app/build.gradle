@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'keyAlias'
+            keyPassword '112233'
+            storeFile file('C:/Ticherhaz/Challenger/AndroidStudio/keyAlias/karangancemerlangspm.jks')
+            storePassword '112233'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "net.ticherhaz.karangancemerlangspm"
