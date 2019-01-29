@@ -3,6 +3,7 @@ package net.ticherhaz.karangancemerlangspm;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -37,8 +38,6 @@ public class SplashActivity extends AppCompatActivity {
     //Firebase
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
-    //Shared Preference
-    private SharedPreferences sharedPreferences;
     private String uid;
 
     //Method to get IP Address
@@ -78,7 +77,8 @@ public class SplashActivity extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference().child("user");
 
         //Call back the shared preference
-        sharedPreferences = getSharedPreferences(SHARED_PREFERENCES,
+        //Shared Preference
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES,
                 Context.MODE_PRIVATE);
         //If already created the uid, then we just need to call back the shared preference
         if (sharedPreferences.contains(SHARED_PREFERENCES_UID)) {
@@ -157,10 +157,19 @@ public class SplashActivity extends AppCompatActivity {
                 System system = dataSnapshot.getValue(System.class);
 
                 //After that, we chat the value
-                if (system != null && system.getVersi() != 1) {
-                    //TODO: Version right now is 1. Please update when the new version is released.
+                if (system != null && system.getVersi() != 2) {
+                    //TODO: Version right now is 2. Please update when the new version is released.
                     Toast.makeText(getApplicationContext(), "Please update the new version", Toast.LENGTH_SHORT).show();
-                    //Then we return to out of this databaseReferenceSystem.
+
+                    //put the delay
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            //Then we proceed to the playStore for user to download the lastest version
+                            final String appPackageName = "net.ticherhaz.karangancemerlangspm"; // Can also use getPackageName(), as below
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                        }
+                    }, 2100); //2.1 seconds
                     return;
                 }
                 if (system != null && !system.isMod()) {

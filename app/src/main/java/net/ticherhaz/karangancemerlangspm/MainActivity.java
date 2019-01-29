@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,7 +22,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -55,35 +54,16 @@ public class MainActivity extends AppCompatActivity {
     //Edit Text
     private EditText editTextSearch;
 
-    //TextView
-    private TextView textViewData;
-
     //Progressbar
     private ProgressBar progressBar;
-
-    //Swipe
-    private SwipeRefreshLayout swipeRefreshLayout;
 
     //RecyclerView
     private RecyclerView recyclerViewTajuk1;
     private RecyclerView recyclerViewTajuk2;
-    // private RecyclerView recyclerViewTajuk3;
+    private RecyclerView recyclerViewTajuk7;
 //    private RecyclerView recyclerViewTajuk4;
 //    private RecyclerView recyclerViewTajuk5;
 //    private RecyclerView recyclerViewTajuk6;
-//    private RecyclerView recyclerViewTajuk7;
-//    private RecyclerView recyclerViewTajuk8;
-//    private RecyclerView recyclerViewTajuk9;
-//
-//    private RecyclerView recyclerViewDeskripsi1;
-//    private RecyclerView recyclerViewDeskripsi2;
-//    private RecyclerView recyclerViewDeskripsi3;
-//    private RecyclerView recyclerViewDeskripsi4;
-//    private RecyclerView recyclerViewDeskripsi5;
-//    private RecyclerView recyclerViewDeskripsi6;
-//    private RecyclerView recyclerViewDeskripsi7;
-//    private RecyclerView recyclerViewDeskripsi8;
-//    private RecyclerView recyclerViewDeskripsi9;
 
     private LinearLayout linearLayout;
     private Toolbar toolbar;
@@ -94,29 +74,13 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         editTextSearch = findViewById(R.id.edit_text_search);
-        textViewData = findViewById(R.id.text_view_data_is_not_found);
         progressBar = findViewById(R.id.progressbar);
-        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
-        setSwipeRefreshLayout();
         recyclerViewTajuk1 = findViewById(R.id.recycler_view_tajuk1);
         recyclerViewTajuk2 = findViewById(R.id.recycler_view_tajuk2);
-        // recyclerViewTajuk3 = findViewById(R.id.recycler_view_tajuk3);
+        recyclerViewTajuk7 = findViewById(R.id.recycler_view_tajuk7);
 //        recyclerViewTajuk4 = findViewById(R.id.recycler_view_tajuk4);
 //        recyclerViewTajuk5 = findViewById(R.id.recycler_view_tajuk5);
 //        recyclerViewTajuk6 = findViewById(R.id.recycler_view_tajuk6);
-//        recyclerViewTajuk7 = findViewById(R.id.recycler_view_tajuk7);
-//        recyclerViewTajuk8 = findViewById(R.id.recycler_view_tajuk8);
-//        recyclerViewTajuk9 = findViewById(R.id.recycler_view_tajuk9);
-//
-//        recyclerViewDeskripsi1 = findViewById(R.id.recycler_view_deskripsi1);
-//        recyclerViewDeskripsi2 = findViewById(R.id.recycler_view_deskripsi2);
-//        recyclerViewDeskripsi3 = findViewById(R.id.recycler_view_deskripsi3);
-//        recyclerViewDeskripsi4 = findViewById(R.id.recycler_view_deskripsi4);
-//        recyclerViewDeskripsi5 = findViewById(R.id.recycler_view_deskripsi5);
-//        recyclerViewDeskripsi6 = findViewById(R.id.recycler_view_deskripsi6);
-//        recyclerViewDeskripsi7 = findViewById(R.id.recycler_view_deskripsi7);
-//        recyclerViewDeskripsi8 = findViewById(R.id.recycler_view_deskripsi8);
-//        recyclerViewDeskripsi9 = findViewById(R.id.recycler_view_deskripsi9);
 
         linearLayout = findViewById(R.id.linear_layout);
 
@@ -129,12 +93,12 @@ public class MainActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
+
         setEditTextSearch();
     }
 
     //Method Edit Text Changed
     private void setEditTextSearch() {
-
         editTextSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -154,6 +118,18 @@ public class MainActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.INVISIBLE);
                     linearLayout.setVisibility(View.INVISIBLE);
                 }
+
+                //TODO: Internet connection, we use the service from the splash activity
+                new SplashActivity.InternetCheck(new SplashActivity.InternetCheck.Consumer() {    //We called the task here (execute here)
+                    @Override
+                    public void accept(Boolean internet) {  //After it met the condition about the internet, it will proceed.
+                        //Then we go to check the system is it ok or not
+                        if (!internet) {
+                            //If no connection, then we proceed to store admin info
+                            Toast.makeText(getApplicationContext(), "Please use stable internet connection", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
     }
@@ -166,33 +142,17 @@ public class MainActivity extends AppCompatActivity {
 //                setRecyclerView(search, "tajuk7UpperCase", recyclerViewTajuk7) || setRecyclerView(search, "tajuk8UpperCase", recyclerViewTajuk8) || setRecyclerView(search, "tajuk9UpperCase", recyclerViewTajuk9)) {
         setRecyclerView(search, "tajuk1UpperCase", recyclerViewTajuk1);
         setRecyclerView(search, "tajuk2UpperCase", recyclerViewTajuk2);
-        //   setRecyclerView(search, "tajuk3UpperCase", recyclerViewTajuk3);
+        setRecyclerView(search, "tajuk7UpperCase", recyclerViewTajuk7);
 //            setRecyclerView(search, "tajuk4UpperCase", recyclerViewTajuk4);
 //            setRecyclerView(search, "tajuk5UpperCase", recyclerViewTajuk5);
 //            setRecyclerView(search, "tajuk6UpperCase", recyclerViewTajuk6);
-//            setRecyclerView(search, "tajuk7UpperCase", recyclerViewTajuk7);
-//            setRecyclerView(search, "tajuk8UpperCase", recyclerViewTajuk8);
-//            setRecyclerView(search, "tajuk9UpperCase", recyclerViewTajuk9);
-        //   } else {
-        //This part for the deskripsiUpperCase
-//            setRecyclerView(search, "deskripsi1UpperCase", recyclerViewDeskripsi1);
-//            setRecyclerView(search, "deskripsi2UpperCase", recyclerViewDeskripsi2);
-//            setRecyclerView(search, "deskripsi3UpperCase", recyclerViewDeskripsi3);
-//            setRecyclerView(search, "deskripsi4UpperCase", recyclerViewDeskripsi4);
-//            setRecyclerView(search, "deskripsi5UpperCase", recyclerViewDeskripsi5);
-//            setRecyclerView(search, "deskripsi6UpperCase", recyclerViewDeskripsi6);
-//            setRecyclerView(search, "deskripsi7UpperCase", recyclerViewDeskripsi7);
-//            setRecyclerView(search, "deskripsi8UpperCase", recyclerViewDeskripsi8);
-//            setRecyclerView(search, "deskripsi9UpperCase", recyclerViewDeskripsi9);
-        // }
+
     }
 
     //Method tajuk
     private void setRecyclerView(String search, String tajukNumberUpperCase, final RecyclerView recyclerViewNumber) {
-
         //Making query
         Query query = databaseReference.child("karangan").child("main").orderByChild(tajukNumberUpperCase).startAt(search.toUpperCase()).endAt(search.toUpperCase() + "\uf8ff");
-
         firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<Karangan>()
                 .setQuery(query, Karangan.class)
                 .build();
@@ -286,14 +246,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChanged() {
                 progressBar.setVisibility(View.INVISIBLE);
-//                if (firebaseRecyclerAdapter.getItemCount() < 0) {
-//                    textViewData.setVisibility(View.VISIBLE);
-//                } else{
-//                    textViewData.setVisibility(View.GONE);
-//                }
-
-                // If there are no chat messages, show a view that invites the user to add a message.
-                //  textViewData.setVisibility(getItemCount() == 0 ? View.VISIBLE : View.GONE);
             }
         };
         //Display
@@ -331,7 +283,8 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_about) {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
             builder.setTitle("About");
-            builder.setMessage("Karangan Cemerlang SPM\nversion 1.0\n\ncreated by Ticherhaz\nhazman45.blogspot.com\n\n ©2019");
+            //TODO: Update the version at About
+            builder.setMessage("Karangan Cemerlang SPM\nversion 1.02\n\ncreated by Ticherhaz\nhazman45.blogspot.com\n\n ©2019");
             builder.setCancelable(true);
             builder.setPositiveButton(
                     "Ok",
@@ -344,18 +297,10 @@ public class MainActivity extends AppCompatActivity {
             alert.show();
             return true;
         }
+        if (id == R.id.action_tips_karangan) {
+            startActivity(new Intent(MainActivity.this, TipsKaranganActivity.class));
+            return true;
+        }
         return super.onOptionsItemSelected(item);
-    }
-
-    //Method swipe
-    private void setSwipeRefreshLayout() {
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                firebaseRecyclerAdapter.startListening();
-                firebaseRecyclerAdapter.notifyDataSetChanged();
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
     }
 }
