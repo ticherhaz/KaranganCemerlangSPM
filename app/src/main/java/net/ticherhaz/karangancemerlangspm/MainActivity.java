@@ -288,7 +288,7 @@ public class MainActivity extends AppCompatActivity {
             builder.setTitle("About");
             builder.setCancelable(false);
             //TODO: Update the version at About
-            builder.setMessage("Karangan Cemerlang SPM\nversion 1.02\n\ncreated by Ticherhaz\nhazman45.blogspot.com\n\n ©2019");
+            builder.setMessage("Karangan Cemerlang SPM\nversion 1.03\n\ncreated by Ticherhaz\nhazman45.blogspot.com\n\n ©2019");
             builder.setCancelable(true);
             builder.setPositiveButton(
                     "Ok",

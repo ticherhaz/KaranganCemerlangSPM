@@ -117,7 +117,7 @@ public class SplashActivity extends AppCompatActivity {
                 //if the user status login or not, then proceed to the next part WITHOUT INTERNET.
                 checkStatusLogin(uid);
             }
-        }, 1900);   //So we are making for 2.1 seconds of the splash screen.
+        }, 1100);   //So we are making for 1.1 seconds of the splash screen.
     }
 
     //Method store data of the user into the Firebase
@@ -158,8 +158,8 @@ public class SplashActivity extends AppCompatActivity {
                 System system = dataSnapshot.getValue(System.class);
 
                 //After that, we chat the value
-                if (system != null && system.getVersi() != 2) {
-                    //TODO: Version right now is 2. Please update when the new version is released.
+                if (system != null && system.getVersi() != 3) {
+                    //TODO: Version right now is 3. Please update when the new version is released.
                     Toast.makeText(getApplicationContext(), "Please update the new version", Toast.LENGTH_SHORT).show();
 
                     //put the delay
@@ -170,7 +170,7 @@ public class SplashActivity extends AppCompatActivity {
                             final String appPackageName = "net.ticherhaz.karangancemerlangspm"; // Can also use getPackageName(), as below
                             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
                         }
-                    }, 2100); //2.1 seconds
+                    }, 3000); //3 seconds
                     return;
                 }
                 if (system != null && !system.isMod()) {
