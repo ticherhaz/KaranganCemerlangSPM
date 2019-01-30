@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Variable
     private String userUid;
+    private String phoneModel;
 
     //Edit Text
     private EditText editTextSearch;
@@ -66,12 +67,11 @@ public class MainActivity extends AppCompatActivity {
 //    private RecyclerView recyclerViewTajuk6;
 
     private LinearLayout linearLayout;
-    private Toolbar toolbar;
 
     //Method listID
     private void listID() {
         //Toolbar
-        toolbar = findViewById(R.id.app_bar);
+        Toolbar toolbar = findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         editTextSearch = findViewById(R.id.edit_text_search);
         progressBar = findViewById(R.id.progressbar);
@@ -86,8 +86,11 @@ public class MainActivity extends AppCompatActivity {
 
         //Get the value of the userUid
         Intent intent = getIntent();
-        if (intent.getExtras() != null)
+        if (intent.getExtras() != null) {
             userUid = intent.getExtras().getString("userUid");
+            phoneModel = intent.getExtras().getString("phoneModel");
+        }
+
 
         //Database
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -283,6 +286,7 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_about) {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
             builder.setTitle("About");
+            builder.setCancelable(false);
             //TODO: Update the version at About
             builder.setMessage("Karangan Cemerlang SPM\nversion 1.02\n\ncreated by Ticherhaz\nhazman45.blogspot.com\n\n ©2019");
             builder.setCancelable(true);
@@ -299,6 +303,13 @@ public class MainActivity extends AppCompatActivity {
         }
         if (id == R.id.action_tips_karangan) {
             startActivity(new Intent(MainActivity.this, TipsKaranganActivity.class));
+            return true;
+        }
+        if (id == R.id.action_feedback) {
+            Intent intent = new Intent(MainActivity.this, FeedbackActivity.class);
+            intent.putExtra("userUid", userUid);
+            intent.putExtra("phoneModel", phoneModel);
+            startActivities(new Intent[]{intent});
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -18,64 +18,49 @@
     <string name="action_about">About</string>
     <string name="data_is_not_found">Data is not found</string>
     <string name="tips_karangan">Tips Karangan</string>
-    <string name="tips_karangan_explain"><![CDATA[Tips Nak Buat Karangan Guna AMBaCoKUP
-Tips sebelum exam kalau kalau ketandusan idea… nie tips daripada cikgu sy di SMK Paya Kemunting dan SMK Seri Mahawangsa.
-
-ok, 1st sekali tengok tajuk.. pastu buat 4 points pun ok da, tapi bergantung kpd cikgu skolah masing2 laa..
-
-
-notes from myself : nk buat karangan nie kita kena bayangkan.. selepas nie apa.. then apa pulak..  dia ada jugak kaitan dgn nada suara dalam kita contohnya, \'dasawarsa ini, pembangunan dalam negara kita merosot. media massa banyak memaparkan ...... " camtu la . lebih kurang.
-
-AMBaCoKUP
-
-PENDAHULUAN:
-
-pendahuluan ni mcm pengenalan terhadap soalan. contoh, 'peranan ibu bapa terhadap pendidikan anak-anak' . okay.
-
-1st sekali, kita buat la pengenalan ibu bapa sekarang nie. 'sibuk dgn kerja' and so on.
-then, kaitkan la pulak dgn anak-anak & pendidikan.
-
-contohnya, berdasarkan peribahasa anak-anak ibarat kain putih, ibu bapalah yang mencorakkannya.
-
-pastu, buat la persoalan. contohnya "apakah peranan ibu bapa terhadap pendidikan anak-anak?"
-
-arghh... boleh faham kot ...
-
-pendahuluan ni macam ngan flow.. kita mcm ngan ikut jerr..
-
-
-PERENGGAN untuk ISI:
-
-A = apa...  mean, apa yg tajuk tuu nakk..
-
-M = mengapa... mean mengapa benda tu berlaku, selalunya ayat akan bermula, "hal ini kerana...."
-
-Ba = bagaimana... mean bagaimana nak bendung,.. selalu ayat yg sy guna "usaha yg boleh dilaksanakan...."
-
-Co = contoh.. mean nak bagi contoh perkara yg berlaku pun boleh... "contonhya, membina masjid di kawasan perumahan.." ataupun "misalnya..."
-
-K = kesan... mean kesan yg akan berlaku terhadap contoh itu.. "impaknya, ramai org akan pergi ke masjid..." ataupun "kesannya...."
-
-U = ungkapan... mean ungkapan daripada kesan itu.. "ada peribahasa menyatakan bahawa...."
-
-P = penegasan... mean nak tegas balikk... selalunya salin balik ayat 1st kita buat perenggan... salin sebulat2 pun tkpa cuma tambah "Sesungguhnya...." ataupun "Jelaslah bahawa...."
-
-pastu perenggan kedua pun sama la .. hehe..
-
-PENUTUP:
-
-Penutup ni pun sama jugak la dgn pendahuluan, cuma ubah2 kan dari ayat pendahuluan. pastu cuba kaitkan "Pelbagai pihak perlu memainkan peranan .... "
-
-orang kata ayat harapan.... ayat nak up . haha. camtu la .
-
-kalau tak faham atau pertanyaan, PM :D
-
-
-Selamat beramal dan semoga maju jaya! :)
-
-
-
-
-
+    <string name="tips_karangan_explain">
+        <![CDATA[
+        <h2><b>Tips Buat Karangan Menggunakan AMBaCoKUP</b></h2>
+        </br>
+        </br>
+        <p><b>Pengenalan:</b> Kalau ketandusan idea, tips ini inshaAllah dapat membantu anda semua. Terima kasih kepada guru saya di SMK Paya Kemunting dan SMK Seri Mahawangsa diatas ilmu yang dicurahkan.</p>
+        </br>
+        <p><b>Cara-cara:</b></p>
+        <p>1. Mendalami soalan terlebih dahulu. Apa soalan itu mahu. Soalan nak langkah, cara, peranan, punca, faktor, manfaat, faedah, usaha?</p>
+        <p>2. Corakkan perjalanan karangan. Penggunaan AMBaCoKUP. Bagaimana permulaan, pertengahan, klimaks, pengakhiran karangan kamu.</p>
+        <p>3. Senaraikan isi penting. Senang dikenal pasti berdasarkan soalan. Sebab itu kena mendalami soalan.</p>
+        <p>4. Selamat Mengarang :)</p>
+        </br>
+        </br>
+        </br>
+        <h3><b>AMBaCoKUP</b></h3>
+        </br>
+        <p><i><b>Nota dari saya:</b> Nak buat karangan ni, kita kena bayangkan.. selepas nie apa.. then apa pulak.. nada suara kita dalam hati tu mainkan peranan jugak untuk menjana idea, ulang banyak kali nada itu, mcm kita bagi pidato tu. haa inshaAllah idea tu datang. contohnya, \"dasawarsa ini, pembangunan dalam negara kita merosot. media massa banyak memaparkan ...... " .</i></p>
+        </br>
+        <p><b>PENDAHULUAN KARANGAN</b></p>
+        <p>Pendahuluan ni mcm pengenalan terhadap soalan. Contohnya, 'peranan ibu bapa terhadap pendidikan anak-anak'. Okay, 1st sekali, kita buat la pengenalan ibu bapa sekarang nie. 'sibuk dgn kerja' and so on. Then, kaitkan la pulak dgn anak-anak & pendidikan. Contohnya, berdasarkan peribahasa anak-anak ibarat kain putih, ibu bapalah yang mencorakkannya. Pastu, buat la persoalan, contohnya "apakah peranan ibu bapa terhadap pendidikan anak-anak?" Ayat penegasan yg last sekali ni penting, dapat menimbulkan persoalan, tertanya-tanya. Pendahuluan ni macam ngan flow.. kita mcm ngan ikut jerr.. </p>
+        </br>
+        <p><b>ISI KARANGAN untuk SETIAP PERENGGAN:</b></p>
+        </br>
+        <p><b>A</b> = Apa...  mean, apa yg tajuk tuu nakk.. kita akan tulis balik isi points yang kita dapat tu.</p>
+        <p><b>M</b> = Mengapa...  mean, mengapa benda tu berlaku, selalunya ayat akan bermula, "hal ini kerana...."</p>
+        <p><b>Ba</b> = Bagaimana...  mean, bagaimana nak bendung,.. selalu ayat yg sy guna "usaha yg boleh dilaksanakan...."</p>
+        <p><b>Co</b> = Contoh..  mean, nak bagi contoh perkara yg berlaku pun boleh... "contonhya, membina masjid di kawasan perumahan.." ataupun "misalnya..."</p>
+        <p><b>K</b> = Kesan...  mean, kesan yg akan berlaku terhadap contoh itu.. "impaknya, ramai org akan pergi ke masjid..." ataupun "kesannya...."</p>
+        <p><b>U</b> = Ungkapan...  mean, ungkapan daripada kesan itu.. "ada peribahasa menyatakan bahawa...."</p>
+        <p><b>P</b> = Penegasan...  mean, nak tegas balikk... selalunya salin balik ayat 1st kita buat perenggan... salin sebulat2 pun tkpa cuma tambah "Sesungguhnya...." ataupun "Jelaslah bahawa...."</p>
+        <p>pastu perenggan kedua pun sama la .. hehe..</p>
+        <p><i>Extra tips: nak bagi cantik sikit, perenggan 2 or 3, kita terbalikkan ayat untuk Apa. Contoh, ayat 1st: "Untuk berjasa kepada kedua ibu bapa kita ialah dengan menolong kedua ibu bapa." . ayat 2nd: "Menolong kedua ibu bapa kita adalah salah satu cara untuk berjasa kepada kedua ibup bapa kita". Nampak dak?</i></p>
+        </br>
+        <p><b>PENUTUP KARANGAN:</b></p>
+        <p>Penutup ni pun sama jugak la dgn pendahuluan, cuma ubah2 kan dari ayat pendahuluan. pastu cuba kaitkan "Pelbagai pihak perlu memainkan peranan .... ". orang kata ayat harapan.... ayat nak up . haha. camtu la .</p>
+        <p>kalau tak faham atau pertanyaan, boleh emailkan ke: <b><i>ticherhaz@gmail.com</i></b></P>
+        <p><b><i>Selamat beramal dan semoga maju jaya! :)</i></b></p>
 ]]></string>
+    <string name="feedback">Feedback</string>
+    <string name="submit">Submit</string>
+    <string-array name="feedback_array">
+        <item>Suggestion</item>
+        <item>Compliment</item>
+    </string-array>
 </resources>

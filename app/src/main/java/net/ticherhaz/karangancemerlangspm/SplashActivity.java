@@ -138,6 +138,7 @@ public class SplashActivity extends AppCompatActivity {
         //Then start the main activity and transfer the userUID
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.putExtra("userUid", userUid);
+        intent.putExtra("phoneModel", phoneModel);
         startActivities(new Intent[]{intent});
         //Then close this activity
         finish();
