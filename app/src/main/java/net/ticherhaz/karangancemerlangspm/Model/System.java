@@ -19,33 +19,21 @@ public class System implements Parcelable {
     private boolean mod;
     private int versi;
 
-    protected System(Parcel in) {
+    private System(Parcel in) {
         mod = in.readByte() != 0;
         versi = in.readInt();
     }
 
     public System() {
-    }
-
-    public System(boolean mod, int versi) {
-        this.mod = mod;
-        this.versi = versi;
+        //Don't delete constructor
     }
 
     public boolean isMod() {
         return mod;
     }
 
-    public void setMod(boolean mod) {
-        this.mod = mod;
-    }
-
     public int getVersi() {
         return versi;
-    }
-
-    public void setVersi(int versi) {
-        this.versi = versi;
     }
 
     @Override

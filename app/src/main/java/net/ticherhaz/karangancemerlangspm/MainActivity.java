@@ -40,13 +40,7 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    //Firebase Database
-    private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
-
-    //FirebaseUI
-    private FirebaseRecyclerOptions<Karangan> firebaseRecyclerOptions;
-    private FirebaseRecyclerAdapter<Karangan, KaranganViewHolder> firebaseRecyclerAdapter;
 
     //Variable
     private String userUid;
@@ -93,7 +87,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Database
-        firebaseDatabase = FirebaseDatabase.getInstance();
+        //Firebase Database
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
 
@@ -123,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 //TODO: Internet connection, we use the service from the splash activity
-                new SplashActivity.InternetCheck(new SplashActivity.InternetCheck.Consumer() {    //We called the task here (execute here)
+                new InternetCheck(new InternetCheck.Consumer() {    //We called the task here (execute here)
                     @Override
                     public void accept(Boolean internet) {  //After it met the condition about the internet, it will proceed.
                         //Then we go to check the system is it ok or not
@@ -156,15 +151,18 @@ public class MainActivity extends AppCompatActivity {
     private void setRecyclerView(String search, String tajukNumberUpperCase, final RecyclerView recyclerViewNumber) {
         //Making query
         Query query = databaseReference.child("karangan").child("main").orderByChild(tajukNumberUpperCase).startAt(search.toUpperCase()).endAt(search.toUpperCase() + "\uf8ff");
-        firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<Karangan>()
+        //FirebaseUI
+        FirebaseRecyclerOptions<Karangan> firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<Karangan>()
                 .setQuery(query, Karangan.class)
                 .build();
-        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Karangan, KaranganViewHolder>(firebaseRecyclerOptions) {
+        FirebaseRecyclerAdapter<Karangan, KaranganViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Karangan, KaranganViewHolder>(firebaseRecyclerOptions) {
             @Override
             protected void onBindViewHolder(@NonNull final KaranganViewHolder holder, int position, @NonNull final Karangan model) {
                 //Display the data
                 holder.getTextViewTajuk().setText(model.getTajukPenuh());
                 holder.getTextViewDeskripsi().setText(model.getDeskripsiPenuh());
+                holder.getTextViewViewer().setText(String.valueOf(model.getMostVisited()));
+                holder.getTextViewFav().setText(String.valueOf(model.getVote()));
 
                 holder.getView().setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -185,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                                 //We declare the click = 0 because we don't know if the click is available or not
                                 int click = 0;
                                 if (dataSnapshot.exists()) {
-                                    click = dataSnapshot.getValue(Integer.class);
+                                    click = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
                                 }
                                 //Then we set the new data of the user
                                 databaseReference.child("user").child(userUid).child("karangan").child(model.getTajukPenuh()).child("click").setValue(click + 1);
@@ -200,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
 
                                         int clickKarangan = 0;
                                         if (dataSnapshot.exists()) {
-                                            clickKarangan = dataSnapshot.getValue(Integer.class);
+                                            clickKarangan = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
                                         }
                                         //Then we set the data for the karangan
                                         databaseReference.child("karangan").child("main").child(model.getUid()).child("mostVisited").setValue(clickKarangan + 1);
@@ -286,9 +284,8 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_about) {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
             builder.setTitle("About");
-            builder.setCancelable(false);
             //TODO: Update the version at About
-            builder.setMessage("Karangan Cemerlang SPM\nversion 1.03\n\ncreated by Ticherhaz\nhazman45.blogspot.com\n\n ©2019");
+            builder.setMessage("Karangan Cemerlang SPM\nversion 1.04\n\ncreated by Ticherhaz\nhazman45.blogspot.com\n\n ©2019");
             builder.setCancelable(true);
             builder.setPositiveButton(
                     "Ok",
@@ -298,6 +295,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
             AlertDialog alert = builder.create();
+            alert.setCancelable(false);
             alert.show();
             return true;
         }

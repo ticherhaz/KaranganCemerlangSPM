@@ -59,6 +59,9 @@
 ]]></string>
     <string name="feedback">Feedback</string>
     <string name="submit">Submit</string>
+    <string name="logo_kcspm">Logo KCSPM</string>
+    <string name="viewer">Viewer</string>
+    <string name="fav">Fav</string>
     <string-array name="feedback_array">
         <item>Suggestion</item>
         <item>Compliment</item>

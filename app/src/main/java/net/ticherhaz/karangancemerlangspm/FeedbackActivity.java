@@ -23,7 +23,6 @@ import java.util.Calendar;
 
 public class FeedbackActivity extends AppCompatActivity {
 
-    private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
 
     private EditText editTextEmail;
@@ -38,7 +37,7 @@ public class FeedbackActivity extends AppCompatActivity {
 
     //Method list ID
     private void listID() {
-        firebaseDatabase = FirebaseDatabase.getInstance();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("feedback");
 
         editTextEmail = findViewById(R.id.edit_text_email);
@@ -77,28 +76,41 @@ public class FeedbackActivity extends AppCompatActivity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!TextUtils.isEmpty(editTextEmail.getText().toString()) && !TextUtils.isEmpty(editTextDescription.getText().toString()) && isEmailValid(editTextEmail.getText().toString())) {
-                    String typeProblem = spinner.getSelectedItem().toString();
-                    String email = editTextEmail.getText().toString();
-                    String description = editTextDescription.getText().toString();
-                    String date = Calendar.getInstance().getTime().toString();
+                //Check the internet connection
+                new InternetCheck(new InternetCheck.Consumer() {
+                    @Override
+                    public void accept(Boolean internet) {
+                        if (internet) {
+                            if (!TextUtils.isEmpty(editTextEmail.getText().toString()) && !TextUtils.isEmpty(editTextDescription.getText().toString()) && isEmailValid(editTextEmail.getText().toString())) {
+                                String typeProblem = spinner.getSelectedItem().toString();
+                                String email = editTextEmail.getText().toString();
+                                String description = editTextDescription.getText().toString();
+                                String date = Calendar.getInstance().getTime().toString();
 
-                    String uid = databaseReference.push().getKey();
+                                String uid = databaseReference.push().getKey();
 
-                    Feedback feedback = new Feedback(uid, userUid, phoneModel, typeProblem, email, description, date);
-                    //Then store the data into firebase
-                    if (uid != null)
-                        databaseReference.child(uid).setValue(feedback).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    editTextEmail.setText("");
-                                    editTextDescription.setText("");
-                                    Toast.makeText(getApplicationContext(), "Thank you for your feedback.\nWe will contact you soon.", Toast.LENGTH_SHORT).show();
-                                }
+                                Feedback feedback = new Feedback(uid, userUid, phoneModel, typeProblem, email, description, date);
+                                //Then store the data into firebase
+                                if (uid != null)
+                                    databaseReference.child(uid).setValue(feedback).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                editTextEmail.setText("");
+                                                editTextDescription.setText("");
+                                                Toast.makeText(getApplicationContext(), "Thank you for your feedback.\nWe will contact you soon.", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Please use your email and fill in the blank", Toast.LENGTH_SHORT).show();
                             }
-                        });
-                }
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Please check internet connection", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
             }
         });
     }

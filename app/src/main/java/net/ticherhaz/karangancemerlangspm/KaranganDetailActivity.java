@@ -25,16 +25,16 @@ public class KaranganDetailActivity extends AppCompatActivity {
     private TextView textViewTajuk;
     private TextView textViewKarangan;
     private TextView textViewTarikh;
-    private TextView textViewVote;
-    private TextView textViewLike;
+    private TextView textViewFav;
+    private TextView textViewViewer;
 
     private String userUid;
     private String uidKarangan;
     private String tajuk;
     private String karangan;
     private String tarikh;
-    private String vote;
-    private int like;
+    private int vote;
+    private int mostVisited;
     private int voteAtKarangan = 0;
 
     //Method listID
@@ -42,8 +42,8 @@ public class KaranganDetailActivity extends AppCompatActivity {
         textViewTajuk = findViewById(R.id.text_view_tajuk);
         textViewKarangan = findViewById(R.id.text_view_karangan);
         textViewTarikh = findViewById(R.id.text_view_tarikh);
-        textViewVote = findViewById(R.id.text_view_vote);
-        textViewLike = findViewById(R.id.text_view_like);
+        textViewFav = findViewById(R.id.text_view_fav);
+        textViewViewer = findViewById(R.id.text_view_viewer);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("user");
@@ -62,16 +62,18 @@ public class KaranganDetailActivity extends AppCompatActivity {
             tajuk = intent.getExtras().getString("tajukPenuh");
             karangan = intent.getExtras().getString("karangan");
             tarikh = intent.getExtras().getString("tarikh");
-            vote = String.valueOf(intent.getExtras().getInt("vote"));
+            vote = intent.getExtras().getInt("vote");
+            mostVisited = intent.getExtras().getInt("mostVisited");
         }
     }
 
     //Method display the data
     private void displayData() {
-        textViewTajuk.append(tajuk);
-        textViewKarangan.append(karangan);
-        textViewTarikh.append(tarikh);
-        textViewVote.append("Vote: " + vote);
+        textViewTajuk.setText(tajuk);
+        textViewKarangan.setText(karangan);
+        textViewTarikh.setText(tarikh);
+        textViewFav.setText(String.valueOf(vote));
+        textViewViewer.setText(String.valueOf(mostVisited));
     }
 
     //Method check the user if user already like or not
@@ -82,7 +84,7 @@ public class KaranganDetailActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    like = dataSnapshot.getValue(Integer.class);
+                    vote = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
                 }
 
                 //Then update the view at the like
@@ -90,8 +92,9 @@ public class KaranganDetailActivity extends AppCompatActivity {
                 //0 == not like
                 //1 == like
 
-                if (like == 1) {
-                    textViewLike.setText("LIKED");
+                if (vote == 1) {
+                    textViewFav.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_favourite_red, 0, 0, 0);
+                    textViewFav.setCompoundDrawablePadding(1);
                 }
 
             }
@@ -105,11 +108,11 @@ public class KaranganDetailActivity extends AppCompatActivity {
 
     //Method click the like text view
     private void setTextViewLike() {
-        textViewLike.setOnClickListener(new View.OnClickListener() {
+        textViewFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //If the text already become liked
-                if (textViewLike.getText().toString().equals("LIKED")) {
+                if (textViewFav.getCompoundDrawablePadding() == 1) {
                     Toast.makeText(getApplicationContext(), "You already liked this karangan", Toast.LENGTH_SHORT).show();
                 } else {
                     //1st. we read and update at karangan
@@ -118,11 +121,12 @@ public class KaranganDetailActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
-                                voteAtKarangan = dataSnapshot.getValue(Integer.class);
+                                voteAtKarangan = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
                             }
                             //Then we update at karangan
                             databaseReferenceKarangan.child("karangan").child("main").child(uidKarangan).child("vote").setValue(voteAtKarangan + 1);
                             databaseReference.child(userUid).child("karangan").child(tajuk).child("like").setValue(1);
+                            textViewFav.setText(String.valueOf(vote + 1));
                             Toast.makeText(getApplicationContext(), "You LIKE this Karangan", Toast.LENGTH_SHORT).show();
                         }
 

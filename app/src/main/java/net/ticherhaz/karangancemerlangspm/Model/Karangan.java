@@ -70,58 +70,10 @@ public class Karangan implements Parcelable {
     private String deskripsi9UpperCase;
 
     public Karangan() {
+        //Don't delete constructor
     }
 
-    public Karangan(String uid, String tajukPenuh, String tajuk1, String tajuk2, String tajuk3, String tajuk4, String tajuk5, String tajuk6, String tajuk7, String tajuk8, String tajuk9, String deskripsiPenuh, String deskripsi1, String deskripsi2, String deskripsi3, String deskripsi4, String deskripsi5, String deskripsi6, String deskripsi7, String deskripsi8, String deskripsi9, String tarikh, String karangan, int vote, int mostVisited, String userLastVisitedDate, String tajukPenuhUpperCase, String tajuk1UpperCase, String tajuk2UpperCase, String tajuk3UpperCase, String tajuk4UpperCase, String tajuk5UpperCase, String tajuk6UpperCase, String tajuk7UpperCase, String tajuk8UpperCase, String tajuk9UpperCase, String deskripsiPenuhUpperCase, String deskripsi1UpperCase, String deskripsi2UpperCase, String deskripsi3UpperCase, String deskripsi4UpperCase, String deskripsi5UpperCase, String deskripsi6UpperCase, String deskripsi7UpperCase, String deskripsi8UpperCase, String deskripsi9UpperCase) {
-        this.uid = uid;
-        this.tajukPenuh = tajukPenuh;
-        this.tajuk1 = tajuk1;
-        this.tajuk2 = tajuk2;
-        this.tajuk3 = tajuk3;
-        this.tajuk4 = tajuk4;
-        this.tajuk5 = tajuk5;
-        this.tajuk6 = tajuk6;
-        this.tajuk7 = tajuk7;
-        this.tajuk8 = tajuk8;
-        this.tajuk9 = tajuk9;
-        this.deskripsiPenuh = deskripsiPenuh;
-        this.deskripsi1 = deskripsi1;
-        this.deskripsi2 = deskripsi2;
-        this.deskripsi3 = deskripsi3;
-        this.deskripsi4 = deskripsi4;
-        this.deskripsi5 = deskripsi5;
-        this.deskripsi6 = deskripsi6;
-        this.deskripsi7 = deskripsi7;
-        this.deskripsi8 = deskripsi8;
-        this.deskripsi9 = deskripsi9;
-        this.tarikh = tarikh;
-        this.karangan = karangan;
-        this.vote = vote;
-        this.mostVisited = mostVisited;
-        this.userLastVisitedDate = userLastVisitedDate;
-        this.tajukPenuhUpperCase = tajukPenuhUpperCase;
-        this.tajuk1UpperCase = tajuk1UpperCase;
-        this.tajuk2UpperCase = tajuk2UpperCase;
-        this.tajuk3UpperCase = tajuk3UpperCase;
-        this.tajuk4UpperCase = tajuk4UpperCase;
-        this.tajuk5UpperCase = tajuk5UpperCase;
-        this.tajuk6UpperCase = tajuk6UpperCase;
-        this.tajuk7UpperCase = tajuk7UpperCase;
-        this.tajuk8UpperCase = tajuk8UpperCase;
-        this.tajuk9UpperCase = tajuk9UpperCase;
-        this.deskripsiPenuhUpperCase = deskripsiPenuhUpperCase;
-        this.deskripsi1UpperCase = deskripsi1UpperCase;
-        this.deskripsi2UpperCase = deskripsi2UpperCase;
-        this.deskripsi3UpperCase = deskripsi3UpperCase;
-        this.deskripsi4UpperCase = deskripsi4UpperCase;
-        this.deskripsi5UpperCase = deskripsi5UpperCase;
-        this.deskripsi6UpperCase = deskripsi6UpperCase;
-        this.deskripsi7UpperCase = deskripsi7UpperCase;
-        this.deskripsi8UpperCase = deskripsi8UpperCase;
-        this.deskripsi9UpperCase = deskripsi9UpperCase;
-    }
-
-    protected Karangan(Parcel in) {
+    private Karangan(Parcel in) {
         uid = in.readString();
         tajukPenuh = in.readString();
         tajuk1 = in.readString();
@@ -168,22 +120,6 @@ public class Karangan implements Parcelable {
         deskripsi7UpperCase = in.readString();
         deskripsi8UpperCase = in.readString();
         deskripsi9UpperCase = in.readString();
-    }
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
-    public String getTajukPenuh() {
-        return tajukPenuh;
-    }
-
-    public void setTajukPenuh(String tajukPenuh) {
-        this.tajukPenuh = tajukPenuh;
     }
 
     public String getTajuk1() {
@@ -258,14 +194,6 @@ public class Karangan implements Parcelable {
         this.tajuk9 = tajuk9;
     }
 
-    public String getDeskripsiPenuh() {
-        return deskripsiPenuh;
-    }
-
-    public void setDeskripsiPenuh(String deskripsiPenuh) {
-        this.deskripsiPenuh = deskripsiPenuh;
-    }
-
     public String getDeskripsi1() {
         return deskripsi1;
     }
@@ -336,46 +264,6 @@ public class Karangan implements Parcelable {
 
     public void setDeskripsi9(String deskripsi9) {
         this.deskripsi9 = deskripsi9;
-    }
-
-    public String getTarikh() {
-        return tarikh;
-    }
-
-    public void setTarikh(String tarikh) {
-        this.tarikh = tarikh;
-    }
-
-    public String getKarangan() {
-        return karangan;
-    }
-
-    public void setKarangan(String karangan) {
-        this.karangan = karangan;
-    }
-
-    public int getVote() {
-        return vote;
-    }
-
-    public void setVote(int vote) {
-        this.vote = vote;
-    }
-
-    public int getMostVisited() {
-        return mostVisited;
-    }
-
-    public void setMostVisited(int mostVisited) {
-        this.mostVisited = mostVisited;
-    }
-
-    public String getUserLastVisitedDate() {
-        return userLastVisitedDate;
-    }
-
-    public void setUserLastVisitedDate(String userLastVisitedDate) {
-        this.userLastVisitedDate = userLastVisitedDate;
     }
 
     public String getTajukPenuhUpperCase() {
@@ -536,6 +424,70 @@ public class Karangan implements Parcelable {
 
     public void setDeskripsi9UpperCase(String deskripsi9UpperCase) {
         this.deskripsi9UpperCase = deskripsi9UpperCase;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getTajukPenuh() {
+        return tajukPenuh;
+    }
+
+    public void setTajukPenuh(String tajukPenuh) {
+        this.tajukPenuh = tajukPenuh;
+    }
+
+    public String getDeskripsiPenuh() {
+        return deskripsiPenuh;
+    }
+
+    public void setDeskripsiPenuh(String deskripsiPenuh) {
+        this.deskripsiPenuh = deskripsiPenuh;
+    }
+
+    public String getTarikh() {
+        return tarikh;
+    }
+
+    public void setTarikh(String tarikh) {
+        this.tarikh = tarikh;
+    }
+
+    public String getKarangan() {
+        return karangan;
+    }
+
+    public void setKarangan(String karangan) {
+        this.karangan = karangan;
+    }
+
+    public int getVote() {
+        return vote;
+    }
+
+    public void setVote(int vote) {
+        this.vote = vote;
+    }
+
+    public int getMostVisited() {
+        return mostVisited;
+    }
+
+    public void setMostVisited(int mostVisited) {
+        this.mostVisited = mostVisited;
+    }
+
+    public String getUserLastVisitedDate() {
+        return userLastVisitedDate;
+    }
+
+    public void setUserLastVisitedDate(String userLastVisitedDate) {
+        this.userLastVisitedDate = userLastVisitedDate;
     }
 
     @Override

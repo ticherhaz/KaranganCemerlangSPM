@@ -4,12 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -21,11 +21,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.System;
 
-import java.io.IOException;
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.net.NetworkInterface;
-import java.net.Socket;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
@@ -117,7 +114,7 @@ public class SplashActivity extends AppCompatActivity {
                 //if the user status login or not, then proceed to the next part WITHOUT INTERNET.
                 checkStatusLogin(uid);
             }
-        }, 1100);   //So we are making for 1.1 seconds of the splash screen.
+        }, 900);   //So we are making for 0.9 seconds of the splash screen.
     }
 
     //Method store data of the user into the Firebase
@@ -158,8 +155,8 @@ public class SplashActivity extends AppCompatActivity {
                 System system = dataSnapshot.getValue(System.class);
 
                 //After that, we chat the value
-                if (system != null && system.getVersi() != 3) {
-                    //TODO: Version right now is 3. Please update when the new version is released.
+                if (system != null && system.getVersi() != 4) {
+                    //TODO: Version right now is 4. Please update when the new version is released.
                     Toast.makeText(getApplicationContext(), "Please update the new version", Toast.LENGTH_SHORT).show();
 
                     //put the delay
@@ -194,7 +191,10 @@ public class SplashActivity extends AppCompatActivity {
         //If the user already signed in
         if (userUid != null) {
             //Show to user to use stable connection
-            Toast.makeText(getApplicationContext(), "Please use stable connection", Toast.LENGTH_SHORT).show();
+            //Making special toast to center the toast
+            Toast toast = Toast.makeText(getApplicationContext(), "Please use stable connection", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
             //If there is connection, then it will check the system
             //So, we using the async task to check the internet, this is the best way to check the internet connection
             //TODO: Internet connection
@@ -238,34 +238,34 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     //AsyncTask to check the internet connection-------------------------------------
-    //TODO: Internet connection AsyncTask
-    static class InternetCheck extends AsyncTask<Void, Void, Boolean> {
-        private Consumer mConsumer;
-
-        InternetCheck(Consumer consumer) {
-            mConsumer = consumer;
-            execute();
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... voids) {
-            try {
-                Socket sock = new Socket();
-                sock.connect(new InetSocketAddress("8.8.8.8", 53), 1500);
-                sock.close();
-                return true;
-            } catch (IOException e) {
-                return false;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Boolean internet) {
-            mConsumer.accept(internet);
-        }
-
-        public interface Consumer {
-            void accept(Boolean internet);
-        }
-    }
+    //TODO: Internet connection AsyncTask, but we transfer. we make a class for the AsyncTask to check the internet [1.2.2019]
+//    static class InternetCheck extends AsyncTask<Void, Void, Boolean> {
+//        private Consumer mConsumer;
+//
+//        InternetCheck(Consumer consumer) {
+//            mConsumer = consumer;
+//            execute();
+//        }
+//
+//        @Override
+//        protected Boolean doInBackground(Void... voids) {
+//            try {
+//                Socket sock = new Socket();
+//                sock.connect(new InetSocketAddress("8.8.8.8", 53), 1500);
+//                sock.close();
+//                return true;
+//            } catch (IOException e) {
+//                return false;
+//            }
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Boolean internet) {
+//            mConsumer.accept(internet);
+//        }
+//
+//        public interface Consumer {
+//            void accept(Boolean internet);
+//        }
+//    }
 }

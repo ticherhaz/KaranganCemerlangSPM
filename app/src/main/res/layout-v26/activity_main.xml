@@ -30,8 +30,7 @@
             android:layout_margin="7dp"
             android:autofillHints="@string/mencari_karangan"
             android:hint="@string/mencari_karangan"
-            android:inputType="text"
-            tools:targetApi="o" />
+            android:inputType="text" />
 
         <LinearLayout
             android:id="@+id/linear_layout"

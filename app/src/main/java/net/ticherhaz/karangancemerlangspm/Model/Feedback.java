@@ -23,6 +23,10 @@ public class Feedback implements Parcelable {
     private String description;
     private String date;
 
+    public Feedback() {
+        //Don't delete constructor
+    }
+
     public Feedback(String uid, String userUid, String phoneModel, String problemType, String email, String description, String date) {
         this.uid = uid;
         this.userUid = userUid;
@@ -31,9 +35,6 @@ public class Feedback implements Parcelable {
         this.email = email;
         this.description = description;
         this.date = date;
-    }
-
-    public Feedback() {
     }
 
     private Feedback(Parcel in) {
