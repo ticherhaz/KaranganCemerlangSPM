@@ -17,8 +17,19 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".SenaraiKaranganActivity"
+            android:label="Senarai Karangan">
+
+            <!-- This is for the back button navigation -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+
+        </activity>
+        <activity
             android:name=".FeedbackActivity"
             android:label="@string/feedback">
+
             <!-- This is for the back button navigation -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -27,12 +38,14 @@
         <activity
             android:name=".TipsKaranganActivity"
             android:label="@string/tips_karangan">
+
             <!-- This is for the back button navigation -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
         <activity android:name=".KaranganDetailActivity">
+
             <!-- This is for the back button navigation -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -49,4 +62,5 @@
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
+
 </manifest>

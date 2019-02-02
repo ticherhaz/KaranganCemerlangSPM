@@ -23,6 +23,17 @@
             android:contentDescription="@string/logo_kcspm"
             android:src="@drawable/logo" />
 
+        <TextView
+            android:id="@+id/text_view_senarai_karangan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="3dp"
+            android:gravity="center"
+            android:text="@string/senarai_karangan"
+            android:textColor="@drawable/text_view_color"
+            android:textSize="20sp" />
+
         <EditText
             android:id="@+id/edit_text_search"
             android:layout_width="match_parent"

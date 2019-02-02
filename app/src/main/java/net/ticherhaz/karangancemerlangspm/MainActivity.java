@@ -22,6 +22,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -49,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
     //Edit Text
     private EditText editTextSearch;
 
+    //Text View
+    private TextView textViewSenaraiKarangan;
+
     //Progressbar
     private ProgressBar progressBar;
 
@@ -56,10 +60,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewTajuk1;
     private RecyclerView recyclerViewTajuk2;
     private RecyclerView recyclerViewTajuk7;
-//    private RecyclerView recyclerViewTajuk4;
-//    private RecyclerView recyclerViewTajuk5;
-//    private RecyclerView recyclerViewTajuk6;
-
     private LinearLayout linearLayout;
 
     //Method listID
@@ -68,14 +68,11 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         editTextSearch = findViewById(R.id.edit_text_search);
+        textViewSenaraiKarangan = findViewById(R.id.text_view_senarai_karangan);
         progressBar = findViewById(R.id.progressbar);
         recyclerViewTajuk1 = findViewById(R.id.recycler_view_tajuk1);
         recyclerViewTajuk2 = findViewById(R.id.recycler_view_tajuk2);
         recyclerViewTajuk7 = findViewById(R.id.recycler_view_tajuk7);
-//        recyclerViewTajuk4 = findViewById(R.id.recycler_view_tajuk4);
-//        recyclerViewTajuk5 = findViewById(R.id.recycler_view_tajuk5);
-//        recyclerViewTajuk6 = findViewById(R.id.recycler_view_tajuk6);
-
         linearLayout = findViewById(R.id.linear_layout);
 
         //Get the value of the userUid
@@ -93,6 +90,19 @@ public class MainActivity extends AppCompatActivity {
 
 
         setEditTextSearch();
+
+    }
+
+    //Method senarai karangan
+    private void setTextViewSenaraiKarangan() {
+        textViewSenaraiKarangan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SenaraiKaranganActivity.class);
+                intent.putExtra("userUid", userUid);
+                startActivities(new Intent[]{intent});
+            }
+        });
     }
 
     //Method Edit Text Changed
@@ -134,17 +144,9 @@ public class MainActivity extends AppCompatActivity {
 
     //Set the firebaseUI
     private void setFirebaseRecyclerAdapter(String search) {
-        //This part for the tajukUpperCase
-//        if (setRecyclerView(search, "tajuk1UpperCase", recyclerViewTajuk1) || setRecyclerView(search, "tajuk2UpperCase", recyclerViewTajuk2) || setRecyclerView(search, "tajuk3UpperCase", recyclerViewTajuk3) ||
-//                setRecyclerView(search, "tajuk4UpperCase", recyclerViewTajuk4) || setRecyclerView(search, "tajuk5UpperCase", recyclerViewTajuk5) || setRecyclerView(search, "tajuk6UpperCase", recyclerViewTajuk6) ||
-//                setRecyclerView(search, "tajuk7UpperCase", recyclerViewTajuk7) || setRecyclerView(search, "tajuk8UpperCase", recyclerViewTajuk8) || setRecyclerView(search, "tajuk9UpperCase", recyclerViewTajuk9)) {
         setRecyclerView(search, "tajuk1UpperCase", recyclerViewTajuk1);
         setRecyclerView(search, "tajuk2UpperCase", recyclerViewTajuk2);
         setRecyclerView(search, "tajuk7UpperCase", recyclerViewTajuk7);
-//            setRecyclerView(search, "tajuk4UpperCase", recyclerViewTajuk4);
-//            setRecyclerView(search, "tajuk5UpperCase", recyclerViewTajuk5);
-//            setRecyclerView(search, "tajuk6UpperCase", recyclerViewTajuk6);
-
     }
 
     //Method tajuk
@@ -263,6 +265,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listID();
+        setTextViewSenaraiKarangan();
     }
 
     //This is for toolbar
@@ -285,7 +288,7 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
             builder.setTitle("About");
             //TODO: Update the version at About
-            builder.setMessage("Karangan Cemerlang SPM\nversion 1.04\n\ncreated by Ticherhaz\nhazman45.blogspot.com\n\n ©2019");
+            builder.setMessage("Karangan Cemerlang SPM\nversion 1.07\n\ncreated by Ticherhaz\nhazman45.blogspot.com\n\n ©2019");
             builder.setCancelable(true);
             builder.setPositiveButton(
                     "Ok",

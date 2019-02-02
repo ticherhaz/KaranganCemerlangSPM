@@ -62,6 +62,7 @@
     <string name="logo_kcspm">Logo KCSPM</string>
     <string name="viewer">Viewer</string>
     <string name="fav">Fav</string>
+    <string name="senarai_karangan">Senarai Karangan</string>
     <string-array name="feedback_array">
         <item>Suggestion</item>
         <item>Compliment</item>

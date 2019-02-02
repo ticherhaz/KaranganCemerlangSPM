@@ -130,8 +130,12 @@ public class SplashActivity extends AppCompatActivity {
         databaseReference.child(userUid).child("phoneModel").setValue(phoneModel);
         databaseReference.child(userUid).child("ipAddress").setValue(ipAddress);
         databaseReference.child(userUid).child("lastSeen").setValue(lastSeen);
-        databaseReference.child(userUid).child("loginLog").push().setValue(lastSeen);
-        databaseReference.child(userUid).child("ipAddressLog").push().setValue(ipAddress);
+        final String activtiyLogUid = databaseReference.push().getKey();
+        if (activtiyLogUid != null) {
+            databaseReference.child(userUid).child("activityLog").child(activtiyLogUid).child("loginLog").setValue(lastSeen);
+            databaseReference.child(userUid).child("activityLog").child(activtiyLogUid).child("ipAddressLog").setValue(ipAddress);
+        }
+
         //Then start the main activity and transfer the userUID
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.putExtra("userUid", userUid);
@@ -152,32 +156,37 @@ public class SplashActivity extends AppCompatActivity {
                 //This type of code is to retrieve all the value from a child.
                 //We are using the model class to be assigned from the database.
                 //Make sure it is the same variables here and in the database.
-                System system = dataSnapshot.getValue(System.class);
+                if (dataSnapshot.exists()) {
+                    System system = dataSnapshot.getValue(System.class);
+                    if (system != null && !system.isMod()) {
+                        Toast.makeText(getApplicationContext(), "Under maintenance", Toast.LENGTH_SHORT).show();
+                        //Then we return to out of this databaseReferenceSystem.
+                        return;
+                    }
+                    //After that, we chat the value
+                    if (system != null && system.getVersi() != 7) {
+                        //TODO: Version right now is 7. Please update when the new version is released.
+                        Toast.makeText(getApplicationContext(), "Please update the new version", Toast.LENGTH_SHORT).show();
 
-                //After that, we chat the value
-                if (system != null && system.getVersi() != 4) {
-                    //TODO: Version right now is 4. Please update when the new version is released.
-                    Toast.makeText(getApplicationContext(), "Please update the new version", Toast.LENGTH_SHORT).show();
+                        //put the delay
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                //Then we proceed to the playStore for user to download the lastest version
+                                final String appPackageName = "net.ticherhaz.karangancemerlangspm"; // Can also use getPackageName(), as below
+                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                            }
+                        }, 3000); //3 seconds
+                        return;
+                    }
 
-                    //put the delay
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            //Then we proceed to the playStore for user to download the lastest version
-                            final String appPackageName = "net.ticherhaz.karangancemerlangspm"; // Can also use getPackageName(), as below
-                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                        }
-                    }, 3000); //3 seconds
-                    return;
+                    //If all the condition above is met, it will NOT GOING THIS PART INSTEAD THEY WILL GO OUTSIDE FROM THE onDataChange
+                    //It not met, then it will proceed here.
+                    storeUserInfo(userUid);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Not exist", Toast.LENGTH_SHORT).show();
                 }
-                if (system != null && !system.isMod()) {
-                    Toast.makeText(getApplicationContext(), "Under maintenance", Toast.LENGTH_SHORT).show();
-                    //Then we return to out of this databaseReferenceSystem.
-                    return;
-                }
-                //If all the condition above is met, it will NOT GOING THIS PART INSTEAD THEY WILL GO OUTSIDE FROM THE onDataChange
-                //It not met, then it will proceed here.
-                storeUserInfo(userUid);
+
             }
 
             @Override
