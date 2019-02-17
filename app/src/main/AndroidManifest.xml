@@ -10,12 +10,24 @@
 
     <application
         android:allowBackup="true"
+        android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning,HardcodedDebugMode">
+        <activity android:name=".ForumActivity"></activity>
+        <activity android:name=".ForumSplashActivity" />
+        <activity
+            android:name=".HantarKaranganActivity"
+            android:label="@string/hantar_karangan">
+
+            <!-- This is for the back button navigation -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity
             android:name=".SenaraiKaranganActivity"
             android:label="Senarai Karangan">
@@ -24,7 +36,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
-
         </activity>
         <activity
             android:name=".FeedbackActivity"

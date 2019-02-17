@@ -130,12 +130,11 @@ public class SplashActivity extends AppCompatActivity {
         databaseReference.child(userUid).child("phoneModel").setValue(phoneModel);
         databaseReference.child(userUid).child("ipAddress").setValue(ipAddress);
         databaseReference.child(userUid).child("lastSeen").setValue(lastSeen);
-        final String activtiyLogUid = databaseReference.push().getKey();
-        if (activtiyLogUid != null) {
-            databaseReference.child(userUid).child("activityLog").child(activtiyLogUid).child("loginLog").setValue(lastSeen);
-            databaseReference.child(userUid).child("activityLog").child(activtiyLogUid).child("ipAddressLog").setValue(ipAddress);
+        final String activityLogUid = databaseReference.push().getKey();
+        if (activityLogUid != null) {
+            databaseReference.child(userUid).child("activityLog").child(activityLogUid).child("loginLog").setValue(lastSeen);
+            databaseReference.child(userUid).child("activityLog").child(activityLogUid).child("ipAddressLog").setValue(ipAddress);
         }
-
         //Then start the main activity and transfer the userUID
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.putExtra("userUid", userUid);
@@ -248,33 +247,5 @@ public class SplashActivity extends AppCompatActivity {
 
     //AsyncTask to check the internet connection-------------------------------------
     //TODO: Internet connection AsyncTask, but we transfer. we make a class for the AsyncTask to check the internet [1.2.2019]
-//    static class InternetCheck extends AsyncTask<Void, Void, Boolean> {
-//        private Consumer mConsumer;
-//
-//        InternetCheck(Consumer consumer) {
-//            mConsumer = consumer;
-//            execute();
-//        }
-//
-//        @Override
-//        protected Boolean doInBackground(Void... voids) {
-//            try {
-//                Socket sock = new Socket();
-//                sock.connect(new InetSocketAddress("8.8.8.8", 53), 1500);
-//                sock.close();
-//                return true;
-//            } catch (IOException e) {
-//                return false;
-//            }
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Boolean internet) {
-//            mConsumer.accept(internet);
-//        }
-//
-//        public interface Consumer {
-//            void accept(Boolean internet);
-//        }
-//    }
+
 }

@@ -63,6 +63,9 @@
     <string name="viewer">Viewer</string>
     <string name="fav">Fav</string>
     <string name="senarai_karangan">Senarai Karangan</string>
+    <string name="hantar_karangan">Hantar Karangan</string>
+    <string name="muat_naik_file">Muat Naik File</string>
+    <string name="forum">Forum</string>
     <string-array name="feedback_array">
         <item>Suggestion</item>
         <item>Compliment</item>

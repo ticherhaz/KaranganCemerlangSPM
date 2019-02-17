@@ -288,7 +288,7 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
             builder.setTitle("About");
             //TODO: Update the version at About
-            builder.setMessage("Karangan Cemerlang SPM\nversion 1.07\n\ncreated by Ticherhaz\nhazman45.blogspot.com\n\n ©2019");
+            builder.setMessage("Karangan Cemerlang SPM\nversion 1.08\n\ncreated by Ticherhaz\nhazman45.blogspot.com\n\n ©2019");
             builder.setCancelable(true);
             builder.setPositiveButton(
                     "Ok",
@@ -306,10 +306,21 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, TipsKaranganActivity.class));
             return true;
         }
+        if (id == R.id.action_hantar_karangan) {
+            startActivity(new Intent(MainActivity.this, HantarKaranganActivity.class));
+            return true;
+        }
         if (id == R.id.action_feedback) {
             Intent intent = new Intent(MainActivity.this, FeedbackActivity.class);
             intent.putExtra("userUid", userUid);
             intent.putExtra("phoneModel", phoneModel);
+            startActivities(new Intent[]{intent});
+            return true;
+        }
+        if (id == R.id.action_forum) {
+            Intent intent = new Intent(MainActivity.this, ForumSplashActivity.class);
+            intent.putExtra("userUid", userUid);
+            // intent.putExtra("phoneModel", phoneModel);
             startActivities(new Intent[]{intent});
             return true;
         }
