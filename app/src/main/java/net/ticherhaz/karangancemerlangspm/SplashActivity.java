@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.System;
+import net.ticherhaz.karangancemerlangspm.Util.InternetCheck;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -163,8 +164,8 @@ public class SplashActivity extends AppCompatActivity {
                         return;
                     }
                     //After that, we chat the value
-                    if (system != null && system.getVersi() != 7) {
-                        //TODO: Version right now is 7. Please update when the new version is released.
+                    if (system != null && system.getVersi() != 10) {
+                        //TODO: Version right now is 10. Please update when the new version is released.
                         Toast.makeText(getApplicationContext(), "Please update the new version", Toast.LENGTH_SHORT).show();
 
                         //put the delay

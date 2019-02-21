@@ -11,6 +11,7 @@
         layout="@layout/app_bar_main" />
 
     <LinearLayout
+        android:id="@+id/linear_layout_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -23,17 +24,6 @@
             android:contentDescription="@string/logo_kcspm"
             android:src="@drawable/logo" />
 
-        <TextView
-            android:id="@+id/text_view_senarai_karangan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="3dp"
-            android:gravity="center"
-            android:text="@string/senarai_karangan"
-            android:textColor="@drawable/text_view_color"
-            android:textSize="20sp" />
-
         <EditText
             android:id="@+id/edit_text_search"
             android:layout_width="match_parent"
@@ -41,7 +31,8 @@
             android:layout_margin="7dp"
             android:autofillHints="@string/mencari_karangan"
             android:hint="@string/mencari_karangan"
-            android:inputType="text" />
+            android:inputType="text"
+            tools:targetApi="o" />
 
         <LinearLayout
             android:id="@+id/linear_layout"
@@ -61,35 +52,49 @@
                 android:max="100"
                 android:visibility="invisible" />
 
-            <android.support.v4.widget.NestedScrollView
+            <LinearLayout
+                android:id="@+id/linear_layout_how"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/text_view_how"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recycler_view_tajuk1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recycler_view_tajuk2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                <android.support.v4.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recycler_view_tajuk7"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-            </android.support.v4.widget.NestedScrollView>
-            <!--<android.support.v7.widget.RecyclerView-->
-            <!--android:id="@+id/recycler_view_tajuk4"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycler_view_tajuk1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycler_view_tajuk2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycler_view_tajuk7"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </android.support.v4.widget.NestedScrollView>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

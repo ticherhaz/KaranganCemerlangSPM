@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import net.ticherhaz.karangancemerlangspm.Model.Feedback;
+import net.ticherhaz.karangancemerlangspm.Util.InternetCheck;
 
 import java.util.Calendar;
 

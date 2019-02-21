@@ -2,16 +2,19 @@ package net.ticherhaz.karangancemerlangspm;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -117,7 +120,7 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         //Hide the progressbar
-                                        progressBar.setVisibility(View.INVISIBLE);
+                                        progressBar.setVisibility(View.GONE);
                                         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
                                         int clickKarangan = 0;
@@ -149,6 +152,7 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
                                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                                     }
+
                                 });
                             }
 
@@ -157,6 +161,7 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
 
                             }
                         });
+
                     }
                 });
             }
@@ -175,7 +180,6 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
             @Override
             public void onDataChanged() {
                 //When dataChanged mean, after finished load the data
-
                 //Hide the progressbar
                 progressBar.setVisibility(View.GONE);
             }
@@ -189,7 +193,22 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
         firebaseRecyclerAdapter.notifyDataSetChanged();
         firebaseRecyclerAdapter.startListening();
 
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (progressBar.getVisibility() == View.VISIBLE) {
+
+                    Toast toast = Toast.makeText(getApplicationContext(), "Please use stable connection", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+
+            }
+        }, 3000);
+
+
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

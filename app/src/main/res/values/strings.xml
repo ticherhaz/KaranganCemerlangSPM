@@ -66,6 +66,17 @@
     <string name="hantar_karangan">Hantar Karangan</string>
     <string name="muat_naik_file">Muat Naik File</string>
     <string name="forum">Forum</string>
+    <string name="how">
+        <![CDATA[
+        <p><b>Cara-cara menggunakan aplikasi ini</b></p>
+        <p>Kata kunci contoh: <b>langkah</b>, <b>cara</b>, <b>usaha<b/></p>
+        <p>Di 'Settings', (3 titik atas kanan), boleh lihat <b>Senarai Karangan</b></p>
+]]></string>
+    <string name="nama">Nama</string>
+    <string name="sekolah">Sekolah</string>
+    <string name="progress_uploading">Uploading…</string>
+    <string name="upload_success">Upload Success</string>
+    <string name="upload_failure">Upload Failed</string>
     <string-array name="feedback_array">
         <item>Suggestion</item>
         <item>Compliment</item>

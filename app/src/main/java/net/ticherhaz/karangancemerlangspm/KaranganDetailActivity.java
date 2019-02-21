@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +15,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import net.ticherhaz.karangancemerlangspm.Util.DoubleClickListener;
 
 public class KaranganDetailActivity extends AppCompatActivity {
 
@@ -37,6 +40,8 @@ public class KaranganDetailActivity extends AppCompatActivity {
     private int mostVisited;
     private int voteAtKarangan = 0;
 
+    private LinearLayout linearLayoutDoubleClick;
+
     //Method listID
     private void listID() {
         textViewTajuk = findViewById(R.id.text_view_tajuk);
@@ -44,6 +49,7 @@ public class KaranganDetailActivity extends AppCompatActivity {
         textViewTarikh = findViewById(R.id.text_view_tarikh);
         textViewFav = findViewById(R.id.text_view_fav);
         textViewViewer = findViewById(R.id.text_view_viewer);
+        linearLayoutDoubleClick = findViewById(R.id.linear_layout_double_click);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("user");
@@ -140,12 +146,52 @@ public class KaranganDetailActivity extends AppCompatActivity {
         });
     }
 
+    private void setTextViewKarangan() {
+        textViewKarangan.setOnClickListener(new DoubleClickListener() {
+
+            //So we use the double click from the custom at the util.
+            @Override
+            public void onSingleClick(View v) {
+            }
+
+            @Override
+            public void onDoubleClick(View v) {
+                //If the text already become liked
+                if (textViewFav.getCompoundDrawablePadding() == 1) {
+                    Toast.makeText(getApplicationContext(), "You already liked this karangan", Toast.LENGTH_SHORT).show();
+                } else {
+                    //1st. we read and update at karangan
+                    final DatabaseReference databaseReferenceKarangan = firebaseDatabase.getReference();
+                    databaseReferenceKarangan.child("karangan").child("main").child(uidKarangan).child("vote").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                voteAtKarangan = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
+                            }
+                            //Then we update at karangan
+                            databaseReferenceKarangan.child("karangan").child("main").child(uidKarangan).child("vote").setValue(voteAtKarangan + 1);
+                            databaseReference.child(userUid).child("karangan").child(tajuk).child("like").setValue(1);
+                            textViewFav.setText(String.valueOf(vote + 1));
+                            Toast.makeText(getApplicationContext(), "You LIKE this Karangan", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
+        });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_karangan_detail);
         listID();
         setTextViewLike();
+        setTextViewKarangan();
     }
 
     @Override

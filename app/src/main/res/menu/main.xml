@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
-        android:id="@+id/action_about"
+        android:id="@+id/action_senarai_karangan"
         android:orderInCategory="100"
-        android:title="@string/action_about"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_tips_karangan"
-        android:orderInCategory="100"
-        android:title="@string/tips_karangan"
+        android:title="@string/senarai_karangan"
         app:showAsAction="never" />
 
     <item
@@ -19,9 +15,9 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_feedback"
+        android:id="@+id/action_tips_karangan"
         android:orderInCategory="100"
-        android:title="@string/feedback"
+        android:title="@string/tips_karangan"
         app:showAsAction="never" />
 
     <item
@@ -29,4 +25,16 @@
         android:orderInCategory="100"
         android:title="@string/forum"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_feedback"
+        android:orderInCategory="100"
+        android:title="@string/feedback"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_about"
+        android:orderInCategory="100"
+        android:title="@string/action_about"
+        app:showAsAction="never" />
+
 </menu>

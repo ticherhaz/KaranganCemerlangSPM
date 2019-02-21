@@ -1,4 +1,4 @@
-package net.ticherhaz.karangancemerlangspm;
+package net.ticherhaz.karangancemerlangspm.Util;
 
 import android.os.AsyncTask;
 
@@ -10,7 +10,7 @@ public class InternetCheck extends AsyncTask<Void, Void, Boolean> {
 
     private Consumer mConsumer;
 
-    InternetCheck(Consumer consumer) {
+    public InternetCheck(Consumer consumer) {
         mConsumer = consumer;
         execute();
     }

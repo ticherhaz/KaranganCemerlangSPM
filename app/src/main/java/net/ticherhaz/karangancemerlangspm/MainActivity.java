@@ -3,6 +3,7 @@ package net.ticherhaz.karangancemerlangspm;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -10,9 +11,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,6 +38,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.Karangan;
+import net.ticherhaz.karangancemerlangspm.Util.InternetCheck;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.KaranganViewHolder;
 
 import java.util.Calendar;
@@ -50,9 +54,6 @@ public class MainActivity extends AppCompatActivity {
     //Edit Text
     private EditText editTextSearch;
 
-    //Text View
-    private TextView textViewSenaraiKarangan;
-
     //Progressbar
     private ProgressBar progressBar;
 
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewTajuk2;
     private RecyclerView recyclerViewTajuk7;
     private LinearLayout linearLayout;
+    private LinearLayout linearLayoutHow;
 
     //Method listID
     private void listID() {
@@ -68,12 +70,15 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         editTextSearch = findViewById(R.id.edit_text_search);
-        textViewSenaraiKarangan = findViewById(R.id.text_view_senarai_karangan);
+        TextView textViewHow = findViewById(R.id.text_view_how);
         progressBar = findViewById(R.id.progressbar);
         recyclerViewTajuk1 = findViewById(R.id.recycler_view_tajuk1);
         recyclerViewTajuk2 = findViewById(R.id.recycler_view_tajuk2);
         recyclerViewTajuk7 = findViewById(R.id.recycler_view_tajuk7);
         linearLayout = findViewById(R.id.linear_layout);
+        linearLayoutHow = findViewById(R.id.linear_layout_how);
+
+        textViewHow.setText(Html.fromHtml(getString(R.string.how)));
 
         //Get the value of the userUid
         Intent intent = getIntent();
@@ -93,18 +98,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //Method senarai karangan
-    private void setTextViewSenaraiKarangan() {
-        textViewSenaraiKarangan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SenaraiKaranganActivity.class);
-                intent.putExtra("userUid", userUid);
-                startActivities(new Intent[]{intent});
-            }
-        });
-    }
-
     //Method Edit Text Changed
     private void setEditTextSearch() {
         editTextSearch.addTextChangedListener(new TextWatcher() {
@@ -117,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 linearLayout.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.VISIBLE);
+                linearLayoutHow.setVisibility(View.GONE);
                 setFirebaseRecyclerAdapter(editTextSearch.getText().toString());
             }
 
@@ -125,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(editTextSearch.getText().toString())) {
                     progressBar.setVisibility(View.INVISIBLE);
                     linearLayout.setVisibility(View.INVISIBLE);
+                    linearLayoutHow.setVisibility(View.VISIBLE);
                 }
 
                 //TODO: Internet connection, we use the service from the splash activity
@@ -258,6 +253,19 @@ public class MainActivity extends AppCompatActivity {
         //2. FirebaseUI
         firebaseRecyclerAdapter.notifyDataSetChanged();
         firebaseRecyclerAdapter.startListening();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (progressBar.getVisibility() == View.VISIBLE) {
+
+                    Toast toast = Toast.makeText(getApplicationContext(), "Please use stable connection", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+
+            }
+        }, 3000);
     }
 
     @Override
@@ -265,7 +273,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listID();
-        setTextViewSenaraiKarangan();
     }
 
     //This is for toolbar
@@ -288,7 +295,7 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
             builder.setTitle("About");
             //TODO: Update the version at About
-            builder.setMessage("Karangan Cemerlang SPM\nversion 1.08\n\ncreated by Ticherhaz\nhazman45.blogspot.com\n\n ©2019");
+            builder.setMessage("Karangan Cemerlang SPM\nversion 1.10\n\n\nDon't forget to share with your friends :)\n\n--Donate--\nHAZMAN BADRUNSHAM\n7614543761\nCIMB BANK\n\n\n\nhazman45.blogspot.com\nTicherhaz©2019");
             builder.setCancelable(true);
             builder.setPositiveButton(
                     "Ok",
@@ -307,7 +314,9 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         if (id == R.id.action_hantar_karangan) {
-            startActivity(new Intent(MainActivity.this, HantarKaranganActivity.class));
+            Intent intent = new Intent(MainActivity.this, HantarKaranganActivity.class);
+            intent.putExtra("userUid", userUid);
+            startActivities(new Intent[]{intent});
             return true;
         }
         if (id == R.id.action_feedback) {
@@ -321,6 +330,12 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, ForumSplashActivity.class);
             intent.putExtra("userUid", userUid);
             // intent.putExtra("phoneModel", phoneModel);
+            startActivities(new Intent[]{intent});
+            return true;
+        }
+        if (id == R.id.action_senarai_karangan) {
+            Intent intent = new Intent(MainActivity.this, SenaraiKaranganActivity.class);
+            intent.putExtra("userUid", userUid);
             startActivities(new Intent[]{intent});
             return true;
         }
