@@ -38,7 +38,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.Karangan;
-import net.ticherhaz.karangancemerlangspm.Util.InternetCheck;
+import net.ticherhaz.karangancemerlangspm.Util.InternetMessage;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.KaranganViewHolder;
 
 import java.util.Calendar;
@@ -121,18 +121,6 @@ public class MainActivity extends AppCompatActivity {
                     linearLayout.setVisibility(View.INVISIBLE);
                     linearLayoutHow.setVisibility(View.VISIBLE);
                 }
-
-                //TODO: Internet connection, we use the service from the splash activity
-                new InternetCheck(new InternetCheck.Consumer() {    //We called the task here (execute here)
-                    @Override
-                    public void accept(Boolean internet) {  //After it met the condition about the internet, it will proceed.
-                        //Then we go to check the system is it ok or not
-                        if (!internet) {
-                            //If no connection, then we proceed to store admin info
-                            Toast.makeText(getApplicationContext(), "Please use stable internet connection", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
             }
         });
     }
@@ -258,12 +246,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (progressBar.getVisibility() == View.VISIBLE) {
-
-                    Toast toast = Toast.makeText(getApplicationContext(), "Please use stable connection", Toast.LENGTH_SHORT);
+                    //If no connection, then we proceed to store admin info
+                    Toast toast = Toast.makeText(getApplicationContext(), new InternetMessage().getMessage(), Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
-
             }
         }, 3000);
     }
@@ -295,7 +282,9 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
             builder.setTitle("About");
             //TODO: Update the version at About
-            builder.setMessage("Karangan Cemerlang SPM\nversion 1.10\n\n\nDon't forget to share with your friends :)\n\n--Donate--\nHAZMAN BADRUNSHAM\n7614543761\nCIMB BANK\n\n\n\nhazman45.blogspot.com\nTicherhaz©2019");
+            //builder.setMessage("Karangan Cemerlang SPM\nversion 1.12\n\n\nDon't forget to share with your friends :)\n\n--Donate--\nHAZMAN BADRUNSHAM\n7614543761\nCIMB BANK\n\n\n\nhazman45.blogspot.com\nTicherhaz©2019");
+            builder.setMessage("Karangan Cemerlang SPM\nversion 1.12\n\n\nDon't forget to share with your friends :)\n\n\n\n\nhazman45.blogspot.com\nTicherhaz©2019");
+
             builder.setCancelable(true);
             builder.setPositiveButton(
                     "Ok",

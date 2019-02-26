@@ -11,6 +11,7 @@ import android.widget.Toast;
 public class ForumSplashActivity extends AppCompatActivity {
 
     private String userUid;
+    private String phoneModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,24 +28,24 @@ public class ForumSplashActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent.getExtras() != null) {
             userUid = intent.getExtras().getString("userUid");
+            phoneModel = intent.getExtras().getString("phoneModel");
         }
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
-                //So we hold on this
-                Toast toast = Toast.makeText(getApplicationContext(), "Coming soon...", Toast.LENGTH_LONG);
+                //Making special toast to center the toast
+                Toast toast = Toast.makeText(getApplicationContext(), "Coming soon...", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
-
                 finish();
 
-                // Intent intent = new Intent(ForumSplashActivity.this, ForumActivity.class);
-                //  intent.putExtra("userUid", userUid);
-                // intent.putExtra("phoneModel", phoneModel);
-                //  startActivities(new Intent[]{intent});
-                // finish();
+//                Intent intent = new Intent(ForumSplashActivity.this, ForumActivity.class);
+//                intent.putExtra("userUid", userUid);
+//                intent.putExtra("phoneModel", phoneModel);
+//                startActivities(new Intent[]{intent});
+//                finish();
             }
         }, 1000);
     }

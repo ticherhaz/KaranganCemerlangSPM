@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.System;
 import net.ticherhaz.karangancemerlangspm.Util.InternetCheck;
+import net.ticherhaz.karangancemerlangspm.Util.InternetMessage;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -37,6 +38,9 @@ public class SplashActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private String uid;
+    private String lastSeen;
+    private String ipAddress;
+    private String phoneModel;
 
     //Method to get IP Address
     public static String getIPAddress(boolean useIPv4) {
@@ -74,6 +78,14 @@ public class SplashActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("user");
 
+        //Assign the phoneModel
+        phoneModel = getDeviceName();
+        //Assign the IP Address
+        ipAddress = getIPAddress(true);
+        //Assign the lastSeen
+        lastSeen = Calendar.getInstance().getTime().toString();
+
+
         //Call back the shared preference
         //Shared Preference
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES,
@@ -91,6 +103,11 @@ public class SplashActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString(SHARED_PREFERENCES_UID, uid);
             editor.apply();
+
+            databaseReference.child(uid).child("uid").setValue(uid);
+            databaseReference.child(uid).child("phoneModel").setValue(phoneModel);
+            databaseReference.child(uid).child("ipAddress").setValue(ipAddress);
+            databaseReference.child(uid).child("lastSeen").setValue(lastSeen);
         }
     }
 
@@ -120,17 +137,9 @@ public class SplashActivity extends AppCompatActivity {
 
     //Method store data of the user into the Firebase
     private void storeUserInfo(final String userUid) {
-        //Assign the phoneModel
-        final String phoneModel = getDeviceName();
-        //Assign the IP Address
-        final String ipAddress = getIPAddress(true);
-        //Assign the lastSeen
-        final String lastSeen = Calendar.getInstance().getTime().toString();
+        //So the new user enter the system, then we collect the new information for the user
 
-        databaseReference.child(userUid).child("uid").setValue(userUid);
-        databaseReference.child(userUid).child("phoneModel").setValue(phoneModel);
-        databaseReference.child(userUid).child("ipAddress").setValue(ipAddress);
-        databaseReference.child(userUid).child("lastSeen").setValue(lastSeen);
+
         final String activityLogUid = databaseReference.push().getKey();
         if (activityLogUid != null) {
             databaseReference.child(userUid).child("activityLog").child(activityLogUid).child("loginLog").setValue(lastSeen);
@@ -164,8 +173,8 @@ public class SplashActivity extends AppCompatActivity {
                         return;
                     }
                     //After that, we chat the value
-                    if (system != null && system.getVersi() != 10) {
-                        //TODO: Version right now is 10. Please update when the new version is released.
+                    if (system != null && system.getVersi() != 12) {
+                        //TODO: Version right now is 12. Please update when the new version is released.
                         Toast.makeText(getApplicationContext(), "Please update the new version", Toast.LENGTH_SHORT).show();
 
                         //put the delay
@@ -201,7 +210,7 @@ public class SplashActivity extends AppCompatActivity {
         if (userUid != null) {
             //Show to user to use stable connection
             //Making special toast to center the toast
-            Toast toast = Toast.makeText(getApplicationContext(), "Please use stable connection", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(getApplicationContext(), new InternetMessage().getMessage(), Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
             //If there is connection, then it will check the system
@@ -217,6 +226,7 @@ public class SplashActivity extends AppCompatActivity {
                         //If no connection, then we proceed to store admin info
                         storeUserInfo(userUid);
                     }
+
                 }
             });
         }

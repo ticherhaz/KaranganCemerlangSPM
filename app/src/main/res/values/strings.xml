@@ -3,7 +3,6 @@
     <string name="administrator">Administrator</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="sign_in">Sign In</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
 
@@ -77,6 +76,20 @@
     <string name="progress_uploading">Uploading…</string>
     <string name="upload_success">Upload Success</string>
     <string name="upload_failure">Upload Failed</string>
+    <string name="umum">Umum</string>
+    <string name="_0_viewing">(0 Viewing)</string>
+    <string name="views">Views</string>
+    <string name="threads">Threads:</string>
+    <string name="posts">Posts:</string>
+    <string name="last_thread">Last Thread</string>
+    <string name="by_user">by User</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="to_reply_thread_sign_up_today">To reply thread, sign up today</string>
+    <string name="reputation">Reputation</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm Password</string>
     <string-array name="feedback_array">
         <item>Suggestion</item>
         <item>Compliment</item>
