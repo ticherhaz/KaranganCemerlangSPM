@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 public class ForumSplashActivity extends AppCompatActivity {
 
@@ -24,6 +22,7 @@ public class ForumSplashActivity extends AppCompatActivity {
         //We still need to put this one, because it is appbar not included for the full screen stuff
         if (getSupportActionBar() != null)
             getSupportActionBar().hide();
+
         //Get the value of the userUid
         Intent intent = getIntent();
         if (intent.getExtras() != null) {
@@ -36,16 +35,16 @@ public class ForumSplashActivity extends AppCompatActivity {
             public void run() {
 
                 //Making special toast to center the toast
-                Toast toast = Toast.makeText(getApplicationContext(), "Coming soon...", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
-                finish();
-
-//                Intent intent = new Intent(ForumSplashActivity.this, ForumActivity.class);
-//                intent.putExtra("userUid", userUid);
-//                intent.putExtra("phoneModel", phoneModel);
-//                startActivities(new Intent[]{intent});
+//                Toast toast = Toast.makeText(getApplicationContext(), "Coming soon...", Toast.LENGTH_SHORT);
+//                toast.setGravity(Gravity.CENTER, 0, 0);
+//                toast.show();
 //                finish();
+
+                Intent intent = new Intent(ForumSplashActivity.this, ForumActivity.class);
+                intent.putExtra("userUid", userUid);
+                intent.putExtra("phoneModel", phoneModel);
+                startActivities(new Intent[]{intent});
+                finish();
             }
         }, 1000);
     }

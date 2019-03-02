@@ -318,7 +318,7 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_forum) {
             Intent intent = new Intent(MainActivity.this, ForumSplashActivity.class);
             intent.putExtra("userUid", userUid);
-            // intent.putExtra("phoneModel", phoneModel);
+            intent.putExtra("phoneModel", phoneModel);
             startActivities(new Intent[]{intent});
             return true;
         }

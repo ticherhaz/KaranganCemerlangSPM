@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class RegisteredUser implements Parcelable {
-
     public static final Creator<RegisteredUser> CREATOR = new Creator<RegisteredUser>() {
         @Override
         public RegisteredUser createFromParcel(Parcel in) {
@@ -22,6 +21,7 @@ public class RegisteredUser implements Parcelable {
     private String profileUrl;
     private String email;
     private String username;
+    private String sekolah;
     private String titleType;
     private String customTitle;
     private String bio;
@@ -58,13 +58,14 @@ public class RegisteredUser implements Parcelable {
     public RegisteredUser() {
     }
 
-    public RegisteredUser(String registeredUserUid, String userUid, String typeUser, String profileUrl, String email, String username, String titleType, String customTitle, String bio, String state, String birthday, String mode, int postCount, int reputation, int reputationPower, String onlineStatus, String lastCreatedThread, String onDateCreated, String onlineStatusLogUid, String lastSeenLogUid, String onClickedLogUid, String onCreatedThreadLogUid, String profileUrlLogUid, String emailLogUid, String usernameLogUid, String titleTypeLogUid, String customTitleLogUid, String bioLogUid, String stateLogUid, String birthdayLogUid, String modeLogUid, String emailUpperCase, String usernameUpperCase, String bioUpperCase, String stateUpperCase) {
+    public RegisteredUser(String registeredUserUid, String userUid, String typeUser, String profileUrl, String email, String username, String sekolah, String titleType, String customTitle, String bio, String state, String birthday, String mode, int postCount, int reputation, int reputationPower, String onlineStatus, String lastCreatedThread, String onDateCreated, String onlineStatusLogUid, String lastSeenLogUid, String onClickedLogUid, String onCreatedThreadLogUid, String profileUrlLogUid, String emailLogUid, String usernameLogUid, String titleTypeLogUid, String customTitleLogUid, String bioLogUid, String stateLogUid, String birthdayLogUid, String modeLogUid, String emailUpperCase, String usernameUpperCase, String bioUpperCase, String stateUpperCase) {
         this.registeredUserUid = registeredUserUid;
         this.userUid = userUid;
         this.typeUser = typeUser;
         this.profileUrl = profileUrl;
         this.email = email;
         this.username = username;
+        this.sekolah = sekolah;
         this.titleType = titleType;
         this.customTitle = customTitle;
         this.bio = bio;
@@ -103,6 +104,7 @@ public class RegisteredUser implements Parcelable {
         profileUrl = in.readString();
         email = in.readString();
         username = in.readString();
+        sekolah = in.readString();
         titleType = in.readString();
         customTitle = in.readString();
         bio = in.readString();
@@ -132,50 +134,6 @@ public class RegisteredUser implements Parcelable {
         usernameUpperCase = in.readString();
         bioUpperCase = in.readString();
         stateUpperCase = in.readString();
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(registeredUserUid);
-        dest.writeString(userUid);
-        dest.writeString(typeUser);
-        dest.writeString(profileUrl);
-        dest.writeString(email);
-        dest.writeString(username);
-        dest.writeString(titleType);
-        dest.writeString(customTitle);
-        dest.writeString(bio);
-        dest.writeString(state);
-        dest.writeString(birthday);
-        dest.writeString(mode);
-        dest.writeInt(postCount);
-        dest.writeInt(reputation);
-        dest.writeInt(reputationPower);
-        dest.writeString(onlineStatus);
-        dest.writeString(lastCreatedThread);
-        dest.writeString(onDateCreated);
-        dest.writeString(onlineStatusLogUid);
-        dest.writeString(lastSeenLogUid);
-        dest.writeString(onClickedLogUid);
-        dest.writeString(onCreatedThreadLogUid);
-        dest.writeString(profileUrlLogUid);
-        dest.writeString(emailLogUid);
-        dest.writeString(usernameLogUid);
-        dest.writeString(titleTypeLogUid);
-        dest.writeString(customTitleLogUid);
-        dest.writeString(bioLogUid);
-        dest.writeString(stateLogUid);
-        dest.writeString(birthdayLogUid);
-        dest.writeString(modeLogUid);
-        dest.writeString(emailUpperCase);
-        dest.writeString(usernameUpperCase);
-        dest.writeString(bioUpperCase);
-        dest.writeString(stateUpperCase);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
     }
 
     public String getRegisteredUserUid() {
@@ -224,6 +182,14 @@ public class RegisteredUser implements Parcelable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getSekolah() {
+        return sekolah;
+    }
+
+    public void setSekolah(String sekolah) {
+        this.sekolah = sekolah;
     }
 
     public String getTitleType() {
@@ -458,4 +424,48 @@ public class RegisteredUser implements Parcelable {
         this.stateUpperCase = stateUpperCase;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(registeredUserUid);
+        dest.writeString(userUid);
+        dest.writeString(typeUser);
+        dest.writeString(profileUrl);
+        dest.writeString(email);
+        dest.writeString(username);
+        dest.writeString(sekolah);
+        dest.writeString(titleType);
+        dest.writeString(customTitle);
+        dest.writeString(bio);
+        dest.writeString(state);
+        dest.writeString(birthday);
+        dest.writeString(mode);
+        dest.writeInt(postCount);
+        dest.writeInt(reputation);
+        dest.writeInt(reputationPower);
+        dest.writeString(onlineStatus);
+        dest.writeString(lastCreatedThread);
+        dest.writeString(onDateCreated);
+        dest.writeString(onlineStatusLogUid);
+        dest.writeString(lastSeenLogUid);
+        dest.writeString(onClickedLogUid);
+        dest.writeString(onCreatedThreadLogUid);
+        dest.writeString(profileUrlLogUid);
+        dest.writeString(emailLogUid);
+        dest.writeString(usernameLogUid);
+        dest.writeString(titleTypeLogUid);
+        dest.writeString(customTitleLogUid);
+        dest.writeString(bioLogUid);
+        dest.writeString(stateLogUid);
+        dest.writeString(birthdayLogUid);
+        dest.writeString(modeLogUid);
+        dest.writeString(emailUpperCase);
+        dest.writeString(usernameUpperCase);
+        dest.writeString(bioUpperCase);
+        dest.writeString(stateUpperCase);
+    }
 }

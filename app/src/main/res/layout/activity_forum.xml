@@ -727,6 +727,8 @@
                             android:layout_alignRight="@+id/text_view_sign_out"
                             android:layout_marginEnd="0dp"
                             android:layout_marginRight="0dp"
+                            android:drawableStart="@drawable/ic_sign_online"
+                            android:drawableLeft="@drawable/ic_sign_online"
                             android:ellipsize="marquee"
                             android:focusable="true"
                             android:focusableInTouchMode="true"

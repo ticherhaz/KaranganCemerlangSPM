@@ -2,6 +2,7 @@ package net.ticherhaz.karangancemerlangspm;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -11,8 +12,13 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 
 public class ForumActivity extends AppCompatActivity {
 
@@ -64,8 +70,6 @@ public class ForumActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
 
-        checkIfUserOnline();
-
 
         //Get the value of the userUid
         Intent intent = getIntent();
@@ -74,8 +78,9 @@ public class ForumActivity extends AppCompatActivity {
             phoneModel = intent.getExtras().getString("phoneModel");
         }
 
-
+        checkIfUserOnline();
     }
+
 
     private void checkIfUserOnline() {
         //Check if already login or not
@@ -83,7 +88,36 @@ public class ForumActivity extends AppCompatActivity {
             //already sign in
             linearLayoutOlderUser.setVisibility(View.VISIBLE);
             linearLayoutNewUser.setVisibility(View.GONE);
-            textViewUsername.setText(firebaseAuth.getUid());
+            textViewUsername.setText(firebaseUser.getDisplayName());
+
+            //Get the data from the database
+            databaseReference.child("registeredUser").child("main").child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        String sekolah = dataSnapshot.getValue(RegisteredUser.class).getSekolah();
+                        String reputation = String.valueOf(dataSnapshot.getValue(RegisteredUser.class).getReputation());
+                        //Check the online status, if online or not
+                        if (dataSnapshot.getValue(RegisteredUser.class).getOnlineStatus().equals("Online")) {
+                            textViewUsername.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sign_online_green, 0, 0, 0);
+                            textViewUsername.setCompoundDrawablePadding(1);
+                        } else {
+                            textViewUsername.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sign_online, 0, 0, 0);
+                            textViewUsername.setCompoundDrawablePadding(1);
+                        }
+                        textViewReputation.setText(sekolah);
+                        textViewSekolah.setText(reputation);
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+
         } else {
             linearLayoutNewUser.setVisibility(View.VISIBLE);
             linearLayoutOlderUser.setVisibility(View.GONE);
@@ -95,7 +129,14 @@ public class ForumActivity extends AppCompatActivity {
         buttonSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                SignInDialog signInDialog = new SignInDialog(ForumActivity.this);
+                //    signInDialog.setInitialUid(userUid);
+                signInDialog.setLinearLayoutNewUser(linearLayoutNewUser);
+                signInDialog.setLinearLayoutOldUser(linearLayoutOlderUser);
+                signInDialog.setTextViewUsername(textViewUsername);
+                signInDialog.setTextViewSekolah(textViewSekolah);
+                signInDialog.setTextViewReputation(textViewReputation);
+                signInDialog.show();
             }
         });
     }
@@ -109,6 +150,9 @@ public class ForumActivity extends AppCompatActivity {
                 signUpDialog.setInitialUid(userUid);
                 signUpDialog.setLinearLayoutNewUser(linearLayoutNewUser);
                 signUpDialog.setLinearLayoutOldUser(linearLayoutOlderUser);
+                signUpDialog.setTextViewUsername(textViewUsername);
+                signUpDialog.setTextViewSekolah(textViewSekolah);
+                signUpDialog.setTextViewReputation(textViewReputation);
                 signUpDialog.show();
             }
         });
@@ -127,6 +171,7 @@ public class ForumActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

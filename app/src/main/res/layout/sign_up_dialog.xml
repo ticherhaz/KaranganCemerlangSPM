@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="300dp"
-    android:layout_height="250dp"
+    android:layout_height="400dp"
     android:layout_margin="7dp"
     android:orientation="vertical">
 
@@ -14,12 +14,21 @@
         android:singleLine="true" />
 
     <EditText
+        android:id="@+id/edit_text_sekolah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/sekolah"
+        android:inputType="text"
+        android:singleLine="true" />
+
+    <EditText
         android:id="@+id/edit_text_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:singleLine="true" />
+
 
     <EditText
         android:id="@+id/edit_text_password"
@@ -34,6 +43,28 @@
         android:layout_height="wrap_content"
         android:hint="@string/confirm_password"
         android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/text_view_birthday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/select_birthday_date"
+        android:textColor="@drawable/text_view_color"
+        android:textSize="17sp" />
+
+    <Spinner
+        android:id="@+id/spinner_state"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp" />
+
+    <Spinner
+        android:id="@+id/spinner_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp" />
+
 
     <Button
         android:id="@+id/button_sign_up"
