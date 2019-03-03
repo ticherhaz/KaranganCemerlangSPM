@@ -86,7 +86,7 @@
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
     <string name="to_reply_thread_sign_up_today">To reply thread, sign up today</string>
-    <string name="reputation">Reputation</string>
+    <string name="reputation">Reputation: </string>
     <string name="sign_out">Sign Out</string>
     <string name="username">Username</string>
     <string name="confirm_password">Confirm Password</string>

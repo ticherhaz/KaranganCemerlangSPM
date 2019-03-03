@@ -3,7 +3,6 @@ package net.ticherhaz.karangancemerlangspm;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +14,6 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.ContextThemeWrapper;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,7 +24,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -38,7 +35,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.Karangan;
-import net.ticherhaz.karangancemerlangspm.Util.InternetMessage;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.KaranganViewHolder;
 
 import java.util.Calendar;
@@ -242,17 +238,6 @@ public class MainActivity extends AppCompatActivity {
         firebaseRecyclerAdapter.notifyDataSetChanged();
         firebaseRecyclerAdapter.startListening();
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (progressBar.getVisibility() == View.VISIBLE) {
-                    //If no connection, then we proceed to store admin info
-                    Toast toast = Toast.makeText(getApplicationContext(), new InternetMessage().getMessage(), Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                }
-            }
-        }, 3000);
     }
 
     @Override
@@ -282,8 +267,8 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
             builder.setTitle("About");
             //TODO: Update the version at About
-            //builder.setMessage("Karangan Cemerlang SPM\nversion 1.12\n\n\nDon't forget to share with your friends :)\n\n--Donate--\nHAZMAN BADRUNSHAM\n7614543761\nCIMB BANK\n\n\n\nhazman45.blogspot.com\nTicherhaz©2019");
-            builder.setMessage("Karangan Cemerlang SPM\nversion 1.12\n\n\nDon't forget to share with your friends :)\n\n\n\n\nhazman45.blogspot.com\nTicherhaz©2019");
+            //builder.setMessage("Karangan Cemerlang SPM\nversion 1.13\n\n\nDon't forget to share with your friends :)\n\n--Donate--\nHAZMAN BADRUNSHAM\n7614543761\nCIMB BANK\n\n\n\nhazman45.blogspot.com\nTicherhaz©2019");
+            builder.setMessage("Karangan Cemerlang SPM\nversion 1.13\n\n\nDon't forget to share with your friends :)\n\n\n\n\nhazman45.blogspot.com\nTicherhaz©2019");
 
             builder.setCancelable(true);
             builder.setPositiveButton(

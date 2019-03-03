@@ -11,14 +11,13 @@
         android:layout_margin="7dp"
         android:orientation="vertical">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/text_view_umum"
+                android:id="@+id/text_view_forum_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
@@ -26,7 +25,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/text_view_user_viewing"
+                android:id="@+id/text_view_forum_user_viewing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
@@ -35,9 +34,8 @@
 
         </LinearLayout>
 
-
         <TextView
-            android:id="@+id/text_view_deskripsi_forum"
+            android:id="@+id/text_view_forum_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
@@ -50,7 +48,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/text_view_viewer"
+                android:id="@+id/text_view_forum_views"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_viewer"
@@ -59,17 +57,17 @@
                 android:text="@string/views"
                 android:textSize="12sp" />
 
-            <TextView
-                android:id="@+id/text_view_fav"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:drawableStart="@drawable/ic_favourite"
-                android:drawableLeft="@drawable/ic_favourite"
-                android:gravity="center_vertical"
-                android:text="@string/fav"
-                android:textSize="12sp" />
+            <!--<TextView-->
+            <!--android:id="@+id/text_view_fav"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:drawableStart="@drawable/ic_favourite"-->
+            <!--android:drawableLeft="@drawable/ic_favourite"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:text="@string/fav"-->
+            <!--android:textSize="12sp" />-->
         </RelativeLayout>
 
         <RelativeLayout
@@ -86,7 +84,7 @@
                 android:textStyle="italic" />
 
             <TextView
-                android:id="@+id/text_view_posts"
+                android:id="@+id/text_view_posts_thread_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -99,7 +97,7 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/text_view_last_post"
+            android:id="@+id/text_view_last_thread_post"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/last_thread" />
@@ -109,6 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/by_user"
+            android:textSize="12sp"
             android:textStyle="italic" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

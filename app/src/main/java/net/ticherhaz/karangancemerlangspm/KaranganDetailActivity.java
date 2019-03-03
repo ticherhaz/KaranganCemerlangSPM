@@ -91,18 +91,10 @@ public class KaranganDetailActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     vote = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
-                }
 
-                //Then update the view at the like
-
-                //0 == not like
-                //1 == like
-
-                if (vote == 1) {
                     textViewFav.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_favourite_red, 0, 0, 0);
                     textViewFav.setCompoundDrawablePadding(1);
                 }
-
             }
 
             @Override

@@ -186,12 +186,12 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
         };
         //Display
         //1. Set the recycler view
-        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(firebaseRecyclerAdapter);
         //2. FirebaseUI
         firebaseRecyclerAdapter.notifyDataSetChanged();
         firebaseRecyclerAdapter.startListening();
+
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -205,8 +205,6 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
 
             }
         }, 3000);
-
-
     }
 
 
@@ -228,7 +226,6 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
             }
         });
     }
-
 
     @Override
     public void onBackPressed() {

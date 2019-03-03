@@ -103,11 +103,6 @@ public class SplashActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString(SHARED_PREFERENCES_UID, uid);
             editor.apply();
-
-            databaseReference.child(uid).child("uid").setValue(uid);
-            databaseReference.child(uid).child("phoneModel").setValue(phoneModel);
-            databaseReference.child(uid).child("ipAddress").setValue(ipAddress);
-            databaseReference.child(uid).child("lastSeen").setValue(lastSeen);
         }
     }
 
@@ -138,7 +133,10 @@ public class SplashActivity extends AppCompatActivity {
     //Method store data of the user into the Firebase
     private void storeUserInfo(final String userUid) {
         //So the new user enter the system, then we collect the new information for the user
-
+        databaseReference.child(uid).child("uid").setValue(uid);
+        databaseReference.child(uid).child("phoneModel").setValue(phoneModel);
+        databaseReference.child(uid).child("ipAddress").setValue(ipAddress);
+        databaseReference.child(uid).child("lastSeen").setValue(lastSeen);
 
         final String activityLogUid = databaseReference.push().getKey();
         if (activityLogUid != null) {
@@ -173,8 +171,8 @@ public class SplashActivity extends AppCompatActivity {
                         return;
                     }
                     //After that, we chat the value
-                    if (system != null && system.getVersi() != 12) {
-                        //TODO: Version right now is 12. Please update when the new version is released.
+                    if (system != null && system.getVersi() != 13) {
+                        //TODO: Version right now is 13. Please update when the new version is released.
                         Toast.makeText(getApplicationContext(), "Please update the new version", Toast.LENGTH_SHORT).show();
 
                         //put the delay
