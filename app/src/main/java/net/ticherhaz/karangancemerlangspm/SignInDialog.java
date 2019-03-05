@@ -1,6 +1,5 @@
 package net.ticherhaz.karangancemerlangspm;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -219,11 +218,10 @@ public class SignInDialog extends Dialog implements View.OnClickListener {
                     if (firebaseUser != null) {
                         Intent intent = new Intent(context, ForumActivity.class);
                         context.startActivity(intent);
-                        ((Activity) context).finish();
+                        Toast.makeText(context, "Success login: " + firebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                         dismiss();
-                        Toast.makeText(context, "Success login: " + firebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
-
+                        ((ForumActivity) context).finish();
                     }
                 } else {
                     if (task.getException() != null)

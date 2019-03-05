@@ -4,14 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 public class ForumSplashActivity extends AppCompatActivity {
 
     private String userUid;
-    private String phoneModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +27,6 @@ public class ForumSplashActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent.getExtras() != null) {
             userUid = intent.getExtras().getString("userUid");
-            phoneModel = intent.getExtras().getString("phoneModel");
         }
 
         new Handler().postDelayed(new Runnable() {
@@ -37,16 +34,15 @@ public class ForumSplashActivity extends AppCompatActivity {
             public void run() {
 
                 //Making special toast to center the toast
-                Toast toast = Toast.makeText(getApplicationContext(), "Coming soon...", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
-                finish();
-
-//                Intent intent = new Intent(ForumSplashActivity.this, ForumActivity.class);
-//                intent.putExtra("userUid", userUid);
-//                intent.putExtra("phoneModel", phoneModel);
-//                startActivities(new Intent[]{intent});
+//                Toast toast = Toast.makeText(getApplicationContext(), "Coming soon...", Toast.LENGTH_SHORT);
+//                toast.setGravity(Gravity.CENTER, 0, 0);
+//                toast.show();
 //                finish();
+
+                Intent intent = new Intent(ForumSplashActivity.this, ForumActivity.class);
+                intent.putExtra("userUid", userUid);
+                startActivities(new Intent[]{intent});
+                finish();
             }
         }, 1000);
     }

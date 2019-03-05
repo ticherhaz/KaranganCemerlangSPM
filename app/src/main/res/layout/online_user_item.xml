@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/text_view_username"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:drawableStart="@drawable/ic_sign_online_green"
+            android:drawableLeft="@drawable/ic_sign_online_green"
+            android:gravity="center_vertical"
+            android:text="@string/username" />
+
+        <TextView
+            android:id="@+id/text_view_sekolah"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:gravity="center_vertical"
+            android:text="@string/sekolah" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="3dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:gravity="center_vertical"
+            android:text="@string/reputation" />
+
+        <TextView
+            android:id="@+id/text_view_reputation"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:drawableStart="@drawable/ic_reputation"
+            android:drawableLeft="@drawable/ic_reputation"
+            android:gravity="center_vertical"
+            android:text="@string/reputation" />
+
+    </LinearLayout>
+
+</LinearLayout>

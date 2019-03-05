@@ -4,7 +4,9 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -32,6 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import net.ticherhaz.karangancemerlangspm.Model.Phone;
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 
 import java.util.Calendar;
@@ -175,7 +178,7 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
                     if (firebaseUser != null) {
 
                         //Get the new registeredUid after creating the account.
-                        String registeredUserUid = firebaseUser.getUid();
+                        final String registeredUserUid = firebaseUser.getUid();
 
                         //Store the value in the object
                         RegisteredUser registeredUser = new RegisteredUser(registeredUserUid, userUid, typeUser, profileUrl, email, username, sekolah, titleType, customTitle,
@@ -189,28 +192,68 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(context, "Successfully registered", Toast.LENGTH_SHORT).show();
-                                    //Then close the dialog
-                                    linearLayoutNewUser.setVisibility(View.GONE);
-                                    linearLayoutOldUser.setVisibility(View.VISIBLE);
-                                    textViewUsername.setText(username);
-                                    textViewUsername.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sign_online_green, 0, 0, 0);
-                                    textViewUsername.setCompoundDrawablePadding(1);
-                                    textViewSekolah.setText(sekolah);
-                                    textViewReputation.setText(String.valueOf(reputation));
-
-                                    //After that store in the firebase user profile request
-                                    UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder()
-                                            .setDisplayName(username)
-                                            .setPhotoUri(Uri.parse(profileUrl))
-                                            .build();
-
-                                    firebaseUser.updateProfile(userProfileChangeRequest);
 
 
-                                    //Hide the progress dialog
-                                    progressDialog.dismiss();
-                                    dismiss();
+                                    String phoneUid = databaseReference.push().push().getKey();
+                                    String board = Build.BOARD;
+                                    String brand = Build.BRAND;
+                                    String device = Build.DEVICE;
+                                    String display = Build.DISPLAY;
+                                    String fingerprint = Build.FINGERPRINT;
+                                    String hardware = Build.HARDWARE;
+                                    String host = Build.HOST;
+                                    String id = Build.ID;
+                                    String manufacturer = Build.MANUFACTURER;
+                                    String model = Build.MODEL;
+                                    String product = Build.PRODUCT;
+                                    String tags = Build.TAGS;
+                                    String time = String.valueOf(Build.TIME);
+                                    String type = Build.TYPE;
+                                    String unknown = Build.UNKNOWN;
+                                    String user = Build.USER;
+
+                                    //So after that we store the value for the phone
+                                    Phone phone = new Phone(phoneUid, board, brand, device, display, fingerprint,
+                                            hardware, host, id, manufacturer, model, product, tags, time, type, unknown, user);
+                                    databaseReference.child(registeredUserUid).child("phone").setValue(phone).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(context, "Successfully registered", Toast.LENGTH_SHORT).show();
+                                                //Then close the dialog
+//                                                linearLayoutNewUser.setVisibility(View.GONE);
+//                                                linearLayoutOldUser.setVisibility(View.VISIBLE);
+//                                                textViewUsername.setText(username);
+//                                                textViewUsername.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sign_online_green, 0, 0, 0);
+//                                                textViewUsername.setCompoundDrawablePadding(1);
+//                                                textViewSekolah.setText(sekolah);
+//                                                textViewReputation.setText(String.valueOf(reputation));
+
+                                                //After that store in the firebase user profile request
+                                                UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder()
+                                                        .setDisplayName(username)
+                                                        .setPhotoUri(Uri.parse(profileUrl))
+                                                        .build();
+
+                                                firebaseUser.updateProfile(userProfileChangeRequest);
+
+
+                                                Intent intent = new Intent(context, ForumActivity.class);
+                                                context.startActivity(intent);
+                                                Toast.makeText(context, "Success register: " + firebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
+                                                progressDialog.dismiss();
+                                                dismiss();
+                                                ((ForumActivity) context).finish();
+                                            } else {
+                                                //Exception if there is problem when to store the value in the database
+                                                if (task.getException() != null)
+                                                    Toast.makeText(context, "" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                progressDialog.dismiss();
+                                            }
+                                        }
+                                    });
+
+
                                 } else {
                                     //Exception if there is problem when to store the value in the database
                                     if (task.getException() != null)
@@ -304,6 +347,7 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 birthdayMain = dayOfMonth + "/" + month + "/" + year;
+                textViewBirthdayDate.setText(birthdayMain);
             }
         };
     }

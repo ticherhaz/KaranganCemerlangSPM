@@ -15,6 +15,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning,HardcodedDebugMode">
+        <activity android:name=".OnlineUserActivity">
+
+            <!-- This is for the back button navigation -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ForumActivity" />
+        </activity>
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/logo" />
@@ -25,6 +33,7 @@
         <activity
             android:name=".ForumActivity"
             android:label="@string/forum">
+
             <!-- This is for the back button navigation -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -90,4 +99,5 @@
             android:exported="false"
             tools:ignore="InnerclassSeparator" />
     </application>
+
 </manifest>

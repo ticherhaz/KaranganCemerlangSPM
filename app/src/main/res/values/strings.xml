@@ -92,6 +92,7 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="select_birthday_date">Select Birthday Date</string>
     <string name="email_or_username">Email or Username</string>
+    <string name="_0_online_s">0 Online(s)</string>
     <string-array name="feedback_array">
         <item>Suggestion</item>
         <item>Compliment</item>
