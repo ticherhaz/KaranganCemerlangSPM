@@ -22,6 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.Karangan;
@@ -53,6 +54,7 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
 
     //Variable
     private String userUid;
+    private String karanganJenis;
 
     //Method listID
     private void listID() {
@@ -73,14 +75,18 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent.getExtras() != null) {
             userUid = intent.getExtras().getString("userUid");
+            karanganJenis = intent.getExtras().getString("karanganJenis");
         }
     }
 
     //Method firebaseUI
     private void setFirebaseRecyclerAdapter() {
         //FirebaseUI
+
+        Query query = databaseReference.child("karangan").child("main").orderByChild("karanganJenis").equalTo(karanganJenis);
         firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<Karangan>()
-                .setQuery(databaseReference.child("karangan").child("main"), Karangan.class)
+                //   .setQuery(databaseReference.child("karangan").child("main"), Karangan.class)
+                .setQuery(query, Karangan.class)
                 .build();
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Karangan, KaranganViewHolder>(firebaseRecyclerOptions) {
             @Override

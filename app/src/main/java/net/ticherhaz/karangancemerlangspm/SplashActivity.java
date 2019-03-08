@@ -171,8 +171,8 @@ public class SplashActivity extends AppCompatActivity {
                         return;
                     }
                     //After that, we chat the value
-                    if (system != null && system.getVersi() != 13) {
-                        //TODO: Version right now is 13. Please update when the new version is released.
+                    if (system != null && system.getVersi() != 14) {
+                        //TODO: Version right now is 14. Please update when the new version is released.
                         Toast.makeText(getApplicationContext(), "Please update the new version", Toast.LENGTH_SHORT).show();
 
                         //put the delay

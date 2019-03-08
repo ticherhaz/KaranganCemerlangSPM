@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewTajuk1;
     private RecyclerView recyclerViewTajuk2;
     private RecyclerView recyclerViewTajuk7;
+    private RecyclerView recyclerViewTag;
     private LinearLayout linearLayout;
     private LinearLayout linearLayoutHow;
 
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewTajuk1 = findViewById(R.id.recycler_view_tajuk1);
         recyclerViewTajuk2 = findViewById(R.id.recycler_view_tajuk2);
         recyclerViewTajuk7 = findViewById(R.id.recycler_view_tajuk7);
+        recyclerViewTag = findViewById(R.id.recycler_view_tag);
         linearLayout = findViewById(R.id.linear_layout);
         linearLayoutHow = findViewById(R.id.linear_layout_how);
 
@@ -123,10 +125,124 @@ public class MainActivity extends AppCompatActivity {
 
     //Set the firebaseUI
     private void setFirebaseRecyclerAdapter(String search) {
-        setRecyclerView(search, "tajuk1UpperCase", recyclerViewTajuk1);
-        setRecyclerView(search, "tajuk2UpperCase", recyclerViewTajuk2);
-        setRecyclerView(search, "tajuk7UpperCase", recyclerViewTajuk7);
+        //  setRecyclerView(search, "tajuk1UpperCase", recyclerViewTajuk1);
+        // setRecyclerView(search, "tajuk2UpperCase", recyclerViewTajuk2);
+        // setRecyclerView(search, "tajuk7UpperCase", recyclerViewTajuk7);
+        setRecyclerViewTag(search, recyclerViewTag);
     }
+
+    //Method tajuk
+    private void setRecyclerViewTag(String search, final RecyclerView recyclerViewNumber) {
+        //Making query
+        Query query = databaseReference.child("karangan").child("main").orderByChild("karanganTag").startAt(search.toUpperCase()).endAt(search.toUpperCase() + "\uf8ff");
+        //FirebaseUI
+        FirebaseRecyclerOptions<Karangan> firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<Karangan>()
+                .setQuery(query, Karangan.class)
+                .build();
+        FirebaseRecyclerAdapter<Karangan, KaranganViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Karangan, KaranganViewHolder>(firebaseRecyclerOptions) {
+            @Override
+            protected void onBindViewHolder(@NonNull final KaranganViewHolder holder, int position, @NonNull final Karangan model) {
+                //Display the data
+                holder.getTextViewTajuk().setText(model.getTajukPenuh());
+                holder.getTextViewDeskripsi().setText(model.getDeskripsiPenuh());
+                holder.getTextViewViewer().setText(String.valueOf(model.getMostVisited()));
+                holder.getTextViewFav().setText(String.valueOf(model.getVote()));
+
+                holder.getView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Display the progress bar1
+                        progressBar.setVisibility(View.VISIBLE);
+                        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+                        //This part we will update the database when user click the specific karangan
+                        //1. We need to update the last visited karangan
+                        databaseReference.child("user").child(userUid).child("lastVisitedKarangan").setValue(model.getTajukPenuh());
+                        //2. So about the mostvisited karangan.
+                        //So we read back the previous data
+                        databaseReference.child("user").child(userUid).child("karangan").child(model.getTajukPenuh()).child("click").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                //We declare the click = 0 because we don't know if the click is available or not
+                                int click = 0;
+                                if (dataSnapshot.exists()) {
+                                    click = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
+                                }
+                                //Then we set the new data of the user
+                                databaseReference.child("user").child(userUid).child("karangan").child(model.getTajukPenuh()).child("click").setValue(click + 1);
+
+                                //This part for the karangan, we will do the same thing as the user
+                                databaseReference.child("karangan").child("main").child(model.getUid()).child("mostVisited").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        //Hide the progressbar
+                                        progressBar.setVisibility(View.INVISIBLE);
+                                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+                                        int clickKarangan = 0;
+                                        if (dataSnapshot.exists()) {
+                                            clickKarangan = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
+                                        }
+                                        //Then we set the data for the karangan
+                                        databaseReference.child("karangan").child("main").child(model.getUid()).child("mostVisited").setValue(clickKarangan + 1);
+
+                                        //After that we need to update this karangan about the lastuservisited
+                                        String tarikh = Calendar.getInstance().getTime().toString();
+                                        databaseReference.child("karangan").child("main").child(model.getUid()).child("userLastVisitedDate").setValue(tarikh);
+
+                                        //This part we continue to the next activity
+                                        Intent intent = new Intent(getApplicationContext(), KaranganDetailActivity.class);
+                                        intent.putExtra("userUid", userUid);
+                                        intent.putExtra("uidKarangan", model.getUid());
+                                        intent.putExtra("tajukPenuh", model.getTajukPenuh());
+                                        intent.putExtra("deskripsiPenuh", model.getDeskripsiPenuh());
+                                        intent.putExtra("tarikh", model.getTarikh());
+                                        intent.putExtra("karangan", model.getKarangan());
+                                        intent.putExtra("vote", model.getVote());
+                                        intent.putExtra("mostVisited", model.getMostVisited());
+                                        intent.putExtra("userLastVisitedDate", model.getUserLastVisitedDate());
+                                        startActivities(new Intent[]{intent});
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                });
+            }
+
+            @NonNull
+            @Override
+            public KaranganViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.karangan_item, viewGroup, false);
+                return new KaranganViewHolder(view);
+            }
+
+            @Override
+            public void onDataChanged() {
+                progressBar.setVisibility(View.INVISIBLE);
+            }
+        };
+        //Display
+        //1. Set the recycler view
+        recyclerViewNumber.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerViewNumber.setAdapter(firebaseRecyclerAdapter);
+        //2. FirebaseUI
+        firebaseRecyclerAdapter.notifyDataSetChanged();
+        firebaseRecyclerAdapter.startListening();
+
+    }
+
 
     //Method tajuk
     private void setRecyclerView(String search, String tajukNumberUpperCase, final RecyclerView recyclerViewNumber) {
@@ -267,8 +383,8 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
             builder.setTitle("About");
             //TODO: Update the version at About
-            //builder.setMessage("Karangan Cemerlang SPM\nversion 1.13\n\n\nDon't forget to share with your friends :)\n\n--Donate--\nHAZMAN BADRUNSHAM\n7614543761\nCIMB BANK\n\n\n\nhazman45.blogspot.com\nTicherhaz©2019");
-            builder.setMessage("Karangan Cemerlang SPM\nversion 1.13\n\n\nDon't forget to share with your friends :)\n\n\n\n\nhazman45.blogspot.com\nTicherhaz©2019");
+            //builder.setMessage("Karangan Cemerlang SPM\nversion 1.14\n\n\nDon't forget to share with your friends :)\n\n--Donate--\nHAZMAN BADRUNSHAM\n7614543761\nCIMB BANK\n\n\n\nhazman45.blogspot.com\nTicherhaz©2019");
+            builder.setMessage("Karangan Cemerlang SPM\nversion 1.14\n\n\nDon't forget to share with your friends :)\n\n\n\nCredited to:\nCikgu Mariani\nCikgu Hamidah\nCikgu Rohani\nCikgu Harum Awang\nCikgu Samat\nCikgu Che Noranuwi\nNabil Fikri\n\nhazman45.blogspot.com\nTicherhaz©2019");
 
             builder.setCancelable(true);
             builder.setPositiveButton(
@@ -308,7 +424,11 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         if (id == R.id.action_senarai_karangan) {
-            Intent intent = new Intent(MainActivity.this, SenaraiKaranganActivity.class);
+//            Intent intent = new Intent(MainActivity.this, SenaraiKaranganActivity.class);
+//            intent.putExtra("userUid", userUid);
+//            startActivities(new Intent[]{intent});
+
+            Intent intent = new Intent(MainActivity.this, JenisKaranganActivity.class);
             intent.putExtra("userUid", userUid);
             startActivities(new Intent[]{intent});
             return true;

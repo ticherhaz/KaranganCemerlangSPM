@@ -68,7 +68,7 @@
     <string name="how">
         <![CDATA[
         <p><b>Cara-cara menggunakan aplikasi ini</b></p>
-        <p>Kata kunci contoh: <b>langkah</b>, <b>cara</b>, <b>usaha<b/></p>
+        <p>Kata kunci contoh: <b>baca</b>, <b>pelancongan</b>, <b>insan<b/></p>
         <p>Di 'Settings', (3 titik atas kanan), boleh lihat <b>Senarai Karangan</b></p>
 ]]></string>
     <string name="nama">Nama</string>
@@ -93,6 +93,7 @@
     <string name="select_birthday_date">Select Birthday Date</string>
     <string name="email_or_username">Email or Username</string>
     <string name="_0_online_s">0 Online(s)</string>
+    <string name="jenis_karangan">Jenis Karangan</string>
     <string-array name="feedback_array">
         <item>Suggestion</item>
         <item>Compliment</item>

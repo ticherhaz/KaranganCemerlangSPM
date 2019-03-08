@@ -15,6 +15,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning,HardcodedDebugMode">
+        <activity
+            android:name=".JenisKaranganActivity"
+            android:label="@string/jenis_karangan">
+            <!-- This is for the back button navigation -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity android:name=".OnlineUserActivity">
 
             <!-- This is for the back button navigation -->
