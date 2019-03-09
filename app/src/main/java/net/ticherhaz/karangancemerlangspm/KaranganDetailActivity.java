@@ -2,11 +2,12 @@ package net.ticherhaz.karangancemerlangspm;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,11 @@ public class KaranganDetailActivity extends AppCompatActivity {
     private TextView textViewFav;
     private TextView textViewViewer;
 
+    private Button buttonIncreaseSize;
+    private Button buttonDecreaseSize;
+    private Button buttonFont;
+    private Button buttonBlack;
+
     private String userUid;
     private String uidKarangan;
     private String tajuk;
@@ -39,8 +45,7 @@ public class KaranganDetailActivity extends AppCompatActivity {
     private int vote;
     private int mostVisited;
     private int voteAtKarangan = 0;
-
-    private LinearLayout linearLayoutDoubleClick;
+    private boolean colorChange = true;
 
     //Method listID
     private void listID() {
@@ -49,7 +54,11 @@ public class KaranganDetailActivity extends AppCompatActivity {
         textViewTarikh = findViewById(R.id.text_view_tarikh);
         textViewFav = findViewById(R.id.text_view_fav);
         textViewViewer = findViewById(R.id.text_view_viewer);
-        linearLayoutDoubleClick = findViewById(R.id.linear_layout_double_click);
+
+        buttonIncreaseSize = findViewById(R.id.button_increase_size);
+        buttonDecreaseSize = findViewById(R.id.button_decrease_size);
+        buttonFont = findViewById(R.id.button_font);
+        buttonBlack = findViewById(R.id.button_black);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("user");
@@ -57,7 +66,71 @@ public class KaranganDetailActivity extends AppCompatActivity {
         retrieveData();
         displayData();
         checkLike();
+
+
+        setButtonIncreaseSize();
+        setButtonDecreaseSizeSize();
+        setButtonFont();
+        setButtonBlack();
     }
+
+    //Method set black
+    private void setButtonBlack() {
+        buttonBlack.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+
+            public void onClick(View v) {
+                if (colorChange) {
+                    colorChange = false;
+                    buttonBlack.setText("White");
+                    textViewKarangan.setTextColor(Color.WHITE);
+                    textViewKarangan.setBackgroundColor(Color.DKGRAY);
+                } else {
+                    colorChange = true;
+                    textViewKarangan.setTextColor(Color.DKGRAY);
+                    buttonBlack.setText("Black");
+                    textViewKarangan.setBackgroundColor(Color.WHITE);
+                }
+
+            }
+        });
+    }
+
+    //Method increase size text
+    private void setButtonIncreaseSize() {
+        buttonIncreaseSize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textViewKarangan.setTextSize(0, textViewKarangan.getTextSize() + 2.0f);
+            }
+        });
+    }
+
+    //Method increase size text
+    private void setButtonDecreaseSizeSize() {
+        buttonDecreaseSize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textViewKarangan.setTextSize(0, textViewKarangan.getTextSize() - 2.0f);
+            }
+        });
+    }
+
+    //Set button font
+    private void setButtonFont() {
+        buttonFont.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FontDialog fontDialog = new FontDialog(KaranganDetailActivity.this);
+                fontDialog.setTextViewKarangan(textViewKarangan);
+                fontDialog.show();
+
+                //  AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            }
+        });
+    }
+
 
     //Method retrieve the data
     private void retrieveData() {

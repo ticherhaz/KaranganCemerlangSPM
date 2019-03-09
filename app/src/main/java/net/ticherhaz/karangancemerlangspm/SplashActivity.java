@@ -171,8 +171,8 @@ public class SplashActivity extends AppCompatActivity {
                         return;
                     }
                     //After that, we chat the value
-                    if (system != null && system.getVersi() != 14) {
-                        //TODO: Version right now is 14. Please update when the new version is released.
+                    if (system != null && system.getVersi() != 15) {
+                        //TODO: Version right now is 15. Please update when the new version is released.
                         Toast.makeText(getApplicationContext(), "Please update the new version", Toast.LENGTH_SHORT).show();
 
                         //put the delay
@@ -208,9 +208,11 @@ public class SplashActivity extends AppCompatActivity {
         if (userUid != null) {
             //Show to user to use stable connection
             //Making special toast to center the toast
+
             Toast toast = Toast.makeText(getApplicationContext(), new InternetMessage().getMessage(), Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
+
             //If there is connection, then it will check the system
             //So, we using the async task to check the internet, this is the best way to check the internet connection
             //TODO: Internet connection

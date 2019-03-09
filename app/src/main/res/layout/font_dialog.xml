@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="190dp"
+    android:layout_height="270dp"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/button_default"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/button_selector"
+        android:fontFamily="sans-serif"
+        android:text="@string/default_font"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/button_merriweather"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/button_selector"
+        android:fontFamily="@font/merriweather"
+        android:padding="11dp"
+        android:text="@string/merriweather"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/button_roboto"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/button_selector"
+        android:fontFamily="@font/roboto"
+        android:text="@string/roboto"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/button_timesnewroman"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/button_selector"
+        android:fontFamily="@font/timesnewroman"
+        android:padding="7dp"
+        android:text="@string/timenewroman"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/button_arial"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/button_selector"
+        android:fontFamily="@font/arial"
+        android:text="@string/arial"
+        android:textAllCaps="false" />
+
+</LinearLayout>

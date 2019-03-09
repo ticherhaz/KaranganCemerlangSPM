@@ -383,8 +383,8 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
             builder.setTitle("About");
             //TODO: Update the version at About
-            //builder.setMessage("Karangan Cemerlang SPM\nversion 1.14\n\n\nDon't forget to share with your friends :)\n\n--Donate--\nHAZMAN BADRUNSHAM\n7614543761\nCIMB BANK\n\n\n\nhazman45.blogspot.com\nTicherhaz©2019");
-            builder.setMessage("Karangan Cemerlang SPM\nversion 1.14\n\n\nDon't forget to share with your friends :)\n\n\n\nCredited to:\nCikgu Mariani\nCikgu Hamidah\nCikgu Rohani\nCikgu Harum Awang\nCikgu Samat\nCikgu Che Noranuwi\nNabil Fikri\n\nhazman45.blogspot.com\nTicherhaz©2019");
+            //builder.setMessage("Karangan Cemerlang SPM\nversion 1.15\n\n\nDon't forget to share with your friends :)\n\n--Donate--\nHAZMAN BADRUNSHAM\n7614543761\nCIMB BANK\n\n\n\nhazman45.blogspot.com\nTicherhaz©2019");
+            builder.setMessage("Karangan Cemerlang SPM\nversion 1.15\n\n\nDon't forget to share with your friends :)\n\n\n\nCredited to:\nCikgu Mariani\nCikgu Badrunsham\nCikgu Hamidah\nCikgu Rohani\nCikgu Harum Awang\nCikgu Samat\nCikgu Che Noranuwi\nNabil Fikri\nMohd Arif (Bob)\n\nhazman45.blogspot.com\nTicherhaz©2019");
 
             builder.setCancelable(true);
             builder.setPositiveButton(
@@ -424,10 +424,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         if (id == R.id.action_senarai_karangan) {
-//            Intent intent = new Intent(MainActivity.this, SenaraiKaranganActivity.class);
-//            intent.putExtra("userUid", userUid);
-//            startActivities(new Intent[]{intent});
-
             Intent intent = new Intent(MainActivity.this, JenisKaranganActivity.class);
             intent.putExtra("userUid", userUid);
             startActivities(new Intent[]{intent});
