@@ -30,7 +30,7 @@ public class InternetMessage implements Parcelable {
     }
 
     public String getMessage() {
-        return "Please use stable internet connection";
+        return "Sila pastikan internet anda stabil";
     }
 
     public void setMessage(String message) {

@@ -80,34 +80,34 @@ public class FontDialog extends Dialog implements View.OnClickListener {
     private void setButtonArial() {
         Typeface typeface = ResourcesCompat.getFont(context, R.font.arial);
         textViewKarangan.setTypeface(typeface);
-        Toast.makeText(context, "Success changed font to Arial", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Berjaya tukar fon ke Arial", Toast.LENGTH_SHORT).show();
         dismiss();
     }
 
     private void setButtonTimesnewroman() {
         Typeface typeface = ResourcesCompat.getFont(context, R.font.timesnewroman);
         textViewKarangan.setTypeface(typeface);
-        Toast.makeText(context, "Success changed font to Times New Roman", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Berjaya tukar fon ke Times New Roman", Toast.LENGTH_SHORT).show();
         dismiss();
     }
 
     private void setButtonDefault() {
         textViewKarangan.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
-        Toast.makeText(context, "Success changed font to Default", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Berjaya tukar fon ke Default", Toast.LENGTH_SHORT).show();
         dismiss();
     }
 
     private void setButtonMerriweather() {
         Typeface typeface = ResourcesCompat.getFont(context, R.font.merriweather);
         textViewKarangan.setTypeface(typeface);
-        Toast.makeText(context, "Success changed font to Merriweather", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Berjaya tukar fon ke to Merriweather", Toast.LENGTH_SHORT).show();
         dismiss();
     }
 
     private void setButtonRoboto() {
         Typeface typeface = ResourcesCompat.getFont(context, R.font.roboto);
         textViewKarangan.setTypeface(typeface);
-        Toast.makeText(context, "Success changed font to Roboto", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Berjaya tukar fon ke to Roboto", Toast.LENGTH_SHORT).show();
         dismiss();
     }
 }

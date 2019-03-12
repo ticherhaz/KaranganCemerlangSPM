@@ -26,12 +26,12 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.Karangan;
+import net.ticherhaz.karangancemerlangspm.Util.InternetMessage;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.KaranganViewHolder;
 
 import java.util.Calendar;
 
 public class SenaraiKaranganActivity extends AppCompatActivity {
-
 
     //Database
     private FirebaseDatabase firebaseDatabase;
@@ -81,8 +81,9 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
 
     //Method firebaseUI
     private void setFirebaseRecyclerAdapter() {
+        //Set progressbar
+        progressBar.setVisibility(View.VISIBLE);
         //FirebaseUI
-
         Query query = databaseReference.child("karangan").child("main").orderByChild("karanganJenis").equalTo(karanganJenis);
         firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<Karangan>()
                 //   .setQuery(databaseReference.child("karangan").child("main"), Karangan.class)
@@ -126,7 +127,7 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         //Hide the progressbar
-                                        progressBar.setVisibility(View.GONE);
+                                        progressBar.setVisibility(View.INVISIBLE);
                                         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
                                         int clickKarangan = 0;
@@ -187,7 +188,7 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
             public void onDataChanged() {
                 //When dataChanged mean, after finished load the data
                 //Hide the progressbar
-                progressBar.setVisibility(View.GONE);
+                progressBar.setVisibility(View.INVISIBLE);
             }
         };
         //Display
@@ -198,19 +199,17 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
         firebaseRecyclerAdapter.notifyDataSetChanged();
         firebaseRecyclerAdapter.startListening();
 
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 if (progressBar.getVisibility() == View.VISIBLE) {
-
-                    Toast toast = Toast.makeText(getApplicationContext(), "Please use stable connection", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(getApplicationContext(), new InternetMessage().getMessage(), Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
 
             }
-        }, 3000);
+        }, 5000);
     }
 
 
@@ -226,9 +225,15 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                firebaseRecyclerAdapter.notifyDataSetChanged();
-                firebaseRecyclerAdapter.startListening();
-                swipeRefreshLayout.setRefreshing(false);
+                //set runnable
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        firebaseRecyclerAdapter.notifyDataSetChanged();
+                        firebaseRecyclerAdapter.startListening();
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 150);
             }
         });
     }

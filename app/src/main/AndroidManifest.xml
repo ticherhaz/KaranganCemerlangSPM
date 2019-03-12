@@ -37,7 +37,7 @@
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/logo" />
+            android:resource="@drawable/logo2" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorPrimarySoft" />
@@ -72,7 +72,8 @@
         </activity>
         <activity
             android:name=".FeedbackActivity"
-            android:label="@string/feedback">
+            android:label="@string/feedback"
+            android:windowSoftInputMode="stateHidden">
 
             <!-- This is for the back button navigation -->
             <meta-data
@@ -88,7 +89,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".KaranganDetailActivity">
+        <activity
+            android:name=".KaranganDetailActivity"
+            android:label="@string/karangan">
 
             <!-- This is for the back button navigation -->
             <meta-data

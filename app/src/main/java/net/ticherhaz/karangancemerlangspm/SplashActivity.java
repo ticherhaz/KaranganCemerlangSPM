@@ -166,14 +166,18 @@ public class SplashActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     System system = dataSnapshot.getValue(System.class);
                     if (system != null && !system.isMod()) {
-                        Toast.makeText(getApplicationContext(), "Under maintenance", Toast.LENGTH_SHORT).show();
+                        Toast toast = Toast.makeText(getApplicationContext(), "Di Bawah Penyelenggaran", Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
                         //Then we return to out of this databaseReferenceSystem.
                         return;
                     }
                     //After that, we chat the value
-                    if (system != null && system.getVersi() != 15) {
+                    if (system != null && system.getVersi() != 20) {
                         //TODO: Version right now is 15. Please update when the new version is released.
-                        Toast.makeText(getApplicationContext(), "Please update the new version", Toast.LENGTH_SHORT).show();
+                        Toast toast = Toast.makeText(getApplicationContext(), "Sila mengemas kini versi baharu v1.15", Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
 
                         //put the delay
                         new Handler().postDelayed(new Runnable() {
@@ -209,9 +213,7 @@ public class SplashActivity extends AppCompatActivity {
             //Show to user to use stable connection
             //Making special toast to center the toast
 
-            Toast toast = Toast.makeText(getApplicationContext(), new InternetMessage().getMessage(), Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
+            Toast.makeText(getApplicationContext(), new InternetMessage().getMessage(), Toast.LENGTH_SHORT).show();
 
             //If there is connection, then it will check the system
             //So, we using the async task to check the internet, this is the best way to check the internet connection

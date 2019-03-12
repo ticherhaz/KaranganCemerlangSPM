@@ -2,20 +2,19 @@
     <string name="app_name">Karangan Cemerlang SPM</string>
     <string name="administrator">Administrator</string>
     <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="title">Title</string>
-    <string name="description">Description</string>
+    <string name="password">Kata Laluan</string>
+    <string name="title">Tajuk</string>
+    <string name="description">Deskripsi</string>
 
     <string name="karangan">Karangan</string>
-    <string name="add">Add</string>
-    <string name="update">Update</string>
-    <string name="true_false">true/false</string>
+    <string name="add">Tambah</string>
+    <string name="update">Kemas Kini</string>
     <string name="versi">versi</string>
     <string name="edit">Edit</string>
-    <string name="mencari_karangan">Mencari Karangan</string>
-    <string name="like">LIKE</string>
+    <string name="mencari_karangan">Carian Karangan</string>
+    <string name="like">Suka</string>
     <string name="action_about">Tentang Aplikasi</string>
-    <string name="data_is_not_found">Data is not found</string>
+    <string name="data_is_not_found">Maklumat Tidak Tiada</string>
     <string name="tips_karangan">Tips Karangan</string>
     <string name="tips_karangan_explain">
         <![CDATA[
@@ -57,30 +56,30 @@
         <p><b><i>Selamat beramal dan semoga maju jaya! :)</i></b></p>
 ]]></string>
     <string name="feedback">Maklum Balas</string>
-    <string name="submit">Submit</string>
+    <string name="submit">Hantar</string>
     <string name="logo_kcspm">Logo KCSPM</string>
-    <string name="viewer">Viewer</string>
-    <string name="fav">Fav</string>
+    <string name="viewer">Penonton</string>
+    <string name="fav">Kegemaran</string>
     <string name="senarai_karangan">Senarai Karangan</string>
     <string name="hantar_karangan">Hantar Karangan</string>
-    <string name="muat_naik_file">Muat Naik File</string>
+    <string name="muat_naik_file">Muat Naik Fail</string>
     <string name="forum">Forum</string>
     <string name="how">
         <![CDATA[
-        <p><b>Cara-cara menggunakan aplikasi ini</b></p>
-        <p>Kata kunci contoh: <b>baca</b>, <b>pelancongan</b>, <b>insan<b/></p>
-        <p>Di 'Settings', (3 titik atas kanan), boleh lihat <b>Senarai Karangan</b></p>
+        <p><b>Cara-cara menggunakan carian karian</b></p>
+        <p>Kata Kunci: <b>baca</b>, <b>pelancongan</b>, <b>insan<b/></p>
+        <p>Kosongkan kotak carian karangan untuk kembali ke utama.</p>
 ]]></string>
     <string name="nama">Nama</string>
     <string name="sekolah">Sekolah</string>
-    <string name="progress_uploading">Uploading…</string>
-    <string name="upload_success">Upload Success</string>
-    <string name="upload_failure">Upload Failed</string>
+    <string name="progress_uploading">Memuat Naik…</string>
+    <string name="upload_success">Memuat Naik Berjaya</string>
+    <string name="upload_failure">Memuat Naik Gagal</string>
     <string name="umum">Umum</string>
-    <string name="_0_viewing">(0 Viewing)</string>
-    <string name="views">Views</string>
+    <string name="_0_viewing">(0 Tontonan)</string>
+    <string name="views">Penonton</string>
     <string name="threads">Threads:</string>
-    <string name="posts">Posts:</string>
+    <string name="posts">Pos:</string>
     <string name="last_thread">Last Thread</string>
     <string name="by_user">by User</string>
     <string name="sign_in">Sign In</string>
@@ -96,16 +95,16 @@
     <string name="jenis_karangan">Jenis Karangan</string>
     <string name="increase_size">+</string>
     <string name="decrease_size">-</string>
-    <string name="font">Font</string>
+    <string name="font">Fon</string>
     <string name="merriweather">Merriweather</string>
     <string name="roboto">Roboto</string>
     <string name="default_font">Default</string>
-    <string name="black">Black</string>
+    <string name="black">Mod Hitam</string>
     <string name="timenewroman">Times New Roman</string>
     <string name="arial">Arial</string>
     <string-array name="feedback_array">
-        <item>Suggestion</item>
-        <item>Compliment</item>
+        <item>Cadangan</item>
+        <item>Pujian</item>
     </string-array>
     <string-array name="state_array">
         <item>Perlis</item>
@@ -124,10 +123,10 @@
         <item>Sabah</item>
     </string-array>
     <string-array name="mode_array">
-        <item>Happy</item>
-        <item>Sad</item>
-        <item>Angry</item>
-        <item>Silent</item>
+        <item>Gembira</item>
+        <item>Sedih</item>
+        <item>Marah</item>
+        <item>Senyap</item>
     </string-array>
 
 </resources>

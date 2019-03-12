@@ -46,7 +46,6 @@ public class JenisKaranganActivity extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference().child("jenis").child("main");
 
         retrieveData();
-
         setFirebaseRecyclerAdapter();
     }
 

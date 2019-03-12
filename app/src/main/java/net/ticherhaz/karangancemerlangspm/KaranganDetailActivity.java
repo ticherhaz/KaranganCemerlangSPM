@@ -83,13 +83,13 @@ public class KaranganDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (colorChange) {
                     colorChange = false;
-                    buttonBlack.setText("White");
+                    buttonBlack.setText("Mod Putih");
                     textViewKarangan.setTextColor(Color.WHITE);
                     textViewKarangan.setBackgroundColor(Color.DKGRAY);
                 } else {
                     colorChange = true;
                     textViewKarangan.setTextColor(Color.DKGRAY);
-                    buttonBlack.setText("Black");
+                    buttonBlack.setText("Mod Hitam");
                     textViewKarangan.setBackgroundColor(Color.WHITE);
                 }
 
@@ -125,8 +125,6 @@ public class KaranganDetailActivity extends AppCompatActivity {
                 FontDialog fontDialog = new FontDialog(KaranganDetailActivity.this);
                 fontDialog.setTextViewKarangan(textViewKarangan);
                 fontDialog.show();
-
-                //  AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             }
         });
     }
@@ -164,7 +162,7 @@ public class KaranganDetailActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     vote = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
-
+                    //So kalau dia dah like tukar ini kepada warna merah
                     textViewFav.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_favourite_red, 0, 0, 0);
                     textViewFav.setCompoundDrawablePadding(1);
                 }
@@ -184,7 +182,7 @@ public class KaranganDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //If the text already become liked
                 if (textViewFav.getCompoundDrawablePadding() == 1) {
-                    Toast.makeText(getApplicationContext(), "You already liked this karangan", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Anda Sudah Suka Karangan Ini", Toast.LENGTH_SHORT).show();
                 } else {
                     //1st. we read and update at karangan
                     final DatabaseReference databaseReferenceKarangan = firebaseDatabase.getReference();
@@ -198,7 +196,7 @@ public class KaranganDetailActivity extends AppCompatActivity {
                             databaseReferenceKarangan.child("karangan").child("main").child(uidKarangan).child("vote").setValue(voteAtKarangan + 1);
                             databaseReference.child(userUid).child("karangan").child(tajuk).child("like").setValue(1);
                             textViewFav.setText(String.valueOf(vote + 1));
-                            Toast.makeText(getApplicationContext(), "You LIKE this Karangan", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Anda Suka Karangan Ini", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
@@ -223,7 +221,7 @@ public class KaranganDetailActivity extends AppCompatActivity {
             public void onDoubleClick(View v) {
                 //If the text already become liked
                 if (textViewFav.getCompoundDrawablePadding() == 1) {
-                    Toast.makeText(getApplicationContext(), "You already liked this karangan", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Anda Sudah Suka Karangan Ini", Toast.LENGTH_SHORT).show();
                 } else {
                     //1st. we read and update at karangan
                     final DatabaseReference databaseReferenceKarangan = firebaseDatabase.getReference();
@@ -237,7 +235,7 @@ public class KaranganDetailActivity extends AppCompatActivity {
                             databaseReferenceKarangan.child("karangan").child("main").child(uidKarangan).child("vote").setValue(voteAtKarangan + 1);
                             databaseReference.child(userUid).child("karangan").child(tajuk).child("like").setValue(1);
                             textViewFav.setText(String.valueOf(vote + 1));
-                            Toast.makeText(getApplicationContext(), "You LIKE this Karangan", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Anda Suka Karangan Ini", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override

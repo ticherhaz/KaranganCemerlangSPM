@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:contentDescription="@string/forum"
-            android:src="@drawable/forum" />
+            android:src="@drawable/forum_new" />
 
     </LinearLayout>
 </ScrollView>

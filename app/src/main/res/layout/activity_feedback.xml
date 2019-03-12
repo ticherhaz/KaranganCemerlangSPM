@@ -15,25 +15,32 @@
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp" />
+            android:layout_margin="9dp" />
 
         <EditText
             android:id="@+id/edit_text_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="9dp"
             android:autofillHints="@string/email"
+            android:background="@drawable/edit_text_border"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
+            android:padding="7dp"
+            android:singleLine="true"
             tools:targetApi="o" />
 
         <EditText
             android:id="@+id/text_view_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="9dp"
             android:autofillHints="@string/description"
+            android:background="@drawable/edit_text_border"
             android:hint="@string/description"
             android:inputType="textCapSentences|textMultiLine"
             android:maxLines="5"
+            android:padding="7dp"
             android:scrollbars="vertical"
             android:scrollHorizontally="false"
             tools:targetApi="o" />
@@ -43,6 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="@drawable/button_selector"
             android:text="@string/submit"
             android:textAllCaps="false" />
 

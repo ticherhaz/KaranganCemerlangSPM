@@ -1,5 +1,6 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,12 +14,15 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
 import android.view.ContextThemeWrapper;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -176,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         //Display the progress bar1
                         progressBar.setVisibility(View.VISIBLE);
+                        //The window cannot editable, takleh nak pergi mana2
                         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
@@ -259,24 +264,12 @@ public class MainActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.INVISIBLE);
                 // if there are no chat messages, show a view that invites the user to add a message
                 linearLayoutHow.setVisibility(firebaseRecyclerAdapter.getItemCount() == 0 ? View.VISIBLE : View.GONE);
-//                if (recyclerViewNumber.getChildCount() == 0) {
-//                    if (firebaseRecyclerAdapter == null) {
-//                        linearLayoutHow.setVisibility(View.VISIBLE);
-//                        linearLayoutUtama.setVisibility(View.GONE);
-//                        linearLayout.setVisibility(View.GONE);
-//                    }
-//                }
-
             }
-
-
         };
         //Display
         //1. Set the recycler view
-
         recyclerViewNumber.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerViewNumber.setAdapter(firebaseRecyclerAdapter);
-
         //2. FirebaseUI
         firebaseRecyclerAdapter.notifyDataSetChanged();
         firebaseRecyclerAdapter.startListening();
@@ -399,6 +392,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listID();
+        setEditTextSearchEditor();
+        setEditTextSearchDrawableRight();
         allButton();
     }
 
@@ -408,6 +403,42 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    //This is method for the soft keyboard search button entered
+    private void setEditTextSearchEditor() {
+        editTextSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    setFirebaseRecyclerAdapter(editTextSearch.getText().toString());
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void setEditTextSearchDrawableRight() {
+        editTextSearch.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (editTextSearch.getRight() - editTextSearch.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        // your action here
+                        setFirebaseRecyclerAdapter(editTextSearch.getText().toString());
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -420,10 +451,9 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
-            builder.setTitle("About");
+            builder.setTitle(R.string.action_about);
             //TODO: Update the version at About
-            //builder.setMessage("Karangan Cemerlang SPM\nversion 1.15\n\n\nDon't forget to share with your friends :)\n\n--Donate--\nHAZMAN BADRUNSHAM\n7614543761\nCIMB BANK\n\n\n\nhazman45.blogspot.com\nTicherhaz©2019");
-            builder.setMessage("Karangan Cemerlang SPM\nversion 1.15\n\n\nDon't forget to share with your friends :)\n\n\n\nCredited to:\nCikgu Mariani\nCikgu Badrunsham\nCikgu Hamidah\nCikgu Rohani\nCikgu Harum Awang\nCikgu Samat\nCikgu Che Noranuwi\nNabil Fikri\nMuhd Arif (Bob)\nLuqman K\nAffiq Shamil\n\nhazman45.blogspot.com\nTicherhaz©2019");
+            builder.setMessage("Karangan Cemerlang SPM\nversi 2.0\n\n\nJangan lupa kongsi bersama kawan :)\n\n\n\nKreditkan kepada:\nCikgu Mariani\nCikgu Badrunsham\nCikgu Hamidah\nCikgu Rohani\nCikgu Harum Awang\nCikgu Samat\nCikgu Che Noranuwi\nNabil Fikri\nMuhd Arif (Bob)\nLuqman K\nAffiq Shamil\n\nhazman45.blogspot.com\nTicherhaz©2019");
 
             builder.setCancelable(true);
             builder.setPositiveButton(

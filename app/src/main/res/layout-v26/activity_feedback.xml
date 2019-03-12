@@ -1,54 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_margin="3dp"
     tools:context=".FeedbackActivity">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <Spinner
+            android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="11dp"
-            android:orientation="vertical">
+            android:layout_margin="9dp" />
 
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp" />
+        <EditText
+            android:id="@+id/edit_text_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="9dp"
+            android:autofillHints="@string/email"
+            android:background="@drawable/edit_text_border"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:padding="7dp"
+            android:singleLine="true"
+            tools:targetApi="o" />
 
-            <EditText
-                android:id="@+id/edit_text_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints="@string/email"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress" />
+        <EditText
+            android:id="@+id/text_view_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="9dp"
+            android:autofillHints="@string/description"
+            android:background="@drawable/edit_text_border"
+            android:hint="@string/description"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLines="5"
+            android:padding="7dp"
+            android:scrollbars="vertical"
+            android:scrollHorizontally="false"
+            tools:targetApi="o" />
 
-            <EditText
-                android:id="@+id/text_view_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints="@string/description"
-                android:hint="@string/description"
-                android:inputType="textCapSentences|textMultiLine"
-                android:maxLines="5"
-                android:scrollbars="vertical"
-                android:scrollHorizontally="false" />
+        <Button
+            android:id="@+id/button_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/button_selector"
+            android:text="@string/submit"
+            android:textAllCaps="false" />
 
-            <Button
-                android:id="@+id/button_submit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/submit"
-                android:textAllCaps="false" />
-
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>
