@@ -1,20 +1,6 @@
 package net.ticherhaz.karangancemerlangspm.Model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-public class Feedback implements Parcelable {
-    public static final Creator<Feedback> CREATOR = new Creator<Feedback>() {
-        @Override
-        public Feedback createFromParcel(Parcel in) {
-            return new Feedback(in);
-        }
-
-        @Override
-        public Feedback[] newArray(int size) {
-            return new Feedback[size];
-        }
-    };
+public class Feedback {
     private String uid;
     private String userUid;
     private String phoneModel;
@@ -35,16 +21,6 @@ public class Feedback implements Parcelable {
         this.email = email;
         this.description = description;
         this.date = date;
-    }
-
-    private Feedback(Parcel in) {
-        uid = in.readString();
-        userUid = in.readString();
-        phoneModel = in.readString();
-        problemType = in.readString();
-        email = in.readString();
-        description = in.readString();
-        date = in.readString();
     }
 
     public String getUid() {
@@ -103,19 +79,4 @@ public class Feedback implements Parcelable {
         this.date = date;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(uid);
-        dest.writeString(userUid);
-        dest.writeString(phoneModel);
-        dest.writeString(problemType);
-        dest.writeString(email);
-        dest.writeString(description);
-        dest.writeString(date);
-    }
 }

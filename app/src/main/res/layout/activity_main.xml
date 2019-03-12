@@ -22,7 +22,7 @@
             android:layout_gravity="center"
             android:layout_margin="7dp"
             android:contentDescription="@string/logo_kcspm"
-            android:src="@drawable/logo" />
+            android:src="@drawable/logo2" />
 
         <EditText
             android:id="@+id/edit_text_search"
@@ -31,8 +31,100 @@
             android:layout_margin="7dp"
             android:autofillHints="@string/mencari_karangan"
             android:hint="@string/mencari_karangan"
-            android:inputType="text"
+            android:inputType="textNoSuggestions"
             tools:targetApi="o" />
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="-7dp"
+            android:layout_marginEnd="9dp"
+            android:indeterminate="true"
+            android:max="100"
+            android:visibility="invisible" />
+
+        <LinearLayout
+            android:id="@+id/linear_layout_utama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/button_senarai_karangan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@drawable/logo2"
+                            android:text="@string/senarai_karangan"
+                            android:textAllCaps="false" />
+
+                        <Button
+                            android:id="@+id/button_tips_karangan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@drawable/logo2"
+                            android:text="@string/tips_karangan"
+                            android:textAllCaps="false" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/button_hantar_karangan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@drawable/logo2"
+                            android:text="@string/hantar_karangan"
+                            android:textAllCaps="false" />
+
+                        <Button
+                            android:id="@+id/button_forum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@drawable/logo2"
+                            android:text="@string/forum"
+                            android:textAllCaps="false" />
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_how"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:orientation="vertical"
+            android:padding="7dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/text_view_how"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linear_layout"
@@ -40,29 +132,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
             android:orientation="vertical"
-            android:padding="7dp">
-
-            <ProgressBar
-                android:id="@+id/progressbar"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-7dp"
-                android:indeterminate="true"
-                android:max="100"
-                android:visibility="invisible" />
-
-            <LinearLayout
-                android:id="@+id/linear_layout_how"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/text_view_how"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+            android:padding="7dp"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -83,25 +154,24 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
 
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/recycler_view_tajuk1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
 
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/recycler_view_tajuk2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                        <!--<android.support.v7.widget.RecyclerView-->
+                        <!--android:id="@+id/recycler_view_tajuk1"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content" />-->
 
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/recycler_view_tajuk7"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                        <!--<android.support.v7.widget.RecyclerView-->
+                        <!--android:id="@+id/recycler_view_tajuk2"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content" />-->
+
+                        <!--<android.support.v7.widget.RecyclerView-->
+                        <!--android:id="@+id/recycler_view_tajuk7"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content" />-->
                     </LinearLayout>
                 </android.support.v4.widget.NestedScrollView>
-
             </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

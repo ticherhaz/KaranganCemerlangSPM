@@ -1,7 +1,6 @@
 package net.ticherhaz.karangancemerlangspm;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -56,13 +55,13 @@ public class OnlineUserActivity extends AppCompatActivity {
 
         if (firebaseUser != null) {
             registeredUid = firebaseUser.getUid();
-            // new OnlineStatusUtil().updateUserOnlineStatus("Online", registeredUid, firebaseUser, databaseReference);
         }
-        //  setFirebaseRecyclerAdapter();
+        setFirebaseRecyclerAdapter();
     }
 
     //Method set firebase recycler adapter
     private void setFirebaseRecyclerAdapter() {
+        progressBar.setVisibility(View.VISIBLE);
         Query query = databaseReference.child("registeredUser").child("main").orderByChild("onlineStatus").equalTo("Online");
 
         firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<OnlineStatus>()
@@ -82,6 +81,11 @@ public class OnlineUserActivity extends AppCompatActivity {
             public OnlineStatusViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
                 View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.online_user_item, viewGroup, false);
                 return new OnlineStatusViewHolder(view);
+            }
+
+            @Override
+            public void onDataChanged() {
+                progressBar.setVisibility(View.INVISIBLE);
             }
         };
 
@@ -104,55 +108,13 @@ public class OnlineUserActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // startActivity(new Intent(OnlineUserActivity.this, ForumActivity.class));
-        progressBar.setVisibility(View.VISIBLE);
-        // new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                progressBar.setVisibility(View.INVISIBLE);
-                finish();
-            }
-        }, 300);
+        finish();
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        //  startActivity(new Intent(OnlineUserActivity.this, ForumActivity.class));
-        //  finish();
         onBackPressed();
         return true;
-    }
-
-
-//    @Override
-//    protected void onPause() {
-//        //   updateUserOnlineStatus("Offline");
-//        super.onPause();
-//        new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference);
-//    }
-
-    @Override
-    protected void onResume() {
-        // updateUserOnlineStatus("Online");
-        // new OnlineStatusUtil().updateUserOnlineStatus("Online", registeredUid, firebaseUser, databaseReference);
-        setFirebaseRecyclerAdapter();
-        super.onResume();
-    }
-
-//    @Override
-//    protected void onStop() {
-//      //  new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference);
-//        super.onStop();
-//      //  firebaseRecyclerAdapter.stopListening();
-//
-//    }
-
-    @Override
-    protected void onStart() {
-        //  new OnlineStatusUtil().updateUserOnlineStatus("Online", registeredUid, firebaseUser, databaseReference);
-        //  firebaseRecyclerAdapter.startListening();
-        super.onStart();
     }
 
 }

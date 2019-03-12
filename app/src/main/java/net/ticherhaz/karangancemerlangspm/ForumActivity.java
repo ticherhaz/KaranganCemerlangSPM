@@ -3,7 +3,6 @@ package net.ticherhaz.karangancemerlangspm;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,6 +24,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.Forum;
@@ -69,6 +69,7 @@ public class ForumActivity extends AppCompatActivity {
 
     //Method setFirebaseRecycler
     private void setFirebaseRecyclerAdapter() {
+        progressBar.setVisibility(View.VISIBLE);
         //We need to make the query for the firebase recycler adapter
         DatabaseReference databaseReferenceForum = FirebaseDatabase.getInstance().getReference().child("forum").child("main");
         //databaseReference.child("forum").child("main").child("1");
@@ -91,6 +92,13 @@ public class ForumActivity extends AppCompatActivity {
                 holder.getTextViewLastThreadPost().setText(String.valueOf(model.getLastThreadPost()));
                 holder.getTextViewLastThreadByUser().setText(model.getLastThreadByUser());
 
+                holder.getView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getApplicationContext(), "CLicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
 
             @NonNull
@@ -100,6 +108,10 @@ public class ForumActivity extends AppCompatActivity {
                 return new ForumViewHolder(view);
             }
 
+            @Override
+            public void onDataChanged() {
+                progressBar.setVisibility(View.INVISIBLE);
+            }
         };
 
         //After that we apply into the recycler adapter
@@ -113,13 +125,30 @@ public class ForumActivity extends AppCompatActivity {
 
     }
 
-    //Method people online right now
-    private void setTextViewOnlineRightNow() {
-        databaseReference.child("OnlineStatus").child("totalOnline").addValueEventListener(new ValueEventListener() {
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        onDisc();
+    }
+
+    //Make a new calculation.
+    private void calculateAllOnlineRegisteredUser() {
+        databaseReference.child("registeredUser").child("main").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    long totalOnline = dataSnapshot.getValue(Long.class);
+                long totalOnline = 0;
+                long online;
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    String userOnline = dataSnapshot1.child("onlineStatus").getValue(String.class);
+
+                    if (userOnline != null && userOnline.equals("Online")) {
+                        online = 1;
+                        totalOnline = totalOnline + online;
+                    } else {
+                        online = 0;
+                        totalOnline = totalOnline + online;
+                    }
                     textViewOnlineRightNow.setText(String.valueOf(totalOnline + " Online(s)"));
                 }
             }
@@ -129,6 +158,29 @@ public class ForumActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void onDisc() {
+        if (firebaseUser != null) {
+            databaseReference.child("registeredUser").child("main").child(registeredUid).child("onlineStatus").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String online = dataSnapshot.getValue(String.class);
+                    if (online != null && online.equals("Online")) {
+                        //Ni kalau dia dc
+                        databaseReference.child("registeredUser").child("main").child(registeredUid).child("onlineStatus").onDisconnect().setValue("Offline");
+                        final DatabaseReference databaseReferenceLastOnline = FirebaseDatabase.getInstance().getReference().child("registeredUser").child("main").child(registeredUid).child("lastOnline");
+                        databaseReferenceLastOnline.onDisconnect().setValue(ServerValue.TIMESTAMP);
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
     }
 
     private void listID() {
@@ -168,8 +220,10 @@ public class ForumActivity extends AppCompatActivity {
         }
         //Check if the user online or not
         checkIfUserOnline();
+
         //Display all the online user number
-        setTextViewOnlineRightNow();
+        //setTextViewOnlineRightNow();
+        calculateAllOnlineRegisteredUser();
         setTextViewOnlineRightNowClick();
     }
 
@@ -182,8 +236,8 @@ public class ForumActivity extends AppCompatActivity {
             linearLayoutNewUser.setVisibility(View.GONE);
 
             //Add the info in the userOnlineStatus
-            //   updateUserOnlineStatus("Online");
             new OnlineStatusUtil().updateUserOnlineStatus("Online", registeredUid, firebaseUser, databaseReference);
+
 
             //Get the data from the database
             databaseReference.child("registeredUser").child("main").child(registeredUid).addValueEventListener(new ValueEventListener() {
@@ -226,19 +280,7 @@ public class ForumActivity extends AppCompatActivity {
         textViewOnlineRightNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                // new OnlineStatusUtil().updateUserOnlineStatus("Online", registeredUid, firebaseUser, databaseReference);
-
-                //We put delay
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressBar.setVisibility(View.INVISIBLE);
-                        startActivity(new Intent(ForumActivity.this, OnlineUserActivity.class));
-                    }
-                }, 300);
-
-                //  finish();
+                startActivity(new Intent(ForumActivity.this, OnlineUserActivity.class));
             }
         });
     }
@@ -282,8 +324,8 @@ public class ForumActivity extends AppCompatActivity {
         textViewSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference);
                 firebaseAuth.signOut();
-                // new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference);
                 startActivity(new Intent(ForumActivity.this, ForumActivity.class));
                 finish();
                 Toast.makeText(getApplicationContext(), "Sign Out Successfully", Toast.LENGTH_SHORT).show();
@@ -305,6 +347,7 @@ public class ForumActivity extends AppCompatActivity {
     //OnBackPressed
     @Override
     public void onBackPressed() {
+        new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference);
         finish();
     }
 
@@ -314,38 +357,4 @@ public class ForumActivity extends AppCompatActivity {
         return true;
     }
 
-//    @Override
-//    protected void onPause() {
-//        new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference);
-//        super.onPause();
-//    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // new OnlineStatusUtil().updateUserOnlineStatus("Online", registeredUid, firebaseUser, databaseReference);
-    }
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference);
-//        super.onStop();
-//    }
-//
-//    @Override
-//    protected void onRestart() {
-//        new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference);
-//        super.onRestart();
-//    }
-
-    @Override
-    protected void onDestroy() {
-        new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference);
-        super.onDestroy();
-    }
 }

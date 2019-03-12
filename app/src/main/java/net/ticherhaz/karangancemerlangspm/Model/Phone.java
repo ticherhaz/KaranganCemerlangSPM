@@ -1,20 +1,7 @@
 package net.ticherhaz.karangancemerlangspm.Model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+public class Phone {
 
-public class Phone implements Parcelable {
-    public static final Creator<Phone> CREATOR = new Creator<Phone>() {
-        @Override
-        public Phone createFromParcel(Parcel in) {
-            return new Phone(in);
-        }
-
-        @Override
-        public Phone[] newArray(int size) {
-            return new Phone[size];
-        }
-    };
     private String phoneUid;
     private String board;
     private String brand;
@@ -55,26 +42,6 @@ public class Phone implements Parcelable {
         this.type = type;
         this.unknown = unknown;
         this.user = user;
-    }
-
-    protected Phone(Parcel in) {
-        phoneUid = in.readString();
-        board = in.readString();
-        brand = in.readString();
-        device = in.readString();
-        display = in.readString();
-        fingerprint = in.readString();
-        hardware = in.readString();
-        host = in.readString();
-        id = in.readString();
-        manufacturer = in.readString();
-        model = in.readString();
-        product = in.readString();
-        tags = in.readString();
-        time = in.readString();
-        type = in.readString();
-        unknown = in.readString();
-        user = in.readString();
     }
 
     public String getPhoneUid() {
@@ -211,31 +178,5 @@ public class Phone implements Parcelable {
 
     public void setUser(String user) {
         this.user = user;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(phoneUid);
-        dest.writeString(board);
-        dest.writeString(brand);
-        dest.writeString(device);
-        dest.writeString(display);
-        dest.writeString(fingerprint);
-        dest.writeString(hardware);
-        dest.writeString(host);
-        dest.writeString(id);
-        dest.writeString(manufacturer);
-        dest.writeString(model);
-        dest.writeString(product);
-        dest.writeString(tags);
-        dest.writeString(time);
-        dest.writeString(type);
-        dest.writeString(unknown);
-        dest.writeString(user);
     }
 }

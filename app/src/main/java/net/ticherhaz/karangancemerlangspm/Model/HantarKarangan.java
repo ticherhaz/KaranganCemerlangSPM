@@ -1,21 +1,7 @@
 package net.ticherhaz.karangancemerlangspm.Model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+public class HantarKarangan {
 
-public class HantarKarangan implements Parcelable {
-
-    public static final Creator<HantarKarangan> CREATOR = new Creator<HantarKarangan>() {
-        @Override
-        public HantarKarangan createFromParcel(Parcel in) {
-            return new HantarKarangan(in);
-        }
-
-        @Override
-        public HantarKarangan[] newArray(int size) {
-            return new HantarKarangan[size];
-        }
-    };
     private String hantarKaranganUid;
     private String userUid;
     private String name;
@@ -30,15 +16,6 @@ public class HantarKarangan implements Parcelable {
         this.sekolah = sekolah;
         this.date = date;
         this.fileUid = fileUid;
-    }
-
-    private HantarKarangan(Parcel in) {
-        hantarKaranganUid = in.readString();
-        userUid = in.readString();
-        name = in.readString();
-        sekolah = in.readString();
-        date = in.readString();
-        fileUid = in.readString();
     }
 
     public HantarKarangan() {
@@ -92,18 +69,4 @@ public class HantarKarangan implements Parcelable {
         this.fileUid = fileUid;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(hantarKaranganUid);
-        dest.writeString(userUid);
-        dest.writeString(name);
-        dest.writeString(sekolah);
-        dest.writeString(date);
-        dest.writeString(fileUid);
-    }
 }

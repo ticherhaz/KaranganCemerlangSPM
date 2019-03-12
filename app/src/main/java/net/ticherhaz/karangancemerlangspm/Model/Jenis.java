@@ -1,21 +1,7 @@
 package net.ticherhaz.karangancemerlangspm.Model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+public class Jenis {
 
-public class Jenis implements Parcelable {
-
-    public static final Creator<Jenis> CREATOR = new Creator<Jenis>() {
-        @Override
-        public Jenis createFromParcel(Parcel in) {
-            return new Jenis(in);
-        }
-
-        @Override
-        public Jenis[] newArray(int size) {
-            return new Jenis[size];
-        }
-    };
     private String jenisUid;
     private String title;
     private String description;
@@ -27,12 +13,6 @@ public class Jenis implements Parcelable {
     }
 
     public Jenis() {
-    }
-
-    private Jenis(Parcel in) {
-        jenisUid = in.readString();
-        title = in.readString();
-        description = in.readString();
     }
 
     public String getJenisUid() {
@@ -57,17 +37,5 @@ public class Jenis implements Parcelable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(jenisUid);
-        dest.writeString(title);
-        dest.writeString(description);
     }
 }

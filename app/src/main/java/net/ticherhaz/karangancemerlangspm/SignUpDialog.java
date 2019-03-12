@@ -32,6 +32,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.Phone;
@@ -180,9 +181,11 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
                         //Get the new registeredUid after creating the account.
                         final String registeredUserUid = firebaseUser.getUid();
 
+                        long lastOnline = Long.parseLong(String.valueOf(ServerValue.TIMESTAMP));
+
                         //Store the value in the object
                         RegisteredUser registeredUser = new RegisteredUser(registeredUserUid, userUid, typeUser, profileUrl, email, username, sekolah, titleType, customTitle,
-                                bio, state, birthday, mode, postCount, reputation, reputationPower, onlineStatus, lastCreatedThread,
+                                bio, state, birthday, mode, postCount, reputation, reputationPower, onlineStatus, lastOnline, lastCreatedThread,
                                 onDateCreated, onlineStatusLogUid, lastSeenLogUid, onClickedLogUid, onCreatedThreadLogUid, profileUrlLogUid,
                                 emailLogUid, usernameLogUid, titleTypeLogUid, customTitleLogUid, bioLogUid, stateLogUid, birthdayLogUid,
                                 modeLogUid, emailUpperCase, usernameUpperCase, bioUpperCase, stateUpperCase);

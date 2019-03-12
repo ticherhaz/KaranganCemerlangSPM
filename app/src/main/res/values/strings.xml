@@ -14,7 +14,7 @@
     <string name="edit">Edit</string>
     <string name="mencari_karangan">Mencari Karangan</string>
     <string name="like">LIKE</string>
-    <string name="action_about">About</string>
+    <string name="action_about">Tentang Aplikasi</string>
     <string name="data_is_not_found">Data is not found</string>
     <string name="tips_karangan">Tips Karangan</string>
     <string name="tips_karangan_explain">
@@ -56,7 +56,7 @@
         <p>kalau tak faham atau pertanyaan, boleh emailkan ke: <b><i>ticherhaz@gmail.com</i></b></P>
         <p><b><i>Selamat beramal dan semoga maju jaya! :)</i></b></p>
 ]]></string>
-    <string name="feedback">Feedback</string>
+    <string name="feedback">Maklum Balas</string>
     <string name="submit">Submit</string>
     <string name="logo_kcspm">Logo KCSPM</string>
     <string name="viewer">Viewer</string>

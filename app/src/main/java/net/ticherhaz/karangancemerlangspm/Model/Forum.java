@@ -1,20 +1,6 @@
 package net.ticherhaz.karangancemerlangspm.Model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-public class Forum implements Parcelable {
-    public static final Creator<Forum> CREATOR = new Creator<Forum>() {
-        @Override
-        public Forum createFromParcel(Parcel in) {
-            return new Forum(in);
-        }
-
-        @Override
-        public Forum[] newArray(int size) {
-            return new Forum[size];
-        }
-    };
+public class Forum {
     private String forumUid;
     private String forumTitle;
     private long forumUserViewing;
@@ -40,17 +26,6 @@ public class Forum implements Parcelable {
         this.lastThreadByUser = lastThreadByUser;
     }
 
-    protected Forum(Parcel in) {
-        forumUid = in.readString();
-        forumTitle = in.readString();
-        forumUserViewing = in.readLong();
-        forumDescription = in.readString();
-        forumViews = in.readLong();
-        threads = in.readLong();
-        postThreadsCount = in.readLong();
-        lastThreadPost = in.readString();
-        lastThreadByUser = in.readString();
-    }
 
     public String getForumUid() {
         return forumUid;
@@ -124,21 +99,4 @@ public class Forum implements Parcelable {
         this.lastThreadByUser = lastThreadByUser;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(forumUid);
-        dest.writeString(forumTitle);
-        dest.writeLong(forumUserViewing);
-        dest.writeString(forumDescription);
-        dest.writeLong(forumViews);
-        dest.writeLong(threads);
-        dest.writeLong(postThreadsCount);
-        dest.writeString(lastThreadPost);
-        dest.writeString(lastThreadByUser);
-    }
 }
