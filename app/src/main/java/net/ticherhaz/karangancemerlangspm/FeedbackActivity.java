@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import net.ticherhaz.karangancemerlangspm.Model.Feedback;
 import net.ticherhaz.karangancemerlangspm.Util.InternetCheck;
+import net.ticherhaz.karangancemerlangspm.Util.InternetMessage;
 
 import java.util.Calendar;
 
@@ -99,15 +100,15 @@ public class FeedbackActivity extends AppCompatActivity {
                                             if (task.isSuccessful()) {
                                                 editTextEmail.setText("");
                                                 editTextDescription.setText("");
-                                                Toast.makeText(getApplicationContext(), "Thank you for your feedback.\nWe will contact you soon.", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getApplicationContext(), "Terima kasih atas maklum balas anda\nKami akan hubungi anda dalam masa terdekat", Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
                             } else {
-                                Toast.makeText(getApplicationContext(), "Please use your email and fill in the blank", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Sila isi email dan deskripsi anda", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(getApplicationContext(), "Please check internet connection", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), new InternetMessage().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

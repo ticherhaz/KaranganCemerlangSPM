@@ -102,6 +102,7 @@
     <string name="black">Mod Hitam</string>
     <string name="timenewroman">Times New Roman</string>
     <string name="arial">Arial</string>
+    <string name="topik_baru">+ Topik Baru</string>
     <string-array name="feedback_array">
         <item>Cadangan</item>
         <item>Pujian</item>

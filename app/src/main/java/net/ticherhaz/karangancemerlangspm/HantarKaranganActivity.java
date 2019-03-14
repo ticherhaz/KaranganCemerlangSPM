@@ -78,7 +78,7 @@ public class HantarKaranganActivity extends AppCompatActivity {
         name = editTextName.getText().toString();
         sekolah = editTextSekolah.getText().toString();
         if (TextUtils.isEmpty(editTextName.getText().toString()) && TextUtils.isEmpty(editTextSekolah.getText().toString())) {
-            Toast.makeText(getApplicationContext(), "Please fill in the blank", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Sila isi maklumat anda", Toast.LENGTH_SHORT).show();
         } else {
             //Proceed
             launchFile();
@@ -163,9 +163,8 @@ public class HantarKaranganActivity extends AppCompatActivity {
                 } else {
                     Log.w(TAG, "File URI is null");
                 }
-            } else {
-                Toast.makeText(this, "Taking file failed.", Toast.LENGTH_SHORT).show();
             }
+
         }
     }
 

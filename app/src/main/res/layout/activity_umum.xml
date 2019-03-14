@@ -25,18 +25,20 @@
         android:orientation="vertical"
         android:visibility="visible">
 
-        <TextView
-            android:id="@+id/text_view_viewing_right_now"
+        <Button
+            android:id="@+id/button_topik"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:text="@string/_0_viewing"
-            android:textStyle="italic" />
+            android:background="@drawable/button_selector"
+            android:padding="5dp"
+            android:text="@string/topik_baru"
+            android:textAllCaps="false" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view_umum"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp" />
 
     </LinearLayout>
 

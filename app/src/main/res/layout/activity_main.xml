@@ -30,7 +30,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="17dp"
             android:layout_marginEnd="17dp"
-            android:autofillHints="@string/mencari_karangan"
             android:background="@drawable/edit_text_border"
             android:drawableEnd="@drawable/ic_search"
             android:drawableRight="@drawable/ic_search"
@@ -38,8 +37,7 @@
             android:imeOptions="actionSearch"
             android:inputType="textNoSuggestions"
             android:padding="7dp"
-            android:singleLine="true"
-            tools:targetApi="o" />
+            android:singleLine="true" />
 
         <ProgressBar
             android:id="@+id/progressbar"
@@ -78,23 +76,27 @@
 
                         <Button
                             android:id="@+id/button_senarai_karangan"
-                            android:layout_width="130dp"
-                            android:layout_height="130dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_margin="13dp"
                             android:background="@drawable/button_selector"
                             android:drawableTop="@drawable/senarai_karangan"
-                            android:padding="7dp"
+                            android:paddingLeft="14dp"
+                            android:paddingRight="14dp"
+                            android:paddingBottom="7dp"
                             android:text="@string/senarai_karangan"
                             android:textAllCaps="false" />
 
                         <Button
                             android:id="@+id/button_tips_karangan"
-                            android:layout_width="130dp"
-                            android:layout_height="130dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_margin="13dp"
                             android:background="@drawable/button_selector"
                             android:drawableTop="@drawable/tips_karangan"
-                            android:padding="7dp"
+                            android:paddingLeft="22dp"
+                            android:paddingRight="22dp"
+                            android:paddingBottom="7dp"
                             android:text="@string/tips_karangan"
                             android:textAllCaps="false" />
                     </LinearLayout>
@@ -107,23 +109,27 @@
 
                         <Button
                             android:id="@+id/button_hantar_karangan"
-                            android:layout_width="130dp"
-                            android:layout_height="130dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_margin="13dp"
                             android:background="@drawable/button_selector"
                             android:drawableTop="@drawable/hantar_karangan"
-                            android:padding="7dp"
+                            android:paddingLeft="17dp"
+                            android:paddingRight="17dp"
+                            android:paddingBottom="7dp"
                             android:text="@string/hantar_karangan"
                             android:textAllCaps="false" />
 
                         <Button
                             android:id="@+id/button_forum"
-                            android:layout_width="130dp"
-                            android:layout_height="130dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_margin="13dp"
                             android:background="@drawable/button_selector"
                             android:drawableTop="@drawable/forum_new"
-                            android:padding="7dp"
+                            android:paddingLeft="26dp"
+                            android:paddingRight="26dp"
+                            android:paddingBottom="7dp"
                             android:text="@string/forum"
                             android:textAllCaps="false" />
                     </LinearLayout>
@@ -176,19 +182,10 @@
                             android:layout_height="wrap_content" />
 
                         <!--<android.support.v7.widget.RecyclerView-->
-                        <!--android:id="@+id/recycler_view_tajuk1"-->
+                        <!--android:id="@+id/recycler_view_jenis"-->
                         <!--android:layout_width="match_parent"-->
                         <!--android:layout_height="wrap_content" />-->
 
-                        <!--<android.support.v7.widget.RecyclerView-->
-                        <!--android:id="@+id/recycler_view_tajuk2"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content" />-->
-
-                        <!--<android.support.v7.widget.RecyclerView-->
-                        <!--android:id="@+id/recycler_view_tajuk7"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content" />-->
                     </LinearLayout>
                 </android.support.v4.widget.NestedScrollView>
             </LinearLayout>

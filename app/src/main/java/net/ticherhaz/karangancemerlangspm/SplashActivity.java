@@ -127,7 +127,7 @@ public class SplashActivity extends AppCompatActivity {
                 //if the user status login or not, then proceed to the next part WITHOUT INTERNET.
                 checkStatusLogin(uid);
             }
-        }, 900);   //So we are making for 0.9 seconds of the splash screen.
+        }, 700);   //So we are making for 0.9 seconds of the splash screen.
     }
 
     //Method store data of the user into the Firebase
@@ -173,9 +173,9 @@ public class SplashActivity extends AppCompatActivity {
                         return;
                     }
                     //After that, we chat the value
-                    if (system != null && system.getVersi() != 20) {
-                        //TODO: Version right now is 15. Please update when the new version is released.
-                        Toast toast = Toast.makeText(getApplicationContext(), "Sila mengemas kini versi baharu v1.15", Toast.LENGTH_LONG);
+                    if (system != null && system.getVersi() != 21) {
+                        //TODO: Version right now is 21. Please update when the new version is released.
+                        Toast toast = Toast.makeText(getApplicationContext(), "Sila mengemas kini versi baharu", Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
 

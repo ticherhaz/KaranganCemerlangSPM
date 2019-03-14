@@ -72,6 +72,21 @@ public class ForumActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         //We need to make the query for the firebase recycler adapter
         DatabaseReference databaseReferenceForum = FirebaseDatabase.getInstance().getReference().child("forum").child("main");
+        //   DatabaseReference databaseReferenceForum = FirebaseDatabase.getInstance().getReference().child("gerak").child("product");
+
+//        databaseReferenceForum.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+//                    String name = dataSnapshot1.child("name").getValue(String.class);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
         //databaseReference.child("forum").child("main").child("1");
         //Setup for the recycler adapter option
         firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<Forum>()
@@ -83,6 +98,8 @@ public class ForumActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             protected void onBindViewHolder(@NonNull ForumViewHolder holder, int position, @NonNull Forum model) {
+
+                //   holder.getTextViewForumTitle().setText(model.getNama());
                 holder.getTextViewForumTitle().setText(model.getForumTitle());
                 holder.getTextViewUserViewing().setText("(" + String.valueOf(model.getForumUserViewing()) + " Viewing)");
                 holder.getTextViewForumDescrption().setText(model.getForumDescription());
@@ -95,7 +112,7 @@ public class ForumActivity extends AppCompatActivity {
                 holder.getView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "CLicked", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(ForumActivity.this, UmumActivity.class));
                     }
                 });
 
@@ -112,6 +129,7 @@ public class ForumActivity extends AppCompatActivity {
             public void onDataChanged() {
                 progressBar.setVisibility(View.INVISIBLE);
             }
+
         };
 
         //After that we apply into the recycler adapter
