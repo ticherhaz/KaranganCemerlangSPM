@@ -103,6 +103,12 @@
     <string name="timenewroman">Times New Roman</string>
     <string name="arial">Arial</string>
     <string name="topik_baru">+ Topik Baru</string>
+    <string name="topik">Topik</string>
+    <string name="kedudukan">Kedudukan</string>
+    <string name="dibalas_oleh">Dibalas oleh</string>
+    <string name="_1_minit_yang_lalu">1 Minit Yang Lalu</string>
+    <string name="dimulai_oleh">Dimulai Oleh N/A, 1 Minit Yang Lalu</string>
+    <string name="jumlah_balas">Jumlah balas</string>
     <string-array name="feedback_array">
         <item>Cadangan</item>
         <item>Pujian</item>

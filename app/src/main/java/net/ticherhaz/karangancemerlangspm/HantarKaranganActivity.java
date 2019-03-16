@@ -229,7 +229,6 @@ public class HantarKaranganActivity extends AppCompatActivity {
         // updateUI(mAuth.getCurrentUser());
     }
 
-
     private void showProgressDialog(String caption) {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);

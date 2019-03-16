@@ -105,6 +105,7 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
             //1. We have to check if the username is already taken or not.
             // Query query = databaseReferenceUsernameCheck.orderByChild("usernameUpperCase").equalTo(username.toUpperCase());
             Query query = databaseReference.orderByChild("usernameUpperCase").equalTo(editTextUsername.getText().toString().toUpperCase());
+
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

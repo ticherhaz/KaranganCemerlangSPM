@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="7dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/logo2" />
+
+            <TextView
+                android:id="@+id/text_view_umum_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="3dp"
+                android:text="@string/topik"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/text_view_umum_views"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_viewer"
+                android:drawableLeft="@drawable/ic_viewer"
+                android:gravity="center_vertical"
+                android:text="@string/views" />
+
+            <TextView
+                android:id="@+id/text_view_jumlah_balas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toStartOf="@id/text_view_fav"
+                android:layout_toLeftOf="@id/text_view_fav"
+                android:layout_toEndOf="@+id/text_view_umum_views"
+                android:layout_toRightOf="@+id/text_view_umum_views"
+                android:drawableStart="@drawable/ic_reply"
+                android:drawableLeft="@drawable/ic_reply"
+                android:gravity="center_vertical"
+                android:text="@string/jumlah_balas" />
+
+
+            <TextView
+                android:id="@+id/text_view_kedudukan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:drawableStart="@drawable/ic_star"
+                android:drawableLeft="@drawable/ic_star"
+                android:gravity="center_vertical"
+                android:text="@string/kedudukan" />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/text_view_dimulai_oleh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dimulai_oleh" />
+
+        <TextView
+            android:id="@+id/text_view_dibalas_oleh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dibalas_oleh"
+            android:textSize="12sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/text_view_masa_dibalas_oleh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/_1_minit_yang_lalu"
+            android:textSize="12sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>
