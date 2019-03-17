@@ -15,7 +15,14 @@
         android:roundIcon="@mipmap/ic_launcher_foreground"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning,HardcodedDebugMode">
+        <activity android:name=".TopikBaruActivity">
+            <!-- This is for the back button navigation -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".UmumActivity" />
+        </activity>
         <activity android:name=".UmumActivity">
+
             <!-- This is for the back button navigation -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
