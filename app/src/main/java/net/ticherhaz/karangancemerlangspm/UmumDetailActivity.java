@@ -12,9 +12,7 @@ import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -31,7 +29,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class UmumActivity extends AppCompatActivity {
+public class UmumDetailActivity extends AppCompatActivity {
+
 
     //Firebase
     private FirebaseDatabase firebaseDatabase;
@@ -51,12 +50,10 @@ public class UmumActivity extends AppCompatActivity {
     //RecyclerView
     private RecyclerView recyclerView;
 
-    //Button
-    private Button buttonTopikBaru;
+    private String umumUid;
 
     private void setFirebaseRecyclerAdapter() {
-        Query query = databaseReference.child("umum").child("main");
-
+        Query query = databaseReference.child("umum").child("detail").child(umumUid);
         firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<Umum>()
                 .setQuery(query, Umum.class)
                 .build();
@@ -64,7 +61,7 @@ public class UmumActivity extends AppCompatActivity {
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Umum, UmumHolder>(firebaseRecyclerOptions) {
             @SuppressLint("SetTextI18n")
             @Override
-            protected void onBindViewHolder(@NonNull UmumHolder holder, int position, @NonNull final Umum model) {
+            protected void onBindViewHolder(@NonNull UmumHolder holder, int position, @NonNull Umum model) {
                 @SuppressLint("SimpleDateFormat") final SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                 //Change the date to ago
                 try {
@@ -83,9 +80,7 @@ public class UmumActivity extends AppCompatActivity {
                     holder.getView().setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent(UmumActivity.this, UmumDetailActivity.class);
-                            intent.putExtra("umumUid", model.getUmumUid());
-                            startActivities(new Intent[]{intent});
+
                         }
                     });
 
@@ -129,8 +124,12 @@ public class UmumActivity extends AppCompatActivity {
         firebaseUser = firebaseAuth.getCurrentUser();
 
         progressBar = findViewById(R.id.progressbar);
-        buttonTopikBaru = findViewById(R.id.button_topik);
-        recyclerView = findViewById(R.id.recycler_view_umum);
+        recyclerView = findViewById(R.id.recycler_view_umum_detail);
+
+        Intent intent = getIntent();
+        if (intent != null) {
+            umumUid = intent.getExtras().getString("umumUid");
+        }
 
         setFirebaseRecyclerAdapter();
     }
@@ -138,25 +137,12 @@ public class UmumActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_umum);
+        setContentView(R.layout.activity_umum_detail);
+
         listID();
-        setButtonTopikBaru();
+
     }
 
-    //Button topik
-    private void setButtonTopikBaru() {
-        buttonTopikBaru.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (firebaseUser != null) {
-                    startActivity(new Intent(UmumActivity.this, TopikBaruActivity.class));
-                } else {
-                    Toast.makeText(getApplicationContext(), "Sila daftar/Log Masuk Terlebih Dahulu", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
-    }
 
     //OnBackPressed
     @Override

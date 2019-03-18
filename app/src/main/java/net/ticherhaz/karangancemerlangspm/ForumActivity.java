@@ -24,13 +24,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.Forum;
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.Util.OnlineStatusUtil;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.ForumViewHolder;
+
+import java.util.Date;
 
 public class ForumActivity extends AppCompatActivity {
 
@@ -63,6 +64,10 @@ public class ForumActivity extends AppCompatActivity {
     private RecyclerView recyclerViewForum;
     private FirebaseRecyclerOptions<Forum> firebaseRecyclerOptions;
     private FirebaseRecyclerAdapter<Forum, ForumViewHolder> firebaseRecyclerAdapter;
+
+    //ActivitySessionUid
+    private String activitySessionUid = FirebaseDatabase.getInstance().getReference().push().getKey();
+    private String activityDate = String.valueOf(android.text.format.DateFormat.format("dd:MM:yyyy", new Date()));
 
     //Progressbar
     private ProgressBar progressBar;
@@ -147,7 +152,8 @@ public class ForumActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        onDisc();
+        // onDisc();
+        new OnlineStatusUtil().onDisc(firebaseUser, databaseReference, registeredUid, activitySessionUid, activityDate);
     }
 
     //Make a new calculation.
@@ -178,28 +184,75 @@ public class ForumActivity extends AppCompatActivity {
         });
     }
 
-    private void onDisc() {
-        if (firebaseUser != null) {
-            databaseReference.child("registeredUser").child("main").child(registeredUid).child("onlineStatus").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    String online = dataSnapshot.getValue(String.class);
-                    if (online != null && online.equals("Online")) {
-                        //Ni kalau dia dc
-                        databaseReference.child("registeredUser").child("main").child(registeredUid).child("onlineStatus").onDisconnect().setValue("Offline");
-                        final DatabaseReference databaseReferenceLastOnline = FirebaseDatabase.getInstance().getReference().child("registeredUser").child("main").child(registeredUid).child("lastOnline");
-                        databaseReferenceLastOnline.onDisconnect().setValue(ServerValue.TIMESTAMP);
-                    }
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-        }
-    }
+//    private void onDisc() {
+//        if (firebaseUser != null) {
+//            databaseReference.child("registeredUser").child("main").child(registeredUid).child("onlineStatus").addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                    String online = dataSnapshot.getValue(String.class);
+//                    if (online != null && online.equals("Online")) {
+//                        //Ni kalau dia dc
+//                        //TODO: OnDisconnect
+//                        databaseReference.child("registeredUser").child("main").child(registeredUid).child("onlineStatus").onDisconnect().setValue("Offline");
+//                        final DatabaseReference databaseReferenceLastOnline = FirebaseDatabase.getInstance().getReference().child("registeredUser").child("main").child(registeredUid).child("lastOnline");
+//                        databaseReferenceLastOnline.onDisconnect().setValue(ServerValue.TIMESTAMP);
+//
+//
+//                        //Then we update the activity after he want to close
+//                        final String offlineTime = String.valueOf(android.text.format.DateFormat.format("hh:mm:ss a", new Date()));
+//                        if (activitySessionUid != null) {
+//                            databaseReference.child("registeredUser").child("main").child(registeredUid).child("activitySession").child(activityDate).child(activitySessionUid).child("offlineTime").onDisconnect().setValue(offlineTime);
+//                            //After that we calculate the total second that he active in the forum
+//                            //We need to retrieve the data online time
+//                            databaseReference.child("registeredUser").child("main").child(registeredUid).child("activitySession").child(activityDate).child(activitySessionUid).child("onlineTime").addListenerForSingleValueEvent(new ValueEventListener() {
+//                                @Override
+//                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                                    if (dataSnapshot.exists()) {
+//
+//                                        //we get the value first
+//                                        String onlineTime = dataSnapshot.getValue(String.class);
+//                                        try {
+//
+//                                            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss aa");
+//                                            Date date1 = sdf.parse(onlineTime);
+//                                            Date date2 = sdf.parse(offlineTime);
+//
+//                                            long millse = date1.getTime() - date2.getTime();
+//                                            long mills = Math.abs(millse);
+//
+//                                            int Hours = (int) (mills / (1000 * 60 * 60));
+//                                            int Mins = (int) (mills / (1000 * 60)) % 60;
+//                                            long Secs = (int) (mills / 1000) % 60;
+//
+//                                            String totalTime = Hours + " hour, " + Mins + " mins, " + Secs + " secs";
+//                                            //Then we add new value in the database
+//                                            databaseReference.child("registeredUser").child("main").child(registeredUid).child("activitySession").child(activityDate).child(activitySessionUid).child("totalOnline").onDisconnect().setValue(totalTime);
+//
+//
+//                                        } catch (ParseException e) {
+//                                            e.printStackTrace();
+//                                        }
+//
+//                                    }
+//                                }
+//
+//                                @Override
+//                                public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                                }
+//                            });
+//                        }
+//                    }
+//
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                }
+//            });
+//        }
+//    }
 
     private void listID() {
         textViewUsername = findViewById(R.id.text_view_username);
@@ -254,7 +307,7 @@ public class ForumActivity extends AppCompatActivity {
             linearLayoutNewUser.setVisibility(View.GONE);
 
             //Add the info in the userOnlineStatus
-            new OnlineStatusUtil().updateUserOnlineStatus("Online", registeredUid, firebaseUser, databaseReference);
+            new OnlineStatusUtil().updateUserOnlineStatus("Online", registeredUid, firebaseUser, databaseReference, activitySessionUid, activityDate);
 
 
             //Get the data from the database
@@ -342,7 +395,7 @@ public class ForumActivity extends AppCompatActivity {
         textViewSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference);
+                new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference, activitySessionUid, activityDate);
                 firebaseAuth.signOut();
                 startActivity(new Intent(ForumActivity.this, ForumActivity.class));
                 finish();
@@ -365,7 +418,8 @@ public class ForumActivity extends AppCompatActivity {
     //OnBackPressed
     @Override
     public void onBackPressed() {
-        new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference);
+        new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference, activitySessionUid, activityDate);
+        new OnlineStatusUtil().onDisc(firebaseUser, databaseReference, registeredUid, activitySessionUid, activityDate);
         finish();
     }
 

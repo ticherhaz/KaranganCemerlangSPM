@@ -1,16 +1,12 @@
 package net.ticherhaz.karangancemerlangspm;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -19,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import net.ticherhaz.karangancemerlangspm.Model.Umum;
 import net.ticherhaz.karangancemerlangspm.Util.InternetCheck;
 
-import java.util.Calendar;
+import java.util.Date;
 
 public class TopikBaruActivity extends AppCompatActivity {
 
@@ -34,6 +30,7 @@ public class TopikBaruActivity extends AppCompatActivity {
     private Button buttonHantar;
 
     private String userName;
+
 
     private void listID() {
         editTextTajuk = findViewById(R.id.edit_text_tajuk);
@@ -91,6 +88,7 @@ public class TopikBaruActivity extends AppCompatActivity {
     }
 
     private void storeDatabase() {
+
         //Make the umumUid
         String umumUid = databaseReference.push().getKey();
         final String tajuk = editTextTajuk.getText().toString();
@@ -102,7 +100,9 @@ public class TopikBaruActivity extends AppCompatActivity {
         long masaDimulaiOleh = System.currentTimeMillis();
         String dibalasOleh = "";
         long masaDibalasOleh = 0;
-        String onCreatedDate = Calendar.getInstance().getTime().toString();
+
+        String onCreatedDate = String.valueOf(android.text.format.DateFormat.format("yyyy-MM-dd'T'HH:mm:ss", new Date()));
+
         String activityUmumLogUid = databaseReference.push().getKey();
         String activityKududukanLogUid = databaseReference.push().getKey();
         String type = "Umum";
@@ -115,18 +115,8 @@ public class TopikBaruActivity extends AppCompatActivity {
 
 
         if (umumUid != null) {
-            databaseReference.child("umum").child("main").child(umumUid).setValue(umum).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
-                    } else {
-                        if (task.getException() != null)
-                            Toast.makeText(getApplicationContext(), "" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-
-                }
-            });
+            databaseReference.child("umum").child("main").child(umumUid).setValue(umum);
+            databaseReference.child("umum").child("detail").child(umumUid).child(umumUid).setValue(umum);
         }
     }
 
