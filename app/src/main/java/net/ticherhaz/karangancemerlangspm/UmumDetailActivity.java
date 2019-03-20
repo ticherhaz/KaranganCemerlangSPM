@@ -22,8 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
-import net.ticherhaz.karangancemerlangspm.Model.Umum;
-import net.ticherhaz.karangancemerlangspm.ViewHolder.UmumHolder;
+import net.ticherhaz.karangancemerlangspm.Model.UmumDetail;
+import net.ticherhaz.karangancemerlangspm.ViewHolder.UmumDetailHolder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -41,8 +41,8 @@ public class UmumDetailActivity extends AppCompatActivity {
     private FirebaseUser firebaseUser;
 
     //FirebaseUi
-    private FirebaseRecyclerOptions<Umum> firebaseRecyclerOptions;
-    private FirebaseRecyclerAdapter<Umum, UmumHolder> firebaseRecyclerAdapter;
+    private FirebaseRecyclerOptions<UmumDetail> firebaseRecyclerOptions;
+    private FirebaseRecyclerAdapter<UmumDetail, UmumDetailHolder> firebaseRecyclerAdapter;
 
     //ProgressBar
     private ProgressBar progressBar;
@@ -53,28 +53,38 @@ public class UmumDetailActivity extends AppCompatActivity {
     private String umumUid;
 
     private void setFirebaseRecyclerAdapter() {
+        progressBar.setVisibility(View.VISIBLE);
         Query query = databaseReference.child("umum").child("detail").child(umumUid);
-        firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<Umum>()
-                .setQuery(query, Umum.class)
+        firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<UmumDetail>()
+                .setQuery(query, UmumDetail.class)
                 .build();
 
-        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Umum, UmumHolder>(firebaseRecyclerOptions) {
+        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<UmumDetail, UmumDetailHolder>(firebaseRecyclerOptions) {
             @SuppressLint("SetTextI18n")
             @Override
-            protected void onBindViewHolder(@NonNull UmumHolder holder, int position, @NonNull Umum model) {
+            protected void onBindViewHolder(@NonNull UmumDetailHolder holder, int position, @NonNull UmumDetail model) {
                 @SuppressLint("SimpleDateFormat") final SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                 //Change the date to ago
                 try {
-                    Date date = inputFormat.parse(model.getOnCreatedDate());
+                    Date date = inputFormat.parse(model.getPostCreatedDate());
                     @SuppressLint({"NewApi", "LocalSuppress"}) String niceDateStr = String.valueOf(DateUtils.getRelativeTimeSpanString(date.getTime(), Calendar.getInstance().getTimeInMillis(), DateUtils.MINUTE_IN_MILLIS));
 
-                    holder.getTextViewUmumTitle().setText(model.getTajuk());
-                    holder.getTextViewKedudukan().setText(String.valueOf(model.getKedudukan()));
-                    holder.getTextViewUmumViews().setText(String.valueOf(model.getViewed()));
-                    holder.getTextViewJumlahBalas().setText(String.valueOf(model.getJumlahBalas()));
-                    holder.getTextViewDimulaiOleh().setText("Dimulai Oleh " + model.getDimulaiOleh() + ", " + niceDateStr);
-                    holder.getTextViewDibalasOleh().setText("Dibalas Oleh " + model.getDibalasOleh());
-                    holder.getTextViewMasaDibalasOleh().setText(String.valueOf(model.getMasaDibalasOleh()));
+                    holder.getTextViewUsername().setText(model.getUsername());
+                    holder.getTextViewUserTitle().setText(model.getUserTitle());
+                    holder.getTextViewSekolah().setText(model.getSekolah());
+                    holder.getTextViewUserJoinDate().setText("Masa Menyertai: " + model.getOnAccountCreatedDate());
+                    holder.getTextViewGender().setText("Jantina: " + model.getGender());
+                    holder.getTextViewPos().setText("Pos: " + String.valueOf(model.getPos()));
+                    holder.getTextViewReputation().setText(String.valueOf(model.getReputation()));
+                    holder.getTextViewDeskripsi().setText(model.getDeskripsi());
+
+//                    holder.getTextViewUmumTitle().setText(model.getTajuk());
+//                    holder.getTextViewKedudukan().setText(String.valueOf(model.getKedudukan()));
+//                    holder.getTextViewUmumViews().setText(String.valueOf(model.getViewed()));
+//                    holder.getTextViewJumlahBalas().setText(String.valueOf(model.getJumlahBalas()));
+//                    holder.getTextViewDimulaiOleh().setText("Dimulai Oleh " + model.getDimulaiOleh() + ", " + niceDateStr);
+//                    holder.getTextViewDibalasOleh().setText("Dibalas Oleh " + model.getDibalasOleh());
+                    holder.getTextViewMasaDibalasOleh().setText(String.valueOf(niceDateStr));
 
 
                     holder.getView().setOnClickListener(new View.OnClickListener() {
@@ -94,14 +104,14 @@ public class UmumDetailActivity extends AppCompatActivity {
 
             @NonNull
             @Override
-            public UmumHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.umum_item, viewGroup, false);
-                return new UmumHolder(view);
+            public UmumDetailHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.umum_detail_item, viewGroup, false);
+                return new UmumDetailHolder(view);
             }
 
             @Override
             public void onDataChanged() {
-
+                progressBar.setVisibility(View.INVISIBLE);
             }
         };
 

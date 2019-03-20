@@ -85,7 +85,7 @@
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
     <string name="to_reply_thread_sign_up_today">To reply thread, sign up today</string>
-    <string name="reputation">Reputation: </string>
+    <string name="reputation">Reputasi: </string>
     <string name="sign_out">Sign Out</string>
     <string name="username">Username</string>
     <string name="confirm_password">Confirm Password</string>
@@ -112,6 +112,11 @@
     <string name="tajuk">Tajuk</string>
     <string name="deskripsi">Deskripsi</string>
     <string name="hantar">Hantar</string>
+    <string name="murid">Murid</string>
+    <string name="join_date">Join Date</string>
+    <string name="jantina">Jantina</string>
+    <string name="pos">Pos</string>
+    <string name="membalas">Membalas</string>
     <string-array name="feedback_array">
         <item>Cadangan</item>
         <item>Pujian</item>

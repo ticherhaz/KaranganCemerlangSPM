@@ -18,9 +18,6 @@ public class Umum {
     private String type;
     private String lastVisitedUser;
 
-    public Umum() {
-    }
-
     public Umum(String umumUid, String tajuk, String deskripsi, long viewed, long jumlahBalas, long kedudukan, String dimulaiOleh, long masaDimulaiOleh, String dibalasOleh, long masaDibalasOleh, String onCreatedDate, String activityUmumLogUid, String activityKedudukanLogUid, String type, String lastVisitedUser) {
         this.umumUid = umumUid;
         this.tajuk = tajuk;
@@ -37,6 +34,9 @@ public class Umum {
         this.activityKedudukanLogUid = activityKedudukanLogUid;
         this.type = type;
         this.lastVisitedUser = lastVisitedUser;
+    }
+
+    public Umum() {
     }
 
     public String getUmumUid() {

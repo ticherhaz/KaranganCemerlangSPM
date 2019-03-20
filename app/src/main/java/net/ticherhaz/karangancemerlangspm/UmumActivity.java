@@ -55,6 +55,7 @@ public class UmumActivity extends AppCompatActivity {
     private Button buttonTopikBaru;
 
     private void setFirebaseRecyclerAdapter() {
+        progressBar.setVisibility(View.VISIBLE);
         Query query = databaseReference.child("umum").child("main");
 
         firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<Umum>()
@@ -77,7 +78,7 @@ public class UmumActivity extends AppCompatActivity {
                     holder.getTextViewJumlahBalas().setText(String.valueOf(model.getJumlahBalas()));
                     holder.getTextViewDimulaiOleh().setText("Dimulai Oleh " + model.getDimulaiOleh() + ", " + niceDateStr);
                     holder.getTextViewDibalasOleh().setText("Dibalas Oleh " + model.getDibalasOleh());
-                    holder.getTextViewMasaDibalasOleh().setText(String.valueOf(model.getMasaDibalasOleh()));
+                    holder.getTextViewMasaDibalasOleh().setText(String.valueOf(String.valueOf(model.getMasaDibalasOleh())));
 
 
                     holder.getView().setOnClickListener(new View.OnClickListener() {
@@ -106,6 +107,7 @@ public class UmumActivity extends AppCompatActivity {
 
             @Override
             public void onDataChanged() {
+                progressBar.setVisibility(View.INVISIBLE);
 
             }
         };
