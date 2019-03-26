@@ -32,6 +32,7 @@ public class RunTransaction {
 
         //This part we continue to the next activity
         Intent intent = new Intent(context, KaranganDetailActivity.class);
+        intent.putExtra("karanganJenis", karanganJenis);
         intent.putExtra("userUid", userUid);
         intent.putExtra("uidKarangan", modelUid);
         intent.putExtra("tajukPenuh", modelTajukPenuh);
@@ -66,6 +67,26 @@ public class RunTransaction {
 
     public void runTransactionUserClick(final DatabaseReference databaseReference, final String userUid, final String tajukPenuh) {
         databaseReference.child("user").child(userUid).child("karangan").child(tajukPenuh).child("click").runTransaction(new Transaction.Handler() {
+            @NonNull
+            @Override
+            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
+                if (mutableData.getValue() == null) {
+                    mutableData.setValue(0);
+                } else {
+                    mutableData.setValue((Long) mutableData.getValue() + 1);
+                }
+                return Transaction.success(mutableData);
+            }
+
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
+
+            }
+        });
+    }
+
+    public void runTransactionUserVoteKarangan(final DatabaseReference databaseReference, final String karanganJenis, final String karanganUid) {
+        databaseReference.child("karangan").child(karanganJenis).child(karanganUid).child("vote").runTransaction(new Transaction.Handler() {
             @NonNull
             @Override
             public Transaction.Result doTransaction(@NonNull MutableData mutableData) {

@@ -64,95 +64,92 @@
             android:max="100"
             android:visibility="invisible" />
 
-        <LinearLayout
-            android:id="@+id/linear_layout_utama"
+
+        <ScrollView
+            android:id="@+id/scroll_view_utama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
             android:orientation="vertical"
             android:visibility="visible">
 
-            <ScrollView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="17dp">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <Button
+                        android:id="@+id/button_senarai_karangan"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                        android:layout_margin="13dp"
+                        android:background="@drawable/button_selector"
+                        android:drawableTop="@drawable/senarai"
+                        android:paddingLeft="11dp"
+                        android:paddingTop="19dp"
+                        android:paddingRight="11dp"
+                        android:paddingBottom="11dp"
+                        android:text="@string/senarai_karangan"
+                        android:textAllCaps="false" />
 
-                        <Button
-                            android:id="@+id/button_senarai_karangan"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="13dp"
-                            android:background="@drawable/button_selector"
-                            android:drawableTop="@drawable/senarai"
-                            android:paddingLeft="11dp"
-                            android:paddingTop="19dp"
-                            android:paddingRight="11dp"
-                            android:paddingBottom="11dp"
-                            android:text="@string/senarai_karangan"
-                            android:textAllCaps="false" />
-
-                        <Button
-                            android:id="@+id/button_tips_karangan"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="13dp"
-                            android:background="@drawable/button_selector"
-                            android:drawableTop="@drawable/tips"
-                            android:paddingLeft="11dp"
-                            android:paddingTop="19dp"
-                            android:paddingRight="11dp"
-                            android:paddingBottom="11dp"
-                            android:text="@string/tips_karangan"
-                            android:textAllCaps="false" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <Button
+                        android:id="@+id/button_tips_karangan"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <Button
-                            android:id="@+id/button_hantar_karangan"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="13dp"
-                            android:background="@drawable/button_selector"
-                            android:drawableTop="@drawable/hantar"
-                            android:paddingLeft="11dp"
-                            android:paddingTop="19dp"
-                            android:paddingRight="11dp"
-                            android:paddingBottom="11dp"
-                            android:text="@string/hantar_karangan"
-                            android:textAllCaps="false" />
-
-                        <Button
-                            android:id="@+id/button_forum"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="13dp"
-                            android:background="@drawable/button_selector"
-                            android:drawableTop="@drawable/forum"
-                            android:paddingLeft="11dp"
-                            android:paddingTop="19dp"
-                            android:paddingRight="11dp"
-                            android:paddingBottom="11dp"
-                            android:text="@string/forum"
-                            android:textAllCaps="false" />
-                    </LinearLayout>
+                        android:layout_margin="13dp"
+                        android:background="@drawable/button_selector"
+                        android:drawableTop="@drawable/tips"
+                        android:paddingLeft="11dp"
+                        android:paddingTop="19dp"
+                        android:paddingRight="11dp"
+                        android:paddingBottom="11dp"
+                        android:text="@string/tips_karangan"
+                        android:textAllCaps="false" />
                 </LinearLayout>
-            </ScrollView>
-        </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/button_hantar_karangan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="13dp"
+                        android:background="@drawable/button_selector"
+                        android:drawableTop="@drawable/hantar"
+                        android:paddingLeft="11dp"
+                        android:paddingTop="19dp"
+                        android:paddingRight="11dp"
+                        android:paddingBottom="11dp"
+                        android:text="@string/hantar_karangan"
+                        android:textAllCaps="false" />
+
+                    <Button
+                        android:id="@+id/button_forum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="13dp"
+                        android:background="@drawable/button_selector"
+                        android:drawableTop="@drawable/forum"
+                        android:paddingLeft="11dp"
+                        android:paddingTop="19dp"
+                        android:paddingRight="11dp"
+                        android:paddingBottom="11dp"
+                        android:text="@string/forum"
+                        android:textAllCaps="false" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
 
         <LinearLayout
             android:id="@+id/linear_layout_how"
@@ -179,33 +176,47 @@
             android:padding="7dp"
             android:visibility="gone">
 
-            <LinearLayout
+            <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent">
 
-                <android.support.v4.widget.NestedScrollView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    <LinearLayout
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view_tag"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content" />
 
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/recycler_view_tag"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view_tag_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
-                        <!--<android.support.v7.widget.RecyclerView-->
-                        <!--android:id="@+id/recycler_view_jenis"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content" />-->
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view_tag_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
-                    </LinearLayout>
-                </android.support.v4.widget.NestedScrollView>
-            </LinearLayout>
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view_tag_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view_tag_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view_tag_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

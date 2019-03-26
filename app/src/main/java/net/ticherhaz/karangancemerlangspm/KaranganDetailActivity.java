@@ -18,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Util.DoubleClickListener;
+import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
 
 public class KaranganDetailActivity extends AppCompatActivity {
 
@@ -37,6 +38,7 @@ public class KaranganDetailActivity extends AppCompatActivity {
     private Button buttonFont;
     private Button buttonBlack;
 
+    private String karanganJenis;
     private String userUid;
     private String uidKarangan;
     private String tajuk;
@@ -61,7 +63,7 @@ public class KaranganDetailActivity extends AppCompatActivity {
         buttonBlack = findViewById(R.id.button_black);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference().child("user");
+        databaseReference = firebaseDatabase.getReference();
 
         retrieveData();
         displayData();
@@ -135,6 +137,7 @@ public class KaranganDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent.getExtras() != null) {
             uidKarangan = intent.getExtras().getString("uidKarangan");
+            karanganJenis = intent.getExtras().getString("karanganJenis");
             userUid = intent.getExtras().getString("userUid");
             tajuk = intent.getExtras().getString("tajukPenuh");
             karangan = intent.getExtras().getString("karangan");
@@ -156,7 +159,7 @@ public class KaranganDetailActivity extends AppCompatActivity {
     //Method check the user if user already like or not
     private void checkLike() {
         //We are using the value event listener instead single value because we want to database always online
-        databaseReference.child(userUid).child("karangan").child(tajuk).child("like").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("user").child(userUid).child("karangan").child(tajuk).child("like").addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -185,25 +188,10 @@ public class KaranganDetailActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Anda Sudah Suka Karangan Ini", Toast.LENGTH_SHORT).show();
                 } else {
                     //1st. we read and update at karangan
-                    final DatabaseReference databaseReferenceKarangan = firebaseDatabase.getReference();
-                    databaseReferenceKarangan.child("karangan").child("main").child(uidKarangan).child("vote").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()) {
-                                voteAtKarangan = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
-                            }
-                            //Then we update at karangan
-                            databaseReferenceKarangan.child("karangan").child("main").child(uidKarangan).child("vote").setValue(voteAtKarangan + 1);
-                            databaseReference.child(userUid).child("karangan").child(tajuk).child("like").setValue(1);
-                            textViewFav.setText(String.valueOf(vote + 1));
-                            Toast.makeText(getApplicationContext(), "Anda Suka Karangan Ini", Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+                    new RunTransaction().runTransactionUserVoteKarangan(databaseReference, karanganJenis, uidKarangan);
+                    databaseReference.child("user").child(userUid).child("karangan").child(tajuk).child("like").setValue(1);
+                    textViewFav.setText(String.valueOf(vote + 1));
+                    Toast.makeText(getApplicationContext(), "Anda Suka Karangan Ini", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -224,25 +212,12 @@ public class KaranganDetailActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Anda Sudah Suka Karangan Ini", Toast.LENGTH_SHORT).show();
                 } else {
                     //1st. we read and update at karangan
-                    final DatabaseReference databaseReferenceKarangan = firebaseDatabase.getReference();
-                    databaseReferenceKarangan.child("karangan").child("main").child(uidKarangan).child("vote").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()) {
-                                voteAtKarangan = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
-                            }
-                            //Then we update at karangan
-                            databaseReferenceKarangan.child("karangan").child("main").child(uidKarangan).child("vote").setValue(voteAtKarangan + 1);
-                            databaseReference.child(userUid).child("karangan").child(tajuk).child("like").setValue(1);
-                            textViewFav.setText(String.valueOf(vote + 1));
-                            Toast.makeText(getApplicationContext(), "Anda Suka Karangan Ini", Toast.LENGTH_SHORT).show();
-                        }
+                    //  final DatabaseReference databaseReferenceKarangan = firebaseDatabase.getReference();
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+                    new RunTransaction().runTransactionUserVoteKarangan(databaseReference, karanganJenis, uidKarangan);
+                    databaseReference.child("user").child(userUid).child("karangan").child(tajuk).child("like").setValue(1);
+                    textViewFav.setText(String.valueOf(vote + 1));
+                    Toast.makeText(getApplicationContext(), "Anda Suka Karangan Ini", Toast.LENGTH_SHORT).show();
                 }
             }
         });

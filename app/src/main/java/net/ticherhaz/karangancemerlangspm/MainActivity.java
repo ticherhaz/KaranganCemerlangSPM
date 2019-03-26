@@ -28,6 +28,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -48,12 +49,21 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
 
     private FirebaseRecyclerOptions<Karangan> firebaseRecyclerOptions;
+    private FirebaseRecyclerOptions<Karangan> firebaseRecyclerOptions2;
+    private FirebaseRecyclerOptions<Karangan> firebaseRecyclerOptions3;
+    private FirebaseRecyclerOptions<Karangan> firebaseRecyclerOptions4;
+    private FirebaseRecyclerOptions<Karangan> firebaseRecyclerOptions5;
+    private FirebaseRecyclerOptions<Karangan> firebaseRecyclerOptions6;
     private FirebaseRecyclerAdapter<Karangan, KaranganViewHolder> firebaseRecyclerAdapter;
+    private FirebaseRecyclerAdapter<Karangan, KaranganViewHolder> firebaseRecyclerAdapter2;
+    private FirebaseRecyclerAdapter<Karangan, KaranganViewHolder> firebaseRecyclerAdapter3;
+    private FirebaseRecyclerAdapter<Karangan, KaranganViewHolder> firebaseRecyclerAdapter4;
+    private FirebaseRecyclerAdapter<Karangan, KaranganViewHolder> firebaseRecyclerAdapter5;
+    private FirebaseRecyclerAdapter<Karangan, KaranganViewHolder> firebaseRecyclerAdapter6;
 
     //Variable
     private String userUid;
     private String phoneModel;
-    private String karanganJenis;
 
     //Edit Text
     private EditText editTextSearch;
@@ -62,11 +72,16 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar progressBar;
 
     //RecyclerView
-    //  private RecyclerView recyclerViewJenis;
     private RecyclerView recyclerViewTag;
+    private RecyclerView recyclerViewTag2;
+    private RecyclerView recyclerViewTag3;
+    private RecyclerView recyclerViewTag4;
+    private RecyclerView recyclerViewTag5;
+    private RecyclerView recyclerViewTag6;
+
     private LinearLayout linearLayout;
     private LinearLayout linearLayoutHow;
-    private LinearLayout linearLayoutUtama;
+    private ScrollView scrollViewUtama;
 
     //Button
     private Button buttonSenaraiKarangan;
@@ -86,11 +101,17 @@ public class MainActivity extends AppCompatActivity {
         TextView textViewHow = findViewById(R.id.text_view_how);
         textViewAnnouncement = findViewById(R.id.text_view_announcement);
         progressBar = findViewById(R.id.progressbar);
-        //    recyclerViewJenis = findViewById(R.id.recycler_view_jenis);
+
         recyclerViewTag = findViewById(R.id.recycler_view_tag);
+        recyclerViewTag2 = findViewById(R.id.recycler_view_tag_2);
+        recyclerViewTag3 = findViewById(R.id.recycler_view_tag_3);
+        recyclerViewTag4 = findViewById(R.id.recycler_view_tag_4);
+        recyclerViewTag5 = findViewById(R.id.recycler_view_tag_5);
+        recyclerViewTag6 = findViewById(R.id.recycler_view_tag_6);
+
         linearLayout = findViewById(R.id.linear_layout);
         linearLayoutHow = findViewById(R.id.linear_layout_how);
-        linearLayoutUtama = findViewById(R.id.linear_layout_utama);
+        scrollViewUtama = findViewById(R.id.scroll_view_utama);
 
         //Button
         buttonSenaraiKarangan = findViewById(R.id.button_senarai_karangan);
@@ -105,11 +126,8 @@ public class MainActivity extends AppCompatActivity {
         if (intent.getExtras() != null) {
             userUid = intent.getExtras().getString("userUid");
             phoneModel = intent.getExtras().getString("phoneModel");
-            karanganJenis = intent.getExtras().getString("karanganJenis");
         }
 
-
-        //Database
         //Firebase Database
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
@@ -134,7 +152,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     //Method Edit Text Changed
     private void setEditTextSearch() {
         editTextSearch.addTextChangedListener(new TextWatcher() {
@@ -152,10 +169,18 @@ public class MainActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if (editTextSearch.getText().toString().equals("")) {
                     progressBar.setVisibility(View.INVISIBLE);
-                    linearLayoutUtama.setVisibility(View.VISIBLE);
+                    scrollViewUtama.setVisibility(View.VISIBLE);
+                    //  linearLayoutUtama.setVisibility(View.VISIBLE);
                     linearLayoutHow.setVisibility(View.GONE);
-                    if (firebaseRecyclerAdapter != null)
+                    if (firebaseRecyclerAdapter != null && firebaseRecyclerAdapter2 != null && firebaseRecyclerAdapter3 != null && firebaseRecyclerAdapter4 != null && firebaseRecyclerAdapter5 != null && firebaseRecyclerAdapter6 != null) {
                         firebaseRecyclerAdapter.stopListening();
+                        firebaseRecyclerAdapter2.stopListening();
+                        firebaseRecyclerAdapter3.stopListening();
+                        firebaseRecyclerAdapter4.stopListening();
+                        firebaseRecyclerAdapter5.stopListening();
+                        firebaseRecyclerAdapter6.stopListening();
+                    }
+
                 } else {
                     setFirebaseRecyclerAdapter(editTextSearch.getText().toString());
                 }
@@ -165,26 +190,385 @@ public class MainActivity extends AppCompatActivity {
 
     //Set the firebaseUI
     private void setFirebaseRecyclerAdapter(String search) {
-//        setRecyclerView(search, recyclerViewTag, "CABARAN");
-//        setRecyclerView(search, recyclerViewTag, "FAKTOR");
-//        setRecyclerView(search, recyclerViewTag, "KESAN");
-//        setRecyclerView(search, recyclerViewTag, "PERANAN");
-//        setRecyclerView(search, recyclerViewTag, "PUNCA");
-        setRecyclerView(search, recyclerViewTag, "USAHA");
+        setRecyclerView(search, recyclerViewTag); //usaha
+        setRecyclerView2(search, recyclerViewTag2); //punca
+        setRecyclerView3(search, recyclerViewTag3); //peranan
+        setRecyclerView4(search, recyclerViewTag4); //kesan
+        setRecyclerView5(search, recyclerViewTag5); //faktor
+        setRecyclerView6(search, recyclerViewTag6); //cabaran
+
     }
 
-
-    //Method tajuk
-    private void setRecyclerView(String search, final RecyclerView recyclerViewNumber, final String karanganJenis) {
+    //Method tag6
+    private void setRecyclerView6(final String search, final RecyclerView recyclerViewNumber) {
         linearLayout.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.VISIBLE);
         linearLayoutHow.setVisibility(View.GONE);
-        linearLayoutUtama.setVisibility(View.GONE);
+        scrollViewUtama.setVisibility(View.GONE);
 
         //Making query
-        //  Query query = databaseReference.child("karangan").child("main").orderByChild("karanganTag").startAt(search.toUpperCase()).endAt(search.toUpperCase() + "\uf8ff");
-        Query query = databaseReference.child("karangan").child(karanganJenis).orderByChild("karanganTag").startAt(search.toUpperCase()).endAt(search.toUpperCase() + "\uf8ff");
-        //  Query query = databaseReference.child("karangan").orderByChild("karanganTag").startAt(search.toUpperCase()).endAt(search.toUpperCase() + "\uf8ff");
+        Query query = databaseReference.child("karangan").child("CABARAN").orderByChild("karanganTag").startAt(search.toUpperCase()).endAt(search.toUpperCase() + "\uf8ff");
+        //FirebaseUI
+        firebaseRecyclerOptions6 = new FirebaseRecyclerOptions.Builder<Karangan>()
+                .setQuery(query, Karangan.class)
+                .build();
+        firebaseRecyclerAdapter6 = new FirebaseRecyclerAdapter<Karangan, KaranganViewHolder>(firebaseRecyclerOptions6) {
+            @Override
+            protected void onBindViewHolder(@NonNull final KaranganViewHolder holder, int position, @NonNull final Karangan model) {
+
+                //Display the data
+                holder.getTextViewTajuk().setText(model.getTajukPenuh());
+                holder.getTextViewDeskripsi().setText(model.getDeskripsiPenuh());
+                holder.getTextViewViewer().setText(String.valueOf(model.getMostVisited()));
+                holder.getTextViewFav().setText(String.valueOf(model.getVote()));
+
+                holder.getView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Display the progress bar1
+                        progressBar.setVisibility(View.VISIBLE);
+                        //The window cannot editable, takleh nak pergi mana2
+                        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+                        //This part we will update the database when user click the specific karangan
+                        //1. We need to update the last visited karangan
+                        databaseReference.child("user").child(userUid).child("lastVisitedKarangan").setValue(model.getTajukPenuh());
+                        //2. So about the mostvisited karangan.
+                        //So we read back the previous data
+
+                        //26.3.2019 : I'm making the new class because the main activity need to use to, so the share the method
+                        new RunTransaction().runTransactionUserClick(databaseReference, userUid, model.getTajukPenuh());
+                        new RunTransaction().runTransactionKaranganMostVisited(progressBar, databaseReference, MainActivity.this, userUid, model.getUid(), model.getTajukPenuh(), model.getDeskripsiPenuh(), model.getTarikh(), model.getKarangan(), model.getVote(), model.getMostVisited(), model.getUserLastVisitedDate(), "PUNCA");
+
+                    }
+                });
+            }
+
+
+            @NonNull
+            @Override
+            public KaranganViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.karangan_item, viewGroup, false);
+                return new KaranganViewHolder(view);
+            }
+
+            @Override
+            public void onDataChanged() {
+                progressBar.setVisibility(View.INVISIBLE);
+                // if there are no chat messages, show a view that invites the user to add a message
+                linearLayoutHow.setVisibility(firebaseRecyclerAdapter.getItemCount() == 0 && firebaseRecyclerAdapter2.getItemCount() == 0 && firebaseRecyclerAdapter3.getItemCount() == 0
+                        && firebaseRecyclerAdapter4.getItemCount() == 0 && firebaseRecyclerAdapter5.getItemCount() == 0 && firebaseRecyclerAdapter6.getItemCount() == 0 ? View.VISIBLE : View.GONE);
+
+            }
+        };
+        //Display
+        //1. Set the recycler view
+        recyclerViewNumber.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerViewNumber.setAdapter(firebaseRecyclerAdapter5);
+        //2. FirebaseUI
+        firebaseRecyclerAdapter6.notifyDataSetChanged();
+        firebaseRecyclerAdapter6.startListening();
+    }
+
+
+    //Method tag5
+    private void setRecyclerView5(final String search, final RecyclerView recyclerViewNumber) {
+        linearLayout.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+        linearLayoutHow.setVisibility(View.GONE);
+        scrollViewUtama.setVisibility(View.GONE);
+
+        //Making query
+        Query query = databaseReference.child("karangan").child("FAKTOR").orderByChild("karanganTag").startAt(search.toUpperCase()).endAt(search.toUpperCase() + "\uf8ff");
+        //FirebaseUI
+        firebaseRecyclerOptions5 = new FirebaseRecyclerOptions.Builder<Karangan>()
+                .setQuery(query, Karangan.class)
+                .build();
+        firebaseRecyclerAdapter5 = new FirebaseRecyclerAdapter<Karangan, KaranganViewHolder>(firebaseRecyclerOptions5) {
+            @Override
+            protected void onBindViewHolder(@NonNull final KaranganViewHolder holder, int position, @NonNull final Karangan model) {
+
+                //Display the data
+                holder.getTextViewTajuk().setText(model.getTajukPenuh());
+                holder.getTextViewDeskripsi().setText(model.getDeskripsiPenuh());
+                holder.getTextViewViewer().setText(String.valueOf(model.getMostVisited()));
+                holder.getTextViewFav().setText(String.valueOf(model.getVote()));
+
+                holder.getView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Display the progress bar1
+                        progressBar.setVisibility(View.VISIBLE);
+                        //The window cannot editable, takleh nak pergi mana2
+                        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+                        //This part we will update the database when user click the specific karangan
+                        //1. We need to update the last visited karangan
+                        databaseReference.child("user").child(userUid).child("lastVisitedKarangan").setValue(model.getTajukPenuh());
+                        //2. So about the mostvisited karangan.
+                        //So we read back the previous data
+
+                        //26.3.2019 : I'm making the new class because the main activity need to use to, so the share the method
+                        new RunTransaction().runTransactionUserClick(databaseReference, userUid, model.getTajukPenuh());
+                        new RunTransaction().runTransactionKaranganMostVisited(progressBar, databaseReference, MainActivity.this, userUid, model.getUid(), model.getTajukPenuh(), model.getDeskripsiPenuh(), model.getTarikh(), model.getKarangan(), model.getVote(), model.getMostVisited(), model.getUserLastVisitedDate(), "PUNCA");
+
+                    }
+                });
+            }
+
+
+            @NonNull
+            @Override
+            public KaranganViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.karangan_item, viewGroup, false);
+                return new KaranganViewHolder(view);
+            }
+
+            @Override
+            public void onDataChanged() {
+                progressBar.setVisibility(View.INVISIBLE);
+                // if there are no chat messages, show a view that invites the user to add a message
+                linearLayoutHow.setVisibility(firebaseRecyclerAdapter.getItemCount() == 0 && firebaseRecyclerAdapter2.getItemCount() == 0 && firebaseRecyclerAdapter3.getItemCount() == 0
+                        && firebaseRecyclerAdapter4.getItemCount() == 0 && firebaseRecyclerAdapter5.getItemCount() == 0 && firebaseRecyclerAdapter6.getItemCount() == 0 ? View.VISIBLE : View.GONE);
+
+            }
+        };
+        //Display
+        //1. Set the recycler view
+        recyclerViewNumber.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerViewNumber.setAdapter(firebaseRecyclerAdapter5);
+        //2. FirebaseUI
+        firebaseRecyclerAdapter5.notifyDataSetChanged();
+        firebaseRecyclerAdapter5.startListening();
+    }
+
+    //Method tag4
+    private void setRecyclerView4(final String search, final RecyclerView recyclerViewNumber) {
+        linearLayout.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+        linearLayoutHow.setVisibility(View.GONE);
+        scrollViewUtama.setVisibility(View.GONE);
+
+        //Making query
+        Query query = databaseReference.child("karangan").child("KESAN").orderByChild("karanganTag").startAt(search.toUpperCase()).endAt(search.toUpperCase() + "\uf8ff");
+        //FirebaseUI
+        firebaseRecyclerOptions4 = new FirebaseRecyclerOptions.Builder<Karangan>()
+                .setQuery(query, Karangan.class)
+                .build();
+        firebaseRecyclerAdapter4 = new FirebaseRecyclerAdapter<Karangan, KaranganViewHolder>(firebaseRecyclerOptions4) {
+            @Override
+            protected void onBindViewHolder(@NonNull final KaranganViewHolder holder, int position, @NonNull final Karangan model) {
+
+                //Display the data
+                holder.getTextViewTajuk().setText(model.getTajukPenuh());
+                holder.getTextViewDeskripsi().setText(model.getDeskripsiPenuh());
+                holder.getTextViewViewer().setText(String.valueOf(model.getMostVisited()));
+                holder.getTextViewFav().setText(String.valueOf(model.getVote()));
+
+                holder.getView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Display the progress bar1
+                        progressBar.setVisibility(View.VISIBLE);
+                        //The window cannot editable, takleh nak pergi mana2
+                        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+                        //This part we will update the database when user click the specific karangan
+                        //1. We need to update the last visited karangan
+                        databaseReference.child("user").child(userUid).child("lastVisitedKarangan").setValue(model.getTajukPenuh());
+                        //2. So about the mostvisited karangan.
+                        //So we read back the previous data
+
+                        //26.3.2019 : I'm making the new class because the main activity need to use to, so the share the method
+                        new RunTransaction().runTransactionUserClick(databaseReference, userUid, model.getTajukPenuh());
+                        new RunTransaction().runTransactionKaranganMostVisited(progressBar, databaseReference, MainActivity.this, userUid, model.getUid(), model.getTajukPenuh(), model.getDeskripsiPenuh(), model.getTarikh(), model.getKarangan(), model.getVote(), model.getMostVisited(), model.getUserLastVisitedDate(), "PUNCA");
+
+                    }
+                });
+            }
+
+
+            @NonNull
+            @Override
+            public KaranganViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.karangan_item, viewGroup, false);
+                return new KaranganViewHolder(view);
+            }
+
+            @Override
+            public void onDataChanged() {
+                progressBar.setVisibility(View.INVISIBLE);
+                // if there are no chat messages, show a view that invites the user to add a message
+                linearLayoutHow.setVisibility(firebaseRecyclerAdapter.getItemCount() == 0 && firebaseRecyclerAdapter2.getItemCount() == 0 && firebaseRecyclerAdapter3.getItemCount() == 0
+                        && firebaseRecyclerAdapter4.getItemCount() == 0 && firebaseRecyclerAdapter5.getItemCount() == 0 && firebaseRecyclerAdapter6.getItemCount() == 0 ? View.VISIBLE : View.GONE);
+
+            }
+        };
+        //Display
+        //1. Set the recycler view
+        recyclerViewNumber.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerViewNumber.setAdapter(firebaseRecyclerAdapter4);
+        //2. FirebaseUI
+        firebaseRecyclerAdapter4.notifyDataSetChanged();
+        firebaseRecyclerAdapter4.startListening();
+    }
+
+    //Method tag3
+    private void setRecyclerView3(final String search, final RecyclerView recyclerViewNumber) {
+        linearLayout.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+        linearLayoutHow.setVisibility(View.GONE);
+        scrollViewUtama.setVisibility(View.GONE);
+
+        //Making query
+        Query query = databaseReference.child("karangan").child("PERANAN").orderByChild("karanganTag").startAt(search.toUpperCase()).endAt(search.toUpperCase() + "\uf8ff");
+        //FirebaseUI
+        firebaseRecyclerOptions3 = new FirebaseRecyclerOptions.Builder<Karangan>()
+                .setQuery(query, Karangan.class)
+                .build();
+        firebaseRecyclerAdapter3 = new FirebaseRecyclerAdapter<Karangan, KaranganViewHolder>(firebaseRecyclerOptions3) {
+            @Override
+            protected void onBindViewHolder(@NonNull final KaranganViewHolder holder, int position, @NonNull final Karangan model) {
+
+                //Display the data
+                holder.getTextViewTajuk().setText(model.getTajukPenuh());
+                holder.getTextViewDeskripsi().setText(model.getDeskripsiPenuh());
+                holder.getTextViewViewer().setText(String.valueOf(model.getMostVisited()));
+                holder.getTextViewFav().setText(String.valueOf(model.getVote()));
+
+                holder.getView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Display the progress bar1
+                        progressBar.setVisibility(View.VISIBLE);
+                        //The window cannot editable, takleh nak pergi mana2
+                        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+                        //This part we will update the database when user click the specific karangan
+                        //1. We need to update the last visited karangan
+                        databaseReference.child("user").child(userUid).child("lastVisitedKarangan").setValue(model.getTajukPenuh());
+                        //2. So about the mostvisited karangan.
+                        //So we read back the previous data
+
+                        //26.3.2019 : I'm making the new class because the main activity need to use to, so the share the method
+                        new RunTransaction().runTransactionUserClick(databaseReference, userUid, model.getTajukPenuh());
+                        new RunTransaction().runTransactionKaranganMostVisited(progressBar, databaseReference, MainActivity.this, userUid, model.getUid(), model.getTajukPenuh(), model.getDeskripsiPenuh(), model.getTarikh(), model.getKarangan(), model.getVote(), model.getMostVisited(), model.getUserLastVisitedDate(), "PUNCA");
+
+                    }
+                });
+            }
+
+
+            @NonNull
+            @Override
+            public KaranganViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.karangan_item, viewGroup, false);
+                return new KaranganViewHolder(view);
+            }
+
+            @Override
+            public void onDataChanged() {
+                progressBar.setVisibility(View.INVISIBLE);
+                // if there are no chat messages, show a view that invites the user to add a message
+                linearLayoutHow.setVisibility(firebaseRecyclerAdapter.getItemCount() == 0 && firebaseRecyclerAdapter2.getItemCount() == 0 && firebaseRecyclerAdapter3.getItemCount() == 0
+                        && firebaseRecyclerAdapter4.getItemCount() == 0 && firebaseRecyclerAdapter5.getItemCount() == 0 && firebaseRecyclerAdapter6.getItemCount() == 0 ? View.VISIBLE : View.GONE);
+
+            }
+        };
+        //Display
+        //1. Set the recycler view
+        recyclerViewNumber.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerViewNumber.setAdapter(firebaseRecyclerAdapter3);
+        //2. FirebaseUI
+        firebaseRecyclerAdapter3.notifyDataSetChanged();
+        firebaseRecyclerAdapter3.startListening();
+    }
+
+    //Method tag2
+    private void setRecyclerView2(final String search, final RecyclerView recyclerViewNumber) {
+        linearLayout.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+        linearLayoutHow.setVisibility(View.GONE);
+        scrollViewUtama.setVisibility(View.GONE);
+
+        //Making query
+        Query query = databaseReference.child("karangan").child("PUNCA").orderByChild("karanganTag").startAt(search.toUpperCase()).endAt(search.toUpperCase() + "\uf8ff");
+        //FirebaseUI
+        firebaseRecyclerOptions2 = new FirebaseRecyclerOptions.Builder<Karangan>()
+                .setQuery(query, Karangan.class)
+                .build();
+        firebaseRecyclerAdapter2 = new FirebaseRecyclerAdapter<Karangan, KaranganViewHolder>(firebaseRecyclerOptions2) {
+            @Override
+            protected void onBindViewHolder(@NonNull final KaranganViewHolder holder, int position, @NonNull final Karangan model) {
+
+                //Display the data
+                holder.getTextViewTajuk().setText(model.getTajukPenuh());
+                holder.getTextViewDeskripsi().setText(model.getDeskripsiPenuh());
+                holder.getTextViewViewer().setText(String.valueOf(model.getMostVisited()));
+                holder.getTextViewFav().setText(String.valueOf(model.getVote()));
+
+                holder.getView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Display the progress bar1
+                        progressBar.setVisibility(View.VISIBLE);
+                        //The window cannot editable, takleh nak pergi mana2
+                        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+                        //This part we will update the database when user click the specific karangan
+                        //1. We need to update the last visited karangan
+                        databaseReference.child("user").child(userUid).child("lastVisitedKarangan").setValue(model.getTajukPenuh());
+                        //2. So about the mostvisited karangan.
+                        //So we read back the previous data
+
+                        //26.3.2019 : I'm making the new class because the main activity need to use to, so the share the method
+                        new RunTransaction().runTransactionUserClick(databaseReference, userUid, model.getTajukPenuh());
+                        new RunTransaction().runTransactionKaranganMostVisited(progressBar, databaseReference, MainActivity.this, userUid, model.getUid(), model.getTajukPenuh(), model.getDeskripsiPenuh(), model.getTarikh(), model.getKarangan(), model.getVote(), model.getMostVisited(), model.getUserLastVisitedDate(), "PUNCA");
+
+                    }
+                });
+            }
+
+
+            @NonNull
+            @Override
+            public KaranganViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.karangan_item, viewGroup, false);
+                return new KaranganViewHolder(view);
+            }
+
+            @Override
+            public void onDataChanged() {
+                progressBar.setVisibility(View.INVISIBLE);
+                // if there are no chat messages, show a view that invites the user to add a message
+                linearLayoutHow.setVisibility(firebaseRecyclerAdapter.getItemCount() == 0 && firebaseRecyclerAdapter2.getItemCount() == 0 && firebaseRecyclerAdapter3.getItemCount() == 0
+                        && firebaseRecyclerAdapter4.getItemCount() == 0 && firebaseRecyclerAdapter5.getItemCount() == 0 && firebaseRecyclerAdapter6.getItemCount() == 0 ? View.VISIBLE : View.GONE);
+
+            }
+        };
+        //Display
+        //1. Set the recycler view
+        recyclerViewNumber.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerViewNumber.setAdapter(firebaseRecyclerAdapter2);
+        //2. FirebaseUI
+        firebaseRecyclerAdapter2.notifyDataSetChanged();
+        firebaseRecyclerAdapter2.startListening();
+    }
+
+    //Method tag
+    private void setRecyclerView(final String search, final RecyclerView recyclerViewNumber) {
+        linearLayout.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+        linearLayoutHow.setVisibility(View.GONE);
+        scrollViewUtama.setVisibility(View.GONE);
+
+        //Making query
+        Query query = databaseReference.child("karangan").child("USAHA").orderByChild("karanganTag").startAt(search.toUpperCase()).endAt(search.toUpperCase() + "\uf8ff");
         //FirebaseUI
         firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<Karangan>()
                 .setQuery(query, Karangan.class)
@@ -216,7 +600,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //26.3.2019 : I'm making the new class because the main activity need to use to, so the share the method
                         new RunTransaction().runTransactionUserClick(databaseReference, userUid, model.getTajukPenuh());
-                        new RunTransaction().runTransactionKaranganMostVisited(progressBar, databaseReference, MainActivity.this, userUid, model.getUid(), model.getTajukPenuh(), model.getDeskripsiPenuh(), model.getTarikh(), model.getKarangan(), model.getVote(), model.getMostVisited(), model.getUserLastVisitedDate(), karanganJenis);
+                        new RunTransaction().runTransactionKaranganMostVisited(progressBar, databaseReference, MainActivity.this, userUid, model.getUid(), model.getTajukPenuh(), model.getDeskripsiPenuh(), model.getTarikh(), model.getKarangan(), model.getVote(), model.getMostVisited(), model.getUserLastVisitedDate(), "USAHA");
 
                     }
                 });
@@ -234,7 +618,9 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChanged() {
                 progressBar.setVisibility(View.INVISIBLE);
                 // if there are no chat messages, show a view that invites the user to add a message
-                linearLayoutHow.setVisibility(firebaseRecyclerAdapter.getItemCount() == 0 ? View.VISIBLE : View.GONE);
+                linearLayoutHow.setVisibility(firebaseRecyclerAdapter.getItemCount() == 0 && firebaseRecyclerAdapter2.getItemCount() == 0 && firebaseRecyclerAdapter3.getItemCount() == 0
+                        && firebaseRecyclerAdapter4.getItemCount() == 0 && firebaseRecyclerAdapter5.getItemCount() == 0 && firebaseRecyclerAdapter6.getItemCount() == 0 ? View.VISIBLE : View.GONE);
+
             }
         };
         //Display
@@ -312,7 +698,7 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
             builder.setTitle(R.string.action_about);
             //TODO: Update the version at About
-            builder.setMessage("Karangan Cemerlang SPM\nversi 2.13\n\n\nJangan lupa kongsi bersama kawan :)\n\n\n\nKreditkan kepada:\nCikgu Mariani\nCikgu Badrunsham\nCikgu Hamidah\nCikgu Rohani\nCikgu Harum Awang\nCikgu Samat\nCikgu Che Noranuwi\nNabil Fikri\nMuhd Arif (Bob)\nLuqman K\nAffiq Shamil\n\nhazman45.blogspot.com\nTicherhaz©2019");
+            builder.setMessage("Karangan Cemerlang SPM\nversi 2.14\n\n\nJangan lupa kongsi bersama kawan :)\n\n\n\nKreditkan kepada:\nCikgu Mariani\nCikgu Badrunsham\nCikgu Hamidah\nCikgu Rohani\nCikgu Harum Awang\nCikgu Samat\nCikgu Che Noranuwi\nNabil Fikri\nMuhd Arif (Bob)\nLuqman K\nAffiq Shamil\n\nhazman45.blogspot.com\nTicherhaz©2019");
 
             builder.setCancelable(true);
             builder.setPositiveButton(
