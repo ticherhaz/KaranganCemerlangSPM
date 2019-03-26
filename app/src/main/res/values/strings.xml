@@ -15,7 +15,7 @@
     <string name="like">Suka</string>
     <string name="action_about">Tentang Aplikasi</string>
     <string name="data_is_not_found">Maklumat Tidak Tiada</string>
-    <string name="tips_karangan">Tips Karangan</string>
+    <string name="tips_karangan">Tips</string>
     <string name="tips_karangan_explain">
         <![CDATA[
         <h2><b>Tips Buat Karangan Menggunakan AMBaCoKUP</b></h2>
@@ -60,8 +60,8 @@
     <string name="logo_kcspm">Logo KCSPM</string>
     <string name="viewer">Penonton</string>
     <string name="fav">Kegemaran</string>
-    <string name="senarai_karangan">Senarai Karangan</string>
-    <string name="hantar_karangan">Hantar Karangan</string>
+    <string name="senarai_karangan">Senarai</string>
+    <string name="hantar_karangan">Hantar</string>
     <string name="muat_naik_file">Muat Naik Fail</string>
     <string name="forum">Forum</string>
     <string name="how">
@@ -117,6 +117,7 @@
     <string name="jantina">Jantina</string>
     <string name="pos">Pos</string>
     <string name="membalas">Membalas</string>
+    <string name="ambil_gambar">Ambil Gambar</string>
     <string-array name="feedback_array">
         <item>Cadangan</item>
         <item>Pujian</item>
@@ -142,6 +143,10 @@
         <item>Sedih</item>
         <item>Marah</item>
         <item>Senyap</item>
+    </string-array>
+    <string-array name="gender_array">
+        <item>Lelaki</item>
+        <item>Perempuan</item>
     </string-array>
 
 </resources>

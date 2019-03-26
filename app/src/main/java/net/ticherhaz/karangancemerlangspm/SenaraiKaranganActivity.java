@@ -18,18 +18,14 @@ import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.Karangan;
 import net.ticherhaz.karangancemerlangspm.Util.InternetMessage;
+import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.KaranganViewHolder;
-
-import java.util.Calendar;
 
 public class SenaraiKaranganActivity extends AppCompatActivity {
 
@@ -79,12 +75,14 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
         }
     }
 
+
     //Method firebaseUI
     private void setFirebaseRecyclerAdapter() {
         //Set progressbar
         progressBar.setVisibility(View.VISIBLE);
         //FirebaseUI
-        Query query = databaseReference.child("karangan").child("main").orderByChild("karanganJenis").equalTo(karanganJenis);
+        //  Query query = databaseReference.child("karangan").child("main").orderByChild("karanganJenis").equalTo(karanganJenis);
+        Query query = databaseReference.child("karangan").child(karanganJenis).orderByChild("karanganJenis").equalTo(karanganJenis);
         firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<Karangan>()
                 //   .setQuery(databaseReference.child("karangan").child("main"), Karangan.class)
                 .setQuery(query, Karangan.class)
@@ -110,64 +108,10 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
                         //1. We need to update the last visited karangan
                         databaseReference.child("user").child(userUid).child("lastVisitedKarangan").setValue(model.getTajukPenuh());
                         //2. So about the mostvisited karangan.
-                        //So we read back the previous data
-                        databaseReference.child("user").child(userUid).child("karangan").child(model.getTajukPenuh()).child("click").addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                //We declare the click = 0 because we don't know if the click is available or not
-                                int click = 0;
-                                if (dataSnapshot.exists()) {
-                                    click = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
-                                }
-                                //Then we set the new data of the user
-                                databaseReference.child("user").child(userUid).child("karangan").child(model.getTajukPenuh()).child("click").setValue(click + 1);
 
-                                //This part for the karangan, we will do the same thing as the user
-                                databaseReference.child("karangan").child("main").child(model.getUid()).child("mostVisited").addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        //Hide the progressbar
-                                        progressBar.setVisibility(View.INVISIBLE);
-                                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-
-                                        int clickKarangan = 0;
-                                        if (dataSnapshot.exists()) {
-                                            clickKarangan = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
-                                        }
-                                        //Then we set the data for the karangan
-                                        databaseReference.child("karangan").child("main").child(model.getUid()).child("mostVisited").setValue(clickKarangan + 1);
-
-                                        //After that we need to update this karangan about the lastuservisited
-                                        String tarikh = Calendar.getInstance().getTime().toString();
-                                        databaseReference.child("karangan").child("main").child(model.getUid()).child("userLastVisitedDate").setValue(tarikh);
-
-                                        //This part we continue to the next activity
-                                        Intent intent = new Intent(SenaraiKaranganActivity.this, KaranganDetailActivity.class);
-                                        intent.putExtra("userUid", userUid);
-                                        intent.putExtra("uidKarangan", model.getUid());
-                                        intent.putExtra("tajukPenuh", model.getTajukPenuh());
-                                        intent.putExtra("deskripsiPenuh", model.getDeskripsiPenuh());
-                                        intent.putExtra("tarikh", model.getTarikh());
-                                        intent.putExtra("karangan", model.getKarangan());
-                                        intent.putExtra("vote", model.getVote());
-                                        intent.putExtra("mostVisited", model.getMostVisited());
-                                        intent.putExtra("userLastVisitedDate", model.getUserLastVisitedDate());
-                                        startActivities(new Intent[]{intent});
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                    }
-
-                                });
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
+                        //26.3.2019 : I'm making the new class because the main activity need to use to, so the share the method
+                        new RunTransaction().runTransactionUserClick(databaseReference, userUid, model.getTajukPenuh());
+                        new RunTransaction().runTransactionKaranganMostVisited(progressBar, databaseReference, SenaraiKaranganActivity.this, userUid, model.getUid(), model.getTajukPenuh(), model.getDeskripsiPenuh(), model.getTarikh(), model.getKarangan(), model.getVote(), model.getMostVisited(), model.getUserLastVisitedDate(), karanganJenis);
 
                     }
                 });

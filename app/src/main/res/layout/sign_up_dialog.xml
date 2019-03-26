@@ -54,6 +54,12 @@
         android:textSize="17sp" />
 
     <Spinner
+        android:id="@+id/spinner_gender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp" />
+
+    <Spinner
         android:id="@+id/spinner_state"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

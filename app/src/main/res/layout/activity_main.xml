@@ -16,20 +16,33 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/text_view_announcement"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryDark" />
+
         <ImageView
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:layout_gravity="center"
             android:layout_margin="7dp"
             android:contentDescription="@string/logo_kcspm"
-            android:src="@drawable/logo2" />
+            android:src="@drawable/emblem" />
 
         <EditText
             android:id="@+id/edit_text_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="17dp"
-            android:layout_marginEnd="17dp"
+            android:layout_marginStart="33dp"
+            android:layout_marginEnd="33dp"
             android:background="@drawable/edit_text_border"
             android:drawableEnd="@drawable/ic_search"
             android:drawableRight="@drawable/ic_search"
@@ -44,9 +57,9 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="17dp"
+            android:layout_marginStart="33dp"
             android:layout_marginTop="-7dp"
-            android:layout_marginEnd="17dp"
+            android:layout_marginEnd="33dp"
             android:indeterminate="true"
             android:max="100"
             android:visibility="invisible" />
@@ -80,10 +93,11 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="13dp"
                             android:background="@drawable/button_selector"
-                            android:drawableTop="@drawable/senarai_karangan"
-                            android:paddingLeft="14dp"
-                            android:paddingRight="14dp"
-                            android:paddingBottom="7dp"
+                            android:drawableTop="@drawable/senarai"
+                            android:paddingLeft="11dp"
+                            android:paddingTop="19dp"
+                            android:paddingRight="11dp"
+                            android:paddingBottom="11dp"
                             android:text="@string/senarai_karangan"
                             android:textAllCaps="false" />
 
@@ -93,10 +107,11 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="13dp"
                             android:background="@drawable/button_selector"
-                            android:drawableTop="@drawable/tips_karangan"
-                            android:paddingLeft="22dp"
-                            android:paddingRight="22dp"
-                            android:paddingBottom="7dp"
+                            android:drawableTop="@drawable/tips"
+                            android:paddingLeft="11dp"
+                            android:paddingTop="19dp"
+                            android:paddingRight="11dp"
+                            android:paddingBottom="11dp"
                             android:text="@string/tips_karangan"
                             android:textAllCaps="false" />
                     </LinearLayout>
@@ -113,10 +128,11 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="13dp"
                             android:background="@drawable/button_selector"
-                            android:drawableTop="@drawable/hantar_karangan"
-                            android:paddingLeft="17dp"
-                            android:paddingRight="17dp"
-                            android:paddingBottom="7dp"
+                            android:drawableTop="@drawable/hantar"
+                            android:paddingLeft="11dp"
+                            android:paddingTop="19dp"
+                            android:paddingRight="11dp"
+                            android:paddingBottom="11dp"
                             android:text="@string/hantar_karangan"
                             android:textAllCaps="false" />
 
@@ -126,10 +142,11 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="13dp"
                             android:background="@drawable/button_selector"
-                            android:drawableTop="@drawable/forum_new"
-                            android:paddingLeft="26dp"
-                            android:paddingRight="26dp"
-                            android:paddingBottom="7dp"
+                            android:drawableTop="@drawable/forum"
+                            android:paddingLeft="11dp"
+                            android:paddingTop="19dp"
+                            android:paddingRight="11dp"
+                            android:paddingBottom="11dp"
                             android:text="@string/forum"
                             android:textAllCaps="false" />
                     </LinearLayout>

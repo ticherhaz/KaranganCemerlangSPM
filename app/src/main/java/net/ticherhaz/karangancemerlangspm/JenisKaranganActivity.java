@@ -35,6 +35,7 @@ public class JenisKaranganActivity extends AppCompatActivity {
     private ProgressBar progressBar;
 
     private String userUid;
+    private String karanganJenis;
 
     //List id
     private void listID() {
@@ -43,7 +44,7 @@ public class JenisKaranganActivity extends AppCompatActivity {
 
         //Firebase database
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference().child("jenis").child("main");
+        databaseReference = firebaseDatabase.getReference().child("jenis");
 
         retrieveData();
         setFirebaseRecyclerAdapter();
@@ -54,6 +55,7 @@ public class JenisKaranganActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent.getExtras() != null) {
             userUid = intent.getExtras().getString("userUid");
+            karanganJenis = intent.getExtras().getString("karanganJenis");
         }
     }
 
