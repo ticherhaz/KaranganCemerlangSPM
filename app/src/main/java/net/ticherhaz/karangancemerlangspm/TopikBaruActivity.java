@@ -1,8 +1,10 @@
 package net.ticherhaz.karangancemerlangspm;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -18,6 +20,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
@@ -41,7 +45,7 @@ public class TopikBaruActivity extends AppCompatActivity {
 
     private String userName;
     private String profileUrl;
-    private String userUid;
+    private String registeredUid;
     private String userTitle;
     private String sekolah;
     private String onAccountCreatedDate;
@@ -51,7 +55,8 @@ public class TopikBaruActivity extends AppCompatActivity {
 
 
     private ProgressDialog progressDialog;
-
+    private String title;
+    private String forumUid;
 
     private void listID() {
         editTextTajuk = findViewById(R.id.edit_text_tajuk);
@@ -71,7 +76,7 @@ public class TopikBaruActivity extends AppCompatActivity {
         if (firebaseUser != null) {
             userName = firebaseUser.getDisplayName();
             profileUrl = String.valueOf(firebaseUser.getPhotoUrl());
-            userUid = firebaseUser.getUid();
+            registeredUid = firebaseUser.getUid();
 
             retrieveData();
         }
@@ -80,7 +85,7 @@ public class TopikBaruActivity extends AppCompatActivity {
 
     //Retrieve value
     private void retrieveData() {
-        databaseReference.child("registeredUser").child("main").child(userUid).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("registeredUser").child(registeredUid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -89,6 +94,7 @@ public class TopikBaruActivity extends AppCompatActivity {
                     onAccountCreatedDate = dataSnapshot.getValue(RegisteredUser.class).getOnDateCreated();
                     pos = dataSnapshot.getValue(RegisteredUser.class).getPostCount();
                     reputation = dataSnapshot.getValue(RegisteredUser.class).getReputation();
+                    gender = dataSnapshot.getValue(RegisteredUser.class).getGender();
                 }
             }
 
@@ -99,10 +105,10 @@ public class TopikBaruActivity extends AppCompatActivity {
         });
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        retrieveIntent();
         setContentView(R.layout.activity_topik_baru);
         listID();
         setButtonHantar();
@@ -149,13 +155,16 @@ public class TopikBaruActivity extends AppCompatActivity {
         String dimulaiOleh = userName;
         long masaDimulaiOleh = System.currentTimeMillis();
         String dibalasOleh = "";
-        long masaDibalasOleh = 0;
+        String masaDibalasOleh = null;
+
+
+        String registeredUidLastReply = null;
 
         String onCreatedDate = String.valueOf(android.text.format.DateFormat.format("yyyy-MM-dd'T'HH:mm:ss", new Date()));
 
         String activityUmumLogUid = databaseReference.push().push().getKey();
         String activityKududukanLogUid = databaseReference.push().push().push().getKey();
-        String type = "Umum";
+        String type = title;
         String lastVisitedUser = userName;
 
 
@@ -164,19 +173,22 @@ public class TopikBaruActivity extends AppCompatActivity {
 
 
         //Call class to store the value
-        Umum umum = new Umum(umumUid, tajuk, deskripsi, viewed, jumlahBalas, kedudukan, dimulaiOleh, masaDimulaiOleh, dibalasOleh,
+        Umum umum = new Umum(umumUid, registeredUid, registeredUidLastReply, tajuk, deskripsi, viewed, jumlahBalas, kedudukan, dimulaiOleh, masaDimulaiOleh, dibalasOleh,
                 masaDibalasOleh, onCreatedDate, activityUmumLogUid, activityKududukanLogUid, type, lastVisitedUser);
 
-        UmumDetail umumDetail = new UmumDetail(umumDetailUid, String.valueOf(masaDibalasOleh), profileUrl, userName, userTitle
-                , sekolah, onAccountCreatedDate, onCreatedDate, "ma", pos, reputation, deskripsi);
 
+        UmumDetail umumDetail = new UmumDetail(umumDetailUid, registeredUid, onCreatedDate, deskripsi);
 
         if (umumUid != null) {
-            databaseReference.child("umum").child("main").child(umumUid).setValue(umum);
-            databaseReference.child("umum").child("detail").child(umumUid).child(umumUid).setValue(umumDetail).addOnCompleteListener(new OnCompleteListener<Void>() {
+            databaseReference.child("umum").child(forumUid).child(umumUid).setValue(umum);
+            databaseReference.child("umumPos").child(forumUid).child(umumUid).child(umumUid).setValue(umumDetail).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
+
+                        //Then, after the data at the forum
+                        runTransac(tajuk);
+
                         progressDialog.dismiss();
                         editTextTajuk.setText("");
                         editTextDeskripsi.setText("");
@@ -188,6 +200,48 @@ public class TopikBaruActivity extends AppCompatActivity {
 
     }
 
+
+    private void runTransac(final String tajuk) {
+        databaseReference.child("forum").child(forumUid).child("postThreadsCount").runTransaction(new Transaction.Handler() {
+            @NonNull
+            @Override
+            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
+                if (mutableData.getValue() == null) {
+                    mutableData.setValue(0);
+                } else {
+                    mutableData.setValue((Long) mutableData.getValue() + 1);
+                }
+                return Transaction.success(mutableData);
+            }
+
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
+
+            }
+        });
+        databaseReference.child("forum").child(forumUid).child("threads").runTransaction(new Transaction.Handler() {
+            @NonNull
+            @Override
+            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
+                if (mutableData.getValue() == null) {
+                    mutableData.setValue(0);
+                } else {
+                    mutableData.setValue((Long) mutableData.getValue() + 1);
+                }
+                return Transaction.success(mutableData);
+            }
+
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
+
+                //Then after complete them.
+                //So this part we want to update the u
+                databaseReference.child("forum").child(forumUid).child("lastThreadByUser").setValue(userName);
+                databaseReference.child("forum").child(forumUid).child("lastThreadPost").setValue(tajuk);
+            }
+        });
+    }
+
     @Override
     public void onBackPressed() {
         finish();
@@ -197,5 +251,13 @@ public class TopikBaruActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    private void retrieveIntent() {
+        Intent intent = getIntent();
+        if (intent.getExtras() != null) {
+            title = intent.getExtras().getString("title");
+            forumUid = intent.getExtras().getString("forumUid");
+        }
     }
 }

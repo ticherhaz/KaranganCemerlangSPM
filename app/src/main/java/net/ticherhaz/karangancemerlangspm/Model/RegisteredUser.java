@@ -12,38 +12,46 @@ public class RegisteredUser {
     private String titleType;
     private String customTitle;
     private String bio;
+    private String gender;
     private String state;
     private String birthday;
     private String mode;
-    private int postCount;
-    private int reputation;
-    private int reputationPower;
+    private long postCount;
+    private long reputation;
+    private long reputationPower;
     private String onlineStatus;
     private long lastOnline;
     private String lastCreatedThread;
     private String onDateCreated;
+    private String onDateCreatedMonthYear;
     //BehaviorLog
-    private String onlineStatusLogUid;
-    private String lastSeenLogUid;
-    private String onClickedLogUid;
-    private String onCreatedThreadLogUid;
+//    private String onlineStatusLogUid;
+//    private String lastSeenLogUid;
+//    private String onClickedLogUid;
+//    private String onCreatedThreadLogUid;
     //UserProfileLog
-    private String profileUrlLogUid;
-    private String emailLogUid;
-    private String usernameLogUid;
-    private String titleTypeLogUid;
-    private String customTitleLogUid;
-    private String bioLogUid;
-    private String stateLogUid;
-    private String birthdayLogUid;
-    private String modeLogUid;
+//    private String profileUrlLogUid;
+//    private String emailLogUid;
+//    private String usernameLogUid;
+//    private String titleTypeLogUid;
+//    private String customTitleLogUid;
+//    private String bioLogUid;
+//    private String stateLogUid;
+//    private String birthdayLogUid;
+//    private String modeLogUid;
     //UpperCase
     private String emailUpperCase;
     private String usernameUpperCase;
     private String bioUpperCase;
     private String stateUpperCase;
 
-    public RegisteredUser(String registeredUserUid, String userUid, String typeUser, String profileUrl, String email, String username, String sekolah, String titleType, String customTitle, String bio, String state, String birthday, String mode, int postCount, int reputation, int reputationPower, String onlineStatus, long lastOnline, String lastCreatedThread, String onDateCreated, String onlineStatusLogUid, String lastSeenLogUid, String onClickedLogUid, String onCreatedThreadLogUid, String profileUrlLogUid, String emailLogUid, String usernameLogUid, String titleTypeLogUid, String customTitleLogUid, String bioLogUid, String stateLogUid, String birthdayLogUid, String modeLogUid, String emailUpperCase, String usernameUpperCase, String bioUpperCase, String stateUpperCase) {
+    public RegisteredUser() {
+    }
+
+    public RegisteredUser(String registeredUserUid, String userUid, String typeUser, String profileUrl, String email, String username
+            , String sekolah, String titleType, String customTitle, String bio, String gender, String state, String birthday, String mode
+            , long postCount, long reputation, long reputationPower, String onlineStatus, long lastOnline, String lastCreatedThread
+            , String onDateCreated, String onDateCreatedMonthYear, String emailUpperCase, String usernameUpperCase, String bioUpperCase, String stateUpperCase) {
         this.registeredUserUid = registeredUserUid;
         this.userUid = userUid;
         this.typeUser = typeUser;
@@ -54,6 +62,7 @@ public class RegisteredUser {
         this.titleType = titleType;
         this.customTitle = customTitle;
         this.bio = bio;
+        this.gender = gender;
         this.state = state;
         this.birthday = birthday;
         this.mode = mode;
@@ -64,26 +73,11 @@ public class RegisteredUser {
         this.lastOnline = lastOnline;
         this.lastCreatedThread = lastCreatedThread;
         this.onDateCreated = onDateCreated;
-        this.onlineStatusLogUid = onlineStatusLogUid;
-        this.lastSeenLogUid = lastSeenLogUid;
-        this.onClickedLogUid = onClickedLogUid;
-        this.onCreatedThreadLogUid = onCreatedThreadLogUid;
-        this.profileUrlLogUid = profileUrlLogUid;
-        this.emailLogUid = emailLogUid;
-        this.usernameLogUid = usernameLogUid;
-        this.titleTypeLogUid = titleTypeLogUid;
-        this.customTitleLogUid = customTitleLogUid;
-        this.bioLogUid = bioLogUid;
-        this.stateLogUid = stateLogUid;
-        this.birthdayLogUid = birthdayLogUid;
-        this.modeLogUid = modeLogUid;
+        this.onDateCreatedMonthYear = onDateCreatedMonthYear;
         this.emailUpperCase = emailUpperCase;
         this.usernameUpperCase = usernameUpperCase;
         this.bioUpperCase = bioUpperCase;
         this.stateUpperCase = stateUpperCase;
-    }
-
-    public RegisteredUser() {
     }
 
     public String getRegisteredUserUid() {
@@ -166,6 +160,14 @@ public class RegisteredUser {
         this.bio = bio;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public String getState() {
         return state;
     }
@@ -190,27 +192,27 @@ public class RegisteredUser {
         this.mode = mode;
     }
 
-    public int getPostCount() {
+    public long getPostCount() {
         return postCount;
     }
 
-    public void setPostCount(int postCount) {
+    public void setPostCount(long postCount) {
         this.postCount = postCount;
     }
 
-    public int getReputation() {
+    public long getReputation() {
         return reputation;
     }
 
-    public void setReputation(int reputation) {
+    public void setReputation(long reputation) {
         this.reputation = reputation;
     }
 
-    public int getReputationPower() {
+    public long getReputationPower() {
         return reputationPower;
     }
 
-    public void setReputationPower(int reputationPower) {
+    public void setReputationPower(long reputationPower) {
         this.reputationPower = reputationPower;
     }
 
@@ -246,108 +248,12 @@ public class RegisteredUser {
         this.onDateCreated = onDateCreated;
     }
 
-    public String getOnlineStatusLogUid() {
-        return onlineStatusLogUid;
+    public String getOnDateCreatedMonthYear() {
+        return onDateCreatedMonthYear;
     }
 
-    public void setOnlineStatusLogUid(String onlineStatusLogUid) {
-        this.onlineStatusLogUid = onlineStatusLogUid;
-    }
-
-    public String getLastSeenLogUid() {
-        return lastSeenLogUid;
-    }
-
-    public void setLastSeenLogUid(String lastSeenLogUid) {
-        this.lastSeenLogUid = lastSeenLogUid;
-    }
-
-    public String getOnClickedLogUid() {
-        return onClickedLogUid;
-    }
-
-    public void setOnClickedLogUid(String onClickedLogUid) {
-        this.onClickedLogUid = onClickedLogUid;
-    }
-
-    public String getOnCreatedThreadLogUid() {
-        return onCreatedThreadLogUid;
-    }
-
-    public void setOnCreatedThreadLogUid(String onCreatedThreadLogUid) {
-        this.onCreatedThreadLogUid = onCreatedThreadLogUid;
-    }
-
-    public String getProfileUrlLogUid() {
-        return profileUrlLogUid;
-    }
-
-    public void setProfileUrlLogUid(String profileUrlLogUid) {
-        this.profileUrlLogUid = profileUrlLogUid;
-    }
-
-    public String getEmailLogUid() {
-        return emailLogUid;
-    }
-
-    public void setEmailLogUid(String emailLogUid) {
-        this.emailLogUid = emailLogUid;
-    }
-
-    public String getUsernameLogUid() {
-        return usernameLogUid;
-    }
-
-    public void setUsernameLogUid(String usernameLogUid) {
-        this.usernameLogUid = usernameLogUid;
-    }
-
-    public String getTitleTypeLogUid() {
-        return titleTypeLogUid;
-    }
-
-    public void setTitleTypeLogUid(String titleTypeLogUid) {
-        this.titleTypeLogUid = titleTypeLogUid;
-    }
-
-    public String getCustomTitleLogUid() {
-        return customTitleLogUid;
-    }
-
-    public void setCustomTitleLogUid(String customTitleLogUid) {
-        this.customTitleLogUid = customTitleLogUid;
-    }
-
-    public String getBioLogUid() {
-        return bioLogUid;
-    }
-
-    public void setBioLogUid(String bioLogUid) {
-        this.bioLogUid = bioLogUid;
-    }
-
-    public String getStateLogUid() {
-        return stateLogUid;
-    }
-
-    public void setStateLogUid(String stateLogUid) {
-        this.stateLogUid = stateLogUid;
-    }
-
-    public String getBirthdayLogUid() {
-        return birthdayLogUid;
-    }
-
-    public void setBirthdayLogUid(String birthdayLogUid) {
-        this.birthdayLogUid = birthdayLogUid;
-    }
-
-    public String getModeLogUid() {
-        return modeLogUid;
-    }
-
-    public void setModeLogUid(String modeLogUid) {
-        this.modeLogUid = modeLogUid;
+    public void setOnDateCreatedMonthYear(String onDateCreatedMonthYear) {
+        this.onDateCreatedMonthYear = onDateCreatedMonthYear;
     }
 
     public String getEmailUpperCase() {

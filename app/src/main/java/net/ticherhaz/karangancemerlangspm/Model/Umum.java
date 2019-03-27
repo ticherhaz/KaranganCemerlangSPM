@@ -3,6 +3,8 @@ package net.ticherhaz.karangancemerlangspm.Model;
 public class Umum {
 
     private String umumUid;
+    private String registeredUid;
+    private String registeredUidLastReply;
     private String tajuk;
     private String deskripsi;
     private long viewed;
@@ -11,15 +13,20 @@ public class Umum {
     private String dimulaiOleh;
     private long masaDimulaiOleh;
     private String dibalasOleh;
-    private long masaDibalasOleh;
+    private String masaDibalasOleh;
     private String onCreatedDate;
     private String activityUmumLogUid;
     private String activityKedudukanLogUid;
     private String type;
     private String lastVisitedUser;
 
-    public Umum(String umumUid, String tajuk, String deskripsi, long viewed, long jumlahBalas, long kedudukan, String dimulaiOleh, long masaDimulaiOleh, String dibalasOleh, long masaDibalasOleh, String onCreatedDate, String activityUmumLogUid, String activityKedudukanLogUid, String type, String lastVisitedUser) {
+    public Umum() {
+    }
+
+    public Umum(String umumUid, String registeredUid, String registeredUidLastReply, String tajuk, String deskripsi, long viewed, long jumlahBalas, long kedudukan, String dimulaiOleh, long masaDimulaiOleh, String dibalasOleh, String masaDibalasOleh, String onCreatedDate, String activityUmumLogUid, String activityKedudukanLogUid, String type, String lastVisitedUser) {
         this.umumUid = umumUid;
+        this.registeredUid = registeredUid;
+        this.registeredUidLastReply = registeredUidLastReply;
         this.tajuk = tajuk;
         this.deskripsi = deskripsi;
         this.viewed = viewed;
@@ -36,15 +43,28 @@ public class Umum {
         this.lastVisitedUser = lastVisitedUser;
     }
 
-    public Umum() {
-    }
-
     public String getUmumUid() {
         return umumUid;
     }
 
     public void setUmumUid(String umumUid) {
         this.umumUid = umumUid;
+    }
+
+    public String getRegisteredUid() {
+        return registeredUid;
+    }
+
+    public void setRegisteredUid(String registeredUid) {
+        this.registeredUid = registeredUid;
+    }
+
+    public String getRegisteredUidLastReply() {
+        return registeredUidLastReply;
+    }
+
+    public void setRegisteredUidLastReply(String registeredUidLastReply) {
+        this.registeredUidLastReply = registeredUidLastReply;
     }
 
     public String getTajuk() {
@@ -111,11 +131,11 @@ public class Umum {
         this.dibalasOleh = dibalasOleh;
     }
 
-    public long getMasaDibalasOleh() {
+    public String getMasaDibalasOleh() {
         return masaDibalasOleh;
     }
 
-    public void setMasaDibalasOleh(long masaDibalasOleh) {
+    public void setMasaDibalasOleh(String masaDibalasOleh) {
         this.masaDibalasOleh = masaDibalasOleh;
     }
 

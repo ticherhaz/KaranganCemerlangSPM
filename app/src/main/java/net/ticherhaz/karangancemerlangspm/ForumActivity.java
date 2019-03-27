@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +25,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.Forum;
@@ -77,7 +80,7 @@ public class ForumActivity extends AppCompatActivity {
     private void setFirebaseRecyclerAdapter() {
         progressBar.setVisibility(View.VISIBLE);
         //We need to make the query for the firebase recycler adapter
-        DatabaseReference databaseReferenceForum = FirebaseDatabase.getInstance().getReference().child("forum").child("main");
+        final DatabaseReference databaseReferenceForum = FirebaseDatabase.getInstance().getReference().child("forum");
         //Setup for the recycler adapter option
         firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<Forum>()
                 .setQuery(databaseReferenceForum, Forum.class)
@@ -87,21 +90,43 @@ public class ForumActivity extends AppCompatActivity {
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Forum, ForumViewHolder>(firebaseRecyclerOptions) {
             @SuppressLint("SetTextI18n")
             @Override
-            protected void onBindViewHolder(@NonNull ForumViewHolder holder, int position, @NonNull Forum model) {
+            protected void onBindViewHolder(@NonNull ForumViewHolder holder, int position, @NonNull final Forum model) {
 
                 holder.getTextViewForumTitle().setText(model.getForumTitle());
-                holder.getTextViewUserViewing().setText("(" + String.valueOf(model.getForumUserViewing()) + " Viewing)");
+                holder.getTextViewUserViewing().setText("(" + String.valueOf(model.getForumUserViewing()) + " Pemerhati)");
                 holder.getTextViewForumDescrption().setText(model.getForumDescription());
                 holder.getTextViewForumViews().setText(String.valueOf(model.getForumViews()));
-                holder.getTextViewThreads().setText(String.valueOf(model.getThreads()));
-                holder.getTextViewPostThreadsCount().setText("Post: " + String.valueOf(model.getPostThreadsCount()));
-                holder.getTextViewLastThreadPost().setText(String.valueOf(model.getLastThreadPost()));
-                holder.getTextViewLastThreadByUser().setText(model.getLastThreadByUser());
+                holder.getTextViewThreads().setText("Jumlah Tajuk: " + String.valueOf(model.getThreads()));
+                holder.getTextViewPostThreadsCount().setText("Pos: " + String.valueOf(model.getPostThreadsCount()));
+                holder.getTextViewLastThreadPost().setText("Tajuk Terakhir: " + String.valueOf(model.getLastThreadPost()));
+                holder.getTextViewLastThreadByUser().setText("daripada: " + model.getLastThreadByUser());
 
                 holder.getView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(ForumActivity.this, UmumActivity.class));
+                        //Onclick we update the number of the views
+                        databaseReferenceForum.child(model.getForumUid()).child("forumViews").runTransaction(new Transaction.Handler() {
+                            @NonNull
+                            @Override
+                            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
+                                if (mutableData.getValue() == null) {
+                                    mutableData.setValue(0);
+                                } else {
+                                    mutableData.setValue((Long) mutableData.getValue() + 1);
+                                }
+                                return Transaction.success(mutableData);
+                            }
+
+                            @Override
+                            public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
+
+                            }
+                        });
+
+                        Intent intent = new Intent(ForumActivity.this, UmumActivity.class);
+                        intent.putExtra("title", model.getForumTitle());
+                        intent.putExtra("forumUid", model.getForumUid());
+                        startActivities(new Intent[]{intent});
                     }
                 });
 
@@ -136,13 +161,12 @@ public class ForumActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        // onDisc();
         new OnlineStatusUtil().onDisc(firebaseUser, databaseReference, registeredUid, activitySessionUid, activityDate);
     }
 
     //Make a new calculation.
     private void calculateAllOnlineRegisteredUser() {
-        databaseReference.child("registeredUser").child("main").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("registeredUser").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 long totalOnline = 0;
@@ -167,76 +191,6 @@ public class ForumActivity extends AppCompatActivity {
             }
         });
     }
-
-//    private void onDisc() {
-//        if (firebaseUser != null) {
-//            databaseReference.child("registeredUser").child("main").child(registeredUid).child("onlineStatus").addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                    String online = dataSnapshot.getValue(String.class);
-//                    if (online != null && online.equals("Online")) {
-//                        //Ni kalau dia dc
-//                        //TODO: OnDisconnect
-//                        databaseReference.child("registeredUser").child("main").child(registeredUid).child("onlineStatus").onDisconnect().setValue("Offline");
-//                        final DatabaseReference databaseReferenceLastOnline = FirebaseDatabase.getInstance().getReference().child("registeredUser").child("main").child(registeredUid).child("lastOnline");
-//                        databaseReferenceLastOnline.onDisconnect().setValue(ServerValue.TIMESTAMP);
-//
-//
-//                        //Then we update the activity after he want to close
-//                        final String offlineTime = String.valueOf(android.text.format.DateFormat.format("hh:mm:ss a", new Date()));
-//                        if (activitySessionUid != null) {
-//                            databaseReference.child("registeredUser").child("main").child(registeredUid).child("activitySession").child(activityDate).child(activitySessionUid).child("offlineTime").onDisconnect().setValue(offlineTime);
-//                            //After that we calculate the total second that he active in the forum
-//                            //We need to retrieve the data online time
-//                            databaseReference.child("registeredUser").child("main").child(registeredUid).child("activitySession").child(activityDate).child(activitySessionUid).child("onlineTime").addListenerForSingleValueEvent(new ValueEventListener() {
-//                                @Override
-//                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                                    if (dataSnapshot.exists()) {
-//
-//                                        //we get the value first
-//                                        String onlineTime = dataSnapshot.getValue(String.class);
-//                                        try {
-//
-//                                            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss aa");
-//                                            Date date1 = sdf.parse(onlineTime);
-//                                            Date date2 = sdf.parse(offlineTime);
-//
-//                                            long millse = date1.getTime() - date2.getTime();
-//                                            long mills = Math.abs(millse);
-//
-//                                            int Hours = (int) (mills / (1000 * 60 * 60));
-//                                            int Mins = (int) (mills / (1000 * 60)) % 60;
-//                                            long Secs = (int) (mills / 1000) % 60;
-//
-//                                            String totalTime = Hours + " hour, " + Mins + " mins, " + Secs + " secs";
-//                                            //Then we add new value in the database
-//                                            databaseReference.child("registeredUser").child("main").child(registeredUid).child("activitySession").child(activityDate).child(activitySessionUid).child("totalOnline").onDisconnect().setValue(totalTime);
-//
-//
-//                                        } catch (ParseException e) {
-//                                            e.printStackTrace();
-//                                        }
-//
-//                                    }
-//                                }
-//
-//                                @Override
-//                                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                                }
-//                            });
-//                        }
-//                    }
-//
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                }
-//            });
-//        }
-//    }
 
     private void listID() {
         textViewUsername = findViewById(R.id.text_view_username);
@@ -295,24 +249,31 @@ public class ForumActivity extends AppCompatActivity {
 
 
             //Get the data from the database
-            databaseReference.child("registeredUser").child("main").child(registeredUid).addValueEventListener(new ValueEventListener() {
+            databaseReference.child("registeredUser").child(registeredUid).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        String sekolah = dataSnapshot.getValue(RegisteredUser.class).getSekolah();
-                        String reputation = String.valueOf(dataSnapshot.getValue(RegisteredUser.class).getReputation());
-                        String username = dataSnapshot.getValue(RegisteredUser.class).getUsername();
-                        //Check the online status, if online or not
-                        if (dataSnapshot.getValue(RegisteredUser.class).getOnlineStatus().equals("Online")) {
-                            textViewUsername.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sign_online_green, 0, 0, 0);
-                            textViewUsername.setCompoundDrawablePadding(1);
-                        } else {
-                            textViewUsername.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sign_online, 0, 0, 0);
-                            textViewUsername.setCompoundDrawablePadding(1);
+
+                        RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
+
+                        if (registeredUser != null) {
+                            String sekolah = registeredUser.getSekolah();
+                            String reputation = String.valueOf(registeredUser.getReputation());
+                            String username = registeredUser.getUsername();
+                            String onlineStatus = registeredUser.getOnlineStatus();
+                            //Check the online status, if online or not
+                            if (onlineStatus.equals("Online")) {
+                                textViewUsername.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sign_online_green, 0, 0, 0);
+                                textViewUsername.setCompoundDrawablePadding(1);
+                            } else {
+                                textViewUsername.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sign_online, 0, 0, 0);
+                                textViewUsername.setCompoundDrawablePadding(1);
+                            }
+                            textViewReputation.setText(reputation);
+                            textViewSekolah.setText(sekolah);
+                            textViewUsername.setText(username);
                         }
-                        textViewReputation.setText(reputation);
-                        textViewSekolah.setText(sekolah);
-                        textViewUsername.setText(username);
+
                     }
 
                 }

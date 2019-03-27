@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
-    android:layout_height="400dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_margin="7dp"
+    android:minWidth="300dp"
+    android:minHeight="400dp"
     android:orientation="vertical">
 
     <EditText
@@ -29,7 +31,6 @@
         android:inputType="textEmailAddress"
         android:singleLine="true" />
 
-
     <EditText
         android:id="@+id/edit_text_password"
         android:layout_width="match_parent"
@@ -45,13 +46,23 @@
         android:inputType="textPassword" />
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tarikh_lahir" />
+
+    <TextView
         android:id="@+id/text_view_birthday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:text="@string/select_birthday_date"
         android:textColor="@drawable/text_view_color"
         android:textSize="17sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/jantina" />
 
     <Spinner
         android:id="@+id/spinner_gender"
@@ -59,11 +70,25 @@
         android:layout_height="wrap_content"
         android:layout_margin="3dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/negeri" />
+
+
     <Spinner
         android:id="@+id/spinner_state"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="3dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/status" />
+
 
     <Spinner
         android:id="@+id/spinner_mode"
@@ -78,6 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="7dp"
+        android:background="@drawable/button_selector"
         android:text="@string/sign_up"
         android:textAllCaps="false" />
 

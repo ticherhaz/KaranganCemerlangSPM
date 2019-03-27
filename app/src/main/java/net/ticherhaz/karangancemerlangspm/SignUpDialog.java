@@ -32,13 +32,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.Phone;
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class SignUpDialog extends Dialog implements View.OnClickListener {
 
@@ -56,6 +56,7 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
 
     private Spinner spinnerState;
     private Spinner spinnerMode;
+    private Spinner spinnerGender;
     private ProgressDialog progressDialog;
 
     private String birthdayMain;
@@ -80,19 +81,19 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
     private void checkEmpty() {
         progressDialog.show();
         if (TextUtils.isEmpty(editTextUsername.getText().toString()) || TextUtils.isEmpty(editTextEmail.getText().toString()) || TextUtils.isEmpty(editTextPassword.getText().toString()) || TextUtils.isEmpty(editTextConfirmPassword.getText().toString()) || TextUtils.isEmpty(editTextSekolah.getText().toString())) {
-            Toast.makeText(context, "Please fill in the blank", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Sila isi tempat kosong", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else if (!editTextPassword.getText().toString().equals(editTextConfirmPassword.getText().toString())) {
-            Toast.makeText(context, "Password not match", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Kata laluan tidak serasi", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else if (editTextPassword.length() <= 8) {
-            Toast.makeText(context, "Password need exceed 8 digits", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Kata laluan hendaklah melebihi 8 digit", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else if (!isEmailValid(editTextEmail.getText().toString())) {
-            Toast.makeText(context, "Not email valid", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Email tidak sah", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else if (!aBooleanBirthday) {
-            Toast.makeText(context, "Please pick your birthday date", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Sila pilih tarikh lahir", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else {
             //Correct
@@ -101,10 +102,9 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
             registered user instead creating the new database
             to compare the username.
              */
-
             //1. We have to check if the username is already taken or not.
             // Query query = databaseReferenceUsernameCheck.orderByChild("usernameUpperCase").equalTo(username.toUpperCase());
-            Query query = databaseReference.orderByChild("usernameUpperCase").equalTo(editTextUsername.getText().toString().toUpperCase());
+            Query query = databaseReference.child("registeredUser").orderByChild("usernameUpperCase").equalTo(editTextUsername.getText().toString().toUpperCase());
 
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -124,30 +124,20 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
                         final String username = editTextUsername.getText().toString();
                         final String sekolah = editTextSekolah.getText().toString();
                         final String titleType = "Member";
-                        final String customTitle = "Null";
-                        final String bio = "Null";
+                        final String customTitle = "";
+                        final String bio = "";
                         final String state = spinnerState.getSelectedItem().toString();
+                        final String gender = spinnerGender.getSelectedItem().toString();
                         final String birthday = birthdayMain;
                         final String mode = spinnerMode.getSelectedItem().toString();
                         final int postCount = 0;
                         final int reputation = 10;
                         final int reputationPower = 0;
                         final String onlineStatus = "Online";
-                        final String lastCreatedThread = "Null";
+                        final String lastCreatedThread = "";
                         final String onDateCreated = Calendar.getInstance().getTime().toString();
-                        final String onlineStatusLogUid = databaseReference.push().getKey();
-                        final String lastSeenLogUid = databaseReference.push().push().getKey();
-                        final String onClickedLogUid = databaseReference.push().push().push().getKey();
-                        final String onCreateThreadLogUid = databaseReference.push().push().push().push().getKey();
-                        final String profileUrlLogUid = databaseReference.push().push().push().push().push().getKey();
-                        final String emailLogUid = databaseReference.push().push().push().push().push().push().getKey();
-                        final String usernameLogUid = databaseReference.push().push().push().push().push().push().push().getKey();
-                        final String titleTypeLogUid = databaseReference.push().push().push().push().push().push().push().push().getKey();
-                        final String customTitleLogUid = databaseReference.push().push().push().push().push().push().push().push().push().getKey();
-                        final String bioLogUid = databaseReference.push().push().push().push().push().push().push().push().push().push().getKey();
-                        final String stateLogUid = databaseReference.push().push().push().push().push().push().push().push().push().push().push().getKey();
-                        final String birthdayLogUid = databaseReference.push().push().push().push().push().push().push().push().push().push().push().push().getKey();
-                        final String modelLogUid = databaseReference.push().push().push().push().push().push().push().push().push().push().push().push().push().getKey();
+                        final String onDateCreatedMonthYear = String.valueOf(android.text.format.DateFormat.format("MMMM yyyy", new Date()));
+
                         //UpperCase
                         final String emailUpperCase = email.toUpperCase();
                         final String usernameUpperCase = username.toUpperCase();
@@ -155,9 +145,8 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
                         final String stateUpperCase = state.toUpperCase();
 
                         //Now we go the method to create the new account
-                        createAccount(userUid, typeUser, profileUrl, email, password, username, sekolah, titleType, customTitle, bio, state, birthday, mode, postCount, reputation, reputationPower
-                                , onlineStatus, lastCreatedThread, onDateCreated, onlineStatusLogUid, lastSeenLogUid, onClickedLogUid, onCreateThreadLogUid, profileUrlLogUid, emailLogUid
-                                , usernameLogUid, titleTypeLogUid, customTitleLogUid, bioLogUid, stateLogUid, birthdayLogUid, modelLogUid, emailUpperCase, usernameUpperCase, bioUpperCase, stateUpperCase);
+                        createAccount(userUid, typeUser, profileUrl, email, password, username, sekolah, titleType, customTitle, bio, gender, state, birthday, mode, postCount, reputation, reputationPower
+                                , onlineStatus, lastCreatedThread, onDateCreated, onDateCreatedMonthYear, emailUpperCase, usernameUpperCase, bioUpperCase, stateUpperCase);
                     }
                 }
 
@@ -170,35 +159,35 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
     }
 
     //Method create Account
-    private void createAccount(final String userUid, final String typeUser, final String profileUrl, final String email, final String password, final String username, final String sekolah, final String titleType, final String customTitle, final String bio, final String state, final String birthday, final String mode, final int postCount, final int reputation, final int reputationPower, final String onlineStatus, final String lastCreatedThread, final String onDateCreated, final String onlineStatusLogUid, final String lastSeenLogUid, final String onClickedLogUid, final String onCreatedThreadLogUid, final String profileUrlLogUid, final String emailLogUid, final String usernameLogUid, final String titleTypeLogUid, final String customTitleLogUid, final String bioLogUid, final String stateLogUid, final String birthdayLogUid, final String modeLogUid, final String emailUpperCase, final String usernameUpperCase, final String bioUpperCase, final String stateUpperCase) {
+    private void createAccount(final String userUid, final String typeUser, final String profileUrl, final String email, final String password, final String username,
+                               final String sekolah, final String titleType, final String customTitle, final String bio, final String gender, final String state, final String birthday,
+                               final String mode, final int postCount, final int reputation, final int reputationPower, final String onlineStatus, final String lastCreatedThread,
+                               final String onDateCreated, final String onDateCreatedMonthYear, final String emailUpperCase, final String usernameUpperCase, final String bioUpperCase, final String stateUpperCase) {
+
         firebaseAuth.createUserWithEmailAndPassword(email, String.valueOf(password)).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     //Get the current user after register the account
                     final FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                    if (firebaseUser != null) {
 
+                    if (firebaseUser != null) {
                         //Get the new registeredUid after creating the account.
                         final String registeredUserUid = firebaseUser.getUid();
-
-                        long lastOnline = Long.parseLong(String.valueOf(ServerValue.TIMESTAMP));
+                        final long lastOnline = System.currentTimeMillis();
 
                         //Store the value in the object
                         RegisteredUser registeredUser = new RegisteredUser(registeredUserUid, userUid, typeUser, profileUrl, email, username, sekolah, titleType, customTitle,
-                                bio, state, birthday, mode, postCount, reputation, reputationPower, onlineStatus, lastOnline, lastCreatedThread,
-                                onDateCreated, onlineStatusLogUid, lastSeenLogUid, onClickedLogUid, onCreatedThreadLogUid, profileUrlLogUid,
-                                emailLogUid, usernameLogUid, titleTypeLogUid, customTitleLogUid, bioLogUid, stateLogUid, birthdayLogUid,
-                                modeLogUid, emailUpperCase, usernameUpperCase, bioUpperCase, stateUpperCase);
+                                bio, gender, state, birthday, mode, postCount, reputation, reputationPower, onlineStatus, lastOnline, lastCreatedThread,
+                                onDateCreated, onDateCreatedMonthYear, emailUpperCase, usernameUpperCase, bioUpperCase, stateUpperCase);
 
                         //Store the value in the database
-                        databaseReference.child(registeredUserUid).setValue(registeredUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        databaseReference.child("registeredUser").child(registeredUserUid).setValue(registeredUser).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
 
-
-                                    String phoneUid = databaseReference.push().push().getKey();
+                                    String phoneUid = databaseReference.push().getKey();
                                     String board = Build.BOARD;
                                     String brand = Build.BRAND;
                                     String device = Build.DEVICE;
@@ -219,19 +208,12 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
                                     //So after that we store the value for the phone
                                     Phone phone = new Phone(phoneUid, board, brand, device, display, fingerprint,
                                             hardware, host, id, manufacturer, model, product, tags, time, type, unknown, user);
-                                    databaseReference.child(registeredUserUid).child("phone").setValue(phone).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    databaseReference.child("phone").child(registeredUserUid).setValue(phone).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
                                                 Toast.makeText(context, "Successfully registered", Toast.LENGTH_SHORT).show();
                                                 //Then close the dialog
-//                                                linearLayoutNewUser.setVisibility(View.GONE);
-//                                                linearLayoutOldUser.setVisibility(View.VISIBLE);
-//                                                textViewUsername.setText(username);
-//                                                textViewUsername.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sign_online_green, 0, 0, 0);
-//                                                textViewUsername.setCompoundDrawablePadding(1);
-//                                                textViewSekolah.setText(sekolah);
-//                                                textViewReputation.setText(String.valueOf(reputation));
 
                                                 //After that store in the firebase user profile request
                                                 UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder()
@@ -285,6 +267,7 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
         editTextConfirmPassword = findViewById(R.id.edit_text_confirm_password);
         spinnerState = findViewById(R.id.spinner_state);
         spinnerMode = findViewById(R.id.spinner_mode);
+        spinnerGender = findViewById(R.id.spinner_gender);
         textViewBirthdayDate = findViewById(R.id.text_view_birthday);
         textViewBirthdayDate.setOnClickListener(this);
 
@@ -303,11 +286,16 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
         adapterMode.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMode.setAdapter(adapterMode);
 
+        ArrayAdapter<CharSequence> adapterGender = ArrayAdapter.createFromResource(context,
+                R.array.gender_array, android.R.layout.simple_spinner_item);
+        adapterGender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerGender.setAdapter(adapterGender);
+
         buttonSignUp = findViewById(R.id.button_sign_up);
         buttonSignUp.setOnClickListener(this);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference().child("registeredUser").child("main");
+        databaseReference = firebaseDatabase.getReference();
 
         firebaseAuth = FirebaseAuth.getInstance();
     }
@@ -351,7 +339,7 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 birthdayMain = dayOfMonth + "/" + month + "/" + year;
-                textViewBirthdayDate.setText(birthdayMain);
+                textViewBirthdayDate.setText(String.valueOf(birthdayMain));
             }
         };
     }

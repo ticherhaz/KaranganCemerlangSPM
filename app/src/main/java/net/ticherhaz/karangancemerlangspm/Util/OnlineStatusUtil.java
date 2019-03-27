@@ -26,7 +26,7 @@ public class OnlineStatusUtil {
     //update user online status 1st, then check online status
     public void updateUserOnlineStatus(String onlineStatus, String registeredUid, FirebaseUser firebaseUser, DatabaseReference databaseReference, final String activitySessionUid, final String activityDate) {
         if (firebaseUser != null) {
-            databaseReference.child("registeredUser").child("main").child(registeredUid).child("onlineStatus").setValue(onlineStatus);
+            databaseReference.child("registeredUser").child(registeredUid).child("onlineStatus").setValue(onlineStatus);
 
 
             //    databaseReference.child("registeredUser").child("main").child(registeredUid).child("onlineStatus").onDisconnect().setValue("Offline");
@@ -50,24 +50,22 @@ public class OnlineStatusUtil {
         if (onlineStatusA.equals("Online")) {
             //So kita tambah dekat total online
             if (activitySessionUid != null) {
-                databaseReference.child("registeredUser").child("main").child(registeredUid).child("activitySession").child(activityDate).child(activitySessionUid).setValue(activitySessionUid);
-                databaseReference.child("registeredUser").child("main").child(registeredUid).child("activitySession").child(activityDate).child(activitySessionUid).child("activitySessionUid").setValue(activitySessionUid);
-                databaseReference.child("registeredUser").child("main").child(registeredUid).child("activitySession").child(activityDate).child(activitySessionUid).child("date").setValue(activityDate);
-                databaseReference.child("registeredUser").child("main").child(registeredUid).child("activitySession").child(activityDate).child(activitySessionUid).child("onlineTime").setValue(onlineTime);
-
-
+                databaseReference.child("activitySession").child(registeredUid).child(activityDate).child(activitySessionUid).setValue(activitySessionUid);
+                databaseReference.child("activitySession").child(registeredUid).child(activityDate).child(activitySessionUid).child("activitySessionUid").setValue(activitySessionUid);
+                databaseReference.child("activitySession").child(registeredUid).child(activityDate).child(activitySessionUid).child("date").setValue(activityDate);
+                databaseReference.child("activitySession").child(registeredUid).child(activityDate).child(activitySessionUid).child("onlineTime").setValue(onlineTime);
             }
 
         } else if (onlineStatusA.equals("Offline")) {
 
-            final DatabaseReference databaseReferenceLastOnline = FirebaseDatabase.getInstance().getReference().child("registeredUser").child("main").child(registeredUid);
+            final DatabaseReference databaseReferenceLastOnline = FirebaseDatabase.getInstance().getReference().child("registeredUser").child(registeredUid);
             databaseReferenceLastOnline.child("lastOnline").setValue(ServerValue.TIMESTAMP);
             final String offlineTime = String.valueOf(android.text.format.DateFormat.format("hh:mm:ss a", new Date()));
             if (activitySessionUid != null) {
-                databaseReference.child("registeredUser").child("main").child(registeredUid).child("activitySession").child(activityDate).child(activitySessionUid).child("offlineTime").setValue(offlineTime);
+                databaseReference.child("activitySession").child(registeredUid).child(activityDate).child(activitySessionUid).child("offlineTime").setValue(offlineTime);
                 //After that we calculate the total second that he active in the forum
                 //We need to retrieve the data online time
-                databaseReference.child("registeredUser").child("main").child(registeredUid).child("activitySession").child(activityDate).child(activitySessionUid).child("onlineTime").addListenerForSingleValueEvent(new ValueEventListener() {
+                databaseReference.child("activitySession").child(registeredUid).child(activityDate).child(activitySessionUid).child("onlineTime").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
@@ -89,7 +87,7 @@ public class OnlineStatusUtil {
 
                                 String totalTime = Hours + " hour, " + Mins + " mins, " + Secs + " secs";
                                 //Then we add new value in the database
-                                databaseReference.child("registeredUser").child("main").child(registeredUid).child("activitySession").child(activityDate).child(activitySessionUid).child("totalOnline").setValue(totalTime);
+                                databaseReference.child("activitySession").child(registeredUid).child(activityDate).child(activitySessionUid).child("totalOnline").setValue(totalTime);
 
 
                             } catch (ParseException e) {
@@ -113,15 +111,15 @@ public class OnlineStatusUtil {
     public void onDisc(final FirebaseUser firebaseUser, final DatabaseReference databaseReference, final String registeredUid, final String activitySessionUid, final String activityDate) {
         if (firebaseUser != null) {
 
-            databaseReference.child("registeredUser").child("main").child(registeredUid).child("onlineStatus").addValueEventListener(new ValueEventListener() {
+            databaseReference.child("registeredUser").child(registeredUid).child("onlineStatus").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     final String online = dataSnapshot.getValue(String.class);
                     if (online != null && online.equals("Online")) {
                         //Ni kalau dia dc
                         //TODO: OnDisconnect
-                        databaseReference.child("registeredUser").child("main").child(registeredUid).child("onlineStatus").onDisconnect().setValue("Offline");
-                        final DatabaseReference databaseReferenceLastOnline = FirebaseDatabase.getInstance().getReference().child("registeredUser").child("main").child(registeredUid).child("lastOnline");
+                        databaseReference.child("registeredUser").child(registeredUid).child("onlineStatus").onDisconnect().setValue("Offline");
+                        final DatabaseReference databaseReferenceLastOnline = FirebaseDatabase.getInstance().getReference().child("registeredUser").child(registeredUid).child("lastOnline");
                         databaseReferenceLastOnline.onDisconnect().setValue(ServerValue.TIMESTAMP);
 
                         //Then we update the activity after he want to close
@@ -130,7 +128,7 @@ public class OnlineStatusUtil {
 
                             //ok new plan, since they will update base on this session uid,
                             //looks like we have to retrieve the value of the activity session uid from the database
-                            databaseReference.child("registeredUser").child("main").child(registeredUid).child("activitySession").child(activityDate).child(activitySessionUid).child("activitySessionUid").addListenerForSingleValueEvent(new ValueEventListener() {
+                            databaseReference.child("activitySession").child(registeredUid).child(activityDate).child(activitySessionUid).child("activitySessionUid").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     if (dataSnapshot.exists()) {
@@ -138,7 +136,7 @@ public class OnlineStatusUtil {
                                         final String oldActUid = dataSnapshot.getValue(String.class);
 
 
-                                        databaseReference.child("registeredUser").child("main").child(registeredUid).child("activitySession").child(activityDate).child(activitySessionUid).child("offlineTime").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        databaseReference.child("activitySession").child(registeredUid).child(activityDate).child(activitySessionUid).child("offlineTime").addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                 if (!dataSnapshot.exists()) {
@@ -146,10 +144,10 @@ public class OnlineStatusUtil {
 
                                                     //Then we store the value base on the old act uid
 
-                                                    databaseReference.child("registeredUser").child("main").child(registeredUid).child("activitySession").child(activityDate).child(oldActUid).child("offlineTime").onDisconnect().setValue(offlineTime);
+                                                    databaseReference.child("activitySession").child(registeredUid).child(activityDate).child(oldActUid).child("offlineTime").onDisconnect().setValue(offlineTime);
                                                     //After that we calculate the total second that he active in the forum
                                                     //We need to retrieve the data online time
-                                                    databaseReference.child("registeredUser").child("main").child(registeredUid).child("activitySession").child(activityDate).child(oldActUid).child("onlineTime").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    databaseReference.child("activitySession").child(registeredUid).child(activityDate).child(oldActUid).child("onlineTime").addListenerForSingleValueEvent(new ValueEventListener() {
                                                         @Override
                                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                             //at here we check if the offline time is already exist or not, if not, then we can create the ondisconnect. :)
@@ -172,7 +170,7 @@ public class OnlineStatusUtil {
 
                                                                     String totalTime = Hours + " hour, " + Mins + " mins, " + Secs + " secs";
                                                                     //Then we add new value in the database
-                                                                    databaseReference.child("registeredUser").child("main").child(registeredUid).child("activitySession").child(activityDate).child(oldActUid).child("totalOnline").onDisconnect().setValue(totalTime);
+                                                                    databaseReference.child("activitySession").child(registeredUid).child(activityDate).child(oldActUid).child("totalOnline").onDisconnect().setValue(totalTime);
 
 
                                                                 } catch (ParseException e) {

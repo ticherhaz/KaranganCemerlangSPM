@@ -18,7 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
-import net.ticherhaz.karangancemerlangspm.Model.OnlineStatus;
+import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.OnlineStatusViewHolder;
 
 public class OnlineUserActivity extends AppCompatActivity {
@@ -32,8 +32,8 @@ public class OnlineUserActivity extends AppCompatActivity {
     private FirebaseUser firebaseUser;
 
     //Firebase Recycler Adapter
-    private FirebaseRecyclerOptions<OnlineStatus> firebaseRecyclerOptions;
-    private FirebaseRecyclerAdapter<OnlineStatus, OnlineStatusViewHolder> firebaseRecyclerAdapter;
+    private FirebaseRecyclerOptions<RegisteredUser> firebaseRecyclerOptions;
+    private FirebaseRecyclerAdapter<RegisteredUser, OnlineStatusViewHolder> firebaseRecyclerAdapter;
 
     private RecyclerView recyclerView;
 
@@ -62,15 +62,15 @@ public class OnlineUserActivity extends AppCompatActivity {
     //Method set firebase recycler adapter
     private void setFirebaseRecyclerAdapter() {
         progressBar.setVisibility(View.VISIBLE);
-        Query query = databaseReference.child("registeredUser").child("main").orderByChild("onlineStatus").equalTo("Online");
+        Query query = databaseReference.child("registeredUser").orderByChild("onlineStatus").equalTo("Online");
 
-        firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<OnlineStatus>()
-                .setQuery(query, OnlineStatus.class)
+        firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<RegisteredUser>()
+                .setQuery(query, RegisteredUser.class)
                 .build();
 
-        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<OnlineStatus, OnlineStatusViewHolder>(firebaseRecyclerOptions) {
+        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<RegisteredUser, OnlineStatusViewHolder>(firebaseRecyclerOptions) {
             @Override
-            protected void onBindViewHolder(@NonNull OnlineStatusViewHolder holder, int position, @NonNull OnlineStatus model) {
+            protected void onBindViewHolder(@NonNull OnlineStatusViewHolder holder, int position, @NonNull RegisteredUser model) {
                 holder.getTextViewUsername().setText(model.getUsername());
                 holder.getTextViewSekolah().setText(model.getSekolah());
                 holder.getTextViewReputation().setText(String.valueOf(model.getReputation()));

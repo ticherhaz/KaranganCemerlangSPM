@@ -111,7 +111,7 @@ public class SignInDialog extends Dialog implements View.OnClickListener {
 
         //Database
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference().child("registeredUser").child("main");
+        databaseReference = firebaseDatabase.getReference().child("registeredUser");
         firebaseAuth = FirebaseAuth.getInstance();
 
     }
@@ -123,11 +123,11 @@ public class SignInDialog extends Dialog implements View.OnClickListener {
         progressDialog.show();
         //Check if user fill in the blank or not
         if (TextUtils.isEmpty(editTextEmailOrUsername.getText().toString()) || TextUtils.isEmpty(editTextPassword.getText().toString())) {
-            Toast.makeText(context, "Please in the blank", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Sila isikan tempat kosong", Toast.LENGTH_SHORT).show();
             //Dismiss the progress dialog
             progressDialog.dismiss();
         } else if (editTextPassword.getText().toString().length() <= 8) {
-            Toast.makeText(context, "Wrong password. Please try again", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Kata Laluan Salah. Sila Cuba Lagi.", Toast.LENGTH_SHORT).show();
             //Dismiss the progress dialog
             progressDialog.dismiss();
         } else {
@@ -156,13 +156,13 @@ public class SignInDialog extends Dialog implements View.OnClickListener {
                                 if (userType.equals("Member")) {
                                     signInAuth(emailUser, password);
                                 } else {
-                                    Toast.makeText(context, "Coming soon...", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "Akan datang...", Toast.LENGTH_SHORT).show();
                                 }
 
                             }
                         } else {
                             progressDialog.dismiss();
-                            Toast.makeText(context, "Email or username you've entered not match any account", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Email/Nama Samaran yang anda masukkan tidak sama untuk semua akaun", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -192,7 +192,7 @@ public class SignInDialog extends Dialog implements View.OnClickListener {
                             }
                         } else {
                             progressDialog.dismiss();
-                            Toast.makeText(context, "Email or username you've entered not match any account", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Email/Nama Samaran yang anda masukkan tidak sama untuk semua akaun", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -218,15 +218,17 @@ public class SignInDialog extends Dialog implements View.OnClickListener {
                     if (firebaseUser != null) {
                         Intent intent = new Intent(context, ForumActivity.class);
                         context.startActivity(intent);
-                        Toast.makeText(context, "Success login: " + firebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Selamat Kembali " + firebaseUser.getDisplayName().toUpperCase(), Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                         dismiss();
                         ((ForumActivity) context).finish();
                     }
                 } else {
-                    if (task.getException() != null)
+                    if (task.getException() != null) {
                         progressDialog.dismiss();
-                    Toast.makeText(context, "" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }
         });

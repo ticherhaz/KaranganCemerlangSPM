@@ -81,16 +81,16 @@
     <string name="threads">Threads:</string>
     <string name="posts">Pos:</string>
     <string name="last_thread">Last Thread</string>
-    <string name="by_user">by User</string>
-    <string name="sign_in">Sign In</string>
-    <string name="sign_up">Sign Up</string>
-    <string name="to_reply_thread_sign_up_today">To reply thread, sign up today</string>
+    <string name="by_user">daripada Penggunar</string>
+    <string name="sign_in">Log Masuk</string>
+    <string name="sign_up">Daftar</string>
+    <string name="to_reply_thread_sign_up_today">Untuk Membalas Forum, Sila Daftar/Log Masuk</string>
     <string name="reputation">Reputasi: </string>
-    <string name="sign_out">Sign Out</string>
-    <string name="username">Username</string>
-    <string name="confirm_password">Confirm Password</string>
-    <string name="select_birthday_date">Select Birthday Date</string>
-    <string name="email_or_username">Email or Username</string>
+    <string name="sign_out">Log Keluar</string>
+    <string name="username">Nama Samaran</string>
+    <string name="confirm_password">Mengesahkan Kata Laluan</string>
+    <string name="select_birthday_date">Pilih Tarikh Lahir</string>
+    <string name="email_or_username">Email atau Nama Samaran</string>
     <string name="_0_online_s">0 Online(s)</string>
     <string name="jenis_karangan">Jenis Karangan</string>
     <string name="increase_size">+</string>
@@ -118,6 +118,10 @@
     <string name="pos">Pos</string>
     <string name="membalas">Membalas</string>
     <string name="ambil_gambar">Ambil Gambar</string>
+    <string name="tarikh_lahir">Tarikh Lahir</string>
+    <string name="negeri">Negeri</string>
+    <string name="status">Status</string>
+    <string name="type_mesej">Taip Mesej…</string>
     <string-array name="feedback_array">
         <item>Cadangan</item>
         <item>Pujian</item>

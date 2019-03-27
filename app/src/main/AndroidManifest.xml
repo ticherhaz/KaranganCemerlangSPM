@@ -22,7 +22,15 @@
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="ocr" />
 
-        <activity android:name=".UmumDetailActivity" />
+        <activity android:name=".UmumDetailActivity">
+
+            <!-- This is for the back button navigation -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".UmumActivity" />
+
+        </activity>
+
         <activity android:name=".TopikBaruActivity">
 
             <!-- This is for the back button navigation -->
