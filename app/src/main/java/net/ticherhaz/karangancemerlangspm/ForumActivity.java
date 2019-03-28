@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,16 +91,57 @@ public class ForumActivity extends AppCompatActivity {
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Forum, ForumViewHolder>(firebaseRecyclerOptions) {
             @SuppressLint("SetTextI18n")
             @Override
-            protected void onBindViewHolder(@NonNull ForumViewHolder holder, int position, @NonNull final Forum model) {
+            protected void onBindViewHolder(@NonNull final ForumViewHolder holder, int position, @NonNull final Forum model) {
 
                 holder.getTextViewForumTitle().setText(model.getForumTitle());
                 holder.getTextViewUserViewing().setText("(" + String.valueOf(model.getForumUserViewing()) + " Pemerhati)");
                 holder.getTextViewForumDescrption().setText(model.getForumDescription());
                 holder.getTextViewForumViews().setText(String.valueOf(model.getForumViews()));
-                holder.getTextViewThreads().setText("Jumlah Tajuk: " + String.valueOf(model.getThreads()));
-                holder.getTextViewPostThreadsCount().setText("Pos: " + String.valueOf(model.getPostThreadsCount()));
-                holder.getTextViewLastThreadPost().setText("Tajuk Terakhir: " + String.valueOf(model.getLastThreadPost()));
-                holder.getTextViewLastThreadByUser().setText("daripada: " + model.getLastThreadByUser());
+
+                holder.getTextViewLastThreadPost().setText("Tajuk Terbaru: " + String.valueOf(model.getLastThreadPost()));
+                //making the name bold
+                String daripada = "Daripada <b>" + model.getLastThreadByUser() + "</b>";
+                holder.getTextViewLastThreadByUser().setText(Html.fromHtml(daripada));
+
+                //value for the jumlah tajuk
+                databaseReference.child("umum").child(model.getForumUid()).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            long size = dataSnapshot.getChildrenCount();
+                            holder.getTextViewThreads().setText("Jumlah Tajuk: " + String.valueOf(size));
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+                //value for the jumlah pos
+                databaseReference.child("umumPos").child(model.getForumUid()).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        long sum = 0;
+                        if (dataSnapshot.exists()) {
+                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                long size = dataSnapshot1.getChildrenCount();
+                                sum += size;
+                                holder.getTextViewPostThreadsCount().setText("Jumlah Pos: " + sum);
+
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
 
                 holder.getView().setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -181,7 +223,7 @@ public class ForumActivity extends AppCompatActivity {
                         online = 0;
                         totalOnline = totalOnline + online;
                     }
-                    textViewOnlineRightNow.setText(String.valueOf(totalOnline + " Online(s)"));
+                    textViewOnlineRightNow.setText(String.valueOf(totalOnline + " Orang Dalam Talian"));
                 }
             }
 

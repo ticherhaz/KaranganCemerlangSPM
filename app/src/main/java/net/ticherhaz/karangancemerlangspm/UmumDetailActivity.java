@@ -1,11 +1,15 @@
 package net.ticherhaz.karangancemerlangspm;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,7 +34,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
@@ -80,6 +86,10 @@ public class UmumDetailActivity extends AppCompatActivity {
     private String gender;
     private long post;
     private long reputation;
+    private long reputationPower;
+
+
+    private ProgressDialog progressDialog;
 
 
     private void retrieveUserData() {
@@ -97,6 +107,7 @@ public class UmumDetailActivity extends AppCompatActivity {
                         gender = registeredUser.getGender();
                         post = registeredUser.getPostCount();
                         reputation = registeredUser.getReputation();
+                        reputationPower = registeredUser.getReputationPower();
                     }
 
 
@@ -120,21 +131,21 @@ public class UmumDetailActivity extends AppCompatActivity {
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<UmumDetail, UmumDetailHolder>(firebaseRecyclerOptions) {
             @SuppressLint("SetTextI18n")
             @Override
-            protected void onBindViewHolder(@NonNull final UmumDetailHolder holder, int position, @NonNull UmumDetail model) {
+            protected void onBindViewHolder(@NonNull final UmumDetailHolder holder, int position, @NonNull final UmumDetail model) {
                 @SuppressLint("SimpleDateFormat") final SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                 //Change the date to ago
                 try {
-                    Date date = inputFormat.parse(model.getPostCreatedDate());
+                    final Date date = inputFormat.parse(model.getPostCreatedDate());
                     @SuppressLint({"NewApi", "LocalSuppress"}) String niceDateStr = String.valueOf(DateUtils.getRelativeTimeSpanString(date.getTime(), Calendar.getInstance().getTimeInMillis(), DateUtils.MINUTE_IN_MILLIS));
 
 
                     //Here we will retrieve user data from user database.
                     databaseReference.child("registeredUser").child(model.getRegisteredUid()).addValueEventListener(new ValueEventListener() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
 
-                                RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
+                                final RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
 
                                 if (registeredUser != null) {
                                     holder.getTextViewUsername().setText(registeredUser.getUsername());
@@ -144,6 +155,53 @@ public class UmumDetailActivity extends AppCompatActivity {
                                     holder.getTextViewGender().setText("Jantina: " + registeredUser.getGender());
                                     holder.getTextViewPos().setText("Pos: " + String.valueOf(registeredUser.getPostCount()));
                                     holder.getTextViewReputation().setText(String.valueOf(registeredUser.getReputation()));
+
+                                    holder.getTextViewGiveReputation().setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            AlertDialog alertDialog = new AlertDialog.Builder(UmumDetailActivity.this)
+                                                    .setCancelable(false)
+                                                    .setTitle("Memberi Reputasi")
+                                                    .setMessage("Adakah anda ingin memberi reputasi kepada " + registeredUser.getUsername() + "?")
+                                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(final DialogInterface dialog, int which) {
+                                                            //Display the progress dialog
+                                                            progressDialog.show();
+                                                            //If yes, then we add the reputation power in this specfic user who post.
+                                                            databaseReference.child("registeredUser").child(model.getRegisteredUid()).child("reputation").runTransaction(new Transaction.Handler() {
+                                                                @NonNull
+                                                                @Override
+                                                                public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
+                                                                    if (mutableData.getValue() == null) {
+                                                                        mutableData.setValue(0);
+                                                                    } else {
+                                                                        mutableData.setValue((Long) mutableData.getValue() + reputationPower); //add the reputation power
+                                                                    }
+                                                                    return Transaction.success(mutableData);
+                                                                }
+
+                                                                @Override
+                                                                public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
+                                                                    //Hide the progress dialog after finish give the reputation
+                                                                    progressDialog.dismiss();
+                                                                    Toast.makeText(getApplicationContext(), "Berjaya memberi reputasi", Toast.LENGTH_SHORT).show();
+                                                                    dialog.cancel();
+                                                                }
+                                                            });
+                                                        }
+                                                    })
+                                                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            //if press no
+                                                            dialog.cancel();
+                                                        }
+                                                    })
+                                                    .create();
+                                            alertDialog.show();
+                                        }
+                                    });
                                 }
                             }
                         }
@@ -205,6 +263,11 @@ public class UmumDetailActivity extends AppCompatActivity {
 
         editTextReply = findViewById(R.id.edit_text_reply_pos);
         floatingActionButton = findViewById(R.id.button_reply);
+
+        progressDialog = new ProgressDialog(UmumDetailActivity.this);
+        progressDialog.setCancelable(false);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Memuat Naik...");
 
         //Get uid
         if (firebaseUser != null) {

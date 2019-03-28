@@ -17,6 +17,7 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/image_view_profile"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:src="@drawable/emblem" />
@@ -27,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="3dp"
-                android:text="@string/topik"
+                android:text="@string/tajuk"
                 android:textSize="21sp"
                 android:textStyle="bold" />
 
@@ -81,14 +82,12 @@
         <TextView
             android:id="@+id/text_view_dimulai_oleh"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/dimulai_oleh" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/text_view_dibalas_oleh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/dibalas_oleh"
             android:textSize="12sp"
             android:textStyle="italic" />
 
@@ -96,7 +95,6 @@
             android:id="@+id/text_view_masa_dibalas_oleh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/_1_minit_yang_lalu"
             android:textSize="12sp"
             android:textStyle="italic" />
     </LinearLayout>

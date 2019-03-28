@@ -9,42 +9,42 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class ConvertTimeToText {
+
+    public ConvertTimeToText() {
+    }
+
     public String covertTimeToText(String dataDate) {
 
         String convTime = null;
-
-        String prefix = "";
-        String suffix = "Ago";
+        String suffix = "Yang Lalu";
 
         try {
             @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
             Date pasTime = dateFormat.parse(dataDate);
-
             Date nowTime = new Date();
 
             long dateDiff = nowTime.getTime() - pasTime.getTime();
-
             long second = TimeUnit.MILLISECONDS.toSeconds(dateDiff);
             long minute = TimeUnit.MILLISECONDS.toMinutes(dateDiff);
             long hour = TimeUnit.MILLISECONDS.toHours(dateDiff);
             long day = TimeUnit.MILLISECONDS.toDays(dateDiff);
 
             if (second < 60) {
-                convTime = second + " Seconds " + suffix;
+                convTime = second + " Saat " + suffix;
             } else if (minute < 60) {
-                convTime = minute + " Minutes " + suffix;
+                convTime = minute + " Minit " + suffix;
             } else if (hour < 24) {
-                convTime = hour + " Hours " + suffix;
+                convTime = hour + " Jam " + suffix;
             } else if (day >= 7) {
                 if (day > 30) {
-                    convTime = (day / 30) + " Months " + suffix;
+                    convTime = (day / 30) + " Bulan " + suffix;
                 } else if (day > 360) {
-                    convTime = (day / 360) + " Years " + suffix;
+                    convTime = (day / 360) + " Tahun " + suffix;
                 } else {
-                    convTime = (day / 7) + " Week " + suffix;
+                    convTime = (day / 7) + " Minggu " + suffix;
                 }
             } else if (day < 7) {
-                convTime = day + " Days " + suffix;
+                convTime = day + " Hari " + suffix;
             }
 
         } catch (ParseException e) {

@@ -19,7 +19,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/linear_layout_bottom_forum"
         android:layout_alignParentTop="true"
         android:layout_margin="3dp"
         android:orientation="vertical"
@@ -27,8 +26,9 @@
 
         <Button
             android:id="@+id/button_topik"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:background="@drawable/button_selector"
             android:padding="5dp"
             android:text="@string/topik_baru"
@@ -42,150 +42,4 @@
 
     </LinearLayout>
 
-
-    <LinearLayout
-        android:id="@+id/linear_layout_bottom_forum"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimarySoft"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/linear_layout_new_user"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="@string/to_reply_thread_sign_up_today" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/button_sign_in"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sign_in"
-                    android:textAllCaps="false" />
-
-
-                <Button
-                    android:id="@+id/button_sign_up"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sign_up"
-                    android:textAllCaps="false" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linear_layout_signed_in_user"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/image_view_profile"
-                    android:layout_width="61dp"
-                    android:layout_height="61dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/emblem" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center">
-
-                        <TextView
-                            android:id="@+id/text_view_username"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/text_view_sign_out"
-                            android:layout_alignRight="@+id/text_view_sign_out"
-                            android:drawableStart="@drawable/ic_sign_online"
-                            android:drawableLeft="@drawable/ic_sign_online"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:text="@string/username"
-                            android:textSize="17sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/text_view_sign_out"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentRight="true"
-                            android:drawableStart="@drawable/ic_action_sign_out"
-                            android:drawableLeft="@drawable/ic_action_sign_out"
-                            android:gravity="center_vertical"
-                            android:paddingEnd="3dp"
-                            android:paddingRight="3dp"
-                            android:text="@string/sign_out"
-                            android:textColor="@drawable/text_view_color"
-                            tools:ignore="RtlSymmetry" />
-
-                    </RelativeLayout>
-
-                    <TextView
-                        android:id="@+id/text_view_sekolah"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginLeft="5dp"
-                        android:text="@string/sekolah"
-                        android:textSize="12sp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginLeft="5dp"
-                            android:text="@string/reputation" />
-
-                        <TextView
-                            android:id="@+id/text_view_reputation"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableStart="@drawable/ic_reputation"
-                            android:drawableLeft="@drawable/ic_reputation"
-                            android:gravity="center_vertical" />
-
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
 </RelativeLayout>

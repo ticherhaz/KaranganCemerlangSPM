@@ -2,13 +2,12 @@ package net.ticherhaz.karangancemerlangspm;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateUtils;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,11 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.Model.Umum;
+import net.ticherhaz.karangancemerlangspm.Util.ConvertTimeToText;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.UmumHolder;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class UmumActivity extends AppCompatActivity {
 
@@ -74,24 +70,47 @@ public class UmumActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             protected void onBindViewHolder(@NonNull final UmumHolder holder, int position, @NonNull final Umum model) {
-                @SuppressLint("SimpleDateFormat") final SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                //new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                 //Change the date to ago
-                try {
-                    Date date = inputFormat.parse(model.getOnCreatedDate());
-                    @SuppressLint({"NewApi", "LocalSuppress"}) final String niceDateStr = String.valueOf(DateUtils.getRelativeTimeSpanString(date.getTime(), Calendar.getInstance().getTimeInMillis(), DateUtils.MINUTE_IN_MILLIS));
 
+                /*Kita tukar pakai yg class untuk tukar time to text
 
-                    //At this part, we retrieve the value user information according to the registeredUid that we saved
-                    //for the name thread
-                    databaseReference.child("registeredUser").child(model.getRegisteredUid()).addValueEventListener(new ValueEventListener() {
+                 */
+
+                //At this part, we retrieve the value user information according to the registeredUid that we saved
+                //for the name thread
+                databaseReference.child("registeredUser").child(model.getRegisteredUid()).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
+                            if (registeredUser != null) {
+                                String dimulaiOleh = "Dimulai Oleh <b>" + registeredUser.getUsername() + "</b>, " + new ConvertTimeToText().covertTimeToText(model.getOnCreatedDate());
+                                holder.getTextViewDimulaiOleh().setText(Html.fromHtml(dimulaiOleh));
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+                //check if null or not
+                if (model.getRegisteredUidLastReply() != null) {
+                    //for the name of last reply
+                    databaseReference.child("registeredUser").child(model.getRegisteredUidLastReply()).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
                                 RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
                                 if (registeredUser != null) {
-                                    holder.getTextViewDimulaiOleh().setText("Dimulai Oleh " + registeredUser.getUsername() + ", " + niceDateStr);
+                                    String dibalasOleh = "Dibalas Oleh <b>" + registeredUser.getUsername() + "</b>";
+                                    holder.getTextViewDibalasOleh().setText(Html.fromHtml(dibalasOleh));
                                 }
                             }
+
                         }
 
                         @Override
@@ -99,61 +118,52 @@ public class UmumActivity extends AppCompatActivity {
 
                         }
                     });
-
-                    //check if null or not
-                    if (model.getRegisteredUidLastReply() != null) {
-                        //for the name of last reply
-                        databaseReference.child("registeredUser").child(model.getRegisteredUidLastReply()).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.exists()) {
-                                    RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
-                                    if (registeredUser != null) {
-                                        holder.getTextViewDibalasOleh().setText("Dibalas Oleh " + registeredUser.getUsername());
-                                    }
-                                }
-
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
-                    }
-
-
-                    if (model.getMasaDibalasOleh() != null) {
-                        //This for the masa dibalas oleh
-                        Date dateDibalas = inputFormat.parse(model.getMasaDibalasOleh());
-                        @SuppressLint({"NewApi", "LocalSuppress"}) final String dateDibalasStr = String.valueOf(DateUtils.getRelativeTimeSpanString(dateDibalas.getTime(), Calendar.getInstance().getTimeInMillis(), DateUtils.MINUTE_IN_MILLIS));
-
-                        holder.getTextViewMasaDibalasOleh().setText(dateDibalasStr);
-
-                    }
-
-
-                    holder.getTextViewUmumTitle().setText(model.getTajuk());
-                    holder.getTextViewKedudukan().setText(String.valueOf(model.getKedudukan()));
-                    holder.getTextViewUmumViews().setText(String.valueOf(model.getViewed()));
-                    holder.getTextViewJumlahBalas().setText(String.valueOf(model.getJumlahBalas()));
-
-
-                    holder.getView().setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(UmumActivity.this, UmumDetailActivity.class);
-                            intent.putExtra("umumUid", model.getUmumUid());
-                            intent.putExtra("tajukPos", model.getTajuk());
-                            intent.putExtra("forumUid", forumUid);
-                            startActivities(new Intent[]{intent});
-                        }
-                    });
-
-
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                } else {
+                    holder.getTextViewDibalasOleh().setVisibility(View.GONE);
                 }
+
+
+                if (model.getMasaDibalasOleh() != null) {
+                    //This for the masa dibalas oleh
+                    holder.getTextViewMasaDibalasOleh().setText(new ConvertTimeToText().covertTimeToText(model.getMasaDibalasOleh()));
+                } else {
+                    holder.getTextViewMasaDibalasOleh().setVisibility(View.GONE);
+                }
+
+
+                //This part we take the umumUid to display the total reply
+                String umumUid = model.getUmumUid();
+                databaseReference.child("umumPos").child(forumUid).child(umumUid).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            long size = dataSnapshot.getChildrenCount();
+                            holder.getTextViewJumlahBalas().setText(String.valueOf(size - 1));
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+                holder.getTextViewUmumTitle().setText(model.getTajuk());
+                holder.getTextViewKedudukan().setText(String.valueOf(model.getKedudukan()));
+                holder.getTextViewUmumViews().setText(String.valueOf(model.getViewed()));
+                holder.getTextViewJumlahBalas().setText(String.valueOf(model.getJumlahBalas()));
+
+
+                holder.getView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(UmumActivity.this, UmumDetailActivity.class);
+                        intent.putExtra("umumUid", model.getUmumUid());
+                        intent.putExtra("tajukPos", model.getTajuk());
+                        intent.putExtra("forumUid", forumUid);
+                        startActivities(new Intent[]{intent});
+                    }
+                });
 
 
             }

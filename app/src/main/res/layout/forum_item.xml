@@ -22,6 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
                 android:text="@string/umum"
+                android:textSize="23sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -29,7 +30,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
-                android:text="@string/_0_viewing"
                 android:textStyle="italic" />
 
         </LinearLayout>
@@ -68,7 +68,6 @@
                 android:id="@+id/text_view_threads"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/threads"
                 android:textSize="12sp"
                 android:textStyle="italic" />
 
@@ -78,7 +77,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:text="@string/posts"
                 android:textSize="12sp"
                 android:textStyle="italic" />
 
@@ -87,14 +85,12 @@
         <TextView
             android:id="@+id/text_view_last_thread_post"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/last_thread" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/text_view_last_thread_by_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/by_user"
             android:textSize="12sp"
             android:textStyle="italic" />
     </LinearLayout>

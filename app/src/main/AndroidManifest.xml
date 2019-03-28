@@ -31,7 +31,9 @@
 
         </activity>
 
-        <activity android:name=".TopikBaruActivity">
+        <activity
+            android:name=".TopikBaruActivity"
+            android:label="Mulakan Topik Baru">
 
             <!-- This is for the back button navigation -->
             <meta-data
@@ -56,7 +58,7 @@
         </activity>
         <activity
             android:name=".OnlineUserActivity"
-            android:label="Online Users">
+            android:label="Jumlah Orang Dalam Talian">
 
             <!-- This is for the back button navigation -->
             <meta-data
