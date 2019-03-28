@@ -50,13 +50,42 @@
         android:layout_height="wrap_content"
         android:text="@string/tarikh_lahir" />
 
-    <TextView
-        android:id="@+id/text_view_birthday"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/select_birthday_date"
-        android:textColor="@drawable/text_view_color"
-        android:textSize="17sp" />
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edit_text_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="@string/_31"
+            android:inputType="number"
+            android:padding="5dp" />
+
+        <EditText
+            android:id="@+id/edit_text_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="@string/_12"
+            android:inputType="number"
+            android:padding="5dp" />
+
+        <EditText
+            android:id="@+id/edit_text_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="@string/_2019"
+            android:inputType="number"
+            android:padding="5dp" />
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"

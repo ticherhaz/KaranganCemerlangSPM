@@ -120,6 +120,9 @@
     <string name="negeri">Negeri</string>
     <string name="status">Status</string>
     <string name="type_mesej">Taip Mesej…</string>
+    <string name="_31">31</string>
+    <string name="_12">12</string>
+    <string name="_2019">2019</string>
     <string-array name="feedback_array">
         <item>Cadangan</item>
         <item>Pujian</item>

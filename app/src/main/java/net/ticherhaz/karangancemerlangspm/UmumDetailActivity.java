@@ -6,7 +6,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,10 +39,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.Model.UmumDetail;
+import net.ticherhaz.karangancemerlangspm.Util.ConvertTimeToText;
+import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.UmumDetailHolder;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class UmumDetailActivity extends AppCompatActivity {
@@ -132,100 +130,96 @@ public class UmumDetailActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             protected void onBindViewHolder(@NonNull final UmumDetailHolder holder, int position, @NonNull final UmumDetail model) {
-                @SuppressLint("SimpleDateFormat") final SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-                //Change the date to ago
-                try {
-                    final Date date = inputFormat.parse(model.getPostCreatedDate());
-                    @SuppressLint({"NewApi", "LocalSuppress"}) String niceDateStr = String.valueOf(DateUtils.getRelativeTimeSpanString(date.getTime(), Calendar.getInstance().getTimeInMillis(), DateUtils.MINUTE_IN_MILLIS));
+                // @SuppressLint("SimpleDateFormat") final SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                //Here we will retrieve user data from user database.
+                databaseReference.child("registeredUser").child(model.getRegisteredUid()).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
 
+                            final RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
 
-                    //Here we will retrieve user data from user database.
-                    databaseReference.child("registeredUser").child(model.getRegisteredUid()).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()) {
+                            if (registeredUser != null) {
+                                holder.getTextViewUsername().setText(registeredUser.getUsername());
+                                holder.getTextViewUserTitle().setText(registeredUser.getTitleType());
+                                holder.getTextViewSekolah().setText(registeredUser.getSekolah());
+                                holder.getTextViewUserJoinDate().setText("Masa Menyertai: " + registeredUser.getOnDateCreatedMonthYear());
+                                holder.getTextViewGender().setText("Jantina: " + registeredUser.getGender());
+                                holder.getTextViewPos().setText("Pos: " + String.valueOf(registeredUser.getPostCount()));
+                                holder.getTextViewReputation().setText(String.valueOf(registeredUser.getReputation()));
 
-                                final RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
-
-                                if (registeredUser != null) {
-                                    holder.getTextViewUsername().setText(registeredUser.getUsername());
-                                    holder.getTextViewUserTitle().setText(registeredUser.getTitleType());
-                                    holder.getTextViewSekolah().setText(registeredUser.getSekolah());
-                                    holder.getTextViewUserJoinDate().setText("Masa Menyertai: " + registeredUser.getOnDateCreatedMonthYear());
-                                    holder.getTextViewGender().setText("Jantina: " + registeredUser.getGender());
-                                    holder.getTextViewPos().setText("Pos: " + String.valueOf(registeredUser.getPostCount()));
-                                    holder.getTextViewReputation().setText(String.valueOf(registeredUser.getReputation()));
-
-                                    holder.getTextViewGiveReputation().setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            AlertDialog alertDialog = new AlertDialog.Builder(UmumDetailActivity.this)
-                                                    .setCancelable(false)
-                                                    .setTitle("Memberi Reputasi")
-                                                    .setMessage("Adakah anda ingin memberi reputasi kepada " + registeredUser.getUsername() + "?")
-                                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(final DialogInterface dialog, int which) {
-                                                            //Display the progress dialog
-                                                            progressDialog.show();
-                                                            //If yes, then we add the reputation power in this specfic user who post.
-                                                            databaseReference.child("registeredUser").child(model.getRegisteredUid()).child("reputation").runTransaction(new Transaction.Handler() {
-                                                                @NonNull
-                                                                @Override
-                                                                public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
-                                                                    if (mutableData.getValue() == null) {
-                                                                        mutableData.setValue(0);
-                                                                    } else {
-                                                                        mutableData.setValue((Long) mutableData.getValue() + reputationPower); //add the reputation power
-                                                                    }
-                                                                    return Transaction.success(mutableData);
+                                holder.getTextViewGiveReputation().setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        AlertDialog alertDialog = new AlertDialog.Builder(UmumDetailActivity.this)
+                                                .setCancelable(false)
+                                                .setTitle("Memberi Reputasi")
+                                                .setMessage("Adakah anda ingin memberi reputasi kepada " + registeredUser.getUsername() + "?")
+                                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(final DialogInterface dialog, int which) {
+                                                        //Display the progress dialog
+                                                        progressDialog.show();
+                                                        //If yes, then we add the reputation power in this specfic user who post.
+                                                        databaseReference.child("registeredUser").child(model.getRegisteredUid()).child("reputation").runTransaction(new Transaction.Handler() {
+                                                            @NonNull
+                                                            @Override
+                                                            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
+                                                                if (mutableData.getValue() == null) {
+                                                                    mutableData.setValue(0);
+                                                                } else {
+                                                                    mutableData.setValue((Long) mutableData.getValue() + reputationPower); //add the reputation power
                                                                 }
+                                                                return Transaction.success(mutableData);
+                                                            }
 
-                                                                @Override
-                                                                public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
-                                                                    //Hide the progress dialog after finish give the reputation
-                                                                    progressDialog.dismiss();
-                                                                    Toast.makeText(getApplicationContext(), "Berjaya memberi reputasi", Toast.LENGTH_SHORT).show();
-                                                                    dialog.cancel();
-                                                                }
-                                                            });
-                                                        }
-                                                    })
-                                                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(DialogInterface dialog, int which) {
-                                                            //if press no
-                                                            dialog.cancel();
-                                                        }
-                                                    })
-                                                    .create();
+                                                            @Override
+                                                            public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
+                                                                //Hide the progress dialog after finish give the reputation
+                                                                progressDialog.dismiss();
+                                                                Toast.makeText(getApplicationContext(), "Berjaya memberi reputasi", Toast.LENGTH_SHORT).show();
+                                                                dialog.cancel();
+                                                            }
+                                                        });
+                                                    }
+                                                })
+                                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        //if press no
+                                                        dialog.cancel();
+                                                    }
+                                                })
+                                                .create();
+                                        if (firebaseUser != null) {
                                             alertDialog.show();
+                                        } else {
+                                            Toast.makeText(UmumDetailActivity.this, "Sila Daftar/Log Masuk Terlebih Dahulu", Toast.LENGTH_SHORT).show();
                                         }
-                                    });
-                                }
+
+                                    }
+                                });
                             }
                         }
+                    }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                        }
-                    });
+                    }
+                });
 
-                    holder.getTextViewDeskripsi().setText(model.getDeskripsi());
-                    holder.getTextViewMasaDibalasOleh().setText(String.valueOf(niceDateStr));
+                holder.getTextViewDeskripsi().setText(model.getDeskripsi());
 
-                    holder.getView().setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
+                //Display the 1minit yg lalu
+                holder.getTextViewMasaDibalasOleh().setText(new ConvertTimeToText().covertTimeToText(model.getPostCreatedDate()));
 
-                        }
-                    });
+                holder.getView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                    }
+                });
 
 
             }
@@ -314,33 +308,45 @@ public class UmumDetailActivity extends AppCompatActivity {
     private void checkEmpty() {
         if (!TextUtils.isEmpty(editTextReply.getText().toString())) {
 
-            String umumDetailUid = databaseReference.push().getKey();
-            final String onCreatedDate = String.valueOf(android.text.format.DateFormat.format("yyyy-MM-dd'T'HH:mm:ss", new Date()));
-            String reply = editTextReply.getText().toString();
-            UmumDetail umumDetail = new UmumDetail(umumDetailUid, registeredUidReply, onCreatedDate, reply);
+            //check if the user is already signed in or not
+            if (firebaseUser != null) {
+                String umumDetailUid = databaseReference.push().getKey();
+                //TODO: this is format date to store string and we can retrieve the string like this : 2 minit yang lalu.
+                final String onCreatedDate = String.valueOf(android.text.format.DateFormat.format("yyyy-MM-dd'T'HH:mm:ss", new Date()));
+                String reply = editTextReply.getText().toString();
+                UmumDetail umumDetail = new UmumDetail(umumDetailUid, registeredUidReply, onCreatedDate, reply);
 
-            if (umumDetailUid != null) {
-                databaseReference.child("umumPos").child(forumUid).child(umumUid).child(umumDetailUid).setValue(umumDetail).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            //Then we store the data into the umum
-                            databaseReference.child("umum").child(forumUid).child(umumUid).child("masaDibalasOleh").setValue(onCreatedDate);
-                            databaseReference.child("umum").child(forumUid).child(umumUid).child("registeredUidLastReply").setValue(registeredUidReply);
+                if (umumDetailUid != null) {
+                    databaseReference.child("umumPos").child(forumUid).child(umumUid).child(umumDetailUid).setValue(umumDetail).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                //Then we store the data into the umum
+                                databaseReference.child("umum").child(forumUid).child(umumUid).child("masaDibalasOleh").setValue(onCreatedDate);
+                                databaseReference.child("umum").child(forumUid).child(umumUid).child("registeredUidLastReply").setValue(registeredUidReply);
 
+                                //after that we increase the amount of post
+                                new RunTransaction().runTransactionRegisteredUserPostCount(databaseReference, registeredUidReply);
 
-                            Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
-                            editTextReply.setText("");
-                            //then hide the keyboard
-                            try {
-                                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                                imm.hideSoftInputFromWindow(UmumDetailActivity.this.getCurrentFocus().getWindowToken(), 0);
-                            } catch (Exception ignored) {
+                                Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                                editTextReply.setText("");
+                                //then hide the keyboard
+                                try {
+                                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                                    if (UmumDetailActivity.this.getCurrentFocus() != null)
+                                        imm.hideSoftInputFromWindow(UmumDetailActivity.this.getCurrentFocus().getWindowToken(), 0);
+                                } catch (Exception ignored) {
+                                }
                             }
                         }
-                    }
-                });
+                    });
+                }
+            } else {
+                //So tell the user to login 1st.
+                Toast.makeText(UmumDetailActivity.this, "Sila Daftar/Log Masuk Terlebih Dahulu", Toast.LENGTH_SHORT).show();
+                editTextReply.setText("");
             }
+
         }
     }
 

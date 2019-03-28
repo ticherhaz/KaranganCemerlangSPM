@@ -1,6 +1,6 @@
 package net.ticherhaz.karangancemerlangspm;
 
-import android.app.DatePickerDialog;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -10,11 +10,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -51,16 +51,16 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
     private EditText editTextSekolah;
     private EditText editTextPassword;
     private EditText editTextConfirmPassword;
-    private TextView textViewBirthdayDate;
-    private DatePickerDialog.OnDateSetListener dateSetListener;
+
+    //Birthday
+    private EditText editTextDay;
+    private EditText editTextMonth;
+    private EditText editTextYear;
 
     private Spinner spinnerState;
     private Spinner spinnerMode;
     private Spinner spinnerGender;
     private ProgressDialog progressDialog;
-
-    private String birthdayMain;
-    private Boolean aBooleanBirthday = false;
 
     //Database
     private FirebaseAuth firebaseAuth;
@@ -78,24 +78,48 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
         this.context = context;
     }
 
+    private void setToast(String message) {
+        @SuppressLint("ShowToast") Toast toast = Toast.makeText(getContext(), message, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+
+    }
+
     private void checkEmpty() {
-        progressDialog.show();
-        if (TextUtils.isEmpty(editTextUsername.getText().toString()) || TextUtils.isEmpty(editTextEmail.getText().toString()) || TextUtils.isEmpty(editTextPassword.getText().toString()) || TextUtils.isEmpty(editTextConfirmPassword.getText().toString()) || TextUtils.isEmpty(editTextSekolah.getText().toString())) {
-            Toast.makeText(context, "Sila isi tempat kosong", Toast.LENGTH_SHORT).show();
-            progressDialog.dismiss();
-        } else if (!editTextPassword.getText().toString().equals(editTextConfirmPassword.getText().toString())) {
-            Toast.makeText(context, "Kata laluan tidak serasi", Toast.LENGTH_SHORT).show();
-            progressDialog.dismiss();
-        } else if (editTextPassword.length() <= 8) {
-            Toast.makeText(context, "Kata laluan hendaklah melebihi 8 digit", Toast.LENGTH_SHORT).show();
-            progressDialog.dismiss();
+        if (TextUtils.isEmpty(editTextUsername.getText().toString()) || TextUtils.isEmpty(editTextEmail.getText().toString())
+                || TextUtils.isEmpty(editTextPassword.getText().toString()) || TextUtils.isEmpty(editTextConfirmPassword.getText().toString())
+                || TextUtils.isEmpty(editTextSekolah.getText().toString()) || TextUtils.isEmpty(editTextDay.getText().toString()) ||
+                TextUtils.isEmpty(editTextMonth.getText().toString()) || TextUtils.isEmpty(editTextYear.getText().toString())) {
+            setToast("Sila isi tempat kosong");
+            editTextUsername.requestFocus();
+        } else if (editTextUsername.getText().toString().length() <= 3) {
+            setToast("Nama Samaran Hendaklah Melebihi 3 Digit");
+            editTextUsername.requestFocus();
+        } else if (editTextUsername.getText().toString().length() >= 13) {
+            setToast("Nama Samaran Hendaklah Kurang 13 Digit");
+            editTextUsername.requestFocus();
         } else if (!isEmailValid(editTextEmail.getText().toString())) {
-            Toast.makeText(context, "Email tidak sah", Toast.LENGTH_SHORT).show();
-            progressDialog.dismiss();
-        } else if (!aBooleanBirthday) {
-            Toast.makeText(context, "Sila pilih tarikh lahir", Toast.LENGTH_SHORT).show();
-            progressDialog.dismiss();
+            setToast("Email tidak sah");
+            editTextEmail.setText("");
+            editTextEmail.requestFocus();
+        } else if (!editTextPassword.getText().toString().equals(editTextConfirmPassword.getText().toString())) {
+            setToast("Kata laluan tidak serasi");
+            editTextConfirmPassword.setText("");
+            editTextConfirmPassword.requestFocus();
+        } else if (editTextPassword.length() <= 8) {
+            setToast("Kata laluan hendaklah melebihi 8 digit");
+            editTextPassword.setText("");
+            editTextPassword.requestFocus();
+        } else if (Integer.parseInt(editTextDay.getText().toString()) == 0 || Integer.parseInt(editTextDay.getText().toString()) >= 32 ||
+                Integer.parseInt(editTextMonth.getText().toString()) == 0 || Integer.parseInt(editTextMonth.getText().toString()) >= 13 ||
+                Integer.parseInt(editTextYear.getText().toString()) <= 1911 || Integer.parseInt(editTextMonth.getText().toString()) >= 2017) {
+            setToast("Sila isi tarikh lahir format yang betul");
+            editTextDay.setText("");
+            editTextMonth.setText("");
+            editTextYear.setText("");
+            editTextDay.requestFocus();
         } else {
+            progressDialog.show();
             //Correct
             /*
             So I just noticed that we can compare straight to the database at the
@@ -128,7 +152,7 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
                         final String bio = "";
                         final String state = spinnerState.getSelectedItem().toString();
                         final String gender = spinnerGender.getSelectedItem().toString();
-                        final String birthday = birthdayMain;
+                        final String birthday = editTextDay.getText().toString() + "/" + editTextMonth.getText().toString() + "/" + editTextYear.getText().toString();
                         final String mode = spinnerMode.getSelectedItem().toString();
                         final int postCount = 0;
                         final int reputation = 10;
@@ -212,8 +236,6 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(context, "Successfully registered", Toast.LENGTH_SHORT).show();
-                                                //Then close the dialog
 
                                                 //After that store in the firebase user profile request
                                                 UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder()
@@ -226,7 +248,7 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
 
                                                 Intent intent = new Intent(context, ForumActivity.class);
                                                 context.startActivity(intent);
-                                                Toast.makeText(context, "Success register: " + firebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(context, "Berjaya Daftar " + firebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
                                                 progressDialog.dismiss();
                                                 dismiss();
                                                 ((ForumActivity) context).finish();
@@ -268,8 +290,10 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
         spinnerState = findViewById(R.id.spinner_state);
         spinnerMode = findViewById(R.id.spinner_mode);
         spinnerGender = findViewById(R.id.spinner_gender);
-        textViewBirthdayDate = findViewById(R.id.text_view_birthday);
-        textViewBirthdayDate.setOnClickListener(this);
+
+        editTextDay = findViewById(R.id.edit_text_day);
+        editTextMonth = findViewById(R.id.edit_text_month);
+        editTextYear = findViewById(R.id.edit_text_year);
 
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading...");
@@ -316,33 +340,11 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
             case R.id.button_sign_up:
                 checkEmpty();
                 break;
-            //Button Birthday
-            case R.id.text_view_birthday:
-                setTextViewBirthdayDate();
-                break;
             default:
                 break;
         }
     }
 
-    private void setTextViewBirthdayDate() {
-        aBooleanBirthday = true;
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog dialog = new DatePickerDialog(context, android.R.style.Theme_DeviceDefault_Light_Dialog, dateSetListener, year, month, day);
-        dialog.show();
-
-        dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                birthdayMain = dayOfMonth + "/" + month + "/" + year;
-                textViewBirthdayDate.setText(String.valueOf(birthdayMain));
-            }
-        };
-    }
 
     private boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();

@@ -28,6 +28,7 @@ import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.Model.Umum;
 import net.ticherhaz.karangancemerlangspm.Model.UmumDetail;
 import net.ticherhaz.karangancemerlangspm.Util.InternetCheck;
+import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
 
 import java.util.Date;
 
@@ -146,7 +147,7 @@ public class TopikBaruActivity extends AppCompatActivity {
     private void storeDatabase() {
 
         //Make the umumUid
-        String umumUid = databaseReference.push().getKey();
+        final String umumUid = databaseReference.push().getKey();
         final String tajuk = editTextTajuk.getText().toString();
         String deskripsi = editTextDeskripsi.getText().toString();
         long viewed = 0;
@@ -189,10 +190,22 @@ public class TopikBaruActivity extends AppCompatActivity {
                         //Then, after the data at the forum
                         runTransac(tajuk);
 
+                        //after that we increase the amount of post
+                        new RunTransaction().runTransactionRegisteredUserPostCount(databaseReference, registeredUid);
+
+
                         progressDialog.dismiss();
                         editTextTajuk.setText("");
                         editTextDeskripsi.setText("");
                         Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+
+                        //Then we proceed to the activity for that
+                        Intent intent = new Intent(TopikBaruActivity.this, UmumDetailActivity.class);
+                        intent.putExtra("umumUid", umumUid);
+                        intent.putExtra("tajukPos", tajuk);
+                        intent.putExtra("forumUid", forumUid);
+                        startActivities(new Intent[]{intent});
+                        finish();
                     }
                 }
             });
