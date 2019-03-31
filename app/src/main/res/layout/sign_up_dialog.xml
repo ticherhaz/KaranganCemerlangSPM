@@ -7,133 +7,179 @@
     android:minHeight="400dp"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/edit_text_username"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/username"
-        android:inputType="text"
-        android:singleLine="true" />
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/edit_text_sekolah"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/sekolah"
-        android:inputType="text"
-        android:singleLine="true" />
-
-    <EditText
-        android:id="@+id/edit_text_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        android:singleLine="true" />
-
-    <EditText
-        android:id="@+id/edit_text_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/password"
-        android:inputType="textPassword" />
-
-    <EditText
-        android:id="@+id/edit_text_confirm_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/confirm_password"
-        android:inputType="textPassword" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tarikh_lahir" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/edit_text_day"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:background="@drawable/edit_text_border"
-            android:hint="@string/_31"
-            android:inputType="number"
-            android:padding="5dp" />
-
-        <EditText
-            android:id="@+id/edit_text_month"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:background="@drawable/edit_text_border"
-            android:hint="@string/_12"
-            android:inputType="number"
-            android:padding="5dp" />
-
-        <EditText
-            android:id="@+id/edit_text_year"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:background="@drawable/edit_text_border"
-            android:hint="@string/_2019"
-            android:inputType="number"
-            android:padding="5dp" />
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="@string/jantina" />
-
-    <Spinner
-        android:id="@+id/spinner_gender"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="3dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="@string/negeri" />
+            android:orientation="vertical">
 
 
-    <Spinner
-        android:id="@+id/spinner_state"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="3dp" />
+            <!--<FrameLayout-->
+            <!--android:id="@+id/frame_layout_upload_picture"-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="150dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginTop="10dp">-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="@string/status" />
+            <!--<ImageView-->
+            <!--android:id="@+id/image_view_upload_profile"-->
+            <!--android:layout_width="130dp"-->
+            <!--android:layout_height="130dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:scaleType="fitXY"-->
+            <!--android:src="@drawable/emblem" />-->
+
+            <!--<ImageView-->
+            <!--android:id="@+id/iv_camera"-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_gravity="bottom|right"-->
+            <!--android:src="@drawable/ic_camera"-->
+            <!--tools:ignore="RtlHardcoded" />-->
+            <!--</FrameLayout>-->
 
 
-    <Spinner
-        android:id="@+id/spinner_mode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="3dp" />
+            <!--<TextView-->
+            <!--android:id="@+id/text_view_upload_image"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginBottom="7dp"-->
+            <!--android:text="@string/muat_naik_gambar_profil"-->
+            <!--android:textColor="@drawable/text_view_color" />-->
+
+            <EditText
+                android:id="@+id/edit_text_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/username"
+                android:inputType="text"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/edit_text_sekolah"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sekolah"
+                android:inputType="text"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/edit_text_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/edit_text_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/edit_text_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/confirm_password"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tarikh_lahir" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edit_text_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/edit_text_border"
+                    android:hint="@string/_31"
+                    android:inputType="number"
+                    android:padding="5dp" />
+
+                <EditText
+                    android:id="@+id/edit_text_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/edit_text_border"
+                    android:hint="@string/_12"
+                    android:inputType="number"
+                    android:padding="5dp" />
+
+                <EditText
+                    android:id="@+id/edit_text_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/edit_text_border"
+                    android:hint="@string/_2019"
+                    android:inputType="number"
+                    android:padding="5dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/jantina" />
+
+            <Spinner
+                android:id="@+id/spinner_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/negeri" />
 
 
-    <Button
-        android:id="@+id/button_sign_up"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="7dp"
-        android:background="@drawable/button_selector"
-        android:text="@string/sign_up"
-        android:textAllCaps="false" />
+            <Spinner
+                android:id="@+id/spinner_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/status" />
+
+
+            <Spinner
+                android:id="@+id/spinner_mode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp" />
+
+
+            <Button
+                android:id="@+id/button_sign_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="7dp"
+                android:background="@drawable/button_selector"
+                android:text="@string/sign_up"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

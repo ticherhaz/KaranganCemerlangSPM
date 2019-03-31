@@ -123,6 +123,13 @@
     <string name="_31">31</string>
     <string name="_12">12</string>
     <string name="_2019">2019</string>
+    <string name="muat_naik_gambar_profil">Muat Naik Gambar Profil</string>
+    <string name="tetapan">Tetapan</string>
+    <string name="reputation">10</string>
+    <string name="gembira">Gembira</string>
+    <string name="biasa">Biasa</string>
+    <string name="sedih">Sedih</string>
+    <string name="memberi_reputasi">Memberi Reputasi</string>
     <string-array name="feedback_array">
         <item>Cadangan</item>
         <item>Pujian</item>
@@ -146,8 +153,7 @@
     <string-array name="mode_array">
         <item>Gembira</item>
         <item>Sedih</item>
-        <item>Marah</item>
-        <item>Senyap</item>
+        <item>Biasa</item>
     </string-array>
     <string-array name="gender_array">
         <item>Lelaki</item>

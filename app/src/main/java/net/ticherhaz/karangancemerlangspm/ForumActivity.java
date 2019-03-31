@@ -2,6 +2,7 @@ package net.ticherhaz.karangancemerlangspm;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -33,6 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 import net.ticherhaz.karangancemerlangspm.Model.Forum;
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.Util.OnlineStatusUtil;
+import net.ticherhaz.karangancemerlangspm.Util.Others;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.ForumViewHolder;
 
 import java.util.Date;
@@ -75,7 +77,9 @@ public class ForumActivity extends AppCompatActivity {
 
     //Progressbar
     private ProgressBar progressBar;
-
+    private TextView textViewTotalPosCount;
+    private TextView textViewSetting;
+    private TextView textViewStatus;
 
     //Method setFirebaseRecycler
     private void setFirebaseRecyclerAdapter() {
@@ -199,7 +203,6 @@ public class ForumActivity extends AppCompatActivity {
 
     }
 
-
     @Override
     protected void onStop() {
         super.onStop();
@@ -242,6 +245,9 @@ public class ForumActivity extends AppCompatActivity {
         textViewReputation = findViewById(R.id.text_view_reputation);
         textViewSignOut = findViewById(R.id.text_view_sign_out);
         textViewOnlineRightNow = findViewById(R.id.text_view_online_right_now);
+        textViewTotalPosCount = findViewById(R.id.text_view_pos);
+        textViewSetting = findViewById(R.id.text_view_setting);
+        textViewStatus = findViewById(R.id.text_view_status);
 
         //Button Initialize
         buttonSignIn = findViewById(R.id.button_sign_in);
@@ -276,6 +282,8 @@ public class ForumActivity extends AppCompatActivity {
         //setTextViewOnlineRightNow();
         calculateAllOnlineRegisteredUser();
         setTextViewOnlineRightNowClick();
+        setTextViewSetting();
+        setTextViewStatus();
     }
 
     private void checkIfUserOnline() {
@@ -303,6 +311,8 @@ public class ForumActivity extends AppCompatActivity {
                             String reputation = String.valueOf(registeredUser.getReputation());
                             String username = registeredUser.getUsername();
                             String onlineStatus = registeredUser.getOnlineStatus();
+                            String totalPos = String.valueOf(registeredUser.getPostCount());
+                            String status = registeredUser.getMode();
                             //Check the online status, if online or not
                             if (onlineStatus.equals("Online")) {
                                 textViewUsername.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sign_online_green, 0, 0, 0);
@@ -314,6 +324,8 @@ public class ForumActivity extends AppCompatActivity {
                             textViewReputation.setText(reputation);
                             textViewSekolah.setText(sekolah);
                             textViewUsername.setText(username);
+                            textViewTotalPosCount.setText(totalPos);
+                            new Others().setStatus(status, textViewStatus);
                         }
 
                     }
@@ -333,6 +345,27 @@ public class ForumActivity extends AppCompatActivity {
         }
     }
 
+
+    private void setTextViewSetting() {
+        textViewSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    private void setTextViewStatus() {
+        textViewStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StatusDialog statusDialog = new StatusDialog(ForumActivity.this);
+                statusDialog.setRegisteredUid(registeredUid);
+                statusDialog.show();
+            }
+        });
+    }
+
     //Method set text view online right now
     private void setTextViewOnlineRightNowClick() {
         textViewOnlineRightNow.setOnClickListener(new View.OnClickListener() {
@@ -349,7 +382,6 @@ public class ForumActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SignInDialog signInDialog = new SignInDialog(ForumActivity.this);
-                //    signInDialog.setInitialUid(userUid);
                 signInDialog.setLinearLayoutNewUser(linearLayoutNewUser);
                 signInDialog.setLinearLayoutOldUser(linearLayoutOlderUser);
                 signInDialog.setTextViewUsername(textViewUsername);
@@ -368,6 +400,7 @@ public class ForumActivity extends AppCompatActivity {
                 SignUpDialog signUpDialog = new SignUpDialog(ForumActivity.this);
                 signUpDialog.setInitialUid(userUid);
                 signUpDialog.setLinearLayoutNewUser(linearLayoutNewUser);
+                signUpDialog.setActivity(ForumActivity.this);
                 signUpDialog.setLinearLayoutOldUser(linearLayoutOlderUser);
                 signUpDialog.setTextViewUsername(textViewUsername);
                 signUpDialog.setTextViewSekolah(textViewSekolah);
@@ -375,6 +408,28 @@ public class ForumActivity extends AppCompatActivity {
                 signUpDialog.show();
             }
         });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        //  new SignUpDialog(this).onActivityResult(requestCode, resultCode, data);
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+        if (requestCode == 1) {
+            final Bundle extras = data.getExtras();
+            if (extras != null) {
+                //Get image
+                Bitmap newProfilePic = extras.getParcelable("data");
+                View view = LayoutInflater.from(this).inflate(R.layout.sign_up_dialog, null);
+                Toast.makeText(getApplicationContext(), "SSSS", Toast.LENGTH_LONG).show();
+                //  ImageView imageView = view.findViewById(R.id.image_view_upload_profile);
+                //  Glide.with(ForumActivity.this).load(newProfilePic).into(imageView);
+            }
+        }
     }
 
     //Method sign out
@@ -401,6 +456,7 @@ public class ForumActivity extends AppCompatActivity {
         setButtonSignUp();
         setTextViewSignOut();
     }
+
 
     //OnBackPressed
     @Override

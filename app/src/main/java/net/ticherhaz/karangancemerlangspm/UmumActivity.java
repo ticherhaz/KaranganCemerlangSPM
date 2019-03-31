@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,7 +24,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
@@ -157,6 +160,24 @@ public class UmumActivity extends AppCompatActivity {
                 holder.getView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        //Onclick we update the number of the views
+                        databaseReference.child("umum").child(forumUid).child(model.getUmumUid()).child("viewed").runTransaction(new Transaction.Handler() {
+                            @NonNull
+                            @Override
+                            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
+                                if (mutableData.getValue() == null) {
+                                    mutableData.setValue(0);
+                                } else {
+                                    mutableData.setValue((Long) mutableData.getValue() + 1);
+                                }
+                                return Transaction.success(mutableData);
+                            }
+
+                            @Override
+                            public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
+
+                            }
+                        });
                         Intent intent = new Intent(UmumActivity.this, UmumDetailActivity.class);
                         intent.putExtra("umumUid", model.getUmumUid());
                         intent.putExtra("tajukPos", model.getTajuk());
@@ -215,6 +236,15 @@ public class UmumActivity extends AppCompatActivity {
         setTitle(title);
         listID();
         setButtonTopikBaru();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (firebaseRecyclerAdapter != null) {
+            firebaseRecyclerAdapter.startListening();
+            firebaseRecyclerAdapter.notifyDataSetChanged();
+        }
     }
 
     //Button topik

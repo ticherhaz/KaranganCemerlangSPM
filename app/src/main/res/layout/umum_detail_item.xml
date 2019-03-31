@@ -35,47 +35,96 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/text_view_username"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:layout_marginLeft="3dp"
-                    android:text="@string/username"
-                    android:textSize="21sp"
-                    android:textStyle="bold" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/text_view_user_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:layout_marginLeft="3dp"
-                    android:text="@string/murid" />
+                    <TextView
+                        android:id="@+id/text_view_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginLeft="3dp"
+                        android:text="@string/username"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/text_view_sekolah"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:layout_marginLeft="3dp"
-                    android:text="@string/sekolah" />
+                    <TextView
+                        android:id="@+id/text_view_user_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginLeft="3dp"
+                        android:text="@string/murid" />
 
-                <TextView
-                    android:id="@+id/text_view_user_join_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:layout_marginLeft="3dp"
-                    android:text="@string/join_date" />
+                    <TextView
+                        android:id="@+id/text_view_sekolah"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginLeft="3dp"
+                        android:text="@string/sekolah" />
 
-                <TextView
-                    android:id="@+id/text_view_gender"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/text_view_user_join_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginLeft="3dp"
+                        android:text="@string/join_date" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:layout_marginLeft="3dp"
-                    android:text="@string/jantina" />
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/text_view_state"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_toStartOf="@+id/text_view_status"
+                        android:layout_toLeftOf="@+id/text_view_status"
+                        android:gravity="center_vertical"
+                        android:text="@string/negeri" />
+
+                    <TextView
+                        android:id="@+id/text_view_gender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/text_view_state"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_toStartOf="@+id/text_view_status"
+                        android:layout_toLeftOf="@+id/text_view_status"
+                        android:gravity="center_vertical"
+                        android:text="@string/jantina" />
+
+
+                    <TextView
+                        android:id="@+id/text_view_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:drawableStart="@drawable/ic_status_neutral"
+                        android:drawableLeft="@drawable/ic_status_neutral"
+                        android:gravity="center_vertical"
+                        android:text="@string/status" />
+
+                </RelativeLayout>
+
 
                 <TextView
                     android:id="@+id/text_view_pos"
@@ -127,7 +176,9 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_reputation"
                 android:drawableLeft="@drawable/ic_reputation"
-                android:gravity="center_vertical" />
+                android:gravity="center_vertical"
+                android:text="@string/memberi_reputasi"
+                android:textColor="@drawable/text_view_color" />
 
             <TextView
                 android:id="@+id/text_view_membalas"
@@ -140,7 +191,8 @@
                 android:drawableStart="@drawable/ic_reply"
                 android:drawableLeft="@drawable/ic_reply"
                 android:gravity="center_vertical"
-                android:text="@string/membalas" />
+                android:text="@string/membalas"
+                android:visibility="gone" />
 
         </RelativeLayout>
     </LinearLayout>

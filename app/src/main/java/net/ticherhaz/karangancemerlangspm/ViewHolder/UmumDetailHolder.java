@@ -23,6 +23,8 @@ public class UmumDetailHolder extends RecyclerView.ViewHolder {
     private TextView textViewDeskripsi;
     private TextView textViewGiveReputation;
     private TextView textViewMembalas;
+    private TextView textViewStatus;
+    private TextView textViewState;
 
     public UmumDetailHolder(@NonNull View itemView) {
         super(itemView);
@@ -39,6 +41,24 @@ public class UmumDetailHolder extends RecyclerView.ViewHolder {
         textViewDeskripsi = itemView.findViewById(R.id.text_view_deskripsi);
         textViewGiveReputation = itemView.findViewById(R.id.text_view_give_reputation);
         textViewMembalas = itemView.findViewById(R.id.text_view_membalas);
+        textViewStatus = itemView.findViewById(R.id.text_view_status);
+        textViewState = itemView.findViewById(R.id.text_view_state);
+    }
+
+    public TextView getTextViewState() {
+        return textViewState;
+    }
+
+    public void setTextViewState(TextView textViewState) {
+        this.textViewState = textViewState;
+    }
+
+    public TextView getTextViewStatus() {
+        return textViewStatus;
+    }
+
+    public void setTextViewStatus(TextView textViewStatus) {
+        this.textViewStatus = textViewStatus;
     }
 
     public View getView() {

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="7dp"
+    android:minWidth="130dp"
+    android:minHeight="100dp"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/checkbox_gembira"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_status_happy"
+                android:drawableRight="@drawable/ic_status_happy"
+                android:text="@string/gembira" />
+
+            <CheckBox
+                android:id="@+id/checkbox_biasa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_status_neutral"
+                android:drawableRight="@drawable/ic_status_neutral"
+                android:text="@string/biasa" />
+
+            <CheckBox
+                android:id="@+id/checkbox_sedih"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_status_sad"
+                android:drawableRight="@drawable/ic_status_sad"
+                android:text="@string/sedih" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

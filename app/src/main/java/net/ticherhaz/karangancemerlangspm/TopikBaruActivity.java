@@ -193,6 +193,8 @@ public class TopikBaruActivity extends AppCompatActivity {
                         //after that we increase the amount of post
                         new RunTransaction().runTransactionRegisteredUserPostCount(databaseReference, registeredUid);
 
+                        //This one we check if the user post is 50 or not togive reputation power
+                        new RunTransaction().postCountReward(databaseReference, registeredUid, pos);
 
                         progressDialog.dismiss();
                         editTextTajuk.setText("");

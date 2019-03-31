@@ -1,6 +1,7 @@
 package net.ticherhaz.karangancemerlangspm;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -43,7 +44,9 @@ import java.util.Date;
 public class SignUpDialog extends Dialog implements View.OnClickListener {
 
     private Context context;
+    private Activity activity;
     private Button buttonSignUp;
+
 
     private String initialUid;
     private EditText editTextEmail;
@@ -51,17 +54,16 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
     private EditText editTextSekolah;
     private EditText editTextPassword;
     private EditText editTextConfirmPassword;
-
+    //FrameLayout Upload Profile Picture
+    //private FrameLayout frameLayoutUploadPicture;
     //Birthday
     private EditText editTextDay;
     private EditText editTextMonth;
     private EditText editTextYear;
-
     private Spinner spinnerState;
     private Spinner spinnerMode;
     private Spinner spinnerGender;
     private ProgressDialog progressDialog;
-
     //Database
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
@@ -72,17 +74,26 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
     private TextView textViewUsername;
     private TextView textViewSekolah;
     private TextView textViewReputation;
+    //  private ImageView imageViewUploadProfilePicture;
 
     SignUpDialog(Context context) {
         super(context);
         this.context = context;
     }
 
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
+    }
+
     private void setToast(String message) {
-        @SuppressLint("ShowToast") Toast toast = Toast.makeText(getContext(), message, Toast.LENGTH_SHORT);
+        @SuppressLint("ShowToast") Toast toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
-
     }
 
     private void checkEmpty() {
@@ -291,6 +302,9 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
         spinnerMode = findViewById(R.id.spinner_mode);
         spinnerGender = findViewById(R.id.spinner_gender);
 
+        //  imageViewUploadProfilePicture = findViewById(R.id.image_view_upload_profile);
+        // frameLayoutUploadPicture = findViewById(R.id.frame_layout_upload_picture);
+
         editTextDay = findViewById(R.id.edit_text_day);
         editTextMonth = findViewById(R.id.edit_text_month);
         editTextYear = findViewById(R.id.edit_text_year);
@@ -322,6 +336,8 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
         databaseReference = firebaseDatabase.getReference();
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        //  setFrameLayoutUploadPicture();
     }
 
     @Override
@@ -331,6 +347,7 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
         setContentView(R.layout.sign_up_dialog);
         listID();
     }
+
 
     //Method button
     @Override
@@ -345,6 +362,53 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
         }
     }
 
+//    private void setFrameLayoutUploadPicture() {
+//        frameLayoutUploadPicture.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                pickImage();
+//            }
+//        });
+//    }
+//
+//    @SuppressLint("IntentReset")
+//    private void pickImage() {
+//        Intent intent = new Intent(Intent.ACTION_PICK,
+//                MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+//        intent.setType("image/*");
+//        intent.putExtra("crop", "true");
+//        intent.putExtra("scale", true);
+//        intent.putExtra("outputX", 256);
+//        intent.putExtra("outputY", 256);
+//        intent.putExtra("aspectX", 1);
+//        intent.putExtra("aspectY", 1);
+//        intent.putExtra("return-data", true);
+//        activity.startActivityForResult(intent, 1);
+//
+//    }
+
+
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.setOwnerActivity(activity);
+//        onActivityResult(requestCode, resultCode, data);
+//    }
+
+
+//    public void setonActivityResult(int requestCode, int resultCode, Intent data) {
+//
+//        if (resultCode != RESULT_OK) {
+//            return;
+//        }
+//        if (requestCode == 1) {
+//            final Bundle extras = data.getExtras();
+//            if (extras != null) {
+//                //Get image
+//                Bitmap newProfilePic = extras.getParcelable("data");
+//                Toast.makeText(activity, "SSSS", Toast.LENGTH_LONG).show();
+//                Glide.with(activity).load(newProfilePic).into(imageViewUploadProfilePicture);
+//            }
+//        }
+//    }
 
     private boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();

@@ -13,6 +13,7 @@ public class OnlineStatusViewHolder extends RecyclerView.ViewHolder {
     private TextView textViewUsername;
     private TextView textViewSekolah;
     private TextView textViewReputation;
+    private TextView textViewStatus;
 
     public OnlineStatusViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -20,6 +21,15 @@ public class OnlineStatusViewHolder extends RecyclerView.ViewHolder {
         textViewUsername = itemView.findViewById(R.id.text_view_username);
         textViewSekolah = itemView.findViewById(R.id.text_view_sekolah);
         textViewReputation = itemView.findViewById(R.id.text_view_reputation);
+        textViewStatus = itemView.findViewById(R.id.text_view_status);
+    }
+
+    public TextView getTextViewStatus() {
+        return textViewStatus;
+    }
+
+    public void setTextViewStatus(TextView textViewStatus) {
+        this.textViewStatus = textViewStatus;
     }
 
     public View getView() {

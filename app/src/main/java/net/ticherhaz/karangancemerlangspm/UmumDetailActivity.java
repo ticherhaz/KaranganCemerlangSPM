@@ -40,6 +40,7 @@ import com.google.firebase.database.ValueEventListener;
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.Model.UmumDetail;
 import net.ticherhaz.karangancemerlangspm.Util.ConvertTimeToText;
+import net.ticherhaz.karangancemerlangspm.Util.Others;
 import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.UmumDetailHolder;
 
@@ -143,10 +144,12 @@ public class UmumDetailActivity extends AppCompatActivity {
                                 holder.getTextViewUsername().setText(registeredUser.getUsername());
                                 holder.getTextViewUserTitle().setText(registeredUser.getTitleType());
                                 holder.getTextViewSekolah().setText(registeredUser.getSekolah());
-                                holder.getTextViewUserJoinDate().setText("Masa Menyertai: " + registeredUser.getOnDateCreatedMonthYear());
+                                holder.getTextViewUserJoinDate().setText("Tarikh Sertai: " + registeredUser.getOnDateCreatedMonthYear());
                                 holder.getTextViewGender().setText("Jantina: " + registeredUser.getGender());
                                 holder.getTextViewPos().setText("Pos: " + String.valueOf(registeredUser.getPostCount()));
                                 holder.getTextViewReputation().setText(String.valueOf(registeredUser.getReputation()));
+                                holder.getTextViewState().setText("Negeri: " + registeredUser.getState());
+                                new Others().setStatus(registeredUser.getMode(), holder.getTextViewStatus());
 
                                 holder.getTextViewGiveReputation().setOnClickListener(new View.OnClickListener() {
                                     @Override

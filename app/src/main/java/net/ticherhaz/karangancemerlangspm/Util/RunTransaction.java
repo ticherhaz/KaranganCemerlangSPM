@@ -124,4 +124,34 @@ public class RunTransaction {
             }
         });
     }
+
+
+    public void postCountReward(final DatabaseReference databaseReference, final String registeredUid, final long pos) {
+        long defaultReward = 50;
+
+        while (pos == defaultReward) {
+
+            databaseReference.child("registeredUser").child(registeredUid).child("reputationPower").runTransaction(new Transaction.Handler() {
+                @NonNull
+                @Override
+                public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
+                    if (mutableData.getValue() == null) {
+                        mutableData.setValue(0);
+                    } else {
+                        mutableData.setValue((Long) mutableData.getValue() + 1);
+                    }
+                    return Transaction.success(mutableData);
+                }
+
+                @Override
+                public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
+
+                }
+            });
+            defaultReward += 50;
+        }
+//        if (pos == defaultReward) {
+//
+//        }
+    }
 }
