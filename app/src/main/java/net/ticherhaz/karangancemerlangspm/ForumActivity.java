@@ -2,7 +2,6 @@ package net.ticherhaz.karangancemerlangspm;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -146,7 +145,11 @@ public class ForumActivity extends AppCompatActivity {
                     }
                 });
 
+                //Display for the total user who is watching the umum specific
+                calculateAllOnlineSpecific(model.getForumUid(), holder.getTextViewUserViewing());
 
+
+                //When it clicked
                 holder.getView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -171,6 +174,7 @@ public class ForumActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(ForumActivity.this, UmumActivity.class);
                         intent.putExtra("title", model.getForumTitle());
+                        intent.putExtra("userUid", userUid);
                         intent.putExtra("forumUid", model.getForumUid());
                         startActivities(new Intent[]{intent});
                     }
@@ -237,6 +241,35 @@ public class ForumActivity extends AppCompatActivity {
         });
     }
 
+    //Make a new calculation.
+    private void calculateAllOnlineSpecific(final String forumUid, final TextView textView) {
+        databaseReference.child("onlineStatusSpecific").child(forumUid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                long totalOnline = 0;
+                long online;
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    String userOnline = dataSnapshot1.child("onlineStatus").getValue(String.class);
+
+                    if (userOnline != null && userOnline.equals("Online")) {
+                        online = 1;
+                        totalOnline = totalOnline + online;
+                    } else {
+                        online = 0;
+                        totalOnline = totalOnline + online;
+                    }
+                    textView.setText(String.valueOf("(" + totalOnline + " Pemerhati)"));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
     private void listID() {
         textViewUsername = findViewById(R.id.text_view_username);
         //This is for the textview auto gerak kalau nama dia panjang sangat
@@ -279,7 +312,6 @@ public class ForumActivity extends AppCompatActivity {
         checkIfUserOnline();
 
         //Display all the online user number
-        //setTextViewOnlineRightNow();
         calculateAllOnlineRegisteredUser();
         setTextViewOnlineRightNowClick();
         setTextViewSetting();
@@ -350,7 +382,9 @@ public class ForumActivity extends AppCompatActivity {
         textViewSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(ForumActivity.this, SettingActivity.class);
+                intent.putExtra("userUid", userUid);
+                startActivities(new Intent[]{intent});
             }
         });
     }
@@ -387,6 +421,7 @@ public class ForumActivity extends AppCompatActivity {
                 signInDialog.setTextViewUsername(textViewUsername);
                 signInDialog.setTextViewSekolah(textViewSekolah);
                 signInDialog.setTextViewReputation(textViewReputation);
+                signInDialog.setUserUid(userUid);
                 signInDialog.show();
             }
         });
@@ -411,26 +446,26 @@ public class ForumActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        //  new SignUpDialog(this).onActivityResult(requestCode, resultCode, data);
-
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != RESULT_OK) {
-            return;
-        }
-        if (requestCode == 1) {
-            final Bundle extras = data.getExtras();
-            if (extras != null) {
-                //Get image
-                Bitmap newProfilePic = extras.getParcelable("data");
-                View view = LayoutInflater.from(this).inflate(R.layout.sign_up_dialog, null);
-                Toast.makeText(getApplicationContext(), "SSSS", Toast.LENGTH_LONG).show();
-                //  ImageView imageView = view.findViewById(R.id.image_view_upload_profile);
-                //  Glide.with(ForumActivity.this).load(newProfilePic).into(imageView);
-            }
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        //  new SignUpDialog(this).onActivityResult(requestCode, resultCode, data);
+//
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (resultCode != RESULT_OK) {
+//            return;
+//        }
+//        if (requestCode == 1) {
+//            final Bundle extras = data.getExtras();
+//            if (extras != null) {
+//                //Get image
+//                Bitmap newProfilePic = extras.getParcelable("data");
+//                View view = LayoutInflater.from(this).inflate(R.layout.sign_up_dialog, null);
+//                Toast.makeText(getApplicationContext(), "SSSS", Toast.LENGTH_LONG).show();
+//                //  ImageView imageView = view.findViewById(R.id.image_view_upload_profile);
+//                //  Glide.with(ForumActivity.this).load(newProfilePic).into(imageView);
+//            }
+//        }
+//    }
 
     //Method sign out
     private void setTextViewSignOut() {
@@ -439,7 +474,9 @@ public class ForumActivity extends AppCompatActivity {
             public void onClick(View v) {
                 new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference, activitySessionUid, activityDate);
                 firebaseAuth.signOut();
-                startActivity(new Intent(ForumActivity.this, ForumActivity.class));
+                Intent intent = new Intent(ForumActivity.this, ForumActivity.class);
+                intent.putExtra("userUid", userUid);
+                startActivities(new Intent[]{intent});
                 finish();
                 Toast.makeText(getApplicationContext(), "Sign Out Successfully", Toast.LENGTH_SHORT).show();
             }

@@ -50,10 +50,19 @@ public class SignInDialog extends Dialog implements View.OnClickListener {
     private TextView textViewUsername;
     private TextView textViewSekolah;
     private TextView textViewReputation;
+    private String userUid;
 
     public SignInDialog(Context context) {
         super(context);
         this.context = context;
+    }
+
+    public String getUserUid() {
+        return userUid;
+    }
+
+    public void setUserUid(String userUid) {
+        this.userUid = userUid;
     }
 
     public LinearLayout getLinearLayoutNewUser() {
@@ -217,6 +226,7 @@ public class SignInDialog extends Dialog implements View.OnClickListener {
                     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                     if (firebaseUser != null) {
                         Intent intent = new Intent(context, ForumActivity.class);
+                        intent.putExtra("userUid", userUid);
                         context.startActivity(intent);
                         Toast.makeText(context, "Selamat Kembali " + firebaseUser.getDisplayName().toUpperCase(), Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();

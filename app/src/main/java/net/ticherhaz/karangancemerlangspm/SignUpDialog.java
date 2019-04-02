@@ -230,7 +230,7 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
                                     String fingerprint = Build.FINGERPRINT;
                                     String hardware = Build.HARDWARE;
                                     String host = Build.HOST;
-                                    String id = Build.ID;
+                                    final String id = Build.ID;
                                     String manufacturer = Build.MANUFACTURER;
                                     String model = Build.MODEL;
                                     String product = Build.PRODUCT;
@@ -258,6 +258,7 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
 
 
                                                 Intent intent = new Intent(context, ForumActivity.class);
+                                                intent.putExtra("userUid", userUid);
                                                 context.startActivity(intent);
                                                 Toast.makeText(context, "Berjaya Daftar " + firebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
                                                 progressDialog.dismiss();

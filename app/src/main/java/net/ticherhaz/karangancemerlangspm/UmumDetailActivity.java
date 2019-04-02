@@ -151,6 +151,25 @@ public class UmumDetailActivity extends AppCompatActivity {
                                 holder.getTextViewState().setText("Negeri: " + registeredUser.getState());
                                 new Others().setStatus(registeredUser.getMode(), holder.getTextViewStatus());
 
+                                //Edit part
+                                //this part, first, we check if the user is already sign in or not and if the user valid, then he can edit his reply
+                                if (firebaseUser != null) {
+                                    //then we show the button
+                                    holder.getTextViewEditReply().setVisibility(View.VISIBLE);
+                                    holder.getTextViewEditReply().setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            //when we click this one, then we change the layout display from the textview become the edittext.
+                                            //so we gone the textview
+                                            holder.getTextViewDeskripsi().setVisibility(View.GONE);
+                                            //then we display the edit text
+                                            holder.getEditTextEdit().setVisibility(View.VISIBLE);
+                                            //after that we display the text of the reply.
+                                            holder.getEditTextEdit().setText(model.getDeskripsi());
+                                        }
+                                    });
+                                }
+
                                 holder.getTextViewGiveReputation().setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
@@ -194,6 +213,8 @@ public class UmumDetailActivity extends AppCompatActivity {
                                                     }
                                                 })
                                                 .create();
+
+                                        //If the user is not null when pressing the button give reputation, mean its valid then display the alert dialog
                                         if (firebaseUser != null) {
                                             alertDialog.show();
                                         } else {
@@ -266,7 +287,7 @@ public class UmumDetailActivity extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Memuat Naik...");
 
-        //Get uid
+        //Get uid/ check if the user is not null or not
         if (firebaseUser != null) {
             registeredUidReply = firebaseUser.getUid();
             retrieveUserData();

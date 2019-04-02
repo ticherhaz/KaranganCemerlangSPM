@@ -59,7 +59,7 @@ public class UmumActivity extends AppCompatActivity {
 
     private String title;
     private String forumUid;
-
+    private String userUid;
 
     private void setFirebaseRecyclerAdapter() {
         progressBar.setVisibility(View.VISIBLE);
@@ -99,6 +99,7 @@ public class UmumActivity extends AppCompatActivity {
 
                     }
                 });
+
 
                 //check if null or not
                 if (model.getRegisteredUidLastReply() != null) {
@@ -178,6 +179,8 @@ public class UmumActivity extends AppCompatActivity {
 
                             }
                         });
+
+
                         Intent intent = new Intent(UmumActivity.this, UmumDetailActivity.class);
                         intent.putExtra("umumUid", model.getUmumUid());
                         intent.putExtra("tajukPos", model.getTajuk());
@@ -213,7 +216,6 @@ public class UmumActivity extends AppCompatActivity {
         firebaseRecyclerAdapter.notifyDataSetChanged();
     }
 
-
     private void listID() {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
@@ -225,6 +227,7 @@ public class UmumActivity extends AppCompatActivity {
         buttonTopikBaru = findViewById(R.id.button_topik);
         recyclerView = findViewById(R.id.recycler_view_umum);
 
+        setTotalOnlineSpecific(userUid, "Online");
         setFirebaseRecyclerAdapter();
     }
 
@@ -266,9 +269,18 @@ public class UmumActivity extends AppCompatActivity {
         });
     }
 
+    private void setTotalOnlineSpecific(final String userUid, String onlineStatus) {
+        //Update the total user is seeing this umum activity.
+        if (userUid != null) {
+            databaseReference.child("onlineStatusSpecific").child(forumUid).child(userUid).child("onlineStatus").setValue(onlineStatus);
+            databaseReference.child("onlineStatusSpecific").child(forumUid).child(userUid).child("onlineStatus").onDisconnect().setValue("Offline");
+        }
+    }
+
     //OnBackPressed
     @Override
     public void onBackPressed() {
+        setTotalOnlineSpecific(userUid, "Offline");
         finish();
     }
 
@@ -283,6 +295,7 @@ public class UmumActivity extends AppCompatActivity {
         if (intent.getExtras() != null) {
             title = intent.getExtras().getString("title");
             forumUid = intent.getExtras().getString("forumUid");
+            userUid = intent.getExtras().getString("userUid");
         }
     }
 }

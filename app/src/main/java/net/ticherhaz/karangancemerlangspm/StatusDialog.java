@@ -9,6 +9,8 @@ import android.widget.CompoundButton;
 
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Calendar;
+
 public class StatusDialog extends Dialog {
 
     Context context;
@@ -35,7 +37,9 @@ public class StatusDialog extends Dialog {
         checkBoxBiasa = findViewById(R.id.checkbox_biasa);
         checkBoxSedih = findViewById(R.id.checkbox_sedih);
 
-        setCheckBox();
+        setCheckBox(checkBoxGembira, "Gembira");
+        setCheckBox(checkBoxBiasa, "Biasa");
+        setCheckBox(checkBoxSedih, "Sedih");
     }
 
 
@@ -47,35 +51,23 @@ public class StatusDialog extends Dialog {
         listID();
     }
 
-    private void setCheckBox() {
-        checkBoxGembira.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+    private void setCheckBox(CheckBox checkBox, final String status) {
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    //then we store the data in the database
-                    FirebaseDatabase.getInstance().getReference().child("registeredUser").child(registeredUid).child("mode").setValue("Gembira");
-                    dismiss();
+                //then we store the data in the database
+                FirebaseDatabase.getInstance().getReference().child("registeredUser").child(registeredUid).child("mode").setValue(status);
+
+                String date = Calendar.getInstance().getTime().toString();
+                String uid = FirebaseDatabase.getInstance().getReference().push().getKey();
+                //update the activity log for the changes status
+                if (uid != null) {
+                    FirebaseDatabase.getInstance().getReference().child("activityStatusChanges").child(registeredUid).child(uid).child("mode").setValue(status);
+                    FirebaseDatabase.getInstance().getReference().child("activityStatusChanges").child(registeredUid).child(uid).child("date").setValue(date);
                 }
-            }
-        });
-        checkBoxBiasa.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    //then we store the data in the database
-                    FirebaseDatabase.getInstance().getReference().child("registeredUser").child(registeredUid).child("mode").setValue("Biasa");
-                    dismiss();
-                }
-            }
-        });
-        checkBoxSedih.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    //then we store the data in the database
-                    FirebaseDatabase.getInstance().getReference().child("registeredUser").child(registeredUid).child("mode").setValue("Sedih");
-                    dismiss();
-                }
+
+                dismiss();
             }
         });
     }

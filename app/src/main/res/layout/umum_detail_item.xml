@@ -165,6 +165,15 @@
             android:scrollbars="vertical"
             android:text="@string/deskripsi" />
 
+        <EditText
+            android:id="@+id/edit_text_deskripsi"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:maxLines="29"
+            android:scrollbars="vertical"
+            android:visibility="gone" />
+
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -180,19 +189,33 @@
                 android:text="@string/memberi_reputasi"
                 android:textColor="@drawable/text_view_color" />
 
+            <!--<TextView-->
+            <!--android:id="@+id/text_view_membalas"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginStart="5dp"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:drawableStart="@drawable/ic_reply"-->
+            <!--android:drawableLeft="@drawable/ic_reply"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:text="@string/membalas"-->
+            <!--android:visibility="gone" />-->
+
             <TextView
-                android:id="@+id/text_view_membalas"
+                android:id="@+id/text_view_edit_reply"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
-                android:drawableStart="@drawable/ic_reply"
-                android:drawableLeft="@drawable/ic_reply"
+                android:drawableStart="@drawable/ic_edit"
+                android:drawableLeft="@drawable/ic_edit"
                 android:gravity="center_vertical"
-                android:text="@string/membalas"
-                android:visibility="gone" />
+                android:text="@string/edit"
+                android:visibility="invisible" />
 
         </RelativeLayout>
     </LinearLayout>

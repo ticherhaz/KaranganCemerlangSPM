@@ -143,48 +143,50 @@ public class OnlineStatusUtil {
 
 
                                                     //Then we store the value base on the old act uid
+                                                    if (oldActUid != null) {
+                                                        databaseReference.child("activitySession").child(registeredUid).child(activityDate).child(oldActUid).child("offlineTimeOnDisconnect").onDisconnect().setValue(offlineTime);
 
-                                                    databaseReference.child("activitySession").child(registeredUid).child(activityDate).child(oldActUid).child("offlineTime").onDisconnect().setValue(offlineTime);
-                                                    //After that we calculate the total second that he active in the forum
-                                                    //We need to retrieve the data online time
-                                                    databaseReference.child("activitySession").child(registeredUid).child(activityDate).child(oldActUid).child("onlineTime").addListenerForSingleValueEvent(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                            //at here we check if the offline time is already exist or not, if not, then we can create the ondisconnect. :)
-                                                            if (dataSnapshot.exists()) {
+                                                        //After that we calculate the total second that he active in the forum
+                                                        //We need to retrieve the data online time
+                                                        databaseReference.child("activitySession").child(registeredUid).child(activityDate).child(oldActUid).child("onlineTime").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                //at here we check if the offline time is already exist or not, if not, then we can create the ondisconnect. :)
+                                                                if (dataSnapshot.exists()) {
 
-                                                                //we get the value first
-                                                                String onlineTime = dataSnapshot.getValue(String.class);
-                                                                try {
+                                                                    //we get the value first
+                                                                    String onlineTime = dataSnapshot.getValue(String.class);
+                                                                    try {
 
-                                                                    @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss aa");
-                                                                    Date date1 = sdf.parse(onlineTime);
-                                                                    Date date2 = sdf.parse(offlineTime);
+                                                                        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss aa");
+                                                                        Date date1 = sdf.parse(onlineTime);
+                                                                        Date date2 = sdf.parse(offlineTime);
 
-                                                                    long millse = date1.getTime() - date2.getTime();
-                                                                    long mills = Math.abs(millse);
+                                                                        long millse = date1.getTime() - date2.getTime();
+                                                                        long mills = Math.abs(millse);
 
-                                                                    int Hours = (int) (mills / (1000 * 60 * 60));
-                                                                    int Mins = (int) (mills / (1000 * 60)) % 60;
-                                                                    long Secs = (int) (mills / 1000) % 60;
+                                                                        int Hours = (int) (mills / (1000 * 60 * 60));
+                                                                        int Mins = (int) (mills / (1000 * 60)) % 60;
+                                                                        long Secs = (int) (mills / 1000) % 60;
 
-                                                                    String totalTime = Hours + " hour, " + Mins + " mins, " + Secs + " secs";
-                                                                    //Then we add new value in the database
-                                                                    databaseReference.child("activitySession").child(registeredUid).child(activityDate).child(oldActUid).child("totalOnline").onDisconnect().setValue(totalTime);
+                                                                        String totalTime = Hours + " hour, " + Mins + " mins, " + Secs + " secs";
+                                                                        //Then we add new value in the database
+                                                                        databaseReference.child("activitySession").child(registeredUid).child(activityDate).child(oldActUid).child("totalOnlineOnDisconnect").onDisconnect().setValue(totalTime);
 
 
-                                                                } catch (ParseException e) {
-                                                                    e.printStackTrace();
+                                                                    } catch (ParseException e) {
+                                                                        e.printStackTrace();
+                                                                    }
+
                                                                 }
+                                                            }
+
+                                                            @Override
+                                                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
                                                             }
-                                                        }
-
-                                                        @Override
-                                                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                                        }
-                                                    });
+                                                        });
+                                                    }
 
 
                                                 }

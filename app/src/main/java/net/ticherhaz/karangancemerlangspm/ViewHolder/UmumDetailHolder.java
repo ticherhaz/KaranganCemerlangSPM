@@ -3,6 +3,7 @@ package net.ticherhaz.karangancemerlangspm.ViewHolder;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,9 +23,10 @@ public class UmumDetailHolder extends RecyclerView.ViewHolder {
     private TextView textViewReputation;
     private TextView textViewDeskripsi;
     private TextView textViewGiveReputation;
-    private TextView textViewMembalas;
     private TextView textViewStatus;
     private TextView textViewState;
+    private TextView textViewEditReply;
+    private EditText editTextEdit;
 
     public UmumDetailHolder(@NonNull View itemView) {
         super(itemView);
@@ -40,9 +42,26 @@ public class UmumDetailHolder extends RecyclerView.ViewHolder {
         textViewReputation = itemView.findViewById(R.id.text_view_reputation);
         textViewDeskripsi = itemView.findViewById(R.id.text_view_deskripsi);
         textViewGiveReputation = itemView.findViewById(R.id.text_view_give_reputation);
-        textViewMembalas = itemView.findViewById(R.id.text_view_membalas);
         textViewStatus = itemView.findViewById(R.id.text_view_status);
         textViewState = itemView.findViewById(R.id.text_view_state);
+        textViewEditReply = itemView.findViewById(R.id.text_view_edit_reply);
+        editTextEdit = itemView.findViewById(R.id.edit_text_deskripsi);
+    }
+
+    public EditText getEditTextEdit() {
+        return editTextEdit;
+    }
+
+    public void setEditTextEdit(EditText editTextEdit) {
+        this.editTextEdit = editTextEdit;
+    }
+
+    public TextView getTextViewEditReply() {
+        return textViewEditReply;
+    }
+
+    public void setTextViewEditReply(TextView textViewEditReply) {
+        this.textViewEditReply = textViewEditReply;
     }
 
     public TextView getTextViewState() {
@@ -157,11 +176,4 @@ public class UmumDetailHolder extends RecyclerView.ViewHolder {
         this.textViewGiveReputation = textViewGiveReputation;
     }
 
-    public TextView getTextViewMembalas() {
-        return textViewMembalas;
-    }
-
-    public void setTextViewMembalas(TextView textViewMembalas) {
-        this.textViewMembalas = textViewMembalas;
-    }
 }
