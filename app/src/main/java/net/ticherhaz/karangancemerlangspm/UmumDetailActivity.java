@@ -153,9 +153,15 @@ public class UmumDetailActivity extends AppCompatActivity {
 
                                 //Edit part
                                 //this part, first, we check if the user is already sign in or not and if the user valid, then he can edit his reply
-                                if (firebaseUser != null) {
+                                //check if the same person, then, he able to edit it
+                                if (model.getRegisteredUid().equals(firebaseUser.getUid())) {
                                     //then we show the button
                                     holder.getTextViewEditReply().setVisibility(View.VISIBLE);
+
+                                    //Hide the giving of the reputation
+                                    holder.getTextViewGiveReputation().setVisibility(View.GONE);
+
+
                                     holder.getTextViewEditReply().setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
@@ -166,10 +172,56 @@ public class UmumDetailActivity extends AppCompatActivity {
                                             holder.getEditTextEdit().setVisibility(View.VISIBLE);
                                             //after that we display the text of the reply.
                                             holder.getEditTextEdit().setText(model.getDeskripsi());
+                                            //Then we hide the textview 'reply'
+                                            holder.getTextViewEditReply().setVisibility(View.GONE);
+                                            //We display with they yes, or cancel to edit
+                                            holder.getTextViewEditYes().setVisibility(View.VISIBLE);
+                                            holder.getTextViewEditCancel().setVisibility(View.VISIBLE);
+
+
+                                            //After that we triggered the button yes to edit
+                                            holder.getTextViewEditYes().setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    String newDeskripsi = holder.getEditTextEdit().getText().toString();
+                                                    //here we triggered to change in the database
+                                                    databaseReference.child("umumPos").child(forumUid).child(umumUid).child(model.getUmumDetailUid()).child("deskripsi").setValue(newDeskripsi);
+                                                    //After we finish
+                                                    //back to normal
+                                                    //then we change back all to normal
+                                                    //we hide the edittext deskripsi
+                                                    holder.getEditTextEdit().setVisibility(View.GONE);
+                                                    //we display textview deskripsi
+                                                    holder.getTextViewDeskripsi().setVisibility(View.VISIBLE);
+                                                    //We hide this button cancel and yes
+                                                    holder.getTextViewEditYes().setVisibility(View.GONE);
+                                                    holder.getTextViewEditCancel().setVisibility(View.GONE);
+                                                    //Then we display back the edit button
+                                                    holder.getTextViewEditReply().setVisibility(View.VISIBLE);
+                                                }
+                                            });
+
+                                            //This one is for cancel
+                                            holder.getTextViewEditCancel().setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    //then we change back all to normal
+                                                    //we hide the edittext deskripsi
+                                                    holder.getEditTextEdit().setVisibility(View.GONE);
+                                                    //we display textview deskripsi
+                                                    holder.getTextViewDeskripsi().setVisibility(View.VISIBLE);
+                                                    //We hide this button cancel and yes
+                                                    holder.getTextViewEditYes().setVisibility(View.GONE);
+                                                    holder.getTextViewEditCancel().setVisibility(View.GONE);
+                                                    //Then we display back the edit button
+                                                    holder.getTextViewEditReply().setVisibility(View.VISIBLE);
+                                                }
+                                            });
                                         }
                                     });
                                 }
 
+                                //GIVE REPUTATION
                                 holder.getTextViewGiveReputation().setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
@@ -182,27 +234,64 @@ public class UmumDetailActivity extends AppCompatActivity {
                                                     public void onClick(final DialogInterface dialog, int which) {
                                                         //Display the progress dialog
                                                         progressDialog.show();
-                                                        //If yes, then we add the reputation power in this specfic user who post.
-                                                        databaseReference.child("registeredUser").child(model.getRegisteredUid()).child("reputation").runTransaction(new Transaction.Handler() {
-                                                            @NonNull
+
+                                                        //First we check the reputationLimit for this guy
+                                                        databaseReference.child("reputationLimit").child(registeredUidReply).addListenerForSingleValueEvent(new ValueEventListener() {
                                                             @Override
-                                                            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
-                                                                if (mutableData.getValue() == null) {
-                                                                    mutableData.setValue(0);
-                                                                } else {
-                                                                    mutableData.setValue((Long) mutableData.getValue() + reputationPower); //add the reputation power
+                                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                if (dataSnapshot.exists()) {
+
+                                                                    final long totalLimitReputation = dataSnapshot.getValue(Long.class);
+
+                                                                    //If has
+                                                                    if (totalLimitReputation > 0) {
+
+                                                                        //If yes, then we add the reputation power in this specfic user who post.
+                                                                        databaseReference.child("registeredUser").child(model.getRegisteredUid()).child("reputation").runTransaction(new Transaction.Handler() {
+                                                                            @NonNull
+                                                                            @Override
+                                                                            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
+                                                                                if (mutableData.getValue() == null) {
+                                                                                    mutableData.setValue(0);
+                                                                                } else {
+                                                                                    mutableData.setValue((Long) mutableData.getValue() + reputationPower); //add the reputation power
+                                                                                }
+                                                                                return Transaction.success(mutableData);
+                                                                            }
+
+                                                                            @Override
+                                                                            public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
+                                                                                //Hide the progress dialog after finish give the reputation
+                                                                                progressDialog.dismiss();
+                                                                                Toast.makeText(getApplicationContext(), "Berjaya memberi reputasi", Toast.LENGTH_SHORT).show();
+
+
+                                                                                //After we update the value, then we reduce the reputationLimit for this guy
+                                                                                long afterDeductReputationLimit = totalLimitReputation - 1;
+                                                                                databaseReference.child("reputationLimit").child(registeredUidReply).setValue(afterDeductReputationLimit);
+                                                                                dialog.cancel();
+                                                                            }
+                                                                        });
+
+                                                                    }
+                                                                    //Then if the user already reach 0 total to give reputation
+                                                                    else {
+                                                                        progressDialog.dismiss();
+                                                                        Toast.makeText(getApplicationContext(), "Maaf, reputatasi hari ini sudah habis, sila tunggu esok", Toast.LENGTH_SHORT).show();
+                                                                    }
+
                                                                 }
-                                                                return Transaction.success(mutableData);
+
+
                                                             }
 
                                                             @Override
-                                                            public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
-                                                                //Hide the progress dialog after finish give the reputation
-                                                                progressDialog.dismiss();
-                                                                Toast.makeText(getApplicationContext(), "Berjaya memberi reputasi", Toast.LENGTH_SHORT).show();
-                                                                dialog.cancel();
+                                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
                                                             }
                                                         });
+
+
                                                     }
                                                 })
                                                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -216,7 +305,12 @@ public class UmumDetailActivity extends AppCompatActivity {
 
                                         //If the user is not null when pressing the button give reputation, mean its valid then display the alert dialog
                                         if (firebaseUser != null) {
-                                            alertDialog.show();
+                                            //and check if the user and the one who post is not the same person
+                                            if (!model.getRegisteredUid().equals(firebaseUser.getUid())) {
+                                                alertDialog.show();
+                                            } else {
+                                                Toast.makeText(UmumDetailActivity.this, "Tidak Boleh Reputasi Diri Sendiri", Toast.LENGTH_SHORT).show();
+                                            }
                                         } else {
                                             Toast.makeText(UmumDetailActivity.this, "Sila Daftar/Log Masuk Terlebih Dahulu", Toast.LENGTH_SHORT).show();
                                         }

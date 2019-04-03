@@ -27,6 +27,8 @@ public class UmumDetailHolder extends RecyclerView.ViewHolder {
     private TextView textViewState;
     private TextView textViewEditReply;
     private EditText editTextEdit;
+    private TextView textViewEditYes;
+    private TextView textViewEditCancel;
 
     public UmumDetailHolder(@NonNull View itemView) {
         super(itemView);
@@ -46,6 +48,24 @@ public class UmumDetailHolder extends RecyclerView.ViewHolder {
         textViewState = itemView.findViewById(R.id.text_view_state);
         textViewEditReply = itemView.findViewById(R.id.text_view_edit_reply);
         editTextEdit = itemView.findViewById(R.id.edit_text_deskripsi);
+        textViewEditYes = itemView.findViewById(R.id.text_view_edit_reply_submit);
+        textViewEditCancel = itemView.findViewById(R.id.text_view_edit_reply_cancel);
+    }
+
+    public TextView getTextViewEditYes() {
+        return textViewEditYes;
+    }
+
+    public void setTextViewEditYes(TextView textViewEditYes) {
+        this.textViewEditYes = textViewEditYes;
+    }
+
+    public TextView getTextViewEditCancel() {
+        return textViewEditCancel;
+    }
+
+    public void setTextViewEditCancel(TextView textViewEditCancel) {
+        this.textViewEditCancel = textViewEditCancel;
     }
 
     public EditText getEditTextEdit() {

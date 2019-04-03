@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -44,10 +45,12 @@ import net.ticherhaz.karangancemerlangspm.Model.Karangan;
 import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.KaranganViewHolder;
 
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
+
 public class MainActivity extends AppCompatActivity {
 
     private DatabaseReference databaseReference;
-
     private FirebaseRecyclerOptions<Karangan> firebaseRecyclerOptions;
     private FirebaseRecyclerOptions<Karangan> firebaseRecyclerOptions2;
     private FirebaseRecyclerOptions<Karangan> firebaseRecyclerOptions3;
@@ -60,17 +63,13 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseRecyclerAdapter<Karangan, KaranganViewHolder> firebaseRecyclerAdapter4;
     private FirebaseRecyclerAdapter<Karangan, KaranganViewHolder> firebaseRecyclerAdapter5;
     private FirebaseRecyclerAdapter<Karangan, KaranganViewHolder> firebaseRecyclerAdapter6;
-
     //Variable
     private String userUid;
     private String phoneModel;
-
     //Edit Text
     private EditText editTextSearch;
-
     //Progressbar
     private ProgressBar progressBar;
-
     //RecyclerView
     private RecyclerView recyclerViewTag;
     private RecyclerView recyclerViewTag2;
@@ -78,18 +77,16 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewTag4;
     private RecyclerView recyclerViewTag5;
     private RecyclerView recyclerViewTag6;
-
     private LinearLayout linearLayout;
     private LinearLayout linearLayoutHow;
     private ScrollView scrollViewUtama;
-
     //Button
     private Button buttonSenaraiKarangan;
     private Button buttonTipsKarangan;
     private Button buttonHantarKarangan;
     private Button buttonForum;
-
     private TextView textViewAnnouncement;
+    private TextView textViewCountdownSPM;
 
     //Method listID
     private void listID() {
@@ -100,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         editTextSearch = findViewById(R.id.edit_text_search);
         TextView textViewHow = findViewById(R.id.text_view_how);
         textViewAnnouncement = findViewById(R.id.text_view_announcement);
+        textViewCountdownSPM = findViewById(R.id.text_view_countdown_spm);
         progressBar = findViewById(R.id.progressbar);
 
         recyclerViewTag = findViewById(R.id.recycler_view_tag);
@@ -270,7 +268,6 @@ public class MainActivity extends AppCompatActivity {
         firebaseRecyclerAdapter6.notifyDataSetChanged();
         firebaseRecyclerAdapter6.startListening();
     }
-
 
     //Method tag5
     private void setRecyclerView5(final String search, final RecyclerView recyclerViewNumber) {
@@ -637,6 +634,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listID();
+        setmCountDownTimer();
         setEditTextSearchEditor();
         setEditTextSearchDrawableRight();
         allButton();
@@ -669,10 +667,10 @@ public class MainActivity extends AppCompatActivity {
         editTextSearch.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                final int DRAWABLE_LEFT = 0;
-                final int DRAWABLE_TOP = 1;
+                //  final int DRAWABLE_LEFT = 0;
+                //     final int DRAWABLE_TOP = 1;
                 final int DRAWABLE_RIGHT = 2;
-                final int DRAWABLE_BOTTOM = 3;
+                //  final int DRAWABLE_BOTTOM = 3;
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (event.getRawX() >= (editTextSearch.getRight() - editTextSearch.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
@@ -761,5 +759,50 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         FirebaseDatabase.getInstance().goOnline();
+    }
+
+    private void setmCountDownTimer() {
+        Calendar start_calendar = Calendar.getInstance();
+        Calendar end_calendar = Calendar.getInstance();
+        end_calendar.set(Calendar.DAY_OF_MONTH, 4);
+        end_calendar.set(Calendar.MONTH, 11 - 1);
+        end_calendar.set(Calendar.YEAR, 2019);
+        end_calendar.set(Calendar.HOUR_OF_DAY, 8);
+        end_calendar.set(Calendar.SECOND, 0);
+        end_calendar.set(Calendar.MINUTE, 0);
+
+        long start_millis = start_calendar.getTimeInMillis(); //get the start time in milliseconds
+        long end_millis = end_calendar.getTimeInMillis(); //get the end time in milliseconds
+        long total_millis = (end_millis - start_millis); //total time in milliseconds
+        // end_calendar.set(2015, 10, 6); // 10 = November, month start at 0 = January
+        // end_calendar.set(2019, 11,4 , 8, 0, 0);
+
+        //1000 = 1 second interval
+        CountDownTimer cdt = new CountDownTimer(total_millis, 1000) {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onTick(long millisUntilFinished) {
+                long days = TimeUnit.MILLISECONDS.toDays(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.DAYS.toMillis(days);
+
+                long hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.HOURS.toMillis(hours);
+
+                long minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.MINUTES.toMillis(minutes);
+
+                long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
+
+                String timerSPM = days + " days " + hours + " hours " + minutes + " minutes " + seconds + " seconds";
+                textViewCountdownSPM.setText(timerSPM); //You can compute the millisUntilFinished on hours/minutes/seconds
+            }
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onFinish() {
+                textViewCountdownSPM.setText("Finish!");
+            }
+        };
+        cdt.start();
     }
 }

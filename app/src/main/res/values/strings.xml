@@ -130,6 +130,9 @@
     <string name="biasa">Biasa</string>
     <string name="sedih">Sedih</string>
     <string name="memberi_reputasi">Memberi Reputasi</string>
+    <string name="ubah">Ubah</string>
+    <string name="batal">Batal</string>
+    <string name="spm_2019">SPM 2019</string>
     <string-array name="feedback_array">
         <item>Cadangan</item>
         <item>Pujian</item>

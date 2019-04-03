@@ -242,6 +242,15 @@ public class UmumActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        if (firebaseRecyclerAdapter != null) {
+            firebaseRecyclerAdapter.stopListening();
+            firebaseRecyclerAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         if (firebaseRecyclerAdapter != null) {

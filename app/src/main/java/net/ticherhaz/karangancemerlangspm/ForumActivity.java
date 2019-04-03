@@ -2,7 +2,9 @@ package net.ticherhaz.karangancemerlangspm;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +38,7 @@ import net.ticherhaz.karangancemerlangspm.Util.OnlineStatusUtil;
 import net.ticherhaz.karangancemerlangspm.Util.Others;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.ForumViewHolder;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class ForumActivity extends AppCompatActivity {
@@ -321,10 +324,43 @@ public class ForumActivity extends AppCompatActivity {
     private void checkIfUserOnline() {
         //Check if already login or not
         if (firebaseUser != null) {
+
+
             registeredUid = firebaseUser.getUid();
             //already sign in
             linearLayoutOlderUser.setVisibility(View.VISIBLE);
             linearLayoutNewUser.setVisibility(View.GONE);
+
+            //TODO: This part is for the reset day, it is for the reputation. When the new day, it will reset and give user to give reputation for other user.
+
+            //First we need to detect the date
+            Calendar calendar = Calendar.getInstance();
+            int thisDay = calendar.get(Calendar.DAY_OF_YEAR);
+            long todayMillis = calendar.getTimeInMillis();
+
+            //We are using the shared preference
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+            long last = sharedPreferences.getLong("date", 0);
+            calendar.setTimeInMillis(last);
+            int lastDay = calendar.get(Calendar.DAY_OF_YEAR);
+
+            if (last == 0 || lastDay != thisDay) {
+                //New day
+                SharedPreferences.Editor edit = sharedPreferences.edit();
+                edit.putLong("date", todayMillis);
+                edit.apply();
+                long newReputation = 3;
+                //Then we store the
+                databaseReference.child("reputationLimit").child(registeredUid).setValue(newReputation);
+            }
+
+//            long newReputation = 3;
+//            //Then we store the
+//            databaseReference.child("reputationLimit").child(registeredUid).setValue(newReputation);
+
+
+
+
 
             //Add the info in the userOnlineStatus
             new OnlineStatusUtil().updateUserOnlineStatus("Online", registeredUid, firebaseUser, databaseReference, activitySessionUid, activityDate);
