@@ -110,46 +110,50 @@ public class ForumActivity extends AppCompatActivity {
                 holder.getTextViewLastThreadByUser().setText(Html.fromHtml(daripada));
 
                 //value for the jumlah tajuk
-                databaseReference.child("umum").child(model.getForumUid()).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            long size = dataSnapshot.getChildrenCount();
-                            holder.getTextViewThreads().setText("Jumlah Tajuk: " + String.valueOf(size));
-
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-                //value for the jumlah pos
-                databaseReference.child("umumPos").child(model.getForumUid()).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        long sum = 0;
-                        if (dataSnapshot.exists()) {
-                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                long size = dataSnapshot1.getChildrenCount();
-                                sum += size;
-                                holder.getTextViewPostThreadsCount().setText("Jumlah Pos: " + sum);
+                if (model.getForumUid() != null) {
+                    databaseReference.child("umum").child(model.getForumUid()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                long size = dataSnapshot.getChildrenCount();
+                                holder.getTextViewThreads().setText("Jumlah Tajuk: " + String.valueOf(size));
 
                             }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
                         }
-                    }
+                    });
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    //value for the jumlah pos
+                    databaseReference.child("umumPos").child(model.getForumUid()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            long sum = 0;
+                            if (dataSnapshot.exists()) {
+                                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                    long size = dataSnapshot1.getChildrenCount();
+                                    sum += size;
+                                    holder.getTextViewPostThreadsCount().setText("Jumlah Pos: " + sum);
 
-                    }
-                });
+                                }
 
-                //Display for the total user who is watching the umum specific
-                calculateAllOnlineSpecific(model.getForumUid(), holder.getTextViewUserViewing());
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+                    //Display for the total user who is watching the umum specific
+                    calculateAllOnlineSpecific(model.getForumUid(), holder.getTextViewUserViewing());
+
+                }
 
 
                 //When it clicked
@@ -205,7 +209,7 @@ public class ForumActivity extends AppCompatActivity {
         recyclerViewForum.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerViewForum.setAdapter(firebaseRecyclerAdapter);
         //2. FirebaseUI
-        firebaseRecyclerAdapter.notifyDataSetChanged();
+//          firebaseRecyclerAdapter.notifyDataSetChanged();
         firebaseRecyclerAdapter.startListening();
 
     }
@@ -214,6 +218,7 @@ public class ForumActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         new OnlineStatusUtil().onDisc(firebaseUser, databaseReference, registeredUid, activitySessionUid, activityDate);
+        firebaseRecyclerAdapter.stopListening();
     }
 
     //Make a new calculation.
@@ -359,9 +364,6 @@ public class ForumActivity extends AppCompatActivity {
 //            databaseReference.child("reputationLimit").child(registeredUid).setValue(newReputation);
 
 
-
-
-
             //Add the info in the userOnlineStatus
             new OnlineStatusUtil().updateUserOnlineStatus("Online", registeredUid, firebaseUser, databaseReference, activitySessionUid, activityDate);
 
@@ -482,27 +484,6 @@ public class ForumActivity extends AppCompatActivity {
     }
 
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        //  new SignUpDialog(this).onActivityResult(requestCode, resultCode, data);
-//
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode != RESULT_OK) {
-//            return;
-//        }
-//        if (requestCode == 1) {
-//            final Bundle extras = data.getExtras();
-//            if (extras != null) {
-//                //Get image
-//                Bitmap newProfilePic = extras.getParcelable("data");
-//                View view = LayoutInflater.from(this).inflate(R.layout.sign_up_dialog, null);
-//                Toast.makeText(getApplicationContext(), "SSSS", Toast.LENGTH_LONG).show();
-//                //  ImageView imageView = view.findViewById(R.id.image_view_upload_profile);
-//                //  Glide.with(ForumActivity.this).load(newProfilePic).into(imageView);
-//            }
-//        }
-//    }
-
     //Method sign out
     private void setTextViewSignOut() {
         textViewSignOut.setOnClickListener(new View.OnClickListener() {
@@ -528,6 +509,12 @@ public class ForumActivity extends AppCompatActivity {
         setButtonSignIn();
         setButtonSignUp();
         setTextViewSignOut();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firebaseRecyclerAdapter.startListening();
     }
 
 

@@ -42,6 +42,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.Karangan;
+import net.ticherhaz.karangancemerlangspm.Util.Others;
 import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.KaranganViewHolder;
 
@@ -231,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //This part we will update the database when user click the specific karangan
                         //1. We need to update the last visited karangan
-                        databaseReference.child("user").child(userUid).child("lastVisitedKarangan").setValue(model.getTajukPenuh());
+                        new Others().lastVisitedKarangan(databaseReference, userUid, model);
                         //2. So about the mostvisited karangan.
                         //So we read back the previous data
 
@@ -303,7 +304,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //This part we will update the database when user click the specific karangan
                         //1. We need to update the last visited karangan
-                        databaseReference.child("user").child(userUid).child("lastVisitedKarangan").setValue(model.getTajukPenuh());
+                        new Others().lastVisitedKarangan(databaseReference, userUid, model);
                         //2. So about the mostvisited karangan.
                         //So we read back the previous data
 
@@ -375,7 +376,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //This part we will update the database when user click the specific karangan
                         //1. We need to update the last visited karangan
-                        databaseReference.child("user").child(userUid).child("lastVisitedKarangan").setValue(model.getTajukPenuh());
+                        new Others().lastVisitedKarangan(databaseReference, userUid, model);
                         //2. So about the mostvisited karangan.
                         //So we read back the previous data
 
@@ -447,7 +448,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //This part we will update the database when user click the specific karangan
                         //1. We need to update the last visited karangan
-                        databaseReference.child("user").child(userUid).child("lastVisitedKarangan").setValue(model.getTajukPenuh());
+                        new Others().lastVisitedKarangan(databaseReference, userUid, model);
                         //2. So about the mostvisited karangan.
                         //So we read back the previous data
 
@@ -519,7 +520,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //This part we will update the database when user click the specific karangan
                         //1. We need to update the last visited karangan
-                        databaseReference.child("user").child(userUid).child("lastVisitedKarangan").setValue(model.getTajukPenuh());
+                        new Others().lastVisitedKarangan(databaseReference, userUid, model);
                         //2. So about the mostvisited karangan.
                         //So we read back the previous data
 
@@ -591,7 +592,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //This part we will update the database when user click the specific karangan
                         //1. We need to update the last visited karangan
-                        databaseReference.child("user").child(userUid).child("lastVisitedKarangan").setValue(model.getTajukPenuh());
+                        new Others().lastVisitedKarangan(databaseReference, userUid, model);
                         //2. So about the mostvisited karangan.
                         //So we read back the previous data
 
@@ -625,7 +626,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewNumber.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerViewNumber.setAdapter(firebaseRecyclerAdapter);
         //2. FirebaseUI
-        firebaseRecyclerAdapter.notifyDataSetChanged();
+        //  firebaseRecyclerAdapter.notifyDataSetChanged();
         firebaseRecyclerAdapter.startListening();
     }
 
@@ -696,7 +697,7 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
             builder.setTitle(R.string.action_about);
             //TODO: Update the version at About
-            builder.setMessage("Karangan Cemerlang SPM\nversi 2.14\n\n\nJangan lupa kongsi bersama kawan :)\n\n\n\nKreditkan kepada:\nCikgu Mariani\nCikgu Badrunsham\nCikgu Hamidah\nCikgu Rohani\nCikgu Harum Awang\nCikgu Samat\nCikgu Che Noranuwi\nNabil Fikri\nMuhd Arif (Bob)\nLuqman K\nAffiq Shamil\n\nhazman45.blogspot.com\nTicherhaz©2019");
+            builder.setMessage("Karangan Cemerlang SPM\nversi 2.16\n\n\nJangan lupa kongsi bersama kawan :)\n\n\n\nKredit:\nCikgu Mariani\nCikgu Badrunsham\nCikgu Hamidah\nCikgu Rohani\nCikgu Harum Awang\nCikgu Samat\nCikgu Che Noranuwi\nNabil Fikri\nMuhd Arif (Bob)\nLuqman K\nAffiq Shamil\n\nhazman45.blogspot.com\nTicherhaz©2019");
 
             builder.setCancelable(true);
             builder.setPositiveButton(
@@ -774,8 +775,6 @@ public class MainActivity extends AppCompatActivity {
         long start_millis = start_calendar.getTimeInMillis(); //get the start time in milliseconds
         long end_millis = end_calendar.getTimeInMillis(); //get the end time in milliseconds
         long total_millis = (end_millis - start_millis); //total time in milliseconds
-        // end_calendar.set(2015, 10, 6); // 10 = November, month start at 0 = January
-        // end_calendar.set(2019, 11,4 , 8, 0, 0);
 
         //1000 = 1 second interval
         CountDownTimer cdt = new CountDownTimer(total_millis, 1000) {
@@ -793,7 +792,7 @@ public class MainActivity extends AppCompatActivity {
 
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
 
-                String timerSPM = days + " days " + hours + " hours " + minutes + " minutes " + seconds + " seconds";
+                String timerSPM = days + " Hari " + hours + " Jam " + minutes + " Minit " + seconds + " Saat";
                 textViewCountdownSPM.setText(timerSPM); //You can compute the millisUntilFinished on hours/minutes/seconds
             }
 

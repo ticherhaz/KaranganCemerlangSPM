@@ -46,7 +46,6 @@ public class KaranganDetailActivity extends AppCompatActivity {
     private String tarikh;
     private int vote;
     private int mostVisited;
-    private int voteAtKarangan = 0;
     private boolean colorChange = true;
 
     //Method listID
@@ -159,7 +158,7 @@ public class KaranganDetailActivity extends AppCompatActivity {
     //Method check the user if user already like or not
     private void checkLike() {
         //We are using the value event listener instead single value because we want to database always online
-        databaseReference.child("user").child(userUid).child("karangan").child(tajuk).child("like").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("userAlphaKaranganClick").child(userUid).child(tajuk).child("like").addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -189,7 +188,7 @@ public class KaranganDetailActivity extends AppCompatActivity {
                 } else {
                     //1st. we read and update at karangan
                     new RunTransaction().runTransactionUserVoteKarangan(databaseReference, karanganJenis, uidKarangan);
-                    databaseReference.child("user").child(userUid).child("karangan").child(tajuk).child("like").setValue(1);
+                    databaseReference.child("userAlphaKaranganClick").child(userUid).child(tajuk).child("like").setValue(1);
                     textViewFav.setText(String.valueOf(vote + 1));
                     Toast.makeText(getApplicationContext(), "Anda Suka Karangan Ini", Toast.LENGTH_SHORT).show();
                 }
@@ -212,10 +211,8 @@ public class KaranganDetailActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Anda Sudah Suka Karangan Ini", Toast.LENGTH_SHORT).show();
                 } else {
                     //1st. we read and update at karangan
-                    //  final DatabaseReference databaseReferenceKarangan = firebaseDatabase.getReference();
-
                     new RunTransaction().runTransactionUserVoteKarangan(databaseReference, karanganJenis, uidKarangan);
-                    databaseReference.child("user").child(userUid).child("karangan").child(tajuk).child("like").setValue(1);
+                    databaseReference.child("userAlphaKaranganClick").child(userUid).child(tajuk).child("like").setValue(1);
                     textViewFav.setText(String.valueOf(vote + 1));
                     Toast.makeText(getApplicationContext(), "Anda Suka Karangan Ini", Toast.LENGTH_SHORT).show();
                 }

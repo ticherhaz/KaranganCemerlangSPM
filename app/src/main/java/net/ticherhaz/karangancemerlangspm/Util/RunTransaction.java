@@ -44,13 +44,12 @@ public class RunTransaction {
         intent.putExtra("userLastVisitedDate", modelUserLastVisitedDate);
         context.startActivities(new Intent[]{intent});
 
-        // databaseReference.child("karangan").child("main").child(modelUid).child("mostVisited").runTransaction(new Transaction.Handler() {
         databaseReference.child("karangan").child(karanganJenis).child(modelUid).child("mostVisited").runTransaction(new Transaction.Handler() {
             @NonNull
             @Override
             public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
                 if (mutableData.getValue() == null) {
-                    mutableData.setValue(0);
+                    mutableData.setValue(1);
                 } else {
                     mutableData.setValue((Long) mutableData.getValue() + 1);
                 }
@@ -66,12 +65,12 @@ public class RunTransaction {
     }
 
     public void runTransactionUserClick(final DatabaseReference databaseReference, final String userUid, final String tajukPenuh) {
-        databaseReference.child("user").child(userUid).child("karangan").child(tajukPenuh).child("click").runTransaction(new Transaction.Handler() {
+        databaseReference.child("userAlphaKaranganClick").child(userUid).child(tajukPenuh).child("click").runTransaction(new Transaction.Handler() {
             @NonNull
             @Override
             public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
                 if (mutableData.getValue() == null) {
-                    mutableData.setValue(0);
+                    mutableData.setValue(1);
                 } else {
                     mutableData.setValue((Long) mutableData.getValue() + 1);
                 }
@@ -91,7 +90,7 @@ public class RunTransaction {
             @Override
             public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
                 if (mutableData.getValue() == null) {
-                    mutableData.setValue(0);
+                    mutableData.setValue(1);
                 } else {
                     mutableData.setValue((Long) mutableData.getValue() + 1);
                 }
@@ -150,8 +149,5 @@ public class RunTransaction {
             });
             defaultReward += 50;
         }
-//        if (pos == defaultReward) {
-//
-//        }
     }
 }

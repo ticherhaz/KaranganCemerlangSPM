@@ -28,7 +28,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="3dp"
-                android:text="@string/tajuk"
                 android:textSize="21sp"
                 android:textStyle="bold" />
 
@@ -47,7 +46,7 @@
                 android:drawableStart="@drawable/ic_viewer"
                 android:drawableLeft="@drawable/ic_viewer"
                 android:gravity="center_vertical"
-                android:text="@string/views" />
+                android:text="@string/kosong" />
 
             <TextView
                 android:id="@+id/text_view_jumlah_balas"
@@ -62,7 +61,7 @@
                 android:drawableStart="@drawable/ic_reply"
                 android:drawableLeft="@drawable/ic_reply"
                 android:gravity="center_vertical"
-                android:text="@string/jumlah_balas" />
+                android:text="@string/kosong" />
 
 
             <TextView

@@ -29,13 +29,10 @@ public class HantarKaranganActivity extends AppCompatActivity {
     private static final int RC_TAKE_PICTURE = 101;
 
     private Button buttonMuatNaik;
-    //  private Button buttonAmbilGambar;
     private EditText editTextName;
     private EditText editTextSekolah;
-    // private EditText editTextTextFromImage;
     private BroadcastReceiver mBroadcastReceiver;
     private ProgressDialog mProgressDialog;
-    //  private FirebaseAuth mAuth;
 
     private Uri mFileUri = null;
 
@@ -43,71 +40,15 @@ public class HantarKaranganActivity extends AppCompatActivity {
     private String name = null;
     private String sekolah = null;
 
-    //   private Bitmap bitmapImage;
-
 
     private void listID() {
         buttonMuatNaik = findViewById(R.id.button_muat_naik);
-//        buttonAmbilGambar = findViewById(R.id.button_ambil_gambar);
         editTextName = findViewById(R.id.edit_text_nama);
         editTextSekolah = findViewById(R.id.edit_text_sekolah);
-        //  editTextTextFromImage = findViewById(R.id.edit_text_image_to_text);
-
-        //Initialize
-        //Database
-        // FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        // DatabaseReference databaseReference = firebaseDatabase.getReference();
-
-        // FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
-        // StorageReference storageReference = firebaseStorage.getReference();
         retrieveIntent();
 
     }
 
-//    private void setButtonAmbilGambar() {
-//        buttonAmbilGambar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //Before we proceed we need to check the permission.
-//                // checkPermission();
-//                pickImage();
-//            }
-//        });
-//    }
-
-//    private void checkPermission() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            try {
-//                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_CAMERA);
-//            } catch (Exception e) {
-//
-//            }
-//        } else {
-//            //Then proceed take image
-//            pickImage();
-//        }
-//    }
-
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        if (requestCode == PERMISSION_CAMERA && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//            pickImage();
-//        } else {
-//            checkPermission();
-//        }
-//    }
-
-
-//    private void pickImage() {
-//        CropImage.activity()
-//                .setGuidelines(CropImageView.Guidelines.ON)
-//                .setActivityTitle("My Crop")
-//                .setCropShape(CropImageView.CropShape.RECTANGLE)
-//                .setCropMenuCropButtonTitle("Done")
-//                .setCropMenuCropButtonIcon(R.drawable.ic_tick_yes)
-//                .start(this);
-//
-//    }
 
     //Retrieve value
     private void retrieveIntent() {
@@ -162,7 +103,6 @@ public class HantarKaranganActivity extends AppCompatActivity {
             }
         };
         setButtonMuatNaik();
-        // setButtonAmbilGambar();
 
     }
 
@@ -196,61 +136,6 @@ public class HantarKaranganActivity extends AppCompatActivity {
     }
 
 
-//    private void runTextRecognition(Bitmap mSelectedImage) {
-//        FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(mSelectedImage);
-//
-//        FirebaseVisionCloudTextRecognizerOptions options = new FirebaseVisionCloudTextRecognizerOptions.Builder()
-//                .setLanguageHints(Arrays.asList("en", "hi"))
-//                .build();
-//
-//        FirebaseVisionTextRecognizer detector2 = FirebaseVision.getInstance()
-//                .getCloudTextRecognizer(options);
-//
-//
-//        // Task<FirebaseVisionText> result =
-//        detector2.processImage(image)
-//                .addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
-//                    @Override
-//                    public void onSuccess(FirebaseVisionText firebaseVisionText) {
-//                        // Task completed successfully
-//                        // ...
-//                        processTextRecognitionResult(firebaseVisionText);
-//
-//                    }
-//                })
-//                .addOnFailureListener(
-//                        new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                // Task failed with an exception
-//                                // ...
-//                            }
-//                        });
-//
-//    }
-
-//
-//    @SuppressLint("SetTextI18n")
-//    private void processTextRecognitionResult(FirebaseVisionText texts) {
-//        List<FirebaseVisionText.TextBlock> blocks = texts.getTextBlocks();
-//        if (blocks.size() == 0) {
-//            editTextTextFromImage.setText("No text found!");
-//            return;
-//        }
-//        StringBuilder sb = new StringBuilder("");
-//        for (int i = 0; i < blocks.size(); i++) {
-//            List<FirebaseVisionText.Line> lines = blocks.get(i).getLines();
-//            for (int j = 0; j < lines.size(); j++) {
-//                List<FirebaseVisionText.Element> elements = lines.get(j).getElements();
-//                for (int k = 0; k < elements.size(); k++)
-//                    sb.append(elements.get(k).getText()).append(" ");
-//                sb.append("\n");
-//            }
-//            sb.append("\n");
-//        }
-//        editTextTextFromImage.setText(sb.toString());
-//    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        Log.d(TAG, "onActivityResult:" + requestCode + ":" + resultCode + ":" + data);
@@ -265,29 +150,6 @@ public class HantarKaranganActivity extends AppCompatActivity {
             }
         }
 
-
-//        // handle result of CropImageActivity
-//        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-//            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-//            if (resultCode == RESULT_OK) {
-//                ((ImageView) findViewById(R.id.cropImageView)).setImageURI(result.getUri());
-//
-//                Toast.makeText(
-//                        this, "Cropping successful, Sample: " + result.getSampleSize(), Toast.LENGTH_LONG)
-//                        .show();
-//
-//                try {
-//                    bitmapImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), result.getUri());
-//                    runTextRecognition(bitmapImage);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-//
-//            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-//                Toast.makeText(this, "Cropping failed: " + result.getError(), Toast.LENGTH_LONG).show();
-//            }
-//        }
     }
 
     private void uploadFromUri(Uri fileUri, String userUidl, String namel, String sekolahl) {

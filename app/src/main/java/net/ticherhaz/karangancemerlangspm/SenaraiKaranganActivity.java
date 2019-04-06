@@ -24,6 +24,7 @@ import com.google.firebase.database.Query;
 
 import net.ticherhaz.karangancemerlangspm.Model.Karangan;
 import net.ticherhaz.karangancemerlangspm.Util.InternetMessage;
+import net.ticherhaz.karangancemerlangspm.Util.Others;
 import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.KaranganViewHolder;
 
@@ -81,10 +82,8 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
         //Set progressbar
         progressBar.setVisibility(View.VISIBLE);
         //FirebaseUI
-        //  Query query = databaseReference.child("karangan").child("main").orderByChild("karanganJenis").equalTo(karanganJenis);
         Query query = databaseReference.child("karangan").child(karanganJenis).orderByChild("karanganJenis").equalTo(karanganJenis);
         firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<Karangan>()
-                //   .setQuery(databaseReference.child("karangan").child("main"), Karangan.class)
                 .setQuery(query, Karangan.class)
                 .build();
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Karangan, KaranganViewHolder>(firebaseRecyclerOptions) {
@@ -106,7 +105,7 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
 
                         //This part we will update the database when user click the specific karangan
                         //1. We need to update the last visited karangan
-                        databaseReference.child("user").child(userUid).child("lastVisitedKarangan").setValue(model.getTajukPenuh());
+                        new Others().lastVisitedKarangan(databaseReference, userUid, model);
                         //2. So about the mostvisited karangan.
 
                         //26.3.2019 : I'm making the new class because the main activity need to use to, so the share the method
@@ -140,7 +139,7 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(firebaseRecyclerAdapter);
         //2. FirebaseUI
-        firebaseRecyclerAdapter.notifyDataSetChanged();
+        //firebaseRecyclerAdapter.notifyDataSetChanged();
         firebaseRecyclerAdapter.startListening();
 
         new Handler().postDelayed(new Runnable() {
@@ -156,6 +155,11 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
         }, 5000);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firebaseRecyclerAdapter.startListening();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

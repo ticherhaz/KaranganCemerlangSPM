@@ -42,6 +42,7 @@ import net.ticherhaz.karangancemerlangspm.Model.UmumDetail;
 import net.ticherhaz.karangancemerlangspm.Util.ConvertTimeToText;
 import net.ticherhaz.karangancemerlangspm.Util.Others;
 import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
+import net.ticherhaz.karangancemerlangspm.Util.UserTypeColor;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.UmumDetailHolder;
 
 import java.util.Date;
@@ -131,25 +132,55 @@ public class UmumDetailActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             protected void onBindViewHolder(@NonNull final UmumDetailHolder holder, int position, @NonNull final UmumDetail model) {
+
                 // @SuppressLint("SimpleDateFormat") final SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-                //Here we will retrieve user data from user database.
+
+
+                //1.
+                //Here we will retrieve user data (this specific) from user database.
                 databaseReference.child("registeredUser").child(model.getRegisteredUid()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
-
                             final RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
-
                             if (registeredUser != null) {
-                                holder.getTextViewUsername().setText(registeredUser.getUsername());
-                                holder.getTextViewUserTitle().setText(registeredUser.getTitleType());
-                                holder.getTextViewSekolah().setText(registeredUser.getSekolah());
-                                holder.getTextViewUserJoinDate().setText("Tarikh Sertai: " + registeredUser.getOnDateCreatedMonthYear());
-                                holder.getTextViewGender().setText("Jantina: " + registeredUser.getGender());
-                                holder.getTextViewPos().setText("Pos: " + String.valueOf(registeredUser.getPostCount()));
-                                holder.getTextViewReputation().setText(String.valueOf(registeredUser.getReputation()));
-                                holder.getTextViewState().setText("Negeri: " + registeredUser.getState());
-                                new Others().setStatus(registeredUser.getMode(), holder.getTextViewStatus());
+                                String registeredUserUidA = registeredUser.getRegisteredUserUid();
+                                String userUidA = registeredUser.getUserUid();
+                                String typeUserA = registeredUser.getTypeUser();
+                                String profileUrlA = registeredUser.getProfileUrl();
+                                String emailA = registeredUser.getEmail();
+                                String usernameA = registeredUser.getUsername();
+                                String sekolahA = registeredUser.getSekolah();
+                                String titleTypeA = registeredUser.getTitleType();
+                                String customTitleA = registeredUser.getCustomTitle();
+                                String bioA = registeredUser.getBio();
+                                String genderA = registeredUser.getGender();
+                                String stateA = registeredUser.getState();
+                                String birthdayA = registeredUser.getBirthday();
+                                String modeA = registeredUser.getMode();
+                                long postCountA = registeredUser.getPostCount();
+                                long reputationA = registeredUser.getReputation();
+                                long reputationPowerA = registeredUser.getReputationPower();
+                                String onlineStatusA = registeredUser.getOnlineStatus();
+                                long lastOnlineA = registeredUser.getLastOnline();
+                                String lastCreatedThreadA = registeredUser.getLastCreatedThread();
+                                String onDateCreatedA = registeredUser.getOnDateCreated();
+                                String onDateCreatedMonthYearA = registeredUser.getOnDateCreatedMonthYear();
+
+                                //Call another class to change color
+                                new UserTypeColor().setTextColorUserUmumDetail(registeredUser, holder);
+
+
+                                //This part is to display
+                                holder.getTextViewUsername().setText(usernameA);
+                                holder.getTextViewUserTitle().setText(titleTypeA);
+                                holder.getTextViewSekolah().setText(sekolahA);
+                                holder.getTextViewUserJoinDate().setText("Tarikh Sertai: " + onDateCreatedMonthYearA);
+                                holder.getTextViewGender().setText("Jantina: " + genderA);
+                                holder.getTextViewPos().setText("Pos: " + String.valueOf(postCountA));
+                                holder.getTextViewReputation().setText(String.valueOf(reputationA));
+                                holder.getTextViewState().setText("Negeri: " + stateA);
+                                new Others().setStatus(modeA, holder.getTextViewStatus());
 
                                 //Edit part
                                 //this part, first, we check if the user is already sign in or not and if the user valid, then he can edit his reply
@@ -246,32 +277,103 @@ public class UmumDetailActivity extends AppCompatActivity {
                                                                     //If has
                                                                     if (totalLimitReputation > 0) {
 
-                                                                        //If yes, then we add the reputation power in this specfic user who post.
-                                                                        databaseReference.child("registeredUser").child(model.getRegisteredUid()).child("reputation").runTransaction(new Transaction.Handler() {
-                                                                            @NonNull
+                                                                        //Then we check if the user already given the reputation baru2 ni or not.
+                                                                        Query query1 = databaseReference.child("reputationRecord").child(registeredUidReply).limitToLast(2);
+
+                                                                        query1.addListenerForSingleValueEvent(new ValueEventListener() {
                                                                             @Override
-                                                                            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
-                                                                                if (mutableData.getValue() == null) {
-                                                                                    mutableData.setValue(0);
+                                                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                                if (dataSnapshot.exists()) {
+                                                                                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+
+                                                                                        String existedUser = dataSnapshot1.getValue(String.class);
+
+                                                                                        //then check
+                                                                                        if (model.getRegisteredUid().equals(existedUser)) {
+                                                                                            Toast.makeText(getApplicationContext(), "Sila memberi reputasi kepada orang lain sama", Toast.LENGTH_SHORT).show();
+                                                                                            progressDialog.dismiss();
+                                                                                        } else if (!model.getRegisteredUid().equals(existedUser)) {
+
+                                                                                            //If yes, then we add the reputation power in this specfic user who post.
+                                                                                            databaseReference.child("registeredUser").child(model.getRegisteredUid()).child("reputation").runTransaction(new Transaction.Handler() {
+                                                                                                @NonNull
+                                                                                                @Override
+                                                                                                public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
+                                                                                                    if (mutableData.getValue() == null) {
+                                                                                                        mutableData.setValue(0);
+                                                                                                    } else {
+                                                                                                        mutableData.setValue((Long) mutableData.getValue() + reputationPower); //add the reputation power
+                                                                                                    }
+                                                                                                    return Transaction.success(mutableData);
+                                                                                                }
+
+                                                                                                @Override
+                                                                                                public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
+                                                                                                    //Hide the progress dialog after finish give the reputation
+
+                                                                                                    //After we update the value, then we reduce the reputationLimit for this guy
+                                                                                                    long afterDeductReputationLimit = totalLimitReputation - 1;
+                                                                                                    databaseReference.child("reputationLimit").child(registeredUidReply).setValue(afterDeductReputationLimit);
+
+                                                                                                    //After that, we catat the data that user already given the reputation.
+                                                                                                    databaseReference.child("reputationRecord").child(registeredUidReply).push().setValue(model.getRegisteredUid());
+
+
+                                                                                                    progressDialog.dismiss();
+                                                                                                    Toast.makeText(getApplicationContext(), "Berjaya memberi reputasi", Toast.LENGTH_SHORT).show();
+                                                                                                    dialog.cancel();
+                                                                                                }
+                                                                                            });
+                                                                                        } else {
+                                                                                            Toast.makeText(getApplicationContext(), "Masalah", Toast.LENGTH_SHORT).show();
+                                                                                            progressDialog.dismiss();
+                                                                                        }
+
+                                                                                    }
                                                                                 } else {
-                                                                                    mutableData.setValue((Long) mutableData.getValue() + reputationPower); //add the reputation power
+
+
+                                                                                    //If no data exist, then we proceed here.
+                                                                                    //If yes, then we add the reputation power in this specfic user who post.
+                                                                                    databaseReference.child("registeredUser").child(model.getRegisteredUid()).child("reputation").runTransaction(new Transaction.Handler() {
+                                                                                        @NonNull
+                                                                                        @Override
+                                                                                        public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
+                                                                                            if (mutableData.getValue() == null) {
+                                                                                                mutableData.setValue(0);
+                                                                                            } else {
+                                                                                                mutableData.setValue((Long) mutableData.getValue() + reputationPower); //add the reputation power
+                                                                                            }
+                                                                                            return Transaction.success(mutableData);
+                                                                                        }
+
+                                                                                        @Override
+                                                                                        public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
+                                                                                            //Hide the progress dialog after finish give the reputation
+
+                                                                                            //After we update the value, then we reduce the reputationLimit for this guy
+                                                                                            long afterDeductReputationLimit = totalLimitReputation - 1;
+                                                                                            databaseReference.child("reputationLimit").child(registeredUidReply).setValue(afterDeductReputationLimit);
+
+                                                                                            //After that, we catat the data that user already given the reputation.
+                                                                                            databaseReference.child("reputationRecord").child(registeredUidReply).push().setValue(model.getRegisteredUid());
+
+
+                                                                                            progressDialog.dismiss();
+                                                                                            Toast.makeText(getApplicationContext(), "Berjaya memberi reputasi", Toast.LENGTH_SHORT).show();
+                                                                                            dialog.cancel();
+                                                                                        }
+                                                                                    });
+
                                                                                 }
-                                                                                return Transaction.success(mutableData);
                                                                             }
 
                                                                             @Override
-                                                                            public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
-                                                                                //Hide the progress dialog after finish give the reputation
-                                                                                progressDialog.dismiss();
-                                                                                Toast.makeText(getApplicationContext(), "Berjaya memberi reputasi", Toast.LENGTH_SHORT).show();
+                                                                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-
-                                                                                //After we update the value, then we reduce the reputationLimit for this guy
-                                                                                long afterDeductReputationLimit = totalLimitReputation - 1;
-                                                                                databaseReference.child("reputationLimit").child(registeredUidReply).setValue(afterDeductReputationLimit);
-                                                                                dialog.cancel();
                                                                             }
                                                                         });
+
 
                                                                     }
                                                                     //Then if the user already reach 0 total to give reputation

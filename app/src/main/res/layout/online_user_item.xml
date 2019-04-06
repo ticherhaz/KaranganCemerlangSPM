@@ -18,7 +18,6 @@
             android:drawableStart="@drawable/ic_sign_online_green"
             android:drawableLeft="@drawable/ic_sign_online_green"
             android:gravity="center_vertical"
-            android:text="@string/username"
             android:textStyle="bold" />
 
         <TextView
@@ -26,9 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_margin="3dp"
-            android:gravity="center_vertical"
-            android:text="@string/sekolah" />
-
+            android:gravity="center_vertical" />
 
         <TextView
             android:id="@+id/text_view_reputation"
@@ -48,8 +45,7 @@
             android:layout_marginLeft="5dp"
             android:drawableStart="@drawable/ic_status_neutral"
             android:drawableLeft="@drawable/ic_status_neutral"
-            android:gravity="center_vertical"
-            android:text="@string/status" />
+            android:gravity="center_vertical" />
 
     </LinearLayout>
 </LinearLayout>

@@ -21,7 +21,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
-                android:text="@string/umum"
                 android:textSize="23sp"
                 android:textStyle="bold" />
 
@@ -38,9 +37,7 @@
             android:id="@+id/text_view_forum_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:text="@string/description" />
-
+            android:layout_margin="3dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -54,7 +51,7 @@
                 android:drawableStart="@drawable/ic_viewer"
                 android:drawableLeft="@drawable/ic_viewer"
                 android:gravity="center_vertical"
-                android:text="@string/views"
+                android:text="@string/kosong"
                 android:textSize="12sp" />
 
         </RelativeLayout>

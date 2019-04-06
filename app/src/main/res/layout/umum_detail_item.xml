@@ -46,7 +46,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="3dp"
                         android:layout_marginLeft="3dp"
-                        android:text="@string/username"
                         android:textSize="21sp"
                         android:textStyle="bold" />
 
@@ -56,23 +55,21 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="3dp"
                         android:layout_marginLeft="3dp"
-                        android:text="@string/murid" />
+                        android:fontFamily="@font/merriweather" />
 
                     <TextView
                         android:id="@+id/text_view_sekolah"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="3dp"
-                        android:layout_marginLeft="3dp"
-                        android:text="@string/sekolah" />
+                        android:layout_marginLeft="3dp" />
 
                     <TextView
                         android:id="@+id/text_view_user_join_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="3dp"
-                        android:layout_marginLeft="3dp"
-                        android:text="@string/join_date" />
+                        android:layout_marginLeft="3dp" />
 
                 </LinearLayout>
 
@@ -92,8 +89,7 @@
                         android:layout_marginLeft="3dp"
                         android:layout_toStartOf="@+id/text_view_status"
                         android:layout_toLeftOf="@+id/text_view_status"
-                        android:gravity="center_vertical"
-                        android:text="@string/negeri" />
+                        android:gravity="center_vertical" />
 
                     <TextView
                         android:id="@+id/text_view_gender"
@@ -106,8 +102,7 @@
                         android:layout_marginLeft="3dp"
                         android:layout_toStartOf="@+id/text_view_status"
                         android:layout_toLeftOf="@+id/text_view_status"
-                        android:gravity="center_vertical"
-                        android:text="@string/jantina" />
+                        android:gravity="center_vertical" />
 
 
                     <TextView
@@ -120,8 +115,7 @@
                         android:layout_marginLeft="5dp"
                         android:drawableStart="@drawable/ic_status_neutral"
                         android:drawableLeft="@drawable/ic_status_neutral"
-                        android:gravity="center_vertical"
-                        android:text="@string/status" />
+                        android:gravity="center_vertical" />
 
                 </RelativeLayout>
 
@@ -131,8 +125,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="3dp"
-                    android:layout_marginLeft="3dp"
-                    android:text="@string/pos" />
+                    android:layout_marginLeft="3dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -162,8 +155,7 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:maxLines="29"
-            android:scrollbars="vertical"
-            android:text="@string/deskripsi" />
+            android:scrollbars="vertical" />
 
         <EditText
             android:id="@+id/edit_text_deskripsi"
@@ -172,7 +164,6 @@
             android:maxLines="29"
             android:scrollbars="vertical"
             android:visibility="gone" />
-
 
         <RelativeLayout
             android:layout_width="match_parent"

@@ -20,8 +20,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.System;
-import net.ticherhaz.karangancemerlangspm.Util.InternetCheck;
+import net.ticherhaz.karangancemerlangspm.Model.UserAlpha;
 import net.ticherhaz.karangancemerlangspm.Util.InternetMessage;
+import net.ticherhaz.karangancemerlangspm.Util.Others;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -40,7 +41,6 @@ public class SplashActivity extends AppCompatActivity {
     private String uid;
     private String lastSeen;
     private String ipAddress;
-    private String phoneModel;
 
     //Method to get IP Address
     public static String getIPAddress(boolean useIPv4) {
@@ -76,10 +76,10 @@ public class SplashActivity extends AppCompatActivity {
     private void listID() {
         //Initialize the Firebase
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference().child("user");
+        databaseReference = firebaseDatabase.getReference();
 
         //Assign the phoneModel
-        phoneModel = getDeviceName();
+        // phoneModel = getDeviceName();
         //Assign the IP Address
         ipAddress = getIPAddress(true);
         //Assign the lastSeen
@@ -133,20 +133,38 @@ public class SplashActivity extends AppCompatActivity {
     //Method store data of the user into the Firebase
     private void storeUserInfo(final String userUid) {
         //So the new user enter the system, then we collect the new information for the user
-        databaseReference.child(uid).child("uid").setValue(uid);
-        databaseReference.child(uid).child("phoneModel").setValue(phoneModel);
-        databaseReference.child(uid).child("ipAddress").setValue(ipAddress);
-        databaseReference.child(uid).child("lastSeen").setValue(lastSeen);
+        String brand = Build.BRAND;
+        String model = Build.MODEL;
+
+        //then we call the model class
+        final UserAlpha userAlpha = new UserAlpha(userUid, brand, model, ipAddress, lastSeen);
+
+        //at this part, we check if the user is already created or not for once.
+        databaseReference.child("userAlpha").child(userUid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.exists()) {
+                    databaseReference.child("userAlpha").child(userUid).setValue(userAlpha);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
         final String activityLogUid = databaseReference.push().getKey();
         if (activityLogUid != null) {
-            databaseReference.child(userUid).child("activityLog").child(activityLogUid).child("loginLog").setValue(lastSeen);
-            databaseReference.child(userUid).child("activityLog").child(activityLogUid).child("ipAddressLog").setValue(ipAddress);
+            //Call the model class
+            UserAlpha userAlphaAcitivity = new UserAlpha(lastSeen, ipAddress);
+            databaseReference.child("userAlphaActivity").child(userUid).child(activityLogUid).setValue(userAlphaAcitivity);
         }
         //Then start the main activity and transfer the userUID
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.putExtra("userUid", userUid);
-        intent.putExtra("phoneModel", phoneModel);
+        intent.putExtra("phoneModel", model);
         startActivities(new Intent[]{intent});
         //Then close this activity
         finish();
@@ -173,8 +191,8 @@ public class SplashActivity extends AppCompatActivity {
                         return;
                     }
                     //After that, we chat the value
-                    if (system != null && system.getVersi() != 24) {
-                        //TODO: Version right now is 24. Please update when the new version is released.
+                    if (system != null && system.getVersi() != 26) {
+                        //TODO: Version right now is 26. Please update when the new version is released.
                         Toast toast = Toast.makeText(getApplicationContext(), "Sila mengemas kini versi baharu", Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
@@ -218,45 +236,34 @@ public class SplashActivity extends AppCompatActivity {
             //If there is connection, then it will check the system
             //So, we using the async task to check the internet, this is the best way to check the internet connection
             //TODO: Internet connection
-            new InternetCheck(new InternetCheck.Consumer() {    //We called the task here (execute here)
-                @Override
-                public void accept(Boolean internet) {  //After it met the condition about the internet, it will proceed.
-                    //Then we go to check the system is it ok or not
-                    if (internet) {
-                        checkSystem(userUid);
-                    } else {
-                        //If no connection, then we proceed to store admin info
-                        storeUserInfo(userUid);
-                    }
 
-                }
-            });
+            //note changes: 6.4.2019 change to old internet check to new one
+
+            if (new Others().isNetworkAvailable(getApplicationContext())) {
+                //if yes, there is no connection
+                checkSystem(userUid);
+            } else {
+                //when no connection
+                storeUserInfo(userUid);
+            }
+
+//           //This old one
+//            new InternetCheck(new InternetCheck.Consumer() {    //We called the task here (execute here)
+//                @Override
+//                public void accept(Boolean internet) {  //After it met the condition about the internet, it will proceed.
+//                    //Then we go to check the system is it ok or not
+//                    if (internet) {
+//
+//                    } else {
+//                        //If no connection, then we proceed to store admin info
+//                        storeUserInfo(userUid);
+//                    }
+//
+//                }
+//            });
         }
     }
 
-    //Get the device name
-    public String getDeviceName() {
-        String manufacturer = Build.MANUFACTURER;
-        String model = Build.MODEL;
-        if (model.toLowerCase().startsWith(manufacturer.toLowerCase())) {
-            return capitalize(model);
-        } else {
-            return capitalize(manufacturer) + " " + model;
-        }
-    }
-    //----------------------------------------------------------------------------
-
-    private String capitalize(String s) {
-        if (s == null || s.length() == 0) {
-            return "";
-        }
-        char first = s.charAt(0);
-        if (Character.isUpperCase(first)) {
-            return s;
-        } else {
-            return Character.toUpperCase(first) + s.substring(1);
-        }
-    }
 
     //AsyncTask to check the internet connection-------------------------------------
     //TODO: Internet connection AsyncTask, but we transfer. we make a class for the AsyncTask to check the internet [1.2.2019]

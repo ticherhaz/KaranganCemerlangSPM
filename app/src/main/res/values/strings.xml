@@ -6,7 +6,7 @@
     <string name="title">Tajuk</string>
     <string name="description">Deskripsi</string>
 
-    <string name="karangan">Karangan</string>
+    <!--<string name="karangan">Karangan</string>-->
     <string name="add">Tambah</string>
     <string name="update">Kemas Kini</string>
     <string name="versi">versi</string>
@@ -58,8 +58,8 @@
     <string name="feedback">Maklum Balas</string>
     <string name="submit">Hantar</string>
     <string name="logo_kcspm">Logo KCSPM</string>
-    <string name="viewer">Penonton</string>
-    <string name="fav">Kegemaran</string>
+    <!--<string name="viewer">Penonton</string>-->
+    <!--<string name="fav">Kegemaran</string>-->
     <string name="senarai_karangan">Senarai</string>
     <string name="hantar_karangan">Hantar</string>
     <string name="muat_naik_file">Muat Naik Fail</string>
@@ -75,8 +75,8 @@
     <string name="progress_uploading">Memuat Naik…</string>
     <string name="upload_success">Memuat Naik Berjaya</string>
     <string name="upload_failure">Memuat Naik Gagal</string>
-    <string name="umum">Umum</string>
-    <string name="views">0</string>
+    <!--<string name="umum">Umum</string>-->
+    <!--<string name="views">0</string>-->
     <!--<string name="posts">Pos:</string>-->
     <!--<string name="last_thread">Last Thread</string>-->
     <!--<string name="by_user">daripada Penggunar</string>-->
@@ -89,7 +89,7 @@
     <string name="confirm_password">Mengesahkan Kata Laluan</string>
     <string name="select_birthday_date">Pilih Tarikh Lahir</string>
     <string name="email_or_username">Email atau Nama Samaran</string>
-    <string name="_0_online_s">0 Online(s)</string>
+    <string name="_0_online_s">0 Orang Dalam Talian</string>
     <string name="jenis_karangan">Jenis Karangan</string>
     <string name="increase_size">+</string>
     <string name="decrease_size">-</string>
@@ -106,11 +106,10 @@
     <!--<string name="dibalas_oleh">Dibalas oleh</string>-->
     <!--<string name="_1_minit_yang_lalu">1 Minit Yang Lalu</string>-->
     <!--<string name="dimulai_oleh">Dimulai Oleh N/A, 1 Minit Yang Lalu</string>-->
-    <string name="jumlah_balas">0</string>
-    <string name="tajuk">Tajuk</string>
+    <string name="kosong">0</string>
+    <!--<string name="tajuk">Tajuk</string>-->
     <string name="deskripsi">Deskripsi</string>
     <string name="hantar">Hantar</string>
-    <string name="murid">Murid</string>
     <string name="join_date">Join Date</string>
     <string name="jantina">Jantina</string>
     <string name="pos">Pos</string>
@@ -133,6 +132,8 @@
     <string name="ubah">Ubah</string>
     <string name="batal">Batal</string>
     <string name="spm_2019">SPM 2019</string>
+    <string name="karangan">Karangan</string>
+    <string name="tajuk">Tajuk</string>
     <string-array name="feedback_array">
         <item>Cadangan</item>
         <item>Pujian</item>

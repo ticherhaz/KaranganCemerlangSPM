@@ -2,14 +2,17 @@ package net.ticherhaz.karangancemerlangspm;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -17,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import net.ticherhaz.karangancemerlangspm.Model.Jenis;
+import net.ticherhaz.karangancemerlangspm.Util.InternetMessage;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.JenisViewHolder;
 
 public class JenisKaranganActivity extends AppCompatActivity {
@@ -102,7 +106,25 @@ public class JenisKaranganActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(firebaseRecyclerAdapter);
         //2. FirebaseUI
-        firebaseRecyclerAdapter.notifyDataSetChanged();
+        // firebaseRecyclerAdapter.notifyDataSetChanged();
+        firebaseRecyclerAdapter.startListening();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (progressBar.getVisibility() == View.VISIBLE) {
+                    Toast toast = Toast.makeText(getApplicationContext(), new InternetMessage().getMessage(), Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+
+            }
+        }, 5000);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         firebaseRecyclerAdapter.startListening();
     }
 

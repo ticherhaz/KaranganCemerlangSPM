@@ -74,14 +74,15 @@
                     android:id="@+id/button_sign_in"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/button_selector"
                     android:text="@string/sign_in"
                     android:textAllCaps="false" />
-
 
                 <Button
                     android:id="@+id/button_sign_up"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/button_selector"
                     android:text="@string/sign_up"
                     android:textAllCaps="false" />
 
@@ -200,7 +201,7 @@
                             android:gravity="center_vertical"
                             android:paddingEnd="3dp"
                             android:paddingRight="3dp"
-                            android:text="@string/jumlah_balas"
+                            android:text="@string/kosong"
                             tools:ignore="RtlSymmetry" />
 
                     </RelativeLayout>
@@ -239,7 +240,6 @@
                             android:text="@string/tetapan"
                             android:textColor="@drawable/text_view_color"
                             tools:ignore="RtlSymmetry" />
-
 
                     </RelativeLayout>
                 </LinearLayout>

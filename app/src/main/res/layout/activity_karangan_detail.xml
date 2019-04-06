@@ -36,7 +36,7 @@
                         android:drawableStart="@drawable/ic_viewer"
                         android:drawableLeft="@drawable/ic_viewer"
                         android:gravity="center_vertical"
-                        android:text="@string/viewer"
+                        android:text="@string/kosong"
                         android:textSize="12sp" />
 
                     <TextView
@@ -48,7 +48,7 @@
                         android:drawableStart="@drawable/ic_favourite"
                         android:drawableLeft="@drawable/ic_favourite"
                         android:gravity="center_vertical"
-                        android:text="@string/fav"
+                        android:text="@string/kosong"
                         android:textSize="12sp" />
                 </RelativeLayout>
 
@@ -78,7 +78,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="11dp"
-                        android:text="@string/karangan"
                         android:textSize="14sp" />
 
                 </LinearLayout>

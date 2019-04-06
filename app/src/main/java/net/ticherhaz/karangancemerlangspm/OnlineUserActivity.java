@@ -20,6 +20,7 @@ import com.google.firebase.database.Query;
 
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.Util.Others;
+import net.ticherhaz.karangancemerlangspm.Util.UserTypeColor;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.OnlineStatusViewHolder;
 
 public class OnlineUserActivity extends AppCompatActivity {
@@ -76,6 +77,11 @@ public class OnlineUserActivity extends AppCompatActivity {
                 holder.getTextViewSekolah().setText(model.getSekolah());
                 holder.getTextViewReputation().setText(String.valueOf(model.getReputation()));
                 new Others().setStatus(model.getMode(), holder.getTextViewStatus());
+
+                //change the color of the user
+                if (model.getTitleType() != null) {
+                    new UserTypeColor().setTextColorUserOnlineUserActivity(model, holder);
+                }
             }
 
             @NonNull
