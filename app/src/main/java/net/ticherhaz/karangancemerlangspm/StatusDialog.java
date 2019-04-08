@@ -9,6 +9,8 @@ import android.widget.CompoundButton;
 
 import com.google.firebase.database.FirebaseDatabase;
 
+import net.ticherhaz.karangancemerlangspm.Model.ActivityStatusChanges;
+
 import java.util.Calendar;
 
 public class StatusDialog extends Dialog {
@@ -63,8 +65,8 @@ public class StatusDialog extends Dialog {
                 String uid = FirebaseDatabase.getInstance().getReference().push().getKey();
                 //update the activity log for the changes status
                 if (uid != null) {
-                    FirebaseDatabase.getInstance().getReference().child("activityStatusChanges").child(registeredUid).child(uid).child("mode").setValue(status);
-                    FirebaseDatabase.getInstance().getReference().child("activityStatusChanges").child(registeredUid).child(uid).child("date").setValue(date);
+                    ActivityStatusChanges activityStatusChanges = new ActivityStatusChanges(status, date);
+                    FirebaseDatabase.getInstance().getReference().child("activityStatusChanges").child(registeredUid).child(uid).setValue(activityStatusChanges);
                 }
 
                 dismiss();

@@ -7,9 +7,17 @@
         android:orderInCategory="100"
         android:title="@string/feedback"
         app:showAsAction="never" />
+
     <item
         android:id="@+id/action_about"
         android:orderInCategory="100"
         android:title="@string/action_about"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_skin"
+        android:checkable="true"
+        android:orderInCategory="100"
+        android:title="@string/mod_gelap"
         app:showAsAction="never" />
 </menu>

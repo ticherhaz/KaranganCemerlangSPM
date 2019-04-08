@@ -505,7 +505,7 @@ public class ForumActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forum);
         listID();
-        setFirebaseRecyclerAdapter();
+        //   setFirebaseRecyclerAdapter();
         setButtonSignIn();
         setButtonSignUp();
         setTextViewSignOut();
@@ -514,6 +514,7 @@ public class ForumActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        setFirebaseRecyclerAdapter();
         firebaseRecyclerAdapter.startListening();
     }
 

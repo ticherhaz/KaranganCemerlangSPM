@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -18,12 +17,13 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.Model.Jenis;
 import net.ticherhaz.karangancemerlangspm.Util.InternetMessage;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.JenisViewHolder;
 
-public class JenisKaranganActivity extends AppCompatActivity {
+public class JenisKaranganActivity extends SkinActivity {
 
     //RecyclerView
     private RecyclerView recyclerView;
@@ -92,7 +92,7 @@ public class JenisKaranganActivity extends AppCompatActivity {
             @NonNull
             @Override
             public JenisViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.jenis_item, viewGroup, false);
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.jenis_item, viewGroup, false);
                 return new JenisViewHolder(view);
             }
 
@@ -131,6 +131,8 @@ public class JenisKaranganActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        Toolbar toolbar = findViewById(R.id.app_bar);
+//        setSupportActionBar(toolbar);
         setContentView(R.layout.activity_jenis_karangan);
         listID();
     }

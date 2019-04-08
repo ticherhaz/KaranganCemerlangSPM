@@ -3,15 +3,12 @@ package net.ticherhaz.karangancemerlangspm;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
@@ -40,6 +37,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.zxy.skin.sdk.SkinActivity;
+import com.zxy.skin.sdk.SkinEngine;
 
 import net.ticherhaz.karangancemerlangspm.Model.Karangan;
 import net.ticherhaz.karangancemerlangspm.Util.Others;
@@ -49,7 +48,7 @@ import net.ticherhaz.karangancemerlangspm.ViewHolder.KaranganViewHolder;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends SkinActivity {
 
     private DatabaseReference databaseReference;
     private FirebaseRecyclerOptions<Karangan> firebaseRecyclerOptions;
@@ -92,9 +91,13 @@ public class MainActivity extends AppCompatActivity {
     //Method listID
     private void listID() {
         //Toolbar
-        Toolbar toolbar = findViewById(R.id.app_bar);
-        toolbar.setTitleTextColor(Color.WHITE);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = findViewById(R.id.app_bar);
+//        toolbar.setTitleTextColor(Color.WHITE);
+//
+//        setSupportActionBar(toolbar);
+
+        //8.4.2019: we dont use the toolbar because it is duplicated and not supported for the night mode
+
         editTextSearch = findViewById(R.id.edit_text_search);
         TextView textViewHow = findViewById(R.id.text_view_how);
         textViewAnnouncement = findViewById(R.id.text_view_announcement);
@@ -641,6 +644,7 @@ public class MainActivity extends AppCompatActivity {
         allButton();
     }
 
+
     //This is for toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -719,8 +723,22 @@ public class MainActivity extends AppCompatActivity {
             startActivities(new Intent[]{intent});
             return true;
         }
+        if (id == R.id.action_skin) {
+            if (item.isChecked()) {
+                SkinEngine.changeSkin(R.style.AppTheme);
+                item.setChecked(false);
+
+            } else {
+                item.setChecked(true);
+                SkinEngine.changeSkin(R.style.AppNightTheme);
+
+
+            }
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
+
 
     private void allButton() {
         buttonSenaraiKarangan.setOnClickListener(new View.OnClickListener() {

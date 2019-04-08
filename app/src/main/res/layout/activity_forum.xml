@@ -74,6 +74,7 @@
                     android:id="@+id/button_sign_in"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
                     android:background="@drawable/button_selector"
                     android:text="@string/sign_in"
                     android:textAllCaps="false" />
@@ -82,6 +83,7 @@
                     android:id="@+id/button_sign_up"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
                     android:background="@drawable/button_selector"
                     android:text="@string/sign_up"
                     android:textAllCaps="false" />

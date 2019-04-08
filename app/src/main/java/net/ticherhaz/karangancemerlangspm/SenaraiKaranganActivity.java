@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -21,6 +20,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.Model.Karangan;
 import net.ticherhaz.karangancemerlangspm.Util.InternetMessage;
@@ -28,7 +28,7 @@ import net.ticherhaz.karangancemerlangspm.Util.Others;
 import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.KaranganViewHolder;
 
-public class SenaraiKaranganActivity extends AppCompatActivity {
+public class SenaraiKaranganActivity extends SkinActivity {
 
     //Database
     private FirebaseDatabase firebaseDatabase;

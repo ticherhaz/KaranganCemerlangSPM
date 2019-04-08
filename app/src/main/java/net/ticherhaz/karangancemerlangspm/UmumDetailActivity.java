@@ -185,72 +185,75 @@ public class UmumDetailActivity extends AppCompatActivity {
                                 //Edit part
                                 //this part, first, we check if the user is already sign in or not and if the user valid, then he can edit his reply
                                 //check if the same person, then, he able to edit it
-                                if (model.getRegisteredUid().equals(firebaseUser.getUid())) {
-                                    //then we show the button
-                                    holder.getTextViewEditReply().setVisibility(View.VISIBLE);
+                                if (firebaseUser != null) {
+                                    if (model.getRegisteredUid().equals(firebaseUser.getUid())) {
+                                        //then we show the button
+                                        holder.getTextViewEditReply().setVisibility(View.VISIBLE);
 
-                                    //Hide the giving of the reputation
-                                    holder.getTextViewGiveReputation().setVisibility(View.GONE);
-
-
-                                    holder.getTextViewEditReply().setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            //when we click this one, then we change the layout display from the textview become the edittext.
-                                            //so we gone the textview
-                                            holder.getTextViewDeskripsi().setVisibility(View.GONE);
-                                            //then we display the edit text
-                                            holder.getEditTextEdit().setVisibility(View.VISIBLE);
-                                            //after that we display the text of the reply.
-                                            holder.getEditTextEdit().setText(model.getDeskripsi());
-                                            //Then we hide the textview 'reply'
-                                            holder.getTextViewEditReply().setVisibility(View.GONE);
-                                            //We display with they yes, or cancel to edit
-                                            holder.getTextViewEditYes().setVisibility(View.VISIBLE);
-                                            holder.getTextViewEditCancel().setVisibility(View.VISIBLE);
+                                        //Hide the giving of the reputation
+                                        holder.getTextViewGiveReputation().setVisibility(View.GONE);
 
 
-                                            //After that we triggered the button yes to edit
-                                            holder.getTextViewEditYes().setOnClickListener(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) {
-                                                    String newDeskripsi = holder.getEditTextEdit().getText().toString();
-                                                    //here we triggered to change in the database
-                                                    databaseReference.child("umumPos").child(forumUid).child(umumUid).child(model.getUmumDetailUid()).child("deskripsi").setValue(newDeskripsi);
-                                                    //After we finish
-                                                    //back to normal
-                                                    //then we change back all to normal
-                                                    //we hide the edittext deskripsi
-                                                    holder.getEditTextEdit().setVisibility(View.GONE);
-                                                    //we display textview deskripsi
-                                                    holder.getTextViewDeskripsi().setVisibility(View.VISIBLE);
-                                                    //We hide this button cancel and yes
-                                                    holder.getTextViewEditYes().setVisibility(View.GONE);
-                                                    holder.getTextViewEditCancel().setVisibility(View.GONE);
-                                                    //Then we display back the edit button
-                                                    holder.getTextViewEditReply().setVisibility(View.VISIBLE);
-                                                }
-                                            });
+                                        holder.getTextViewEditReply().setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                //when we click this one, then we change the layout display from the textview become the edittext.
+                                                //so we gone the textview
+                                                holder.getTextViewDeskripsi().setVisibility(View.GONE);
+                                                //then we display the edit text
+                                                holder.getEditTextEdit().setVisibility(View.VISIBLE);
+                                                //after that we display the text of the reply.
+                                                holder.getEditTextEdit().setText(model.getDeskripsi());
+                                                //Then we hide the textview 'reply'
+                                                holder.getTextViewEditReply().setVisibility(View.GONE);
+                                                //We display with they yes, or cancel to edit
+                                                holder.getTextViewEditYes().setVisibility(View.VISIBLE);
+                                                holder.getTextViewEditCancel().setVisibility(View.VISIBLE);
 
-                                            //This one is for cancel
-                                            holder.getTextViewEditCancel().setOnClickListener(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) {
-                                                    //then we change back all to normal
-                                                    //we hide the edittext deskripsi
-                                                    holder.getEditTextEdit().setVisibility(View.GONE);
-                                                    //we display textview deskripsi
-                                                    holder.getTextViewDeskripsi().setVisibility(View.VISIBLE);
-                                                    //We hide this button cancel and yes
-                                                    holder.getTextViewEditYes().setVisibility(View.GONE);
-                                                    holder.getTextViewEditCancel().setVisibility(View.GONE);
-                                                    //Then we display back the edit button
-                                                    holder.getTextViewEditReply().setVisibility(View.VISIBLE);
-                                                }
-                                            });
-                                        }
-                                    });
+
+                                                //After that we triggered the button yes to edit
+                                                holder.getTextViewEditYes().setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View v) {
+                                                        String newDeskripsi = holder.getEditTextEdit().getText().toString();
+                                                        //here we triggered to change in the database
+                                                        databaseReference.child("umumPos").child(forumUid).child(umumUid).child(model.getUmumDetailUid()).child("deskripsi").setValue(newDeskripsi);
+                                                        //After we finish
+                                                        //back to normal
+                                                        //then we change back all to normal
+                                                        //we hide the edittext deskripsi
+                                                        holder.getEditTextEdit().setVisibility(View.GONE);
+                                                        //we display textview deskripsi
+                                                        holder.getTextViewDeskripsi().setVisibility(View.VISIBLE);
+                                                        //We hide this button cancel and yes
+                                                        holder.getTextViewEditYes().setVisibility(View.GONE);
+                                                        holder.getTextViewEditCancel().setVisibility(View.GONE);
+                                                        //Then we display back the edit button
+                                                        holder.getTextViewEditReply().setVisibility(View.VISIBLE);
+                                                    }
+                                                });
+
+                                                //This one is for cancel
+                                                holder.getTextViewEditCancel().setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View v) {
+                                                        //then we change back all to normal
+                                                        //we hide the edittext deskripsi
+                                                        holder.getEditTextEdit().setVisibility(View.GONE);
+                                                        //we display textview deskripsi
+                                                        holder.getTextViewDeskripsi().setVisibility(View.VISIBLE);
+                                                        //We hide this button cancel and yes
+                                                        holder.getTextViewEditYes().setVisibility(View.GONE);
+                                                        holder.getTextViewEditCancel().setVisibility(View.GONE);
+                                                        //Then we display back the edit button
+                                                        holder.getTextViewEditReply().setVisibility(View.VISIBLE);
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
                                 }
+
 
                                 //GIVE REPUTATION
                                 holder.getTextViewGiveReputation().setOnClickListener(new View.OnClickListener() {

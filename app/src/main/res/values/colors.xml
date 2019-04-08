@@ -2,6 +2,11 @@
 <resources>
     <color name="colorPrimary">#006994</color>
     <color name="colorPrimarySoft">#B1DEF3</color>
-    <color name="colorPrimaryDark">#094B9E</color>
+    <color name="colorPrimaryDark">#001F2B</color>
     <color name="colorAccent">#00D6FF</color>
+    <color name="colorBackground">#ECECEC</color>
+    <color name="colorBackgroundRecyclerView">#D8D8D8</color>
+    <color name="colorButtonText">#000000</color>
+    <color name="colorText">#151516</color>
+    <color name="colorLine">#2AC0AB</color>
 </resources>

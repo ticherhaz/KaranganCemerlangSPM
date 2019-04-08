@@ -134,6 +134,7 @@
     <string name="spm_2019">SPM 2019</string>
     <string name="karangan">Karangan</string>
     <string name="tajuk">Tajuk</string>
+    <string name="mod_gelap">Mod Gelap</string>
     <string-array name="feedback_array">
         <item>Cadangan</item>
         <item>Pujian</item>
