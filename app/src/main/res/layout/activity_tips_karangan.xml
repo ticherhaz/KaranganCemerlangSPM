@@ -3,17 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="3dp"
+    android:background="?attr/colorBackground"
     tools:context=".TipsKaranganActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="3dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/text_view_tips"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorText" />
     </LinearLayout>
 </ScrollView>

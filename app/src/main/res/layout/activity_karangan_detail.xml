@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="3dp"
+    android:background="?attr/colorBackground"
     android:orientation="vertical"
     tools:context=".KaranganDetailActivity">
 
@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/linear_layout_bottom_detail"
         android:layout_alignParentTop="true"
+        android:layout_margin="3dp"
         android:orientation="vertical">
 
         <ScrollView
@@ -37,6 +38,7 @@
                         android:drawableLeft="@drawable/ic_viewer"
                         android:gravity="center_vertical"
                         android:text="@string/kosong"
+                        android:textColor="?attr/colorText"
                         android:textSize="12sp" />
 
                     <TextView
@@ -49,6 +51,7 @@
                         android:drawableLeft="@drawable/ic_favourite"
                         android:gravity="center_vertical"
                         android:text="@string/kosong"
+                        android:textColor="?attr/colorText"
                         android:textSize="12sp" />
                 </RelativeLayout>
 
@@ -56,6 +59,7 @@
                     android:id="@+id/text_view_tajuk"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorText"
                     android:textSize="21sp"
                     android:textStyle="bold" />
 
@@ -63,6 +67,7 @@
                     android:id="@+id/text_view_tarikh"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorText"
                     android:textSize="12sp"
                     android:textStyle="italic" />
 
@@ -78,6 +83,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="11dp"
+                        android:textColor="?attr/colorText"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -100,7 +106,8 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/button_selector"
-            android:text="@string/decrease_size" />
+            android:text="@string/decrease_size"
+            android:textColor="?attr/colorButtonText" />
 
         <Button
             android:id="@+id/button_black"
@@ -110,7 +117,8 @@
             android:layout_marginRight="5dp"
             android:background="@drawable/button_selector"
             android:text="@string/black"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textColor="?attr/colorButtonText" />
 
         <Button
             android:id="@+id/button_font"
@@ -121,6 +129,7 @@
             android:background="@drawable/button_selector"
             android:text="@string/font"
             android:textAllCaps="false"
+            android:textColor="?attr/colorButtonText"
             android:typeface="normal" />
 
         <Button
@@ -130,7 +139,8 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/button_selector"
-            android:text="@string/increase_size" />
+            android:text="@string/increase_size"
+            android:textColor="?attr/colorButtonText" />
 
     </LinearLayout>
 </RelativeLayout>

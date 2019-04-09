@@ -72,9 +72,7 @@
             android:inputType="textNoSuggestions"
             android:padding="7dp"
             android:singleLine="true"
-            android:textColor="?attr/colorText"
-            android:textColorHighlight="?attr/colorText"
-            android:textColorHint="?attr/colorText" />
+            android:textColor="?attr/colorText" />
 
         <ProgressBar
             android:id="@+id/progressbar"

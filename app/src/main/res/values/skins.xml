@@ -23,7 +23,7 @@
         <item name="colorButtonText">@color/colorButtonText</item>
         <item name="colorText">@color/colorText</item>
         <item name="colorLine">@color/colorLine</item>
-
+        <item name="android:textColorHint">?attr/colorText</item>
         <item name="android:itemBackground">?attr/colorBackgroundRecyclerView</item>
         <item name="android:itemTextAppearance">@style/menuTextColor</item>
 
@@ -56,5 +56,9 @@
     <style name="menuTextColorA" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:colorPrimary" tools:ignore="NewApi">?attr/colorPrimary</item>
         <item name="android:colorPrimaryDark" tools:ignore="NewApi">?attr/colorPrimaryDark</item>
+    </style>
+
+    <style name="editTextColorText" parent="@android:style/TextAppearance">
+        <item name="android:textColor">?attr/colorText</item>
     </style>
 </resources>

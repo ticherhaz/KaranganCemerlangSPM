@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,11 +15,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.Util.DoubleClickListener;
 import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
 
-public class KaranganDetailActivity extends AppCompatActivity {
+public class KaranganDetailActivity extends SkinActivity {
 
     //We need firebase to check like or not and update if the user like
     private FirebaseDatabase firebaseDatabase;

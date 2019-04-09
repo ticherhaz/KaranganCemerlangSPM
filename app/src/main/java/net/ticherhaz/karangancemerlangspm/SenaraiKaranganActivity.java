@@ -123,7 +123,7 @@ public class SenaraiKaranganActivity extends SkinActivity {
                 //I mean we are referring to what layout.
                 //So, we are making a new view and assign to the karangan_item
                 //Then we return the view for the firebase recycler adapter
-                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.karangan_item, viewGroup, false);
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.karangan_item, viewGroup, false);
                 return new KaranganViewHolder(view);
             }
 

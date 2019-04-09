@@ -727,12 +727,9 @@ public class MainActivity extends SkinActivity {
             if (item.isChecked()) {
                 SkinEngine.changeSkin(R.style.AppTheme);
                 item.setChecked(false);
-
             } else {
                 item.setChecked(true);
                 SkinEngine.changeSkin(R.style.AppNightTheme);
-
-
             }
             return true;
         }

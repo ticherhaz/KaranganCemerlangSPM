@@ -1,11 +1,12 @@
 package net.ticherhaz.karangancemerlangspm;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.widget.TextView;
 
-public class TipsKaranganActivity extends AppCompatActivity {
+import com.zxy.skin.sdk.SkinActivity;
+
+public class TipsKaranganActivity extends SkinActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
