@@ -2,7 +2,7 @@
 <resources>
 
     <color name="colorPrimaryNight">#005575</color>
-    <color name="colorPrimarySoftNight">#B1DEF3</color>
+    <color name="colorPrimarySoftNight">#638A9C</color>
     <color name="colorPrimaryDarkNight">#001820</color>
     <color name="colorAccentNight">#00D6FF</color>
     <color name="colorBackgroundNight">#232324</color>

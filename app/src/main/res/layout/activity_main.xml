@@ -7,9 +7,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <!--<include-->
-    <!--android:id="@+id/app_bar"-->
-    <!--layout="@layout/app_bar_main" />-->
 
     <LinearLayout
         android:id="@+id/linear_layout_main"
@@ -72,7 +69,8 @@
             android:inputType="textNoSuggestions"
             android:padding="7dp"
             android:singleLine="true"
-            android:textColor="?attr/colorText" />
+            android:textColor="?attr/colorText"
+            android:textColorHint="?attr/colorText" />
 
         <ProgressBar
             android:id="@+id/progressbar"
@@ -119,7 +117,7 @@
                         android:paddingBottom="11dp"
                         android:text="@string/senarai_karangan"
                         android:textAllCaps="false"
-                        android:textColor="?attr/colorButtonText" />
+                        android:textColor="@color/colorTextWhite" />
 
                     <Button
                         android:id="@+id/button_tips_karangan"
@@ -134,7 +132,7 @@
                         android:paddingBottom="11dp"
                         android:text="@string/tips_karangan"
                         android:textAllCaps="false"
-                        android:textColor="?attr/colorButtonText" />
+                        android:textColor="@color/colorTextWhite" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -156,7 +154,7 @@
                         android:paddingBottom="11dp"
                         android:text="@string/hantar_karangan"
                         android:textAllCaps="false"
-                        android:textColor="?attr/colorButtonText" />
+                        android:textColor="@color/colorTextWhite" />
 
                     <Button
                         android:id="@+id/button_forum"
@@ -171,7 +169,7 @@
                         android:paddingBottom="11dp"
                         android:text="@string/forum"
                         android:textAllCaps="false"
-                        android:textColor="?attr/colorButtonText" />
+                        android:textColor="@color/colorTextWhite" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>

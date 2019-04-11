@@ -91,56 +91,50 @@
         </ScrollView>
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/linear_layout_bottom_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/button_decrease_size"
             android:layout_width="60dp"
             android:layout_height="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/button_selector"
             android:text="@string/decrease_size"
-            android:textColor="?attr/colorButtonText" />
-
-        <Button
-            android:id="@+id/button_black"
-            android:layout_width="103dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/button_selector"
-            android:text="@string/black"
-            android:textAllCaps="false"
-            android:textColor="?attr/colorButtonText" />
+            android:textColor="@color/colorTextWhite" />
 
         <Button
             android:id="@+id/button_font"
             android:layout_width="60dp"
             android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/button_selector"
             android:text="@string/font"
             android:textAllCaps="false"
-            android:textColor="?attr/colorButtonText"
+            android:textColor="@color/colorTextWhite"
             android:typeface="normal" />
 
         <Button
             android:id="@+id/button_increase_size"
             android:layout_width="60dp"
             android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/button_selector"
             android:text="@string/increase_size"
-            android:textColor="?attr/colorButtonText" />
+            android:textColor="@color/colorTextWhite" />
 
-    </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

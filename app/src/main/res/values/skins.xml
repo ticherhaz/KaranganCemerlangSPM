@@ -11,6 +11,7 @@
         <attr name="colorButtonText" format="color|reference" />
         <attr name="colorText" format="color|reference" />
         <attr name="colorLine" format="color|reference" />
+        <attr name="cardBackgroundColor" format="color|reference" />
     </declare-styleable>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -24,10 +25,27 @@
         <item name="colorText">@color/colorText</item>
         <item name="colorLine">@color/colorLine</item>
         <item name="android:textColorHint">?attr/colorText</item>
+
         <item name="android:itemBackground">?attr/colorBackgroundRecyclerView</item>
-        <item name="android:itemTextAppearance">@style/menuTextColor</item>
+        <item name="android:itemTextAppearance">@style/menuTextColor</item>]
+
+        <item name="android:actionMenuTextColor">?attr/colorText</item>
 
     </style>
+
+    <style name="styleCardView">
+        <item name="cardBackgroundColor">?attr/colorBackgroundRecyclerView</item>
+        <item name="cardCornerRadius">18dp</item>
+        <item name="cardElevation">4dp</item>
+    </style>
+
+    <style name="styleSpinner" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:background">?attr/colorBackgroundRecyclerView</item>
+        <item name="android:textColorHighlight">@color/colorTextWhite</item>
+        <item name="android:textColorPrimary">@color/colorTextWhite</item>
+        <item name="android:textColor">@color/colorTextWhite</item>
+    </style>
+
 
     <style name="AppNightTheme" parent="Theme.AppCompat.Light.DarkActionBar">
 
@@ -40,6 +58,14 @@
         <item name="colorButtonText">@color/colorButtonTextNight</item>
         <item name="colorText">@color/colorTextNight</item>
         <item name="colorLine">@color/colorLineNight</item>
+
+        <!-- yang ni crucial part, walaupun nampak duplicate dgn yg app theme pertama tu, tapi dak, ini penting jugak , kena initialize untuk night jugak -->
+        <item name="android:textColorHint">?attr/colorText</item>
+
+        <item name="android:itemBackground">?attr/colorBackgroundRecyclerView</item>
+        <item name="android:itemTextAppearance">@style/menuTextColor</item>
+
+        <item name="android:actionMenuTextColor">?attr/colorText</item>
 
     </style>
 

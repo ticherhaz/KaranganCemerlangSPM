@@ -43,7 +43,7 @@ public class JenisKaranganActivity extends SkinActivity {
 
     //List id
     private void listID() {
-        recyclerView = findViewById(R.id.recycler_view_jenis);
+        recyclerView = findViewById(R.id.recycler_view);
         progressBar = findViewById(R.id.progressbar);
 
         //Firebase database

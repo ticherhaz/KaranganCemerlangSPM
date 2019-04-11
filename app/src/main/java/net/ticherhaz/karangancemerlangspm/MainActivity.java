@@ -1,8 +1,10 @@
 package net.ticherhaz.karangancemerlangspm;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
@@ -50,6 +52,8 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends SkinActivity {
 
+    private static final String SHARED_PREFERENCES_MOD = "myPreferenceMod";
+    private static final String SHARED_PREFERENCES = "myPreference";
     private DatabaseReference databaseReference;
     private FirebaseRecyclerOptions<Karangan> firebaseRecyclerOptions;
     private FirebaseRecyclerOptions<Karangan> firebaseRecyclerOptions2;
@@ -87,6 +91,8 @@ public class MainActivity extends SkinActivity {
     private Button buttonForum;
     private TextView textViewAnnouncement;
     private TextView textViewCountdownSPM;
+    private SharedPreferences sharedPreferences;
+    private String mod;
 
     //Method listID
     private void listID() {
@@ -128,7 +134,9 @@ public class MainActivity extends SkinActivity {
         if (intent.getExtras() != null) {
             userUid = intent.getExtras().getString("userUid");
             phoneModel = intent.getExtras().getString("phoneModel");
+            mod = intent.getExtras().getString("mod");
         }
+
 
         //Firebase Database
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -251,7 +259,7 @@ public class MainActivity extends SkinActivity {
             @NonNull
             @Override
             public KaranganViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.karangan_item, viewGroup, false);
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.karangan_item, viewGroup, false);
                 return new KaranganViewHolder(view);
             }
 
@@ -323,7 +331,7 @@ public class MainActivity extends SkinActivity {
             @NonNull
             @Override
             public KaranganViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.karangan_item, viewGroup, false);
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.karangan_item, viewGroup, false);
                 return new KaranganViewHolder(view);
             }
 
@@ -341,7 +349,7 @@ public class MainActivity extends SkinActivity {
         recyclerViewNumber.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerViewNumber.setAdapter(firebaseRecyclerAdapter5);
         //2. FirebaseUI
-        firebaseRecyclerAdapter5.notifyDataSetChanged();
+        //firebaseRecyclerAdapter5.notifyDataSetChanged();
         firebaseRecyclerAdapter5.startListening();
     }
 
@@ -395,7 +403,7 @@ public class MainActivity extends SkinActivity {
             @NonNull
             @Override
             public KaranganViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.karangan_item, viewGroup, false);
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.karangan_item, viewGroup, false);
                 return new KaranganViewHolder(view);
             }
 
@@ -413,7 +421,7 @@ public class MainActivity extends SkinActivity {
         recyclerViewNumber.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerViewNumber.setAdapter(firebaseRecyclerAdapter4);
         //2. FirebaseUI
-        firebaseRecyclerAdapter4.notifyDataSetChanged();
+        // firebaseRecyclerAdapter4.notifyDataSetChanged();
         firebaseRecyclerAdapter4.startListening();
     }
 
@@ -467,7 +475,7 @@ public class MainActivity extends SkinActivity {
             @NonNull
             @Override
             public KaranganViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.karangan_item, viewGroup, false);
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.karangan_item, viewGroup, false);
                 return new KaranganViewHolder(view);
             }
 
@@ -485,7 +493,7 @@ public class MainActivity extends SkinActivity {
         recyclerViewNumber.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerViewNumber.setAdapter(firebaseRecyclerAdapter3);
         //2. FirebaseUI
-        firebaseRecyclerAdapter3.notifyDataSetChanged();
+        // firebaseRecyclerAdapter3.notifyDataSetChanged();
         firebaseRecyclerAdapter3.startListening();
     }
 
@@ -539,7 +547,7 @@ public class MainActivity extends SkinActivity {
             @NonNull
             @Override
             public KaranganViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.karangan_item, viewGroup, false);
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.karangan_item, viewGroup, false);
                 return new KaranganViewHolder(view);
             }
 
@@ -557,7 +565,7 @@ public class MainActivity extends SkinActivity {
         recyclerViewNumber.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerViewNumber.setAdapter(firebaseRecyclerAdapter2);
         //2. FirebaseUI
-        firebaseRecyclerAdapter2.notifyDataSetChanged();
+        // firebaseRecyclerAdapter2.notifyDataSetChanged();
         firebaseRecyclerAdapter2.startListening();
     }
 
@@ -611,7 +619,7 @@ public class MainActivity extends SkinActivity {
             @NonNull
             @Override
             public KaranganViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.karangan_item, viewGroup, false);
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.karangan_item, viewGroup, false);
                 return new KaranganViewHolder(view);
             }
 
@@ -631,26 +639,6 @@ public class MainActivity extends SkinActivity {
         //2. FirebaseUI
         //  firebaseRecyclerAdapter.notifyDataSetChanged();
         firebaseRecyclerAdapter.startListening();
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        listID();
-        setmCountDownTimer();
-        setEditTextSearchEditor();
-        setEditTextSearchDrawableRight();
-        allButton();
-    }
-
-
-    //This is for toolbar
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
     }
 
     //This is method for the soft keyboard search button entered
@@ -690,6 +678,29 @@ public class MainActivity extends SkinActivity {
     }
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        //  // Force invalidatation of the menu to cause onPrepareOptionMenu to be called
+        // invalidateOptionsMenu();
+        listID();
+        setmCountDownTimer();
+        setEditTextSearchEditor();
+        setEditTextSearchDrawableRight();
+        allButton();
+
+    }
+
+    //This is for toolbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -701,9 +712,7 @@ public class MainActivity extends SkinActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
             builder.setTitle(R.string.action_about);
             //TODO: Update the version at About
-            builder.setMessage("Karangan Cemerlang SPM\nversi 2.16\n\n\nJangan lupa kongsi bersama kawan :)\n\n\n\nKredit:\nCikgu Mariani\nCikgu Badrunsham\nCikgu Hamidah\nCikgu Rohani\nCikgu Harum Awang\nCikgu Samat\nCikgu Che Noranuwi\nNabil Fikri\nMuhd Arif (Bob)\nLuqman K\nAffiq Shamil\n\nhazman45.blogspot.com\nTicherhaz©2019");
-
-            builder.setCancelable(true);
+            builder.setMessage("Karangan Cemerlang SPM\nversi 2.17\n\n\nJangan lupa kongsi bersama kawan :)\n\n\n\nKredit:\nCikgu Mariani\nCikgu Badrunsham\nCikgu Hamidah\nCikgu Rohani\nCikgu Harum Awang\nCikgu Samat\nCikgu Che Noranuwi\nNabil Fikri\nMuhd Arif (Bob)\nLuqman K\nAffiq Shamil\n\nhazman45.blogspot.com\nTicherhaz©2019");
             builder.setPositiveButton(
                     "Ok",
                     new DialogInterface.OnClickListener() {
@@ -712,7 +721,6 @@ public class MainActivity extends SkinActivity {
                         }
                     });
             AlertDialog alert = builder.create();
-            alert.setCancelable(false);
             alert.show();
             return true;
         }
@@ -723,19 +731,50 @@ public class MainActivity extends SkinActivity {
             startActivities(new Intent[]{intent});
             return true;
         }
+        //Shared Preference
+        sharedPreferences = getSharedPreferences(SHARED_PREFERENCES,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
         if (id == R.id.action_skin) {
             if (item.isChecked()) {
                 SkinEngine.changeSkin(R.style.AppTheme);
                 item.setChecked(false);
+                mod = "PUTIH";
+                editor.putString(SHARED_PREFERENCES_MOD, mod);
+                editor.apply();
+
+                // we clear the text search to avoid the changes of the color night mode
+                editTextSearch.setText("");
             } else {
-                item.setChecked(true);
                 SkinEngine.changeSkin(R.style.AppNightTheme);
+                item.setChecked(true);
+                mod = "HITAM";
+                editor.putString(SHARED_PREFERENCES_MOD, mod);
+                editor.apply();
+
+                editTextSearch.setText("");
+
+
             }
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        MenuItem menuItem = menu.findItem(R.id.action_skin);
+        if (mod != null) {
+            if (mod.equals("PUTIH")) {
+                menuItem.setChecked(false);
+            } else {
+                menuItem.setChecked(true);
+            }
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
 
     private void allButton() {
         buttonSenaraiKarangan.setOnClickListener(new View.OnClickListener() {

@@ -46,6 +46,7 @@ public class FeedbackActivity extends SkinActivity {
         editTextDescription = findViewById(R.id.text_view_description);
 
         spinner = findViewById(R.id.spinner);
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.feedback_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

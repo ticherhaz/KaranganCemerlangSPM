@@ -2,7 +2,6 @@ package net.ticherhaz.karangancemerlangspm;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -36,7 +35,6 @@ public class KaranganDetailActivity extends SkinActivity {
     private Button buttonIncreaseSize;
     private Button buttonDecreaseSize;
     private Button buttonFont;
-    private Button buttonBlack;
 
     private String karanganJenis;
     private String userUid;
@@ -59,7 +57,6 @@ public class KaranganDetailActivity extends SkinActivity {
         buttonIncreaseSize = findViewById(R.id.button_increase_size);
         buttonDecreaseSize = findViewById(R.id.button_decrease_size);
         buttonFont = findViewById(R.id.button_font);
-        buttonBlack = findViewById(R.id.button_black);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
@@ -72,30 +69,6 @@ public class KaranganDetailActivity extends SkinActivity {
         setButtonIncreaseSize();
         setButtonDecreaseSizeSize();
         setButtonFont();
-        setButtonBlack();
-    }
-
-    //Method set black
-    private void setButtonBlack() {
-        buttonBlack.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-
-            public void onClick(View v) {
-                if (colorChange) {
-                    colorChange = false;
-                    buttonBlack.setText("Mod Putih");
-                    textViewKarangan.setTextColor(Color.WHITE);
-                    textViewKarangan.setBackgroundColor(Color.DKGRAY);
-                } else {
-                    colorChange = true;
-                    textViewKarangan.setTextColor(Color.DKGRAY);
-                    buttonBlack.setText("Mod Hitam");
-                    textViewKarangan.setBackgroundColor(Color.WHITE);
-                }
-
-            }
-        });
     }
 
     //Method increase size text

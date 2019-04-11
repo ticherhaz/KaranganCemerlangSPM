@@ -35,10 +35,13 @@ public class SplashActivity extends AppCompatActivity {
     //Variable
     private static final String SHARED_PREFERENCES = "myPreference";
     private static final String SHARED_PREFERENCES_UID = "myPreferenceUid";
+    private static final String SHARED_PREFERENCES_MOD = "myPreferenceMod";
+    public SharedPreferences sharedPreferences;
     //Firebase
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private String uid;
+    private String mod;
     private String lastSeen;
     private String ipAddress;
 
@@ -72,6 +75,7 @@ public class SplashActivity extends AppCompatActivity {
         return "";
     }
 
+
     //Method Initialize the list ID
     private void listID() {
         //Initialize the Firebase
@@ -88,11 +92,13 @@ public class SplashActivity extends AppCompatActivity {
 
         //Call back the shared preference
         //Shared Preference
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES,
+        sharedPreferences = getSharedPreferences(SHARED_PREFERENCES,
                 Context.MODE_PRIVATE);
         //If already created the uid, then we just need to call back the shared preference
-        if (sharedPreferences.contains(SHARED_PREFERENCES_UID)) {
+        if (sharedPreferences.contains(SHARED_PREFERENCES_UID) && sharedPreferences.contains(SHARED_PREFERENCES_MOD)) {
             uid = sharedPreferences.getString(SHARED_PREFERENCES_UID, "");
+            //At this part, we called back the mod because we want to transfer the value of the mod and then change the tick at the menu item
+            mod = sharedPreferences.getString(SHARED_PREFERENCES_MOD, "");
         } else {
             //If not created yet the shared preference mean, then we create new uid from the database and then we store in the shared preference.
             //So, next time we open the apps, it will the load that already created one.
@@ -102,9 +108,19 @@ public class SplashActivity extends AppCompatActivity {
             //Then store the uid in the shared preferences
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString(SHARED_PREFERENCES_UID, uid);
+            // editor.putString(SHARED_PREFERENCES_MOD, mod);
             editor.apply();
         }
+//        if (mod != null) {
+//            if (mod.equals("PUTIH")) {
+//
+//                SkinEngine.changeSkin(R.style.AppTheme);
+//            } else {
+//                SkinEngine.changeSkin(R.style.AppNightTheme);
+//            }
+//        }
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,10 +181,12 @@ public class SplashActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.putExtra("userUid", userUid);
         intent.putExtra("phoneModel", model);
+        intent.putExtra("mod", mod);
         startActivities(new Intent[]{intent});
         //Then close this activity
         finish();
     }
+
 
     //Method check the system about the version and mode
     private void checkSystem(final String userUid) {
@@ -191,8 +209,8 @@ public class SplashActivity extends AppCompatActivity {
                         return;
                     }
                     //After that, we chat the value
-                    if (system != null && system.getVersi() != 26) {
-                        //TODO: Version right now is 26. Please update when the new version is released.
+                    if (system != null && system.getVersi() != 27) {
+                        //TODO: Version right now is 27. Please update when the new version is released.
                         Toast toast = Toast.makeText(getApplicationContext(), "Sila mengemas kini versi baharu", Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();

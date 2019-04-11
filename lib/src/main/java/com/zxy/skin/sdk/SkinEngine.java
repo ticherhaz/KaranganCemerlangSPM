@@ -133,9 +133,7 @@ public class SkinEngine {
         SkinApplicatorManager.getApplicator(view.getClass()).apply(view, skinViewWrapper.attrsMap);
     }
 
-    /**
-     * 解除对view的监控
-     *
+    /** 解除对view的监控
      * @param view
      */
     public static void unRegisterSkinObserver(View view) {

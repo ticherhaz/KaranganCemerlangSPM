@@ -51,7 +51,6 @@ public class SkinViewApplicator {
 
     /**
      * 换肤核心逻辑
-     *
      * @param view
      * @param attrsMap
      */

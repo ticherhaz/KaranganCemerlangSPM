@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="190dp"
     android:layout_height="270dp"
+    android:background="?attr/colorBackgroundRecyclerView"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -13,7 +14,8 @@
         android:background="@drawable/button_selector"
         android:fontFamily="sans-serif"
         android:text="@string/default_font"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:textColor="@color/colorTextWhite" />
 
     <Button
         android:id="@+id/button_merriweather"
@@ -24,7 +26,8 @@
         android:fontFamily="@font/merriweather"
         android:padding="11dp"
         android:text="@string/merriweather"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:textColor="@color/colorTextWhite" />
 
     <Button
         android:id="@+id/button_roboto"
@@ -34,7 +37,8 @@
         android:background="@drawable/button_selector"
         android:fontFamily="@font/roboto"
         android:text="@string/roboto"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:textColor="@color/colorTextWhite" />
 
     <Button
         android:id="@+id/button_timesnewroman"
@@ -45,7 +49,8 @@
         android:fontFamily="@font/timesnewroman"
         android:padding="7dp"
         android:text="@string/timenewroman"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:textColor="@color/colorTextWhite" />
 
     <Button
         android:id="@+id/button_arial"
@@ -55,6 +60,6 @@
         android:background="@drawable/button_selector"
         android:fontFamily="@font/arial"
         android:text="@string/arial"
-        android:textAllCaps="false" />
-
+        android:textAllCaps="false"
+        android:textColor="@color/colorTextWhite" />
 </LinearLayout>

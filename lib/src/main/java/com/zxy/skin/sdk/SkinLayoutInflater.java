@@ -1,6 +1,5 @@
 package com.zxy.skin.sdk;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -27,15 +26,18 @@ import java.util.Set;
  */
 public class SkinLayoutInflater extends LayoutInflater implements LayoutInflater.Factory2, SkinEngine.ISkinObserver {
 
+    private static String TAG = "SkinLayoutInflater";
+
     // copy from AOSP PhoneLayoutInflater.java
     private static final String[] sClassPrefixList = {
             "android.widget.",
             "android.webkit.",
             "android.app."
     };
+
     // copy from AOSP LayoutInflater.java
     private static final StackTraceElement[] EMPTY_STACK_TRACE = new StackTraceElement[0];
-    private static String TAG = "SkinLayoutInflater";
+
     private static Field mConstructorArgsField;
 
     static {
@@ -366,7 +368,6 @@ public class SkinLayoutInflater extends LayoutInflater implements LayoutInflater
      */
     private class SkinElement extends WeakReference<View> {
 
-        @SuppressLint("NewApi")
         public ArrayMap<String, Integer> changeAttrs = new ArrayMap<>();
 
         public SkinElement(View referent) {

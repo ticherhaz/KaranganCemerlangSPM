@@ -97,7 +97,7 @@
     <string name="merriweather">Merriweather</string>
     <string name="roboto">Roboto</string>
     <string name="default_font">Default</string>
-    <string name="black">Mod Hitam</string>
+    <!--<string name="black">Mod Hitam</string>-->
     <string name="timenewroman">Times New Roman</string>
     <string name="arial">Arial</string>
     <string name="topik_baru">+ Topik Baru</string>
