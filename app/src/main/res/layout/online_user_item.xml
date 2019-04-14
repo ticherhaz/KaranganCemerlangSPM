@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="3dp"
+    android:background="?attr/colorBackgroundRecyclerView"
     android:orientation="vertical">
 
     <LinearLayout
@@ -13,6 +14,7 @@
         <TextView
             android:id="@+id/text_view_username"
             android:layout_width="wrap_content"
+            android:textColor="?attr/colorText"
             android:layout_height="match_parent"
             android:layout_margin="3dp"
             android:drawableStart="@drawable/ic_sign_online_green"
@@ -24,6 +26,7 @@
             android:id="@+id/text_view_sekolah"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:textColor="?attr/colorText"
             android:layout_margin="3dp"
             android:gravity="center_vertical" />
 
@@ -31,6 +34,7 @@
             android:id="@+id/text_view_reputation"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:textColor="?attr/colorText"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="3dp"
             android:drawableStart="@drawable/ic_reputation"
@@ -40,6 +44,7 @@
         <TextView
             android:id="@+id/text_view_status"
             android:layout_width="wrap_content"
+            android:textColor="?attr/colorText"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginLeft="5dp"

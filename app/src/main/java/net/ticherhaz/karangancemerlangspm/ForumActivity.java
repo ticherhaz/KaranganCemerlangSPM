@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -31,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
+import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.Model.Forum;
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
@@ -41,7 +41,7 @@ import net.ticherhaz.karangancemerlangspm.ViewHolder.ForumViewHolder;
 import java.util.Calendar;
 import java.util.Date;
 
-public class ForumActivity extends AppCompatActivity {
+public class ForumActivity extends SkinActivity {
 
     //Database
     private FirebaseDatabase firebaseDatabase;
@@ -192,7 +192,7 @@ public class ForumActivity extends AppCompatActivity {
             @NonNull
             @Override
             public ForumViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.forum_item, viewGroup, false);
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.forum_item, viewGroup, false);
                 return new ForumViewHolder(view);
             }
 

@@ -2,7 +2,6 @@ package net.ticherhaz.karangancemerlangspm;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,13 +16,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.Util.Others;
 import net.ticherhaz.karangancemerlangspm.Util.UserTypeColor;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.OnlineStatusViewHolder;
 
-public class OnlineUserActivity extends AppCompatActivity {
+public class OnlineUserActivity extends SkinActivity {
 
     //Firebase
     private FirebaseDatabase firebaseDatabase;
@@ -87,7 +87,7 @@ public class OnlineUserActivity extends AppCompatActivity {
             @NonNull
             @Override
             public OnlineStatusViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.online_user_item, viewGroup, false);
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.online_user_item, viewGroup, false);
                 return new OnlineStatusViewHolder(view);
             }
 
