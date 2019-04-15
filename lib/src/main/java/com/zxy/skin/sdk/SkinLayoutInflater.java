@@ -61,6 +61,7 @@ public class SkinLayoutInflater extends LayoutInflater implements LayoutInflater
 
     private Factory2 mFactory2;
 
+
     public SkinLayoutInflater(Context context) {
         this(null, context);
     }

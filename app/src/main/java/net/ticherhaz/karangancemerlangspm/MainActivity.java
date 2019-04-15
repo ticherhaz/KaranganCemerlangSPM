@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -93,6 +94,7 @@ public class MainActivity extends SkinActivity {
     private TextView textViewCountdownSPM;
     private SharedPreferences sharedPreferences;
     private String mod;
+    private String modA;
 
     //Method listID
     private void listID() {
@@ -681,8 +683,23 @@ public class MainActivity extends SkinActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         //  // Force invalidatation of the menu to cause onPrepareOptionMenu to be called
-        // invalidateOptionsMenu();
+        if (savedInstanceState == null) {
+            //Get the value of the userUid
+
+            sharedPreferences = getSharedPreferences(SHARED_PREFERENCES,
+                    Context.MODE_PRIVATE);
+            //If already created the uid, then we just need to call back the shared preference
+            if (sharedPreferences.contains(SHARED_PREFERENCES_MOD)) {
+
+                //At this part, we called back the mod because we want to transfer the value of the mod and then change the tick at the menu item
+                mod = sharedPreferences.getString(SHARED_PREFERENCES_MOD, "");
+            }
+
+
+        }
+        //    invalidateOptionsMenu();
         listID();
         setmCountDownTimer();
         setEditTextSearchEditor();
@@ -699,6 +716,20 @@ public class MainActivity extends SkinActivity {
         return true;
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        outState.putString("modA", mod);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+
+        super.onRestoreInstanceState(savedInstanceState);
+        modA = savedInstanceState.getString("modA");
+
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -712,7 +743,7 @@ public class MainActivity extends SkinActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
             builder.setTitle(R.string.action_about);
             //TODO: Update the version at About
-            builder.setMessage("Karangan Cemerlang SPM\nversi 2.17\n\n\nJangan lupa kongsi bersama kawan :)\n\n\n\nKredit:\nCikgu Mariani\nCikgu Badrunsham\nCikgu Hamidah\nCikgu Rohani\nCikgu Harum Awang\nCikgu Samat\nCikgu Che Noranuwi\nNabil Fikri\nMuhd Arif (Bob)\nLuqman K\nAffiq Shamil\n\nhazman45.blogspot.com\nTicherhaz©2019");
+            builder.setMessage("Karangan Cemerlang SPM\nversi 2.18\n\n\nJangan lupa kongsi bersama kawan :)\n\n\n\nKredit:\nCikgu Mariani\nCikgu Badrunsham\nCikgu Hamidah\nCikgu Rohani\nCikgu Harum Awang\nCikgu Samat\nCikgu Che Noranuwi\nNabil Fikri\nMuhd Arif (Bob)\nLuqman K\nAffiq Shamil\n\nhazman45.blogspot.com\nTicherhaz©2019");
             builder.setPositiveButton(
                     "Ok",
                     new DialogInterface.OnClickListener() {
@@ -741,6 +772,8 @@ public class MainActivity extends SkinActivity {
                 SkinEngine.changeSkin(R.style.AppTheme);
                 item.setChecked(false);
                 mod = "PUTIH";
+                modA = "PUTIH";
+
                 editor.putString(SHARED_PREFERENCES_MOD, mod);
                 editor.apply();
 
@@ -750,6 +783,7 @@ public class MainActivity extends SkinActivity {
                 SkinEngine.changeSkin(R.style.AppNightTheme);
                 item.setChecked(true);
                 mod = "HITAM";
+                modA = "HITAM";
                 editor.putString(SHARED_PREFERENCES_MOD, mod);
                 editor.apply();
 
@@ -764,7 +798,6 @@ public class MainActivity extends SkinActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-
         MenuItem menuItem = menu.findItem(R.id.action_skin);
         if (mod != null) {
             if (mod.equals("PUTIH")) {
@@ -772,6 +805,14 @@ public class MainActivity extends SkinActivity {
             } else {
                 menuItem.setChecked(true);
             }
+        } else if (modA != null) {
+            if (modA.equals("PUTIH")) {
+                menuItem.setChecked(false);
+            } else {
+                menuItem.setChecked(true);
+            }
+        } else {
+            menuItem.setEnabled(false);
         }
         return super.onPrepareOptionsMenu(menu);
     }

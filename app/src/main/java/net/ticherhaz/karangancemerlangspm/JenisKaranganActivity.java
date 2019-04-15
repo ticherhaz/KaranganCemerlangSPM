@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -21,6 +22,7 @@ import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.Model.Jenis;
 import net.ticherhaz.karangancemerlangspm.Util.InternetMessage;
+import net.ticherhaz.karangancemerlangspm.Util.Others;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.JenisViewHolder;
 
 public class JenisKaranganActivity extends SkinActivity {
@@ -41,11 +43,36 @@ public class JenisKaranganActivity extends SkinActivity {
     private String userUid;
     private String karanganJenis;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+
+    private void setSwipeRefreshLayout() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (new Others().isNetworkAvailable(getApplicationContext())) {
+                            //if has internet connection
+                            setFirebaseRecyclerAdapter();
+                            swipeRefreshLayout.setRefreshing(false);
+                        } else {
+                            Toast.makeText(getApplicationContext(), new InternetMessage().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                }, 500);
+
+            }
+        });
+    }
+
     //List id
     private void listID() {
         recyclerView = findViewById(R.id.recycler_view);
         progressBar = findViewById(R.id.progressbar);
-
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+        setSwipeRefreshLayout();
         //Firebase database
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("jenis");

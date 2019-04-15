@@ -209,8 +209,8 @@ public class SplashActivity extends AppCompatActivity {
                         return;
                     }
                     //After that, we chat the value
-                    if (system != null && system.getVersi() != 27) {
-                        //TODO: Version right now is 27. Please update when the new version is released.
+                    if (system != null && system.getVersi() != 28) {
+                        //TODO: Version right now is 28. Please update when the new version is released.
                         Toast toast = Toast.makeText(getApplicationContext(), "Sila mengemas kini versi baharu", Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();

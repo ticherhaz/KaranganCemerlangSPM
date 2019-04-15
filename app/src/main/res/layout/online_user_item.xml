@@ -14,43 +14,43 @@
         <TextView
             android:id="@+id/text_view_username"
             android:layout_width="wrap_content"
-            android:textColor="?attr/colorText"
             android:layout_height="match_parent"
             android:layout_margin="3dp"
             android:drawableStart="@drawable/ic_sign_online_green"
             android:drawableLeft="@drawable/ic_sign_online_green"
             android:gravity="center_vertical"
+            android:textColor="?attr/colorText"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/text_view_sekolah"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textColor="?attr/colorText"
             android:layout_margin="3dp"
-            android:gravity="center_vertical" />
+            android:gravity="center_vertical"
+            android:textColor="?attr/colorText" />
 
         <TextView
             android:id="@+id/text_view_reputation"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textColor="?attr/colorText"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="3dp"
             android:drawableStart="@drawable/ic_reputation"
             android:drawableLeft="@drawable/ic_reputation"
-            android:gravity="center_vertical" />
+            android:gravity="center_vertical"
+            android:textColor="?attr/colorText" />
 
         <TextView
             android:id="@+id/text_view_status"
             android:layout_width="wrap_content"
-            android:textColor="?attr/colorText"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginLeft="5dp"
             android:drawableStart="@drawable/ic_status_neutral"
             android:drawableLeft="@drawable/ic_status_neutral"
-            android:gravity="center_vertical" />
+            android:gravity="center_vertical"
+            android:textColor="?attr/colorText" />
 
     </LinearLayout>
 </LinearLayout>

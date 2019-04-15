@@ -168,23 +168,28 @@ public class SenaraiKaranganActivity extends SkinActivity {
         listID();
     }
 
-    //Method swipe
     private void setSwipeRefreshLayout() {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //set runnable
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        firebaseRecyclerAdapter.notifyDataSetChanged();
-                        firebaseRecyclerAdapter.startListening();
-                        swipeRefreshLayout.setRefreshing(false);
+                        if (new Others().isNetworkAvailable(getApplicationContext())) {
+                            //if has internet connection
+                            setFirebaseRecyclerAdapter();
+                            swipeRefreshLayout.setRefreshing(false);
+                        } else {
+                            Toast.makeText(getApplicationContext(), new InternetMessage().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+
                     }
-                }, 150);
+                }, 500);
+
             }
         });
     }
+
 
     @Override
     public void onBackPressed() {

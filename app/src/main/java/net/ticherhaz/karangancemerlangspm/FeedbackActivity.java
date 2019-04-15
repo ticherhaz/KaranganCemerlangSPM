@@ -18,8 +18,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.Model.Feedback;
-import net.ticherhaz.karangancemerlangspm.Util.InternetCheck;
 import net.ticherhaz.karangancemerlangspm.Util.InternetMessage;
+import net.ticherhaz.karangancemerlangspm.Util.Others;
 
 import java.util.Calendar;
 
@@ -79,40 +79,53 @@ public class FeedbackActivity extends SkinActivity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Check the internet connection
-                new InternetCheck(new InternetCheck.Consumer() {
-                    @Override
-                    public void accept(Boolean internet) {
-                        if (internet) {
-                            if (!TextUtils.isEmpty(editTextEmail.getText().toString()) && !TextUtils.isEmpty(editTextDescription.getText().toString()) && isEmailValid(editTextEmail.getText().toString())) {
-                                String typeProblem = spinner.getSelectedItem().toString();
-                                String email = editTextEmail.getText().toString();
-                                String description = editTextDescription.getText().toString();
-                                String date = Calendar.getInstance().getTime().toString();
+                if (!TextUtils.isEmpty(editTextEmail.getText().toString()) && !TextUtils.isEmpty(editTextDescription.getText().toString()) && isEmailValid(editTextEmail.getText().toString())) {
+                    String typeProblem = spinner.getSelectedItem().toString();
+                    String email = editTextEmail.getText().toString();
+                    String description = editTextDescription.getText().toString();
+                    String date = Calendar.getInstance().getTime().toString();
+                    String uid = databaseReference.push().getKey();
 
-                                String uid = databaseReference.push().getKey();
+                    Feedback feedback = new Feedback(uid, userUid, phoneModel, typeProblem, email, description, date);
 
-                                Feedback feedback = new Feedback(uid, userUid, phoneModel, typeProblem, email, description, date);
-                                //Then store the data into firebase
-                                if (uid != null)
-                                    databaseReference.child(uid).setValue(feedback).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                editTextEmail.setText("");
-                                                editTextDescription.setText("");
-                                                Toast.makeText(getApplicationContext(), "Terima kasih atas maklum balas anda\nKami akan hubungi anda dalam masa terdekat", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    });
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Sila isi email dan deskripsi anda", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(getApplicationContext(), new InternetMessage().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
+                    if (new Others().isNetworkAvailable(getApplicationContext())) {
+                        //if yes, there is no connection
+                        //Then store the data into firebase
+                        if (uid != null)
+                            databaseReference.child(uid).setValue(feedback).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        editTextEmail.setText("");
+                                        editTextDescription.setText("");
+                                        Toast.makeText(getApplicationContext(), "Terima kasih atas maklum balas anda\nKami akan hubungi anda dalam masa terdekat", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                    } else {
+                        //No connection
+                        Toast.makeText(getApplicationContext(), new InternetMessage().getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                });
+
+
+//                    //Check the internet connection
+//                    new InternetCheck(new InternetCheck.Consumer() {
+//                        @Override
+//                        public void accept(Boolean internet) {
+//                            if (internet) {
+//
+//
+//
+//                            } else {
+//
+//                            }
+//                        }
+//                    });
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "Sila isi email dan deskripsi anda", Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });
