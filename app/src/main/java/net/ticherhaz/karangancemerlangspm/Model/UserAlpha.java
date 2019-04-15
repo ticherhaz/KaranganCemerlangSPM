@@ -9,21 +9,31 @@ public class UserAlpha {
     private String onCreatedDate;
     private String onLoginDate;
     private String onIpAddress;
+    private String dayMonthYearCreated;
 
     public UserAlpha() {
     }
 
-    public UserAlpha(String userUid, String phoneBrand, String phoneModel, String ipAddress, String onCreatedDate) {
+    public UserAlpha(String userUid, String phoneBrand, String phoneModel, String ipAddress, String onCreatedDate, String dayMonthYearCreated) {
         this.userUid = userUid;
         this.phoneBrand = phoneBrand;
         this.phoneModel = phoneModel;
         this.ipAddress = ipAddress;
         this.onCreatedDate = onCreatedDate;
+        this.dayMonthYearCreated = dayMonthYearCreated;
     }
 
     public UserAlpha(String onLoginDate, String onIpAddress) {
         this.onLoginDate = onLoginDate;
         this.onIpAddress = onIpAddress;
+    }
+
+    public String getDayMonthYearCreated() {
+        return dayMonthYearCreated;
+    }
+
+    public void setDayMonthYearCreated(String dayMonthYearCreated) {
+        this.dayMonthYearCreated = dayMonthYearCreated;
     }
 
     public String getUserUid() {

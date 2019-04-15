@@ -28,6 +28,7 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class SplashActivity extends AppCompatActivity {
@@ -44,6 +45,7 @@ public class SplashActivity extends AppCompatActivity {
     private String mod;
     private String lastSeen;
     private String ipAddress;
+    private String dayMonthYearCreated = String.valueOf(android.text.format.DateFormat.format("yyyy:MM:dd", new Date()));
 
     //Method to get IP Address
     public static String getIPAddress(boolean useIPv4) {
@@ -75,7 +77,6 @@ public class SplashActivity extends AppCompatActivity {
         return "";
     }
 
-
     //Method Initialize the list ID
     private void listID() {
         //Initialize the Firebase
@@ -95,11 +96,24 @@ public class SplashActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(SHARED_PREFERENCES,
                 Context.MODE_PRIVATE);
         //If already created the uid, then we just need to call back the shared preference
-        if (sharedPreferences.contains(SHARED_PREFERENCES_UID) && sharedPreferences.contains(SHARED_PREFERENCES_MOD)) {
+        if (sharedPreferences.contains(SHARED_PREFERENCES_UID)) {
             uid = sharedPreferences.getString(SHARED_PREFERENCES_UID, "");
+        }
+        if (sharedPreferences.contains(SHARED_PREFERENCES_MOD)) {
             //At this part, we called back the mod because we want to transfer the value of the mod and then change the tick at the menu item
             mod = sharedPreferences.getString(SHARED_PREFERENCES_MOD, "");
-        } else {
+        }
+        if (!sharedPreferences.contains(SHARED_PREFERENCES_MOD)) {
+            mod = "PUTIH";
+            //At this part, we called back the mod because we want to transfer the value of the mod and then change the tick at the menu item
+            //Then store the uid in the shared preferences
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(SHARED_PREFERENCES_MOD, mod);
+            // editor.putString(SHARED_PREFERENCES_MOD, mod);
+            editor.apply();
+        }
+
+        if (!sharedPreferences.contains(SHARED_PREFERENCES_UID)) {
             //If not created yet the shared preference mean, then we create new uid from the database and then we store in the shared preference.
             //So, next time we open the apps, it will the load that already created one.
 
@@ -111,14 +125,6 @@ public class SplashActivity extends AppCompatActivity {
             // editor.putString(SHARED_PREFERENCES_MOD, mod);
             editor.apply();
         }
-//        if (mod != null) {
-//            if (mod.equals("PUTIH")) {
-//
-//                SkinEngine.changeSkin(R.style.AppTheme);
-//            } else {
-//                SkinEngine.changeSkin(R.style.AppNightTheme);
-//            }
-//        }
     }
 
 
@@ -153,10 +159,10 @@ public class SplashActivity extends AppCompatActivity {
         String model = Build.MODEL;
 
         //then we call the model class
-        final UserAlpha userAlpha = new UserAlpha(userUid, brand, model, ipAddress, lastSeen);
+        final UserAlpha userAlpha = new UserAlpha(userUid, brand, model, ipAddress, lastSeen, dayMonthYearCreated);
 
         //at this part, we check if the user is already created or not for once.
-        databaseReference.child("userAlpha").child(userUid).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("userAlpha").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()) {
@@ -209,8 +215,8 @@ public class SplashActivity extends AppCompatActivity {
                         return;
                     }
                     //After that, we chat the value
-                    if (system != null && system.getVersi() != 28) {
-                        //TODO: Version right now is 28. Please update when the new version is released.
+                    if (system != null && system.getVersi() != 29) {
+                        //TODO: Version right now is 29. Please update when the new version is released.
                         Toast toast = Toast.makeText(getApplicationContext(), "Sila mengemas kini versi baharu", Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();

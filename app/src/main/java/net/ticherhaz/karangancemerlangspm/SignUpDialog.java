@@ -145,7 +145,7 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        Toast.makeText(context, "Username already taken", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Nama Samaran Sudah Diambil", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     } else {
                         //If there is no username yet, then we create the new one

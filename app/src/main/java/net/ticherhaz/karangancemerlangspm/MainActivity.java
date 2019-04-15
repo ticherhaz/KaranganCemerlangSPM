@@ -14,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.Html;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.ContextThemeWrapper;
 import android.view.KeyEvent;
@@ -54,6 +55,7 @@ import java.util.concurrent.TimeUnit;
 public class MainActivity extends SkinActivity {
 
     private static final String SHARED_PREFERENCES_MOD = "myPreferenceMod";
+    private static final String SAVED_MOD = "mySavedMod";
     private static final String SHARED_PREFERENCES = "myPreference";
     private DatabaseReference databaseReference;
     private FirebaseRecyclerOptions<Karangan> firebaseRecyclerOptions;
@@ -94,7 +96,6 @@ public class MainActivity extends SkinActivity {
     private TextView textViewCountdownSPM;
     private SharedPreferences sharedPreferences;
     private String mod;
-    private String modA;
 
     //Method listID
     private void listID() {
@@ -670,7 +671,10 @@ public class MainActivity extends SkinActivity {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (event.getRawX() >= (editTextSearch.getRight() - editTextSearch.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                         // your action here
-                        setFirebaseRecyclerAdapter(editTextSearch.getText().toString());
+                        if (!TextUtils.isEmpty(editTextSearch.getText().toString())) {
+                            setFirebaseRecyclerAdapter(editTextSearch.getText().toString());
+                        }
+
                         return true;
                     }
                 }
@@ -683,30 +687,24 @@ public class MainActivity extends SkinActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //  // Force invalidatation of the menu to cause onPrepareOptionMenu to be called
-        if (savedInstanceState == null) {
-            //Get the value of the userUid
-
-            sharedPreferences = getSharedPreferences(SHARED_PREFERENCES,
-                    Context.MODE_PRIVATE);
-            //If already created the uid, then we just need to call back the shared preference
-            if (sharedPreferences.contains(SHARED_PREFERENCES_MOD)) {
-
-                //At this part, we called back the mod because we want to transfer the value of the mod and then change the tick at the menu item
-                mod = sharedPreferences.getString(SHARED_PREFERENCES_MOD, "");
-            }
-
-
-        }
-        //    invalidateOptionsMenu();
         listID();
+        if (savedInstanceState != null) {
+            mod = savedInstanceState.getString(SAVED_MOD);
+//        } else {
+//            sharedPreferences = getSharedPreferences(SHARED_PREFERENCES,
+//                    Context.MODE_PRIVATE);
+//            if (sharedPreferences.contains(SHARED_PREFERENCES_MOD)) {
+//                //At this part, we called back the mod because we want to transfer the value of the mod and then change the tick at the menu item
+//                mod = sharedPreferences.getString(SHARED_PREFERENCES_MOD, "");
+//            }
+        }
+
         setmCountDownTimer();
         setEditTextSearchEditor();
         setEditTextSearchDrawableRight();
         allButton();
-
     }
+
 
     //This is for toolbar
     @Override
@@ -718,18 +716,9 @@ public class MainActivity extends SkinActivity {
 
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        outState.putString(SAVED_MOD, mod);
         super.onSaveInstanceState(outState, outPersistentState);
-        outState.putString("modA", mod);
     }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-
-        super.onRestoreInstanceState(savedInstanceState);
-        modA = savedInstanceState.getString("modA");
-
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -743,7 +732,7 @@ public class MainActivity extends SkinActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
             builder.setTitle(R.string.action_about);
             //TODO: Update the version at About
-            builder.setMessage("Karangan Cemerlang SPM\nversi 2.18\n\n\nJangan lupa kongsi bersama kawan :)\n\n\n\nKredit:\nCikgu Mariani\nCikgu Badrunsham\nCikgu Hamidah\nCikgu Rohani\nCikgu Harum Awang\nCikgu Samat\nCikgu Che Noranuwi\nNabil Fikri\nMuhd Arif (Bob)\nLuqman K\nAffiq Shamil\n\nhazman45.blogspot.com\nTicherhaz©2019");
+            builder.setMessage("Karangan Cemerlang SPM\nversi 2.19\n\n\nJangan lupa kongsi bersama kawan :)\n\nKredit:\nCikgu Mariani - Cikgu Badrunsham - Cikgu Hamidah - Cikgu Rohani - Cikgu Harum Awang - Cikgu Samat - Cikgu Che Noranuwi - Nabil Fikri - Muhd Arif (Bob) - Luqman K - Affiq Shamil\n\n\n\n\nTips:\nHAZMAN BIN BADRUNSHAM\nCIMB BANK\n7614543761\n\n\nhazman45.blogspot.com\nTicherhaz©2019");
             builder.setPositiveButton(
                     "Ok",
                     new DialogInterface.OnClickListener() {
@@ -762,17 +751,18 @@ public class MainActivity extends SkinActivity {
             startActivities(new Intent[]{intent});
             return true;
         }
-        //Shared Preference
-        sharedPreferences = getSharedPreferences(SHARED_PREFERENCES,
-                Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+
 
         if (id == R.id.action_skin) {
             if (item.isChecked()) {
                 SkinEngine.changeSkin(R.style.AppTheme);
                 item.setChecked(false);
+
+                //Shared Preference
+                sharedPreferences = getSharedPreferences(SHARED_PREFERENCES,
+                        Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
                 mod = "PUTIH";
-                modA = "PUTIH";
 
                 editor.putString(SHARED_PREFERENCES_MOD, mod);
                 editor.apply();
@@ -782,13 +772,17 @@ public class MainActivity extends SkinActivity {
             } else {
                 SkinEngine.changeSkin(R.style.AppNightTheme);
                 item.setChecked(true);
+
+                //Shared Preference
+                sharedPreferences = getSharedPreferences(SHARED_PREFERENCES,
+                        Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
                 mod = "HITAM";
-                modA = "HITAM";
                 editor.putString(SHARED_PREFERENCES_MOD, mod);
                 editor.apply();
 
                 editTextSearch.setText("");
-
 
             }
             return true;
@@ -796,23 +790,42 @@ public class MainActivity extends SkinActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void checkMod(String modHere, MenuItem menuItem) {
+        switch (modHere) {
+            case "PUTIH":
+                menuItem.setChecked(false);
+                break;
+            case "HITAM":
+                menuItem.setChecked(true);
+                break;
+            default:
+                menuItem.setTitle("Yooo");
+                break;
+        }
+    }
+
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem menuItem = menu.findItem(R.id.action_skin);
         if (mod != null) {
-            if (mod.equals("PUTIH")) {
-                menuItem.setChecked(false);
-            } else {
-                menuItem.setChecked(true);
-            }
-        } else if (modA != null) {
-            if (modA.equals("PUTIH")) {
-                menuItem.setChecked(false);
-            } else {
-                menuItem.setChecked(true);
-            }
+            checkMod(mod, menuItem);
         } else {
-            menuItem.setEnabled(false);
+
+            //To avoid the unreachable value of mod, we called back once more time at here (onprepareoptionsmenu)
+            sharedPreferences = getSharedPreferences(SHARED_PREFERENCES,
+                    Context.MODE_PRIVATE);
+            if (sharedPreferences.contains(SHARED_PREFERENCES_MOD)) {
+                //At this part, we called back the mod because we want to transfer the value of the mod and then change the tick at the menu item
+                mod = sharedPreferences.getString(SHARED_PREFERENCES_MOD, "");
+            }
+
+            //Then we check back the value
+            if (mod != null) {
+                checkMod(mod, menuItem);
+            } else {
+                menuItem.setEnabled(false);
+            }
+
         }
         return super.onPrepareOptionsMenu(menu);
     }
