@@ -1,5 +1,6 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -215,8 +216,8 @@ public class SplashActivity extends AppCompatActivity {
                         return;
                     }
                     //After that, we chat the value
-                    if (system != null && system.getVersi() != 29) {
-                        //TODO: Version right now is 29. Please update when the new version is released.
+                    if (system != null && system.getVersi() != 30) {
+                        //TODO: Version right now is 30. Please update when the new version is released.
                         Toast toast = Toast.makeText(getApplicationContext(), "Sila mengemas kini versi baharu", Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
@@ -227,7 +228,14 @@ public class SplashActivity extends AppCompatActivity {
                             public void run() {
                                 //Then we proceed to the playStore for user to download the lastest version
                                 final String appPackageName = "net.ticherhaz.karangancemerlangspm"; // Can also use getPackageName(), as below
-                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                                try {
+                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                                } catch (ActivityNotFoundException ex) {
+                                    Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=net.ticherhaz.karangancemerlangspm&hl=en");
+                                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                    startActivity(intent);
+                                }
+
                             }
                         }, 3000); //3 seconds
                         return;

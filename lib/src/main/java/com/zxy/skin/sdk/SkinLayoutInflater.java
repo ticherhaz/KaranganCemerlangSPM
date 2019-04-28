@@ -1,8 +1,8 @@
 package com.zxy.skin.sdk;
 
 import android.content.Context;
+import android.support.v4.util.ArrayMap;
 import android.text.TextUtils;
-import android.util.ArrayMap;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.InflateException;
@@ -19,6 +19,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+//import android.util.ArrayMap;
+
 /**
  * @Description: 自定义的LayoutInflater，会收集需要换肤的控件及属性集，部分代码 copy from AOSP
  * @author: zhaoxuyang
@@ -26,18 +28,15 @@ import java.util.Set;
  */
 public class SkinLayoutInflater extends LayoutInflater implements LayoutInflater.Factory2, SkinEngine.ISkinObserver {
 
-    private static String TAG = "SkinLayoutInflater";
-
     // copy from AOSP PhoneLayoutInflater.java
     private static final String[] sClassPrefixList = {
             "android.widget.",
             "android.webkit.",
             "android.app."
     };
-
     // copy from AOSP LayoutInflater.java
     private static final StackTraceElement[] EMPTY_STACK_TRACE = new StackTraceElement[0];
-
+    private static String TAG = "SkinLayoutInflater";
     private static Field mConstructorArgsField;
 
     static {

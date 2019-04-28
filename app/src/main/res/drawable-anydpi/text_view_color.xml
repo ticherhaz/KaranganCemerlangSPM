@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:color="@color/colorPrimary" android:state_pressed="true" /> <!-- pressed -->
-    <item android:color="#0000f4" android:state_focused="true" /> <!-- focused -->
+    <!--<item android:color="#009575" android:state_pressed="true" /> &lt;!&ndash; pressed &ndash;&gt;-->
+    <!-- Ok we connot use the code something like at the bottom. -->
+    <!--<item android:color="#0000f4" android:state_focused="true" /> &lt;!&ndash; focused &ndash;&gt;-->
+
+    <!-- instead we are using the referring. -->
+    <!--<item android:color="#00D6FF" android:state_focused="true" /> &lt;!&ndash; focused &ndash;&gt;-->
+
     <item android:color="@color/colorPrimaryDark" />  <!--default -->
 
 </selector>

@@ -3,7 +3,7 @@ package com.zxy.skin.sdk.applicator;
 import android.content.res.TypedArray;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.util.ArrayMap;
+import android.support.v4.util.ArrayMap;
 import android.view.View;
 
 import com.zxy.skin.sdk.Logger;
@@ -51,6 +51,7 @@ public class SkinViewApplicator {
 
     /**
      * 换肤核心逻辑
+     *
      * @param view
      * @param attrsMap
      */

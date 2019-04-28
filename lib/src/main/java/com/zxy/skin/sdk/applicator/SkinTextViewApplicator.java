@@ -3,8 +3,8 @@ package com.zxy.skin.sdk.applicator;
 
 import android.content.res.TypedArray;
 import android.widget.TextView;
+
 /**
- *
  * @Description: TextView 的换肤器
  * @author: zhaoxuyang
  * @Date: 2019/1/31

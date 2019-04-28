@@ -33,7 +33,6 @@
 
         </LinearLayout>
 
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,8 +53,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
-                android:layout_toStartOf="@id/text_view_fav"
-                android:layout_toLeftOf="@id/text_view_fav"
                 android:layout_toEndOf="@+id/text_view_umum_views"
                 android:layout_toRightOf="@+id/text_view_umum_views"
                 android:drawableStart="@drawable/ic_reply"
@@ -76,7 +73,6 @@
                 android:text="@string/kedudukan" />
 
         </RelativeLayout>
-
 
         <TextView
             android:id="@+id/text_view_dimulai_oleh"

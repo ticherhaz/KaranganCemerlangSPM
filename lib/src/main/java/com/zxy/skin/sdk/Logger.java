@@ -3,7 +3,6 @@ package com.zxy.skin.sdk;
 import android.util.Log;
 
 /**
- *
  * @Description: 打印日志使用
  * @author: zhaoxuyang
  * @Date: 2019/1/31

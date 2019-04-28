@@ -1,7 +1,6 @@
 package com.zxy.skin.sdk;
 
 
-import android.util.ArrayMap;
 import android.view.View;
 import android.widget.TextView;
 
@@ -133,7 +132,9 @@ public class SkinEngine {
         SkinApplicatorManager.getApplicator(view.getClass()).apply(view, skinViewWrapper.attrsMap);
     }
 
-    /** 解除对view的监控
+    /**
+     * 解除对view的监控
+     *
      * @param view
      */
     public static void unRegisterSkinObserver(View view) {
@@ -161,7 +162,7 @@ public class SkinEngine {
 
         View view;
 
-        ArrayMap<String, Integer> attrsMap = new ArrayMap<>();
+        android.support.v4.util.ArrayMap<String, Integer> attrsMap = new android.support.v4.util.ArrayMap<>();
 
         SkinViewWrapper(View view) {
             this.view = view;

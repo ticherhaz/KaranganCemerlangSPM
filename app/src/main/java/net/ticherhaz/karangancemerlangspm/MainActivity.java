@@ -732,7 +732,7 @@ public class MainActivity extends SkinActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
             builder.setTitle(R.string.action_about);
             //TODO: Update the version at About
-            builder.setMessage("Karangan Cemerlang SPM\nversi 2.19\n\n\nJangan lupa kongsi bersama kawan :)\n\nKredit:\nCikgu Mariani - Cikgu Badrunsham - Cikgu Hamidah - Cikgu Rohani - Cikgu Harum Awang - Cikgu Samat - Cikgu Che Noranuwi - Nabil Fikri - Muhd Arif (Bob) - Luqman K - Affiq Shamil\n\n\n\n\nTips:\nHAZMAN BIN BADRUNSHAM\nCIMB BANK\n7614543761\n\n\nhazman45.blogspot.com\nTicherhaz©2019");
+            builder.setMessage("Karangan Cemerlang SPM\nversi 2.30\n\n\nJangan lupa kongsi bersama kawan :)\n\nKredit:\nCikgu Mariani - Cikgu Badrunsham - Cikgu Hamidah - Cikgu Rohani - Cikgu Harum Awang - Cikgu Samat - Cikgu Che Noranuwi - Nabil Fikri - Muhd Arif (Bob) - Luqman K - Affiq Shamil\n\n\n\n\nTips:\nHAZMAN BIN BADRUNSHAM\nCIMB BANK\n7614543761\n\n\nhazman45.blogspot.com\nTicherhaz©2019");
             builder.setPositiveButton(
                     "Ok",
                     new DialogInterface.OnClickListener() {

@@ -100,11 +100,11 @@ public class ForumActivity extends SkinActivity {
             protected void onBindViewHolder(@NonNull final ForumViewHolder holder, int position, @NonNull final Forum model) {
 
                 holder.getTextViewForumTitle().setText(model.getForumTitle());
-                holder.getTextViewUserViewing().setText("(" + String.valueOf(model.getForumUserViewing()) + " Pemerhati)");
+                holder.getTextViewUserViewing().setText("(" + model.getForumUserViewing() + " Pemerhati)");
                 holder.getTextViewForumDescrption().setText(model.getForumDescription());
                 holder.getTextViewForumViews().setText(String.valueOf(model.getForumViews()));
 
-                holder.getTextViewLastThreadPost().setText("Tajuk Terbaru: " + String.valueOf(model.getLastThreadPost()));
+                holder.getTextViewLastThreadPost().setText("Tajuk Terbaru: " + model.getLastThreadPost());
                 //making the name bold
                 String daripada = "Daripada <b>" + model.getLastThreadByUser() + "</b>";
                 holder.getTextViewLastThreadByUser().setText(Html.fromHtml(daripada));
@@ -116,7 +116,7 @@ public class ForumActivity extends SkinActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
                                 long size = dataSnapshot.getChildrenCount();
-                                holder.getTextViewThreads().setText("Jumlah Tajuk: " + String.valueOf(size));
+                                holder.getTextViewThreads().setText("Jumlah Tajuk: " + size);
 
                             }
                         }
@@ -224,6 +224,7 @@ public class ForumActivity extends SkinActivity {
     //Make a new calculation.
     private void calculateAllOnlineRegisteredUser() {
         databaseReference.child("registeredUser").addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 long totalOnline = 0;
@@ -238,7 +239,7 @@ public class ForumActivity extends SkinActivity {
                         online = 0;
                         totalOnline = totalOnline + online;
                     }
-                    textViewOnlineRightNow.setText(String.valueOf(totalOnline + " Orang Dalam Talian"));
+                    textViewOnlineRightNow.setText(totalOnline + " Orang Dalam Talian");
                 }
             }
 
@@ -252,6 +253,7 @@ public class ForumActivity extends SkinActivity {
     //Make a new calculation.
     private void calculateAllOnlineSpecific(final String forumUid, final TextView textView) {
         databaseReference.child("onlineStatusSpecific").child(forumUid).addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 long totalOnline = 0;
@@ -266,7 +268,7 @@ public class ForumActivity extends SkinActivity {
                         online = 0;
                         totalOnline = totalOnline + online;
                     }
-                    textView.setText(String.valueOf("(" + totalOnline + " Pemerhati)"));
+                    textView.setText("(" + totalOnline + " Pemerhati)");
                 }
             }
 
