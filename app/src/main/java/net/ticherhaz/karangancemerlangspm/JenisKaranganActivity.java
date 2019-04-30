@@ -16,8 +16,11 @@ import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.Model.Jenis;
@@ -98,9 +101,33 @@ public class JenisKaranganActivity extends SkinActivity {
                 .build();
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Jenis, JenisViewHolder>(firebaseRecyclerOptions) {
             @Override
-            protected void onBindViewHolder(@NonNull JenisViewHolder holder, int position, @NonNull final Jenis model) {
+            protected void onBindViewHolder(@NonNull final JenisViewHolder holder, int position, @NonNull final Jenis model) {
                 holder.getTextViewTitle().setText(model.getTitle());
                 holder.getTextViewDescription().setText(model.getDescription());
+
+
+                //This part is to retrieve the total viewer for specific jenis karangan.
+                FirebaseDatabase.getInstance().getReference().child("karangan").child(model.getJenisUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            long sum = 0;
+                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                if (dataSnapshot1.exists()) {
+                                    long size = dataSnapshot1.child("mostVisited").getValue(Long.class);
+                                    sum += size;
+                                    holder.getTextViewViewer().setText(String.valueOf(sum));
+                                }
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
                 //Onclick the view
                 holder.getView().setOnClickListener(new View.OnClickListener() {

@@ -32,5 +32,18 @@
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
             android:textColor="?attr/colorText" />
+
+        <TextView
+            android:id="@+id/text_view_viewer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:drawableStart="@drawable/ic_viewer"
+            android:drawableLeft="@drawable/ic_viewer"
+            android:gravity="center_vertical"
+            android:text="@string/kosong"
+            android:textColor="?attr/colorText"
+            android:textSize="12sp" />
+
     </LinearLayout>
 </android.support.v7.widget.CardView>

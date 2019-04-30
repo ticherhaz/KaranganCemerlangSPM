@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="3dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    app:cardBackgroundColor="?attr/colorBackgroundRecyclerView">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,6 +17,7 @@
             android:id="@+id/text_view_masa_dibalas_oleh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="?attr/colorText"
             android:textSize="12sp"
             android:textStyle="italic" />
 
@@ -46,6 +49,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="3dp"
                         android:layout_marginLeft="3dp"
+                        android:textColor="?attr/colorText"
                         android:textSize="21sp"
                         android:textStyle="bold" />
 
@@ -55,21 +59,24 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="3dp"
                         android:layout_marginLeft="3dp"
-                        android:fontFamily="@font/merriweather" />
+                        android:fontFamily="@font/merriweather"
+                        android:textColor="?attr/colorText" />
 
                     <TextView
                         android:id="@+id/text_view_sekolah"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="3dp"
-                        android:layout_marginLeft="3dp" />
+                        android:layout_marginLeft="3dp"
+                        android:textColor="?attr/colorText" />
 
                     <TextView
                         android:id="@+id/text_view_user_join_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="3dp"
-                        android:layout_marginLeft="3dp" />
+                        android:layout_marginLeft="3dp"
+                        android:textColor="?attr/colorText" />
 
                 </LinearLayout>
 
@@ -89,7 +96,8 @@
                         android:layout_marginLeft="3dp"
                         android:layout_toStartOf="@+id/text_view_status"
                         android:layout_toLeftOf="@+id/text_view_status"
-                        android:gravity="center_vertical" />
+                        android:gravity="center_vertical"
+                        android:textColor="?attr/colorText" />
 
                     <TextView
                         android:id="@+id/text_view_gender"
@@ -102,7 +110,8 @@
                         android:layout_marginLeft="3dp"
                         android:layout_toStartOf="@+id/text_view_status"
                         android:layout_toLeftOf="@+id/text_view_status"
-                        android:gravity="center_vertical" />
+                        android:gravity="center_vertical"
+                        android:textColor="?attr/colorText" />
 
 
                     <TextView
@@ -115,7 +124,8 @@
                         android:layout_marginLeft="5dp"
                         android:drawableStart="@drawable/ic_status_neutral"
                         android:drawableLeft="@drawable/ic_status_neutral"
-                        android:gravity="center_vertical" />
+                        android:gravity="center_vertical"
+                        android:textColor="?attr/colorText" />
 
                 </RelativeLayout>
 
@@ -125,7 +135,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="3dp"
-                    android:layout_marginLeft="3dp" />
+                    android:layout_marginLeft="3dp"
+                    android:textColor="?attr/colorText" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -136,7 +147,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="3dp"
-                        android:layout_marginLeft="3dp" />
+                        android:layout_marginLeft="3dp"
+                        android:textColor="?attr/colorText" />
 
                     <TextView
                         android:id="@+id/text_view_reputation"
@@ -144,7 +156,8 @@
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_reputation"
                         android:drawableLeft="@drawable/ic_reputation"
-                        android:gravity="center_vertical" />
+                        android:gravity="center_vertical"
+                        android:textColor="?attr/colorText" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -155,7 +168,8 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:maxLines="29"
-            android:scrollbars="vertical" />
+            android:scrollbars="vertical"
+            android:textColor="?attr/colorText" />
 
         <EditText
             android:id="@+id/edit_text_deskripsi"
@@ -163,12 +177,14 @@
             android:layout_height="250dp"
             android:maxLines="29"
             android:scrollbars="vertical"
+            android:textColor="?attr/colorText"
+            android:textColorHint="?attr/colorText"
             android:visibility="gone" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimarySoft">
+            android:background="?attr/colorPrimary">
 
             <TextView
                 android:id="@+id/text_view_give_reputation"
@@ -178,7 +194,7 @@
                 android:drawableLeft="@drawable/ic_reputation"
                 android:gravity="center_vertical"
                 android:text="@string/memberi_reputasi"
-                android:textColor="@drawable/text_view_color" />
+                android:textColor="@color/colorTextWhite" />
 
             <!--<TextView-->
             <!--android:id="@+id/text_view_membalas"-->
@@ -205,8 +221,9 @@
                 android:drawableStart="@drawable/ic_no"
                 android:drawableLeft="@drawable/ic_no"
                 android:gravity="center_vertical"
+                android:padding="3dp"
                 android:text="@string/batal"
-                android:textColor="@drawable/text_view_color"
+                android:textColor="@color/colorTextWhite"
                 android:visibility="gone" />
 
             <TextView
@@ -220,8 +237,9 @@
                 android:drawableStart="@drawable/ic_yes"
                 android:drawableLeft="@drawable/ic_yes"
                 android:gravity="center_vertical"
+                android:padding="3dp"
                 android:text="@string/ubah"
-                android:textColor="@drawable/text_view_color"
+                android:textColor="@color/colorTextWhite"
                 android:visibility="gone" />
 
             <TextView
@@ -235,8 +253,9 @@
                 android:drawableStart="@drawable/ic_edit"
                 android:drawableLeft="@drawable/ic_edit"
                 android:gravity="center_vertical"
+                android:padding="3dp"
                 android:text="@string/edit"
-                android:textColor="@drawable/text_view_color"
+                android:textColor="@color/colorTextWhite"
                 android:visibility="gone" />
 
         </RelativeLayout>

@@ -209,7 +209,6 @@ public class MainActivity extends SkinActivity {
         setRecyclerView4(search, recyclerViewTag4); //kesan
         setRecyclerView5(search, recyclerViewTag5); //faktor
         setRecyclerView6(search, recyclerViewTag6); //cabaran
-
     }
 
     //Method tag6

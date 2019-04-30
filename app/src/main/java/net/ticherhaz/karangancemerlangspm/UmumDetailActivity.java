@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -36,6 +35,7 @@ import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
+import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.Model.UmumDetail;
@@ -47,8 +47,7 @@ import net.ticherhaz.karangancemerlangspm.ViewHolder.UmumDetailHolder;
 
 import java.util.Date;
 
-public class UmumDetailActivity extends AppCompatActivity {
-
+public class UmumDetailActivity extends SkinActivity {
 
     //Firebase
     private FirebaseDatabase firebaseDatabase;
@@ -88,9 +87,7 @@ public class UmumDetailActivity extends AppCompatActivity {
     private long reputation;
     private long reputationPower;
 
-
     private ProgressDialog progressDialog;
-
 
     private void retrieveUserData() {
         databaseReference.child("registeredUser").child(registeredUidReply).addValueEventListener(new ValueEventListener() {
@@ -177,7 +174,7 @@ public class UmumDetailActivity extends AppCompatActivity {
                                 holder.getTextViewSekolah().setText(sekolahA);
                                 holder.getTextViewUserJoinDate().setText("Tarikh Sertai: " + onDateCreatedMonthYearA);
                                 holder.getTextViewGender().setText("Jantina: " + genderA);
-                                holder.getTextViewPos().setText("Pos: " + String.valueOf(postCountA));
+                                holder.getTextViewPos().setText("Pos: " + postCountA);
                                 holder.getTextViewReputation().setText(String.valueOf(reputationA));
                                 holder.getTextViewState().setText("Negeri: " + stateA);
                                 new Others().setStatus(modeA, holder.getTextViewStatus());
@@ -450,7 +447,7 @@ public class UmumDetailActivity extends AppCompatActivity {
             @NonNull
             @Override
             public UmumDetailHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.umum_detail_item, viewGroup, false);
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.umum_detail_item, viewGroup, false);
                 return new UmumDetailHolder(view);
             }
 

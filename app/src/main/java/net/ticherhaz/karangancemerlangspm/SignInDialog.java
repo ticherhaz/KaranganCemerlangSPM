@@ -157,17 +157,21 @@ public class SignInDialog extends Dialog implements View.OnClickListener {
                         if (dataSnapshot.exists()) {
                             //If yes, we get the email from the database
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
-                                //When the email is valid
-                                String emailUser = child.getValue(RegisteredUser.class).getEmail();
-                                String userType = child.getValue(RegisteredUser.class).getTypeUser();
-                                //At this part we check the type of user
 
-                                if (userType.equals("Member")) {
-                                    signInAuth(emailUser, password);
-                                } else {
-                                    Toast.makeText(context, "Akan datang...", Toast.LENGTH_SHORT).show();
+                                //Call the class of model
+                                RegisteredUser registeredUser = child.getValue(RegisteredUser.class);
+
+                                if (registeredUser != null) {
+                                    //   String username = registeredUser.getUsername();
+                                    String emailUser = registeredUser.getEmail();
+                                    String userType = registeredUser.getTypeUser();
+                                    //At this part we check the type of user
+                                    if (userType.equals("Member")) {
+                                        signInAuth(emailUser, password);
+                                    } else if (userType.equals("Admin")) {
+                                        signInAuth(emailUser, password);
+                                    }
                                 }
-
                             }
                         } else {
                             progressDialog.dismiss();
@@ -190,14 +194,21 @@ public class SignInDialog extends Dialog implements View.OnClickListener {
                         if (dataSnapshot.exists()) {
                             //If yes, we get the email from the database
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
-                                String emailUser = child.getValue(RegisteredUser.class).getEmail();
-                                String userType = child.getValue(RegisteredUser.class).getTypeUser();
-                                //At this part we check the type of user
-                                if (userType.equals("Member")) {
-                                    signInAuth(emailUser, password);
-                                } else {
+                                //Call the class of model
+                                RegisteredUser registeredUser = child.getValue(RegisteredUser.class);
 
+                                if (registeredUser != null) {
+                                    //   String username = registeredUser.getUsername();
+                                    String emailUser = registeredUser.getEmail();
+                                    String userType = registeredUser.getTypeUser();
+                                    //At this part we check the type of user
+                                    if (userType.equals("Member")) {
+                                        signInAuth(emailUser, password);
+                                    } else if (userType.equals("Admin")) {
+                                        signInAuth(emailUser, password);
+                                    }
                                 }
+
                             }
                         } else {
                             progressDialog.dismiss();
@@ -228,16 +239,17 @@ public class SignInDialog extends Dialog implements View.OnClickListener {
                         Intent intent = new Intent(context, ForumActivity.class);
                         intent.putExtra("userUid", userUid);
                         context.startActivity(intent);
-                        Toast.makeText(context, "Selamat Kembali " + firebaseUser.getDisplayName().toUpperCase(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Selamat Kembali " + firebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                         dismiss();
                         ((ForumActivity) context).finish();
                     }
                 } else {
-                    if (task.getException() != null) {
-                        progressDialog.dismiss();
-                        Toast.makeText(context, "" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                    //   if (task.getException() != null) {
+                    progressDialog.dismiss();
+                    editTextPassword.setError("Kata Laluan Salah, Sila Cuba Lagi");
+                    //  Toast.makeText(context, "" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    //   }
 
                 }
             }
@@ -247,12 +259,8 @@ public class SignInDialog extends Dialog implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.button_sign_in:
-                checkSignIn();
-                break;
-            default:
-                break;
+        if (v.getId() == R.id.button_sign_in) {
+            checkSignIn();
         }
     }
 

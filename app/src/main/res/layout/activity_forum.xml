@@ -42,13 +42,12 @@
 
     </LinearLayout>
 
-
     <LinearLayout
         android:id="@+id/linear_layout_bottom_forum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimarySoft"
+        android:background="?attr/colorPrimary"
         android:orientation="vertical">
 
         <LinearLayout
@@ -56,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
@@ -64,7 +63,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="@string/to_reply_thread_sign_up_today"
-                android:textColor="?attr/colorText" />
+                android:textColor="@color/colorTextWhite" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -143,7 +142,7 @@
                             android:marqueeRepeatLimit="marquee_forever"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:textColor="?attr/colorText"
+                            android:textColor="@color/colorTextWhite"
                             android:textSize="17sp"
                             android:textStyle="bold" />
 
@@ -159,7 +158,7 @@
                             android:paddingEnd="3dp"
                             android:paddingRight="3dp"
                             android:text="@string/sign_out"
-                            android:textColor="?attr/colorText"
+                            android:textColor="@color/colorTextWhite"
                             tools:ignore="RtlSymmetry" />
 
                     </RelativeLayout>
@@ -183,7 +182,8 @@
                             android:drawableLeft="@drawable/ic_school"
                             android:gravity="center_vertical"
                             android:singleLine="true"
-                            android:text="@string/sekolah" />
+                            android:text="@string/sekolah"
+                            android:textColor="@color/colorTextWhite" />
 
                         <TextView
                             android:id="@+id/text_view_reputation"
@@ -196,7 +196,8 @@
                             android:drawableStart="@drawable/ic_reputation"
                             android:drawableLeft="@drawable/ic_reputation"
                             android:gravity="center_vertical"
-                            android:text="@string/reputation" />
+                            android:text="@string/reputation"
+                            android:textColor="@color/colorTextWhite" />
 
                         <TextView
                             android:id="@+id/text_view_pos"
@@ -210,6 +211,7 @@
                             android:paddingEnd="3dp"
                             android:paddingRight="3dp"
                             android:text="@string/kosong"
+                            android:textColor="@color/colorTextWhite"
                             tools:ignore="RtlSymmetry" />
 
                     </RelativeLayout>
@@ -229,7 +231,7 @@
                             android:drawableLeft="@drawable/ic_status_neutral"
                             android:gravity="center_vertical"
                             android:text="@string/status"
-                            android:textColor="@drawable/text_view_color" />
+                            android:textColor="@color/colorTextWhite" />
 
 
                         <TextView
@@ -246,7 +248,7 @@
                             android:paddingEnd="3dp"
                             android:paddingRight="3dp"
                             android:text="@string/tetapan"
-                            android:textColor="@drawable/text_view_color"
+                            android:textColor="@color/colorTextWhite"
                             tools:ignore="RtlSymmetry" />
 
 

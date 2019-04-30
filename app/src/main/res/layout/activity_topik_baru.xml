@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorBackground"
     android:orientation="vertical"
     tools:context=".TopikBaruActivity">
 
@@ -18,13 +19,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/tajuk"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColor="?attr/colorText"
+            android:textColorHint="?attr/colorText" />
 
         <EditText
             android:id="@+id/edit_text_deskripsi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/deskripsi" />
+            android:hint="@string/deskripsi"
+            android:textColor="?attr/colorText"
+            android:textColorHint="?attr/colorText" />
 
         <Button
             android:id="@+id/button_hantar"
@@ -32,9 +37,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_selector"
             android:text="@string/hantar"
-            android:textAllCaps="false" />
-
+            android:textAllCaps="false"
+            android:textColor="@color/colorTextWhite" />
 
     </LinearLayout>
-
 </ScrollView>

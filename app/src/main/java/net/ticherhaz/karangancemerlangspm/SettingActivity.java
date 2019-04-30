@@ -1,9 +1,10 @@
 package net.ticherhaz.karangancemerlangspm;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
-public class SettingActivity extends AppCompatActivity {
+import com.zxy.skin.sdk.SkinActivity;
+
+public class SettingActivity extends SkinActivity {
 
 
     @Override

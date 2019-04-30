@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -28,13 +27,14 @@ import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
+import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.Model.Umum;
 import net.ticherhaz.karangancemerlangspm.Util.ConvertTimeToText;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.UmumHolder;
 
-public class UmumActivity extends AppCompatActivity {
+public class UmumActivity extends SkinActivity {
 
     //Firebase
     private FirebaseDatabase firebaseDatabase;
@@ -195,7 +195,7 @@ public class UmumActivity extends AppCompatActivity {
             @NonNull
             @Override
             public UmumHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.umum_item, viewGroup, false);
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.umum_item, viewGroup, false);
                 return new UmumHolder(view);
             }
 

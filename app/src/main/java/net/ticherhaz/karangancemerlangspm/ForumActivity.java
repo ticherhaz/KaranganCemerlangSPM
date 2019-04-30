@@ -104,10 +104,22 @@ public class ForumActivity extends SkinActivity {
                 holder.getTextViewForumDescrption().setText(model.getForumDescription());
                 holder.getTextViewForumViews().setText(String.valueOf(model.getForumViews()));
 
-                holder.getTextViewLastThreadPost().setText("Tajuk Terbaru: " + model.getLastThreadPost());
-                //making the name bold
-                String daripada = "Daripada <b>" + model.getLastThreadByUser() + "</b>";
-                holder.getTextViewLastThreadByUser().setText(Html.fromHtml(daripada));
+                String tajukTerbaru = model.getLastThreadPost();
+                if (tajukTerbaru.equals("")) {
+                    holder.getTextViewLastThreadPost().setVisibility(View.GONE);
+                } else {
+                    holder.getTextViewLastThreadPost().setText("Tajuk Terbaru: " + model.getLastThreadPost());
+                }
+
+                String lastThreadByUser = model.getLastThreadByUser();
+                if (lastThreadByUser.equals("")) {
+                    holder.getTextViewLastThreadByUser().setVisibility(View.GONE);
+                } else {
+                    //making the name bold
+                    String daripada = "Daripada <b>" + model.getLastThreadByUser() + "</b>";
+                    holder.getTextViewLastThreadByUser().setText(Html.fromHtml(daripada));
+                }
+
 
                 //value for the jumlah tajuk
                 if (model.getForumUid() != null) {
@@ -117,7 +129,9 @@ public class ForumActivity extends SkinActivity {
                             if (dataSnapshot.exists()) {
                                 long size = dataSnapshot.getChildrenCount();
                                 holder.getTextViewThreads().setText("Jumlah Tajuk: " + size);
-
+                            } else {
+                                //Hide it
+                                holder.getTextViewThreads().setVisibility(View.GONE);
                             }
                         }
 
@@ -137,9 +151,10 @@ public class ForumActivity extends SkinActivity {
                                     long size = dataSnapshot1.getChildrenCount();
                                     sum += size;
                                     holder.getTextViewPostThreadsCount().setText("Jumlah Pos: " + sum);
-
                                 }
-
+                            } else {
+                                //Hide
+                                holder.getTextViewPostThreadsCount().setVisibility(View.GONE);
                             }
                         }
 

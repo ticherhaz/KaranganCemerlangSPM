@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="3dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="?attr/colorBackgroundRecyclerView"
     android:orientation="vertical">
 
     <LinearLayout
@@ -27,6 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:textColor="?attr/colorText"
                 android:layout_margin="3dp"
                 android:textSize="21sp"
                 android:textStyle="bold" />
@@ -41,6 +44,7 @@
             <TextView
                 android:id="@+id/text_view_umum_views"
                 android:layout_width="wrap_content"
+                android:textColor="?attr/colorText"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_viewer"
                 android:drawableLeft="@drawable/ic_viewer"
@@ -52,6 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
+                android:textColor="?attr/colorText"
                 android:layout_marginLeft="5dp"
                 android:layout_toEndOf="@+id/text_view_umum_views"
                 android:layout_toRightOf="@+id/text_view_umum_views"
@@ -66,6 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                android:textColor="?attr/colorText"
                 android:layout_alignParentRight="true"
                 android:drawableStart="@drawable/ic_star"
                 android:drawableLeft="@drawable/ic_star"
@@ -77,12 +83,14 @@
         <TextView
             android:id="@+id/text_view_dimulai_oleh"
             android:layout_width="match_parent"
+            android:textColor="?attr/colorText"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/text_view_dibalas_oleh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="?attr/colorText"
             android:textSize="12sp"
             android:textStyle="italic" />
 
@@ -90,6 +98,7 @@
             android:id="@+id/text_view_masa_dibalas_oleh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="?attr/colorText"
             android:textSize="12sp"
             android:textStyle="italic" />
     </LinearLayout>

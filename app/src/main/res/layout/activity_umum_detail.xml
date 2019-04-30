@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorBackground"
     android:orientation="vertical"
     tools:context=".UmumDetailActivity">
 
@@ -34,19 +35,17 @@
 
     </LinearLayout>
 
-
     <LinearLayout
         android:id="@+id/linear_layout_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimarySoft"
+        android:background="?attr/colorPrimary"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
 
             <EditText
                 android:id="@+id/edit_text_reply_pos"
@@ -55,7 +54,9 @@
                 android:layout_margin="9dp"
                 android:layout_toStartOf="@+id/button_reply"
                 android:layout_toLeftOf="@+id/button_reply"
-                android:hint="@string/type_mesej" />
+                android:hint="@string/type_mesej"
+                android:textColor="@color/colorTextWhite"
+                android:textColorHint="@color/colorTextWhite" />
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/button_reply"

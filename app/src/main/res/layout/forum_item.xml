@@ -36,22 +36,25 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/text_view_forum_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:textColor="?attr/colorText" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_view_forum_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textColor="?attr/colorText" />
 
             <TextView
                 android:id="@+id/text_view_forum_views"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:drawableStart="@drawable/ic_viewer"
                 android:drawableLeft="@drawable/ic_viewer"
                 android:gravity="center_vertical"

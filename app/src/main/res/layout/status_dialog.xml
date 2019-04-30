@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="7dp"
+    android:background="?attr/colorBackgroundRecyclerView"
     android:minWidth="0dp"
     android:minHeight="0dp"
     android:orientation="vertical">
@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="3dp"
         android:orientation="vertical">
 
         <CheckBox
@@ -18,7 +19,8 @@
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_status_happy"
             android:drawableRight="@drawable/ic_status_happy"
-            android:text="@string/gembira" />
+            android:text="@string/gembira"
+            android:textColor="?attr/colorText" />
 
         <CheckBox
             android:id="@+id/checkbox_biasa"
@@ -26,7 +28,8 @@
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_status_neutral"
             android:drawableRight="@drawable/ic_status_neutral"
-            android:text="@string/biasa" />
+            android:text="@string/biasa"
+            android:textColor="?attr/colorText" />
 
         <CheckBox
             android:id="@+id/checkbox_sedih"
@@ -34,7 +37,8 @@
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_status_sad"
             android:drawableRight="@drawable/ic_status_sad"
-            android:text="@string/sedih" />
+            android:text="@string/sedih"
+            android:textColor="?attr/colorText" />
 
     </LinearLayout>
 </LinearLayout>

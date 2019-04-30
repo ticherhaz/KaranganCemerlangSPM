@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
+import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.Model.Umum;
@@ -32,7 +32,7 @@ import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
 
 import java.util.Date;
 
-public class TopikBaruActivity extends AppCompatActivity {
+public class TopikBaruActivity extends SkinActivity {
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;

@@ -12,12 +12,22 @@ public class JenisViewHolder extends RecyclerView.ViewHolder {
     private View view;
     private TextView textViewTitle;
     private TextView textViewDescription;
+    private TextView textViewViewer;
 
     public JenisViewHolder(@NonNull View itemView) {
         super(itemView);
         view = itemView;
         textViewTitle = itemView.findViewById(R.id.text_view_jenis_title);
         textViewDescription = itemView.findViewById(R.id.text_view_jenis_description);
+        textViewViewer = itemView.findViewById(R.id.text_view_viewer);
+    }
+
+    public TextView getTextViewViewer() {
+        return textViewViewer;
+    }
+
+    public void setTextViewViewer(TextView textViewViewer) {
+        this.textViewViewer = textViewViewer;
     }
 
     public View getView() {
