@@ -10,7 +10,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -94,6 +96,45 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
         @SuppressLint("ShowToast") Toast toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
+    }
+
+    private void setEditTextDay() {
+        editTextDay.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 2) {
+                    editTextMonth.requestFocus();
+                }
+            }
+        });
+        editTextMonth.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 2) {
+                    editTextYear.requestFocus();
+                }
+            }
+        });
     }
 
     private void checkEmpty() {
@@ -338,6 +379,7 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+        setEditTextDay();
         //  setFrameLayoutUploadPicture();
     }
 

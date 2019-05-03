@@ -106,7 +106,9 @@
                     android:layout_margin="3dp"
                     android:background="@drawable/edit_text_border"
                     android:hint="@string/_31"
+                    android:imeOptions="actionNext"
                     android:inputType="number"
+                    android:maxLength="2"
                     android:padding="5dp" />
 
                 <EditText
@@ -116,7 +118,9 @@
                     android:layout_margin="3dp"
                     android:background="@drawable/edit_text_border"
                     android:hint="@string/_12"
+                    android:imeOptions="actionNext"
                     android:inputType="number"
+                    android:maxLength="2"
                     android:padding="5dp" />
 
                 <EditText
@@ -127,6 +131,7 @@
                     android:background="@drawable/edit_text_border"
                     android:hint="@string/_2019"
                     android:inputType="number"
+                    android:maxLength="4"
                     android:padding="5dp" />
 
             </LinearLayout>
