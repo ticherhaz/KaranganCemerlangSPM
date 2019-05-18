@@ -135,6 +135,7 @@
     <string name="karangan">Karangan</string>
     <string name="tajuk">Tajuk</string>
     <string name="mod_gelap">Mod Gelap</string>
+    <string name="peribahasa">Peribahasa</string>
     <string-array name="feedback_array">
         <item>Cadangan</item>
         <item>Pujian</item>

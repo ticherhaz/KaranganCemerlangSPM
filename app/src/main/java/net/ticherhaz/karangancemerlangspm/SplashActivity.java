@@ -22,8 +22,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.System;
 import net.ticherhaz.karangancemerlangspm.Model.UserAlpha;
-import net.ticherhaz.karangancemerlangspm.Util.InternetMessage;
-import net.ticherhaz.karangancemerlangspm.Util.Others;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -31,6 +29,9 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+
+import static net.ticherhaz.karangancemerlangspm.Util.Others.isNetworkAvailable;
+import static net.ticherhaz.karangancemerlangspm.Util.Others.messageInternetMessage;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -216,8 +217,8 @@ public class SplashActivity extends AppCompatActivity {
                         return;
                     }
                     //After that, we chat the value
-                    if (system != null && system.getVersi() != 30) {
-                        //TODO: Version right now is 30. Please update when the new version is released.
+                    if (system != null && system.getVersi() != 31) {
+                        //TODO: Version right now is 31. Please update when the new version is released.
                         Toast toast = Toast.makeText(getApplicationContext(), "Sila mengemas kini versi baharu", Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
@@ -263,7 +264,7 @@ public class SplashActivity extends AppCompatActivity {
             //Show to user to use stable connection
             //Making special toast to center the toast
 
-            Toast.makeText(getApplicationContext(), new InternetMessage().getMessage(), Toast.LENGTH_SHORT).show();
+            messageInternetMessage(SplashActivity.this);
 
             //If there is connection, then it will check the system
             //So, we using the async task to check the internet, this is the best way to check the internet connection
@@ -271,7 +272,7 @@ public class SplashActivity extends AppCompatActivity {
 
             //note changes: 6.4.2019 change to old internet check to new one
 
-            if (new Others().isNetworkAvailable(getApplicationContext())) {
+            if (isNetworkAvailable(SplashActivity.this)) {
                 //if yes, there is no connection
                 checkSystem(userUid);
             } else {

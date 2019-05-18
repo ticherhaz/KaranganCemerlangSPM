@@ -30,7 +30,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -86,12 +85,13 @@ public class MainActivity extends SkinActivity {
     private RecyclerView recyclerViewTag6;
     private LinearLayout linearLayout;
     private LinearLayout linearLayoutHow;
-    private ScrollView scrollViewUtama;
+    private LinearLayout scrollViewUtama;
     //Button
     private Button buttonSenaraiKarangan;
     private Button buttonTipsKarangan;
     private Button buttonHantarKarangan;
     private Button buttonForum;
+    private Button buttonPeribahasa;
     private TextView textViewAnnouncement;
     private TextView textViewCountdownSPM;
     private SharedPreferences sharedPreferences;
@@ -122,13 +122,14 @@ public class MainActivity extends SkinActivity {
 
         linearLayout = findViewById(R.id.linear_layout);
         linearLayoutHow = findViewById(R.id.linear_layout_how);
-        scrollViewUtama = findViewById(R.id.scroll_view_utama);
+        scrollViewUtama = findViewById(R.id.linear_layout_utama);
 
         //Button
         buttonSenaraiKarangan = findViewById(R.id.button_senarai_karangan);
         buttonTipsKarangan = findViewById(R.id.button_tips_karangan);
         buttonHantarKarangan = findViewById(R.id.button_hantar_karangan);
         buttonForum = findViewById(R.id.button_forum);
+        buttonPeribahasa = findViewById(R.id.button_peribahasa);
 
         textViewHow.setText(Html.fromHtml(getString(R.string.how)));
 
@@ -146,6 +147,17 @@ public class MainActivity extends SkinActivity {
         databaseReference = firebaseDatabase.getReference();
         setEditTextSearch();
         setTextViewAnnouncement();
+
+        setButtonPeribahasa();
+    }
+
+    private void setButtonPeribahasa() {
+        buttonPeribahasa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, PeribahasaActivity.class));
+            }
+        });
     }
 
     private void setTextViewAnnouncement() {
@@ -250,7 +262,7 @@ public class MainActivity extends SkinActivity {
                         //So we read back the previous data
 
                         //26.3.2019 : I'm making the new class because the main activity need to use to, so the share the method
-                        new RunTransaction().runTransactionUserClick(databaseReference, userUid, model.getTajukPenuh());
+                        new RunTransaction().runTransactionUserClick(databaseReference, userUid, model.getUid());
                         new RunTransaction().runTransactionKaranganMostVisited(progressBar, databaseReference, MainActivity.this, userUid, model.getUid(), model.getTajukPenuh(), model.getDeskripsiPenuh(), model.getTarikh(), model.getKarangan(), model.getVote(), model.getMostVisited(), model.getUserLastVisitedDate(), "PUNCA");
 
                     }
@@ -322,7 +334,7 @@ public class MainActivity extends SkinActivity {
                         //So we read back the previous data
 
                         //26.3.2019 : I'm making the new class because the main activity need to use to, so the share the method
-                        new RunTransaction().runTransactionUserClick(databaseReference, userUid, model.getTajukPenuh());
+                        new RunTransaction().runTransactionUserClick(databaseReference, userUid, model.getUid());
                         new RunTransaction().runTransactionKaranganMostVisited(progressBar, databaseReference, MainActivity.this, userUid, model.getUid(), model.getTajukPenuh(), model.getDeskripsiPenuh(), model.getTarikh(), model.getKarangan(), model.getVote(), model.getMostVisited(), model.getUserLastVisitedDate(), "PUNCA");
 
                     }
@@ -394,7 +406,7 @@ public class MainActivity extends SkinActivity {
                         //So we read back the previous data
 
                         //26.3.2019 : I'm making the new class because the main activity need to use to, so the share the method
-                        new RunTransaction().runTransactionUserClick(databaseReference, userUid, model.getTajukPenuh());
+                        new RunTransaction().runTransactionUserClick(databaseReference, userUid, model.getUid());
                         new RunTransaction().runTransactionKaranganMostVisited(progressBar, databaseReference, MainActivity.this, userUid, model.getUid(), model.getTajukPenuh(), model.getDeskripsiPenuh(), model.getTarikh(), model.getKarangan(), model.getVote(), model.getMostVisited(), model.getUserLastVisitedDate(), "PUNCA");
 
                     }
@@ -466,7 +478,7 @@ public class MainActivity extends SkinActivity {
                         //So we read back the previous data
 
                         //26.3.2019 : I'm making the new class because the main activity need to use to, so the share the method
-                        new RunTransaction().runTransactionUserClick(databaseReference, userUid, model.getTajukPenuh());
+                        new RunTransaction().runTransactionUserClick(databaseReference, userUid, model.getUid());
                         new RunTransaction().runTransactionKaranganMostVisited(progressBar, databaseReference, MainActivity.this, userUid, model.getUid(), model.getTajukPenuh(), model.getDeskripsiPenuh(), model.getTarikh(), model.getKarangan(), model.getVote(), model.getMostVisited(), model.getUserLastVisitedDate(), "PUNCA");
 
                     }
@@ -538,7 +550,8 @@ public class MainActivity extends SkinActivity {
                         //So we read back the previous data
 
                         //26.3.2019 : I'm making the new class because the main activity need to use to, so the share the method
-                        new RunTransaction().runTransactionUserClick(databaseReference, userUid, model.getTajukPenuh());
+                        //18.5.2019 : We change all from modelgettjukname to modelgetuid
+                        new RunTransaction().runTransactionUserClick(databaseReference, userUid, model.getUid());
                         new RunTransaction().runTransactionKaranganMostVisited(progressBar, databaseReference, MainActivity.this, userUid, model.getUid(), model.getTajukPenuh(), model.getDeskripsiPenuh(), model.getTarikh(), model.getKarangan(), model.getVote(), model.getMostVisited(), model.getUserLastVisitedDate(), "PUNCA");
 
                     }
@@ -610,7 +623,7 @@ public class MainActivity extends SkinActivity {
                         //So we read back the previous data
 
                         //26.3.2019 : I'm making the new class because the main activity need to use to, so the share the method
-                        new RunTransaction().runTransactionUserClick(databaseReference, userUid, model.getTajukPenuh());
+                        new RunTransaction().runTransactionUserClick(databaseReference, userUid, model.getUid());
                         new RunTransaction().runTransactionKaranganMostVisited(progressBar, databaseReference, MainActivity.this, userUid, model.getUid(), model.getTajukPenuh(), model.getDeskripsiPenuh(), model.getTarikh(), model.getKarangan(), model.getVote(), model.getMostVisited(), model.getUserLastVisitedDate(), "USAHA");
 
                     }
@@ -731,7 +744,7 @@ public class MainActivity extends SkinActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
             builder.setTitle(R.string.action_about);
             //TODO: Update the version at About
-            builder.setMessage("Karangan Cemerlang SPM\nversi 2.30\n\n\nJangan lupa kongsi bersama kawan :)\n\nKredit:\nCikgu Mariani - Cikgu Badrunsham - Cikgu Hamidah - Cikgu Rohani - Cikgu Harum Awang - Cikgu Samat - Cikgu Che Noranuwi - Nabil Fikri - Muhd Arif (Bob) - Luqman K - Affiq Shamil\n\n\n\n\nTips:\nHAZMAN BIN BADRUNSHAM\nCIMB BANK\n7614543761\n\n\nhazman45.blogspot.com\nTicherhaz©2019");
+            builder.setMessage("Karangan Cemerlang SPM\nversi 2.31\n\n\nJangan lupa kongsi bersama kawan :)\n\nKredit:\nCikgu Mariani - Cikgu Badrunsham - Cikgu Hamidah - Cikgu Rohani - Cikgu Harum Awang - Cikgu Samat - Cikgu Che Noranuwi - Nabil Fikri - Muhd Arif (Bob) - Luqman K - Affiq Shamil\n\n\n\n\nTips:\nHAZMAN BIN BADRUNSHAM\nCIMB BANK\n7614543761\n\n\nhazman45.blogspot.com\nTicherhaz©2019");
             builder.setPositiveButton(
                     "Ok",
                     new DialogInterface.OnClickListener() {

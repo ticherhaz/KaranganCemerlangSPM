@@ -7,12 +7,10 @@ import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -24,9 +22,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.Model.Jenis;
-import net.ticherhaz.karangancemerlangspm.Util.InternetMessage;
-import net.ticherhaz.karangancemerlangspm.Util.Others;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.JenisViewHolder;
+
+import static net.ticherhaz.karangancemerlangspm.Util.Others.isNetworkAvailable;
+import static net.ticherhaz.karangancemerlangspm.Util.Others.messageInternetMessage;
 
 public class JenisKaranganActivity extends SkinActivity {
 
@@ -55,12 +54,12 @@ public class JenisKaranganActivity extends SkinActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (new Others().isNetworkAvailable(getApplicationContext())) {
+                        if (isNetworkAvailable(JenisKaranganActivity.this)) {
                             //if has internet connection
                             setFirebaseRecyclerAdapter();
                             swipeRefreshLayout.setRefreshing(false);
                         } else {
-                            Toast.makeText(getApplicationContext(), new InternetMessage().getMessage(), Toast.LENGTH_SHORT).show();
+                            messageInternetMessage(JenisKaranganActivity.this);
                         }
 
                     }
@@ -167,9 +166,10 @@ public class JenisKaranganActivity extends SkinActivity {
             @Override
             public void run() {
                 if (progressBar.getVisibility() == View.VISIBLE) {
-                    Toast toast = Toast.makeText(getApplicationContext(), new InternetMessage().getMessage(), Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
+                    messageInternetMessage(JenisKaranganActivity.this);
+//                    Toast toast = Toast.makeText(getApplicationContext(), new InternetMessage().getMessage(), Toast.LENGTH_SHORT);
+//                    toast.setGravity(Gravity.CENTER, 0, 0);
+//                    toast.show();
                 }
 
             }

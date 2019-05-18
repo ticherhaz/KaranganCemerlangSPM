@@ -32,6 +32,7 @@ public class RunTransaction {
 
         //This part we continue to the next activity
         Intent intent = new Intent(context, KaranganDetailActivity.class);
+        //18.5.2019: Adding new one, tajukUid because we want to change from the title to become titleUid when user press like
         intent.putExtra("karanganJenis", karanganJenis);
         intent.putExtra("userUid", userUid);
         intent.putExtra("uidKarangan", modelUid);
@@ -64,8 +65,8 @@ public class RunTransaction {
         });
     }
 
-    public void runTransactionUserClick(final DatabaseReference databaseReference, final String userUid, final String tajukPenuh) {
-        databaseReference.child("userAlphaKaranganClick").child(userUid).child(tajukPenuh).child("click").runTransaction(new Transaction.Handler() {
+    public void runTransactionUserClick(final DatabaseReference databaseReference, final String userUid, final String tajukUid) {
+        databaseReference.child("userAlphaKaranganClick").child(userUid).child(tajukUid).child("click").runTransaction(new Transaction.Handler() {
             @NonNull
             @Override
             public Transaction.Result doTransaction(@NonNull MutableData mutableData) {

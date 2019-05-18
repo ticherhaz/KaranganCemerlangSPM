@@ -4,30 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="net.ticherhaz.karangancemerlangspm">
 
+    <uses-sdk tools:overrideLibrary="com.zxy.skin.sdk" />
+
     <dist:module dist:instant="true" /> <!-- Using the internet connection -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" /> <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-sdk tools:overrideLibrary="com.zxy.skin.sdk" />
-    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
-    <!--android:theme="@style/AppTheme"-->
+
     <application
         android:name=".MyApplication"
         android:configChanges="orientation"
-        android:icon="@mipmap/ic_launcher_foreground"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_foreground"
+        android:roundIcon="@mipmap/ic_launcher"
         tools:ignore="GoogleAppIndexingWarning,HardcodedDebugMode">
+        <activity
+            android:name=".PeribahasaActivity"
+            android:label="@string/peribahasa">
+            <!-- This is for the back button navigation -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity
             android:name=".SettingActivity"
             android:label="@string/tetapan">
+
             <!-- This is for the back button navigation -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ForumActivity" />
-
         </activity>
-
         <activity android:name=".UmumDetailActivity">
 
             <!-- This is for the back button navigation -->
@@ -151,4 +158,5 @@
             android:exported="false"
             tools:ignore="InnerclassSeparator" />
     </application>
+
 </manifest>

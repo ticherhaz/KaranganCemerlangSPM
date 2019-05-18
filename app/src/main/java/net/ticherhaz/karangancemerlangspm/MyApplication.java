@@ -24,6 +24,7 @@ public class MyApplication extends Application {
         SkinEngine.registerSkinApplicator(CustomView.class, new SkinCustomViewApplicator());
         setSharedPreferences();
 
+
     }
 
     //At this part we called the shared preference and then we update the themes as soon as user enter the activity

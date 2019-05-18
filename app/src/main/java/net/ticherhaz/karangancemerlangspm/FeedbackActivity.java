@@ -18,10 +18,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.Model.Feedback;
-import net.ticherhaz.karangancemerlangspm.Util.InternetMessage;
-import net.ticherhaz.karangancemerlangspm.Util.Others;
 
 import java.util.Calendar;
+
+import static net.ticherhaz.karangancemerlangspm.Util.Others.isNetworkAvailable;
+import static net.ticherhaz.karangancemerlangspm.Util.Others.messageInternetMessage;
 
 public class FeedbackActivity extends SkinActivity {
 
@@ -88,7 +89,7 @@ public class FeedbackActivity extends SkinActivity {
 
                     Feedback feedback = new Feedback(uid, userUid, phoneModel, typeProblem, email, description, date);
 
-                    if (new Others().isNetworkAvailable(getApplicationContext())) {
+                    if (isNetworkAvailable(FeedbackActivity.this)) {
                         //if yes, there is no connection
                         //Then store the data into firebase
                         if (uid != null)
@@ -104,7 +105,7 @@ public class FeedbackActivity extends SkinActivity {
                             });
                     } else {
                         //No connection
-                        Toast.makeText(getApplicationContext(), new InternetMessage().getMessage(), Toast.LENGTH_SHORT).show();
+                        messageInternetMessage(FeedbackActivity.this);
                     }
 
 
