@@ -31,7 +31,7 @@ import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.Model.Umum;
-import net.ticherhaz.karangancemerlangspm.Util.ConvertTimeToText;
+import net.ticherhaz.karangancemerlangspm.Util.TimeCustom;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.UmumHolder;
 
 public class UmumActivity extends SkinActivity {
@@ -88,7 +88,7 @@ public class UmumActivity extends SkinActivity {
                         if (dataSnapshot.exists()) {
                             RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
                             if (registeredUser != null) {
-                                String dimulaiOleh = "Dimulai Oleh <b>" + registeredUser.getUsername() + "</b>, " + new ConvertTimeToText().covertTimeToText(model.getOnCreatedDate());
+                                String dimulaiOleh = "Dimulai Oleh <b>" + registeredUser.getUsername() + "</b>, " + new TimeCustom().convertTimeToAgo(model.getOnCreatedDate());
                                 holder.getTextViewDimulaiOleh().setText(Html.fromHtml(dimulaiOleh));
                             }
                         }
@@ -129,7 +129,7 @@ public class UmumActivity extends SkinActivity {
 
                 if (model.getMasaDibalasOleh() != null) {
                     //This for the masa dibalas oleh
-                    holder.getTextViewMasaDibalasOleh().setText(new ConvertTimeToText().covertTimeToText(model.getMasaDibalasOleh()));
+                    holder.getTextViewMasaDibalasOleh().setText(new TimeCustom().convertTimeToAgo(model.getMasaDibalasOleh()));
                 } else {
                     holder.getTextViewMasaDibalasOleh().setVisibility(View.GONE);
                 }

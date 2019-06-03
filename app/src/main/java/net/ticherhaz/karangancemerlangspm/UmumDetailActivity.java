@@ -39,9 +39,9 @@ import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.Model.UmumDetail;
-import net.ticherhaz.karangancemerlangspm.Util.ConvertTimeToText;
 import net.ticherhaz.karangancemerlangspm.Util.Others;
 import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
+import net.ticherhaz.karangancemerlangspm.Util.TimeCustom;
 import net.ticherhaz.karangancemerlangspm.Util.UserTypeColor;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.UmumDetailHolder;
 
@@ -432,7 +432,7 @@ public class UmumDetailActivity extends SkinActivity {
                 holder.getTextViewDeskripsi().setText(model.getDeskripsi());
 
                 //Display the 1minit yg lalu
-                holder.getTextViewMasaDibalasOleh().setText(new ConvertTimeToText().covertTimeToText(model.getPostCreatedDate()));
+                holder.getTextViewMasaDibalasOleh().setText(new TimeCustom().convertTimeToAgo(model.getPostCreatedDate()));
 
                 holder.getView().setOnClickListener(new View.OnClickListener() {
                     @Override

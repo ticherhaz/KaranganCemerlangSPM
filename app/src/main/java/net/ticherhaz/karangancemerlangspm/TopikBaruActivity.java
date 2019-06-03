@@ -30,7 +30,7 @@ import net.ticherhaz.karangancemerlangspm.Model.UmumDetail;
 import net.ticherhaz.karangancemerlangspm.Util.InternetCheck;
 import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
 
-import java.util.Date;
+import static net.ticherhaz.karangancemerlangspm.Util.TimeCustom.getInstantNow;
 
 public class TopikBaruActivity extends SkinActivity {
 
@@ -158,10 +158,23 @@ public class TopikBaruActivity extends SkinActivity {
         String dibalasOleh = "";
         String masaDibalasOleh = null;
 
+        /* Using instant which is the latest java 8 iso 8906
+         *  Import instant from the org.threeabp which is support for lower api
+         *
+         * */
+
+//        //TODO: For the time UTC we will use Instant and threetenbp
+//        Instant instant = Instant.now();
+//        final String onCreatedDate = instant.toString();
+//        // final String uid = databaseReference.push().getKey();
+
+
+        //3.6.2019: NEW WAY: WE JUST GET THE VALUE FROM THE TIMECUSTOM.JAVA
+        final String onCreatedDate = getInstantNow();
 
         String registeredUidLastReply = null;
 
-        String onCreatedDate = String.valueOf(android.text.format.DateFormat.format("yyyy-MM-dd'T'HH:mm:ss", new Date()));
+        //String onCreatedDate = String.valueOf(android.text.format.DateFormat.format("yyyy-MM-dd'T'HH:mm:ss", new Date()));
 
         String activityUmumLogUid = databaseReference.push().push().getKey();
         String activityKududukanLogUid = databaseReference.push().push().push().getKey();
