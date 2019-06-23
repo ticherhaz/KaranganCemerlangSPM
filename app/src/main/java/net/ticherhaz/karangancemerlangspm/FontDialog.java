@@ -4,10 +4,11 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.content.res.ResourcesCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.core.content.res.ResourcesCompat;
 
 public class FontDialog extends Dialog implements View.OnClickListener {
 

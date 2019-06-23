@@ -1,5 +1,6 @@
 package net.ticherhaz.karangancemerlangspm.Util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -10,6 +11,11 @@ import com.google.firebase.database.DatabaseReference;
 
 import net.ticherhaz.karangancemerlangspm.Model.Karangan;
 import net.ticherhaz.karangancemerlangspm.R;
+
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.util.Collections;
+import java.util.List;
 
 public class Others {
 
@@ -22,6 +28,66 @@ public class Others {
 
     public static void messageInternetMessage(Context context) {
         Toast.makeText(context, "Sila pastikan internet anda stabil", Toast.LENGTH_SHORT).show();
+    }
+
+    //Method to get IP Address
+    public static String getIPAddress(boolean useIPv4) {
+        try {
+            List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
+            for (NetworkInterface intf : interfaces) {
+                List<InetAddress> addrs = Collections.list(intf.getInetAddresses());
+                for (InetAddress addr : addrs) {
+                    if (!addr.isLoopbackAddress()) {
+                        String sAddr = addr.getHostAddress();
+                        //boolean isIPv4 = InetAddressUtils.isIPv4Address(sAddr);
+                        boolean isIPv4 = sAddr.indexOf(':') < 0;
+
+                        if (useIPv4) {
+                            if (isIPv4)
+                                return sAddr;
+                        } else {
+                            if (!isIPv4) {
+                                int delim = sAddr.indexOf('%'); // drop ip6 zone suffix
+                                return delim < 0 ? sAddr.toUpperCase() : sAddr.substring(0, delim).toUpperCase();
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception ignored) {
+
+        } // for now eat exceptions
+        return "";
+    }
+
+    @SuppressLint("HardwareIds")
+    public static String getMACAddress() {
+        try {
+            List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
+            for (NetworkInterface nif : all) {
+                if (!nif.getName().equalsIgnoreCase("wlan0")) continue;
+
+                byte[] macBytes = nif.getHardwareAddress();
+                if (macBytes == null) {
+                    return "";
+                }
+
+                StringBuilder res1 = new StringBuilder();
+                for (byte b : macBytes) {
+                    String hex = Integer.toHexString(b & 0xFF);
+                    if (hex.length() == 1)
+                        hex = "0".concat(hex);
+                    res1.append(hex.concat(":"));
+                }
+
+                if (res1.length() > 0) {
+                    res1.deleteCharAt(res1.length() - 1);
+                }
+                return res1.toString();
+            }
+        } catch (Exception ignored) {
+        }
+        return "";
     }
 
     public void setStatus(String status, TextView textViewStatus) {
@@ -42,6 +108,6 @@ public class Others {
     }
 
     public void lastVisitedKarangan(DatabaseReference databaseReference, String userUid, Karangan model) {
-        databaseReference.child("userAlpha").child(userUid).child("lastVisitedKarangan").setValue(model.getTajukPenuh());
+        databaseReference.child("userFirst").child(userUid).child("lastVisitedKarangan").setValue(model.getTajukPenuh());
     }
 }

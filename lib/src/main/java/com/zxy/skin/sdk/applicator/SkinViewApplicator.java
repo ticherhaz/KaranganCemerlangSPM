@@ -2,9 +2,10 @@ package com.zxy.skin.sdk.applicator;
 
 import android.content.res.TypedArray;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v4.util.ArrayMap;
 import android.view.View;
+
+import androidx.annotation.RequiresApi;
+import androidx.collection.ArrayMap;
 
 import com.zxy.skin.sdk.Logger;
 

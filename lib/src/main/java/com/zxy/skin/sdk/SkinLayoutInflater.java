@@ -1,13 +1,14 @@
 package com.zxy.skin.sdk;
 
 import android.content.Context;
-import android.support.v4.util.ArrayMap;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import androidx.collection.ArrayMap;
 
 import com.zxy.skin.sdk.applicator.SkinApplicatorManager;
 import com.zxy.skin.sdk.applicator.SkinViewApplicator;

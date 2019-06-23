@@ -1,8 +1,9 @@
 package com.zxy.skin.sdk;
 
 
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+
+import androidx.fragment.app.Fragment;
 
 
 /**

@@ -3,13 +3,14 @@ package net.ticherhaz.karangancemerlangspm;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -30,7 +31,7 @@ import net.ticherhaz.karangancemerlangspm.Model.UmumDetail;
 import net.ticherhaz.karangancemerlangspm.Util.InternetCheck;
 import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
 
-import static net.ticherhaz.karangancemerlangspm.Util.TimeCustom.getInstantNow;
+import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class TopikBaruActivity extends SkinActivity {
 
@@ -170,7 +171,7 @@ public class TopikBaruActivity extends SkinActivity {
 
 
         //3.6.2019: NEW WAY: WE JUST GET THE VALUE FROM THE TIMECUSTOM.JAVA
-        final String onCreatedDate = getInstantNow();
+        final String onCreatedDate = GetTarikhMasa();
 
         String registeredUidLastReply = null;
 

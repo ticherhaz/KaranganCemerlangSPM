@@ -8,11 +8,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.WindowManager;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,17 +22,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.System;
-import net.ticherhaz.karangancemerlangspm.Model.UserAlpha;
+import net.ticherhaz.karangancemerlangspm.Model.UserFirst;
 
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-
+import static net.ticherhaz.karangancemerlangspm.Util.Others.getIPAddress;
 import static net.ticherhaz.karangancemerlangspm.Util.Others.isNetworkAvailable;
 import static net.ticherhaz.karangancemerlangspm.Util.Others.messageInternetMessage;
+import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -45,39 +41,8 @@ public class SplashActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private String uid;
     private String mod;
-    private String lastSeen;
+    private String onLoginDate;
     private String ipAddress;
-    private String dayMonthYearCreated = String.valueOf(android.text.format.DateFormat.format("yyyy:MM:dd", new Date()));
-
-    //Method to get IP Address
-    public static String getIPAddress(boolean useIPv4) {
-        try {
-            List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
-            for (NetworkInterface intf : interfaces) {
-                List<InetAddress> addrs = Collections.list(intf.getInetAddresses());
-                for (InetAddress addr : addrs) {
-                    if (!addr.isLoopbackAddress()) {
-                        String sAddr = addr.getHostAddress();
-                        //boolean isIPv4 = InetAddressUtils.isIPv4Address(sAddr);
-                        boolean isIPv4 = sAddr.indexOf(':') < 0;
-
-                        if (useIPv4) {
-                            if (isIPv4)
-                                return sAddr;
-                        } else {
-                            if (!isIPv4) {
-                                int delim = sAddr.indexOf('%'); // drop ip6 zone suffix
-                                return delim < 0 ? sAddr.toUpperCase() : sAddr.substring(0, delim).toUpperCase();
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (Exception ignored) {
-
-        } // for now eat exceptions
-        return "";
-    }
 
     //Method Initialize the list ID
     private void listID() {
@@ -86,11 +51,11 @@ public class SplashActivity extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference();
 
         //Assign the phoneModel
-        // phoneModel = getDeviceName();
+        //phoneModel = getDeviceName();
         //Assign the IP Address
         ipAddress = getIPAddress(true);
         //Assign the lastSeen
-        lastSeen = Calendar.getInstance().getTime().toString();
+        onLoginDate = GetTarikhMasa();
 
 
         //Call back the shared preference
@@ -111,7 +76,6 @@ public class SplashActivity extends AppCompatActivity {
             //Then store the uid in the shared preferences
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString(SHARED_PREFERENCES_MOD, mod);
-            // editor.putString(SHARED_PREFERENCES_MOD, mod);
             editor.apply();
         }
 
@@ -151,7 +115,7 @@ public class SplashActivity extends AppCompatActivity {
                 //if the user status login or not, then proceed to the next part WITHOUT INTERNET.
                 checkStatusLogin(uid);
             }
-        }, 500);   //So we are making for 0.9 seconds of the splash screen.
+        }, 300);   //So we are making for 0.9 seconds of the splash screen.
     }
 
     //Method store data of the user into the Firebase
@@ -159,16 +123,17 @@ public class SplashActivity extends AppCompatActivity {
         //So the new user enter the system, then we collect the new information for the user
         String brand = Build.BRAND;
         String model = Build.MODEL;
+        String onCreatedDate = GetTarikhMasa();
 
         //then we call the model class
-        final UserAlpha userAlpha = new UserAlpha(userUid, brand, model, ipAddress, lastSeen, dayMonthYearCreated);
+        final UserFirst userFirst = new UserFirst(userUid, brand, model, ipAddress, onCreatedDate);
 
         //at this part, we check if the user is already created or not for once.
-        databaseReference.child("userAlpha").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("userFirst").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()) {
-                    databaseReference.child("userAlpha").child(userUid).setValue(userAlpha);
+                    databaseReference.child("userFirst").child(userUid).setValue(userFirst);
                 }
             }
 
@@ -182,8 +147,8 @@ public class SplashActivity extends AppCompatActivity {
         final String activityLogUid = databaseReference.push().getKey();
         if (activityLogUid != null) {
             //Call the model class
-            UserAlpha userAlphaAcitivity = new UserAlpha(lastSeen, ipAddress);
-            databaseReference.child("userAlphaActivity").child(userUid).child(activityLogUid).setValue(userAlphaAcitivity);
+            UserFirst UserFirstAcitivity = new UserFirst(onLoginDate, ipAddress);
+            databaseReference.child("userFirstActivity").child(userUid).child(activityLogUid).setValue(UserFirstAcitivity);
         }
         //Then start the main activity and transfer the userUID
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);

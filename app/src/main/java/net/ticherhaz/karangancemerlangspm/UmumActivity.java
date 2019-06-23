@@ -3,10 +3,6 @@ package net.ticherhaz.karangancemerlangspm;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -31,8 +32,10 @@ import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.Model.Umum;
-import net.ticherhaz.karangancemerlangspm.Util.TimeCustom;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.UmumHolder;
+import net.ticherhaz.tarikhmasa.TarikhMasa;
+
+import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasaTimeAgo;
 
 public class UmumActivity extends SkinActivity {
 
@@ -69,6 +72,7 @@ public class UmumActivity extends SkinActivity {
                 .setQuery(query, Umum.class)
                 .build();
 
+
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Umum, UmumHolder>(firebaseRecyclerOptions) {
             @SuppressLint("SetTextI18n")
             @Override
@@ -88,7 +92,8 @@ public class UmumActivity extends SkinActivity {
                         if (dataSnapshot.exists()) {
                             RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
                             if (registeredUser != null) {
-                                String dimulaiOleh = "Dimulai Oleh <b>" + registeredUser.getUsername() + "</b>, " + new TimeCustom().convertTimeToAgo(model.getOnCreatedDate());
+                                //   String dimulaiOleh = "Dimulai Oleh <b>" + registeredUser.getUsername() + "</b>, " + new TimeCustom().convertTimeToAgo(model.getOnCreatedDate());
+                                String dimulaiOleh = "Dimulai Oleh <b>" + registeredUser.getUsername() + "</b>, " + GetTarikhMasaTimeAgo(model.getOnCreatedDate(), "MY", true, false);
                                 holder.getTextViewDimulaiOleh().setText(Html.fromHtml(dimulaiOleh));
                             }
                         }
@@ -129,7 +134,8 @@ public class UmumActivity extends SkinActivity {
 
                 if (model.getMasaDibalasOleh() != null) {
                     //This for the masa dibalas oleh
-                    holder.getTextViewMasaDibalasOleh().setText(new TimeCustom().convertTimeToAgo(model.getMasaDibalasOleh()));
+                    // holder.getTextViewMasaDibalasOleh().setText(new TimeCustom().convertTimeToAgo(model.getMasaDibalasOleh()));
+                    holder.getTextViewMasaDibalasOleh().setText(TarikhMasa.GetTarikhMasaTimeAgo(model.getMasaDibalasOleh(), "MY", true, false));
                 } else {
                     holder.getTextViewMasaDibalasOleh().setVisibility(View.GONE);
                 }

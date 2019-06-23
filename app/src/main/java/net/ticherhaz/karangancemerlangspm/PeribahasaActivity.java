@@ -1,15 +1,20 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -45,9 +50,34 @@ public class PeribahasaActivity extends SkinActivity {
 
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Peribahasa, PeribahasaViewHolder>(firebaseRecyclerOptions) {
             @Override
-            protected void onBindViewHolder(@NonNull PeribahasaViewHolder holder, int position, @NonNull Peribahasa model) {
+            protected void onBindViewHolder(@NonNull final PeribahasaViewHolder holder, int position, @NonNull final Peribahasa model) {
                 holder.getTextViewTitle().setText(model.getTitle());
                 holder.getTextViewDescription().setText(model.getDescription());
+
+                holder.getView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //When user press it, it will save to clipboard
+                        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                        ClipData clip = ClipData.newPlainText("title", model.getTitle());
+                        if (clipboard != null)
+                            clipboard.setPrimaryClip(clip);
+
+                        Toast.makeText(getApplicationContext(), "Disalin ke Papan Klip", Toast.LENGTH_SHORT).show();
+
+                        holder.getView().setEnabled(false);
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                holder.getView().setEnabled(true);
+                                Toast.makeText(getApplicationContext(), "Tunggu sebentar...", Toast.LENGTH_SHORT).show();
+                            }
+                        }, 2300);
+                    }
+                });
+
+
             }
 
             @NonNull
@@ -67,6 +97,17 @@ public class PeribahasaActivity extends SkinActivity {
         firebaseRecyclerAdapter.startListening();
         recyclerView.setLayoutManager(new LinearLayoutManager(PeribahasaActivity.this));
         recyclerView.setAdapter(firebaseRecyclerAdapter);
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (progressBar.getVisibility() == View.VISIBLE) {
+                    messageInternetMessage(PeribahasaActivity.this);
+                }
+
+            }
+        }, 5000);
     }
 
     private void listID() {

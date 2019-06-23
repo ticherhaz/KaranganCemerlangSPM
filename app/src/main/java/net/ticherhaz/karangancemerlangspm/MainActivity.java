@@ -8,10 +8,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.PersistableBundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
@@ -31,6 +27,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -167,6 +168,7 @@ public class MainActivity extends SkinActivity {
                 if (dataSnapshot.exists()) {
                     String textAnnouncement = dataSnapshot.getValue(String.class);
                     textViewAnnouncement.setText(textAnnouncement);
+
                 }
             }
 
@@ -744,7 +746,7 @@ public class MainActivity extends SkinActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
             builder.setTitle(R.string.action_about);
             //TODO: Update the version at About
-            builder.setMessage("Karangan Cemerlang SPM\nversi 2.31\n\n\nJangan lupa kongsi bersama kawan :)\n\nKredit:\nCikgu Mariani - Cikgu Badrunsham - Cikgu Hamidah - Cikgu Rohani - Cikgu Harum Awang - Cikgu Samat - Cikgu Che Noranuwi - Nabil Fikri - Muhd Arif (Bob) - Luqman K - Affiq Shamil\n\n\n\n\nTips:\nHAZMAN BIN BADRUNSHAM\nCIMB BANK\n7614543761\n\n\nhazman45.blogspot.com\nTicherhaz©2019");
+            builder.setMessage("Karangan Cemerlang SPM\nversi 2.32\n\n\nKongsi dengan rakan-rakan :)\n\nKredit:\nCikgu Mariani - Cikgu Badrunsham - Cikgu Hamidah - Cikgu Rohani - Cikgu Harum Awang - Cikgu Samat - Cikgu Che Noranuwi - Nabil Fikri - Muhd Arif (Bob) - Luqman K - Affiq Shamil - Peah\n\n\n\n\nTips:\nHAZMAN BIN BADRUNSHAM\nCIMB BANK\n7614543761\n\n\nhazman45.blogspot.com\nTicherhaz©2019");
             builder.setPositiveButton(
                     "Ok",
                     new DialogInterface.OnClickListener() {

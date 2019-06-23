@@ -4,6 +4,8 @@ package com.zxy.skin.sdk;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.collection.ArrayMap;
+
 import com.zxy.skin.sdk.applicator.SkinApplicatorManager;
 import com.zxy.skin.sdk.applicator.SkinViewApplicator;
 
@@ -162,7 +164,8 @@ public class SkinEngine {
 
         View view;
 
-        android.support.v4.util.ArrayMap<String, Integer> attrsMap = new android.support.v4.util.ArrayMap<>();
+        ArrayMap<String, Integer> attrsMap = new ArrayMap<>();
+
 
         SkinViewWrapper(View view) {
             this.view = view;
