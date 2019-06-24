@@ -71,7 +71,6 @@ public class PeribahasaActivity extends SkinActivity {
                             @Override
                             public void run() {
                                 holder.getView().setEnabled(true);
-                                Toast.makeText(getApplicationContext(), "Tunggu sebentar...", Toast.LENGTH_SHORT).show();
                             }
                         }, 2300);
                     }

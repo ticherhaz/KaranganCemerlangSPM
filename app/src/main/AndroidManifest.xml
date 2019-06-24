@@ -8,7 +8,6 @@
 
     <dist:module dist:instant="true" /> <!-- Using the internet connection -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- This one is to get MAC Address -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
