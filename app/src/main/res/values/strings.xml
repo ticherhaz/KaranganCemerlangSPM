@@ -59,7 +59,7 @@
     <string name="about_title">
         <![CDATA[
         <h3>Karangan Cemerlang SPM</h3>
-        <i>versi 2.39</i><br>
+        <i>versi 2.40</i><br>
         hazman45.blogspot.com<br>
         Ticherhaz©2019
 
@@ -68,7 +68,7 @@
         </br>
 ]]>
     </string>
-    <string name="about_credit">Cikgu Mariani - Cikgu Badrunsham - Cikgu Hamidah - Cikgu Rohani - Cikgu Harum Awang - Cikgu Samat - Cikgu Che Noranuwi - Nabil Fikri - Muhd Arif (Bob) - Luqman K - Affiq Shamil - Peah</string>
+    <string name="about_credit">Cikgu Mariani - Cikgu Badrunsham - Cikgu Hamidah - Cikgu Rohani - Cikgu Harum Awang - Cikgu Samat - Cikgu Che Noranuwi - Nabil Fikri - Muhd Arif (Bob) - Luqman K - Affiq Shamil - Peah - Chekta</string>
     <string name="submit">Hantar</string>
     <string name="logo_kcspm">Logo KCSPM</string>
     <!--<string name="viewer">Penonton</string>-->
@@ -151,6 +151,7 @@
     <string name="peribahasa">Peribahasa</string>
     <string name="kredit">Kredit</string>
     <string name="tips">Tips</string>
+    <string name="definition_tips">Setiap tips yang diberikan tidak boleh bayar balik. Seikhlas hati anda. Terima kasih yang teramat kepada yang membantu saya :)</string>
     <string-array name="feedback_array">
         <item>Cadangan</item>
         <item>Pujian</item>

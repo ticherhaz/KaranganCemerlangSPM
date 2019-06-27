@@ -53,6 +53,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.zxy.skin.sdk.SkinActivity;
 import com.zxy.skin.sdk.SkinEngine;
 
+import net.ticherhaz.karangancemerlangspm.Model.AboutClicked;
+import net.ticherhaz.karangancemerlangspm.Model.Donation;
 import net.ticherhaz.karangancemerlangspm.Model.Karangan;
 import net.ticherhaz.karangancemerlangspm.Util.MyTipsAdapter;
 import net.ticherhaz.karangancemerlangspm.Util.Others;
@@ -63,6 +65,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class MainActivity extends SkinActivity implements PurchasesUpdatedListener {
 
@@ -778,16 +782,21 @@ public class MainActivity extends SkinActivity implements PurchasesUpdatedListen
     private void loadProduct(List<SkuDetails> skuDetails, RecyclerView recyclerView) {
         MyTipsAdapter myTipsAdapter = new MyTipsAdapter(this, skuDetails, billingClient);
         recyclerView.setAdapter(myTipsAdapter);
-
     }
+
 
     //23.6.2019
     @Override
     public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> purchases) {
         if (purchases != null) {
-            Toast.makeText(getApplicationContext(), "Tips: " + purchases.size(), Toast.LENGTH_SHORT).show();
-        }
+            Toast.makeText(getApplicationContext(), "Terima kasih atas tips anda RM" + purchases.size() + ", sangat membantu :)", Toast.LENGTH_SHORT).show();
 
+            //After that, we store the information that the user made the payment.
+
+            final String itemUid = FirebaseDatabase.getInstance().getReference().push().getKey();
+            Donation donation = new Donation(userUid, itemUid, GetTarikhMasa(), String.valueOf(purchases.size()));
+            FirebaseDatabase.getInstance().getReference().child("donation").child(userUid).setValue(donation);
+        }
     }
 
     @Override
@@ -799,6 +808,14 @@ public class MainActivity extends SkinActivity implements PurchasesUpdatedListen
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
+
+            //27.7.2019 so we store the information if the user press the about.
+            final String uid = FirebaseDatabase.getInstance().getReference().push().getKey();
+            AboutClicked aboutClicked = new AboutClicked(userUid, uid, GetTarikhMasa());
+            if (uid != null)
+                FirebaseDatabase.getInstance().getReference().child("aboutClicked").child(userUid).setValue(aboutClicked);
+
+
 //            AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
 //            builder.setTitle(R.string.action_about);
 //            //TODO: Update the version at About
