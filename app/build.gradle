@@ -14,8 +14,8 @@ android {
         applicationId "net.ticherhaz.karangancemerlangspm"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 41
-        versionName "2.41"
+        versionCode 42
+        versionName "2.42"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -64,6 +64,6 @@ dependencies {
     implementation 'com.github.ticherhaz:tarikhmasa:1.5.4'
 
     //23/6/2019 Billing method
-    implementation 'com.android.billingclient:billing:2.0.1'
+    // implementation 'com.android.billingclient:billing:2.0.1'
 }
 apply plugin: 'com.google.gms.google-services'

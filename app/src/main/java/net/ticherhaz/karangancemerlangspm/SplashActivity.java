@@ -174,42 +174,42 @@ public class SplashActivity extends AppCompatActivity {
                 //Make sure it is the same variables here and in the database.
                 if (dataSnapshot.exists()) {
                     System system = dataSnapshot.getValue(System.class);
-                    if (system != null && !system.isMod()) {
-                        Toast toast = Toast.makeText(getApplicationContext(), "Di Bawah Penyelenggaran", Toast.LENGTH_LONG);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
-                        //Then we return to out of this databaseReferenceSystem.
-                        return;
-                    }
-                    //After that, we chat the value
-                    if (system != null && system.getVersi() != 41 && system.getVersi() == 40 && system.getVersi() == 39 && system.getVersi() == 38) {
-                        //TODO: Version right now is 41. Please update when the new version is released.
-                        Toast toast = Toast.makeText(getApplicationContext(), "Sila mengemas kini versi baharu", Toast.LENGTH_LONG);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
+                    if (system != null) {
+                        if (!system.isMod()) {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Di Bawah Penyelenggaran", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                        }
+                        //After that, we chat the value
+                        else if (system.getVersi() == 42) {
+                            //TODO: Version right now is 42. Please update when the new version is released.
+                            //If all the condition above is met, it will NOT GOING THIS PART INSTEAD THEY WILL GO OUTSIDE FROM THE onDataChange
+                            //It not met, then it will proceed here.
+                            storeUserInfo(userUid);
+                        } else {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Sila mengemas kini versi baharu", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
 
-                        //put the delay
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                //Then we proceed to the playStore for user to download the lastest version
-                                final String appPackageName = "net.ticherhaz.karangancemerlangspm"; // Can also use getPackageName(), as below
-                                try {
-                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                                } catch (ActivityNotFoundException ex) {
-                                    Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=net.ticherhaz.karangancemerlangspm&hl=en");
-                                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                                    startActivity(intent);
+                            //put the delay
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    //Then we proceed to the playStore for user to download the lastest version
+                                    final String appPackageName = "net.ticherhaz.karangancemerlangspm"; // Can also use getPackageName(), as below
+                                    try {
+                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                                    } catch (ActivityNotFoundException ex) {
+                                        Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=net.ticherhaz.karangancemerlangspm&hl=en");
+                                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                        startActivity(intent);
+                                    }
+
                                 }
-
-                            }
-                        }, 3000); //3 seconds
-                        return;
+                            }, 3000); //3 seconds
+                        }
                     }
 
-                    //If all the condition above is met, it will NOT GOING THIS PART INSTEAD THEY WILL GO OUTSIDE FROM THE onDataChange
-                    //It not met, then it will proceed here.
-                    storeUserInfo(userUid);
                 } else {
                     Toast.makeText(getApplicationContext(), "Not exist", Toast.LENGTH_SHORT).show();
                 }
