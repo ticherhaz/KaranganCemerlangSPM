@@ -59,16 +59,18 @@
     <string name="about_title">
         <![CDATA[
         <h3>Karangan Cemerlang SPM</h3>
-        <i>versi 2.40</i><br>
+        <i>versi 2.41</i><br>
         hazman45.blogspot.com<br>
         Ticherhaz©2019
+
+        <p><i>Ucapan ribuan terima kasih kepada semua yang memberi sokongan aplikasi saya ini. :) </i></p>
 
         <p>Kongsi dengan rakan-rakan yer :)</p>
 
         </br>
 ]]>
     </string>
-    <string name="about_credit">Cikgu Mariani - Cikgu Badrunsham - Cikgu Hamidah - Cikgu Rohani - Cikgu Harum Awang - Cikgu Samat - Cikgu Che Noranuwi - Nabil Fikri - Muhd Arif (Bob) - Luqman K - Affiq Shamil - Peah - Chekta</string>
+    <string name="about_credit">Cikgu Mariani - Cikgu Badrunsham - Cikgu Hamidah - Cikgu Rohani - Cikgu Harum Awang - Cikgu Samat - Cikgu Che Noranuwi - Nabil Fikri - Muhd Arif (Bob) - Luqman K - Affiq Shamil - Peah - Chekta - Eisom- Achik</string>
     <string name="submit">Hantar</string>
     <string name="logo_kcspm">Logo KCSPM</string>
     <!--<string name="viewer">Penonton</string>-->

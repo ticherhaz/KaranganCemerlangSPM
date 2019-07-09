@@ -27,21 +27,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.billingclient.api.BillingClient;
-import com.android.billingclient.api.BillingClientStateListener;
-import com.android.billingclient.api.BillingResult;
-import com.android.billingclient.api.Purchase;
-import com.android.billingclient.api.PurchasesUpdatedListener;
-import com.android.billingclient.api.SkuDetails;
-import com.android.billingclient.api.SkuDetailsParams;
-import com.android.billingclient.api.SkuDetailsResponseListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -54,21 +44,17 @@ import com.zxy.skin.sdk.SkinActivity;
 import com.zxy.skin.sdk.SkinEngine;
 
 import net.ticherhaz.karangancemerlangspm.Model.AboutClicked;
-import net.ticherhaz.karangancemerlangspm.Model.Donation;
 import net.ticherhaz.karangancemerlangspm.Model.Karangan;
-import net.ticherhaz.karangancemerlangspm.Util.MyTipsAdapter;
 import net.ticherhaz.karangancemerlangspm.Util.Others;
 import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.KaranganViewHolder;
 
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
-public class MainActivity extends SkinActivity implements PurchasesUpdatedListener {
+public class MainActivity extends SkinActivity {
 
     private static final String SHARED_PREFERENCES_MOD = "myPreferenceMod";
     private static final String SAVED_MOD = "mySavedMod";
@@ -114,7 +100,7 @@ public class MainActivity extends SkinActivity implements PurchasesUpdatedListen
     private TextView textViewCountdownSPM;
     private SharedPreferences sharedPreferences;
     private String mod;
-    private BillingClient billingClient;
+    // private BillingClient billingClient;
 
     //Method listID
     private void listID() {
@@ -153,7 +139,7 @@ public class MainActivity extends SkinActivity implements PurchasesUpdatedListen
         textViewHow.setText(Html.fromHtml(getString(R.string.how)));
 
         //Set billing
-        setBillingClient();
+        //setBillingClient();
 
         //Get the value of the userUid
         Intent intent = getIntent();
@@ -754,50 +740,48 @@ public class MainActivity extends SkinActivity implements PurchasesUpdatedListen
         super.onSaveInstanceState(outState, outPersistentState);
     }
 
-    private void setBillingClient() {
-        billingClient = BillingClient.newBuilder(this)
-                .setListener(this)
-                .enablePendingPurchases()
-                .build();
+//    private void setBillingClient() {
+//        billingClient = BillingClient.newBuilder(this)
+//                .setListener(this)
+//                .enablePendingPurchases()
+//                .build();
+//
+//        billingClient.startConnection(new BillingClientStateListener() {
+//            @Override
+//            public void onBillingSetupFinished(BillingResult billingResult) {
+////                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+////                    Toast.makeText(getApplicationContext(), "Success connect billing", Toast.LENGTH_SHORT).show();
+////                } else {
+////                    Toast.makeText(getApplicationContext(), "Result: " + billingResult, Toast.LENGTH_SHORT).show();
+////                }
+//
+//            }
+//
+//            @Override
+//            public void onBillingServiceDisconnected() {
+//                // Toast.makeText(getApplicationContext(), "Disconnected from Billing...", Toast.LENGTH_SHORT).show();
+//            }
+//
+//        });
+//    }
+//
+//    private void loadProduct(List<SkuDetails> skuDetails, RecyclerView recyclerView) {
+//        MyTipsAdapter myTipsAdapter = new MyTipsAdapter(this, skuDetails, billingClient);
+//        recyclerView.setAdapter(myTipsAdapter);
+//    }
 
-        billingClient.startConnection(new BillingClientStateListener() {
-            @Override
-            public void onBillingSetupFinished(BillingResult billingResult) {
-//                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-//                    Toast.makeText(getApplicationContext(), "Success connect billing", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    Toast.makeText(getApplicationContext(), "Result: " + billingResult, Toast.LENGTH_SHORT).show();
-//                }
 
-            }
-
-            @Override
-            public void onBillingServiceDisconnected() {
-                // Toast.makeText(getApplicationContext(), "Disconnected from Billing...", Toast.LENGTH_SHORT).show();
-            }
-
-        });
-    }
-
-    private void loadProduct(List<SkuDetails> skuDetails, RecyclerView recyclerView) {
-        MyTipsAdapter myTipsAdapter = new MyTipsAdapter(this, skuDetails, billingClient);
-        recyclerView.setAdapter(myTipsAdapter);
-    }
-
-
-    //23.6.2019
-    @Override
-    public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> purchases) {
-        if (purchases != null) {
-            Toast.makeText(getApplicationContext(), "Terima kasih atas tips anda RM" + purchases.size() + ", sangat membantu :)", Toast.LENGTH_SHORT).show();
-
-            //After that, we store the information that the user made the payment.
-
-            final String itemUid = FirebaseDatabase.getInstance().getReference().push().getKey();
-            Donation donation = new Donation(userUid, itemUid, GetTarikhMasa(), String.valueOf(purchases.size()));
-            FirebaseDatabase.getInstance().getReference().child("donation").child(userUid).setValue(donation);
-        }
-    }
+//    //23.6.2019
+//    @Override
+//    public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> purchases) {
+//        if (purchases != null) {
+//            Toast.makeText(getApplicationContext(), "Terima kasih atas tips anda RM" + purchases.size() + ", sangat membantu :)", Toast.LENGTH_SHORT).show();
+//            //After that, we store the information that the user made the payment.
+//            final String itemUid = FirebaseDatabase.getInstance().getReference().push().getKey();
+//            Donation donation = new Donation(userUid, itemUid, GetTarikhMasa(), String.valueOf(purchases.size()));
+//            FirebaseDatabase.getInstance().getReference().child("donation").child(userUid).setValue(donation);
+//        }
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -816,21 +800,6 @@ public class MainActivity extends SkinActivity implements PurchasesUpdatedListen
                 FirebaseDatabase.getInstance().getReference().child("aboutClicked").child(userUid).setValue(aboutClicked);
 
 
-//            AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
-//            builder.setTitle(R.string.action_about);
-//            //TODO: Update the version at About
-//            builder.setMessage("Karangan Cemerlang SPM\nversi 2.32\n\n\nKongsi dengan rakan-rakan :)\n\nKredit:\nCikgu Mariani - Cikgu Badrunsham - Cikgu Hamidah - Cikgu Rohani - Cikgu Harum Awang - Cikgu Samat - Cikgu Che Noranuwi - Nabil Fikri - Muhd Arif (Bob) - Luqman K - Affiq Shamil - Peah\n\n\n\n\nTips:\nHAZMAN BIN BADRUNSHAM\nCIMB BANK\n7614543761\n\n\nhazman45.blogspot.com\nTicherhaz©2019");
-//            builder.setPositiveButton(
-//                    "Ok",
-//                    new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int id) {
-//                            dialog.cancel();
-//                        }
-//                    });
-//            AlertDialog alert = builder.create();
-//            alert.show();
-
-
             //23.6.2019: We will use new custom alert dialog.
             //According to this tutor: https://stackoverflow.com/questions/23669296/create-a-alertdialog-in-android-with-custom-xml-view
             final Dialog dialogAbout = new Dialog(MainActivity.this);
@@ -839,58 +808,46 @@ public class MainActivity extends SkinActivity implements PurchasesUpdatedListen
             TextView textViewTitle = dialogAbout.findViewById(R.id.text_view_about_title);
             final TextView textViewCredit = dialogAbout.findViewById(R.id.text_view_about_credit);
             textViewTitle.setText(Html.fromHtml(getString(R.string.about_title)));
-
-            final RecyclerView recyclerViewProduct = dialogAbout.findViewById(R.id.recycler_view_product);
-
-            // recyclerViewProduct.setHasFixedSize(true);
-            recyclerViewProduct.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+//
+//          / final RecyclerView recyclerViewProduct = dialogAbout.findViewById(R.id.recycler_view_product);
+//
+//            // recyclerViewProduct.setHasFixedSize(true);
+//            recyclerViewProduct.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
             textViewCredit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     //textViewCredit.setText(R.string.about_credit);
                     if (!isDisplaying) {
-                        textViewCredit.setText(R.string.about_credit);
+                        textViewCredit.setText(R.string.about_credit); //TODO: Update version 2.41
                         isDisplaying = true;
                     } else {
                         textViewCredit.setText(R.string.kredit);
                         isDisplaying = false;
                     }
-
                 }
             });
 
 
-            //Make billing, check if ready or not (this part we creating the billing)
-            if (billingClient.isReady()) {
-                SkuDetailsParams skuDetailsParams = SkuDetailsParams.newBuilder()
-                        .setSkusList(Arrays.asList("tips_1", "tips_5"))
-                        .setType(BillingClient.SkuType.INAPP)
-                        .build();
-
-                billingClient.querySkuDetailsAsync(skuDetailsParams, new SkuDetailsResponseListener() {
-                    @Override
-                    public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> skuDetailsList) {
-                        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                            loadProduct(skuDetailsList, recyclerViewProduct);
-                        }
-//                        } else {
-//                            Toast.makeText(getApplicationContext(), "Cannot query products", Toast.LENGTH_SHORT).show();
+            //TODO: Payment we will hold on. 9.7.2019.
+//            //Make billing, check if ready or not (this part we creating the billing)
+//            if (billingClient.isReady()) {
+//                SkuDetailsParams skuDetailsParams = SkuDetailsParams.newBuilder()
+//                        .setSkusList(Arrays.asList("tips_1", "tips_5"))
+//                        .setType(BillingClient.SkuType.INAPP)
+//                        .build();
+//
+//                billingClient.querySkuDetailsAsync(skuDetailsParams, new SkuDetailsResponseListener() {
+//                    @Override
+//                    public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> skuDetailsList) {
+//                        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+//                            loadProduct(skuDetailsList, recyclerViewProduct);
 //                        }
-                    }
-                });
-            }
-//            } else {
-//                Toast.makeText(getApplicationContext(), "Billing is not ready", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
 //            }
 
 
-            //This is for the size of custom dialog
-//            DisplayMetrics metrics = getResources().getDisplayMetrics();
-//            int width = metrics.widthPixels;
-//            int height = metrics.heightPixels;
-//            if (dialogAbout.getWindow() != null)
-//                dialogAbout.getWindow().setLayout((6 * width) / 7, (4 * height) / 5);
             dialogAbout.show();
             return true;
         }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorBackground"
@@ -31,32 +30,31 @@
             android:text="@string/kredit"
             android:textColor="?attr/colorText" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:gravity="center"
-            android:text="@string/tips"
-            android:textColor="?attr/colorText"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+        <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="3dp"-->
+        <!--android:gravity="center"-->
+        <!--android:text="@string/tips"-->
+        <!--android:textColor="?attr/colorText"-->
+        <!--android:textSize="20sp"-->
+        <!--android:textStyle="bold" />-->
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:gravity="center"
-            android:text="@string/definition_tips"
-            android:textColor="?attr/colorText"
-            android:textSize="11sp"
-            android:textStyle="italic"
-            tools:ignore="SmallSp" />
+        <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="3dp"-->
+        <!--android:gravity="center"-->
+        <!--android:text="@string/definition_tips"-->
+        <!--android:textColor="?attr/colorText"-->
+        <!--android:textSize="11sp"-->
+        <!--android:textStyle="italic"-->
+        <!--tools:ignore="SmallSp" />-->
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp" />
-
+        <!--<androidx.recyclerview.widget.RecyclerView-->
+        <!--android:id="@+id/recycler_view_product"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="3dp" />-->
     </LinearLayout>
 </ScrollView>
