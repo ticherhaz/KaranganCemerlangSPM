@@ -175,14 +175,15 @@ public class SplashActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     System system = dataSnapshot.getValue(System.class);
                     if (system != null) {
+
                         if (!system.isMod()) {
                             Toast toast = Toast.makeText(getApplicationContext(), "Di Bawah Penyelenggaran", Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
                         }
                         //After that, we chat the value
-                        else if (system.getVersi() == 42) {
-                            //TODO: Version right now is 42. Please update when the new version is released.
+                        else if (system.getVersi() == 43) {
+                            //TODO: Version right now is 43. Please update when the new version is released. testing for beta forum (44)
                             //If all the condition above is met, it will NOT GOING THIS PART INSTEAD THEY WILL GO OUTSIDE FROM THE onDataChange
                             //It not met, then it will proceed here.
                             storeUserInfo(userUid);

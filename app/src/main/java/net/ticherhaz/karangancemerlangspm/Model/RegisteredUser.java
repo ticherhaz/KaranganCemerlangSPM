@@ -23,23 +23,6 @@ public class RegisteredUser {
     private long lastOnline;
     private String lastCreatedThread;
     private String onDateCreated;
-    private String onDateCreatedMonthYear;
-    //BehaviorLog
-//    private String onlineStatusLogUid;
-//    private String lastSeenLogUid;
-//    private String onClickedLogUid;
-//    private String onCreatedThreadLogUid;
-    //UserProfileLog
-//    private String profileUrlLogUid;
-//    private String emailLogUid;
-//    private String usernameLogUid;
-//    private String titleTypeLogUid;
-//    private String customTitleLogUid;
-//    private String bioLogUid;
-//    private String stateLogUid;
-//    private String birthdayLogUid;
-//    private String modeLogUid;
-    //UpperCase
     private String emailUpperCase;
     private String usernameUpperCase;
     private String bioUpperCase;
@@ -48,10 +31,7 @@ public class RegisteredUser {
     public RegisteredUser() {
     }
 
-    public RegisteredUser(String registeredUserUid, String userUid, String typeUser, String profileUrl, String email, String username
-            , String sekolah, String titleType, String customTitle, String bio, String gender, String state, String birthday, String mode
-            , long postCount, long reputation, long reputationPower, String onlineStatus, long lastOnline, String lastCreatedThread
-            , String onDateCreated, String onDateCreatedMonthYear, String emailUpperCase, String usernameUpperCase, String bioUpperCase, String stateUpperCase) {
+    public RegisteredUser(String registeredUserUid, String userUid, String typeUser, String profileUrl, String email, String username, String sekolah, String titleType, String customTitle, String bio, String gender, String state, String birthday, String mode, long postCount, long reputation, long reputationPower, String onlineStatus, long lastOnline, String lastCreatedThread, String onDateCreated, String emailUpperCase, String usernameUpperCase, String bioUpperCase, String stateUpperCase) {
         this.registeredUserUid = registeredUserUid;
         this.userUid = userUid;
         this.typeUser = typeUser;
@@ -73,7 +53,6 @@ public class RegisteredUser {
         this.lastOnline = lastOnline;
         this.lastCreatedThread = lastCreatedThread;
         this.onDateCreated = onDateCreated;
-        this.onDateCreatedMonthYear = onDateCreatedMonthYear;
         this.emailUpperCase = emailUpperCase;
         this.usernameUpperCase = usernameUpperCase;
         this.bioUpperCase = bioUpperCase;
@@ -246,14 +225,6 @@ public class RegisteredUser {
 
     public void setOnDateCreated(String onDateCreated) {
         this.onDateCreated = onDateCreated;
-    }
-
-    public String getOnDateCreatedMonthYear() {
-        return onDateCreatedMonthYear;
-    }
-
-    public void setOnDateCreatedMonthYear(String onDateCreatedMonthYear) {
-        this.onDateCreatedMonthYear = onDateCreatedMonthYear;
     }
 
     public String getEmailUpperCase() {

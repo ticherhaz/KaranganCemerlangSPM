@@ -807,7 +807,10 @@ public class MainActivity extends SkinActivity {
             dialogAbout.setContentView(R.layout.dialog_about);
             TextView textViewTitle = dialogAbout.findViewById(R.id.text_view_about_title);
             final TextView textViewCredit = dialogAbout.findViewById(R.id.text_view_about_credit);
+            // final long timestamp = ServerValue.TIMESTAMP.values();
+
             textViewTitle.setText(Html.fromHtml(getString(R.string.about_title)));
+            //   textViewTitle.setText(String.valueOf(timestamp));
 //
 //          / final RecyclerView recyclerViewProduct = dialogAbout.findViewById(R.id.recycler_view_product);
 //
@@ -819,7 +822,7 @@ public class MainActivity extends SkinActivity {
                 public void onClick(View view) {
                     //textViewCredit.setText(R.string.about_credit);
                     if (!isDisplaying) {
-                        textViewCredit.setText(R.string.about_credit); //TODO: Update version 2.42
+                        textViewCredit.setText(R.string.about_credit); //TODO: Update version 2.44
                         isDisplaying = true;
                     } else {
                         textViewCredit.setText(R.string.kredit);

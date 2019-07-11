@@ -50,8 +50,8 @@ public class FeedbackActivity extends SkinActivity {
         spinner = findViewById(R.id.spinner);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.feedback_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.feedback_array, R.layout.spinner_item);
+        adapter.setDropDownViewResource(R.layout.spinner_item);
         spinner.setAdapter(adapter);
 
         buttonSubmit = findViewById(R.id.button_submit);

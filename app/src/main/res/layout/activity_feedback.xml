@@ -16,8 +16,11 @@
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="9dp"
-            android:theme="@style/styleSpinner" />
+            android:layout_marginLeft="9dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginRight="9dp"
+            android:background="?attr/colorBackgroundRecyclerView"
+            android:popupBackground="?attr/colorBackgroundRecyclerView" />
 
         <EditText
             android:id="@+id/edit_text_email"

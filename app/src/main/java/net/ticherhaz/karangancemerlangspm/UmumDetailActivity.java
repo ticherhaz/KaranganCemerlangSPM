@@ -101,7 +101,7 @@ public class UmumDetailActivity extends SkinActivity {
                         username = registeredUser.getUsername();
                         userTitle = registeredUser.getTitleType();
                         sekolah = registeredUser.getSekolah();
-                        onDateCreatedMonthYear = registeredUser.getOnDateCreatedMonthYear();
+                        onDateCreatedMonthYear = registeredUser.getOnDateCreated();
                         gender = registeredUser.getGender();
                         post = registeredUser.getPostCount();
                         reputation = registeredUser.getReputation();
@@ -163,7 +163,7 @@ public class UmumDetailActivity extends SkinActivity {
                                 long lastOnlineA = registeredUser.getLastOnline();
                                 String lastCreatedThreadA = registeredUser.getLastCreatedThread();
                                 String onDateCreatedA = registeredUser.getOnDateCreated();
-                                String onDateCreatedMonthYearA = registeredUser.getOnDateCreatedMonthYear();
+                                String onDateCreatedMonthYearA = registeredUser.getOnDateCreated();
 
                                 //Call another class to change color
                                 new UserTypeColor().setTextColorUserUmumDetail(registeredUser, holder);
