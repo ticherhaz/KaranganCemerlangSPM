@@ -23,10 +23,11 @@
 
     <Button
         android:id="@+id/button_sign_in"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="7dp"
+        android:textColor="@color/colorTextWhite"
         android:background="@drawable/button_selector"
         android:text="@string/sign_in"
         android:textAllCaps="false" />

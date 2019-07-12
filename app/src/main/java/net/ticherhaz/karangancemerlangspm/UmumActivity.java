@@ -1,6 +1,8 @@
 package net.ticherhaz.karangancemerlangspm;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -66,6 +68,29 @@ public class UmumActivity extends SkinActivity {
     private String forumUid;
     private String userUid;
 
+    private String userType;
+
+    private void retrieveFirebase() {
+        if (firebaseUser != null) {
+            databaseReference.child("registeredUser").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
+                        if (registeredUser != null) {
+                            userType = registeredUser.getTypeUser();
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
+
     private void setFirebaseRecyclerAdapter() {
         progressBar.setVisibility(View.VISIBLE);
         Query query = databaseReference.child("umum").child(forumUid);
@@ -77,9 +102,7 @@ public class UmumActivity extends SkinActivity {
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Umum, UmumHolder>(firebaseRecyclerOptions) {
             @SuppressLint("SetTextI18n")
             @Override
-            protected void onBindViewHolder(@NonNull final UmumHolder holder, int position, @NonNull final Umum model) {
-                //new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-                //Change the date to ago
+            protected void onBindViewHolder(@NonNull final UmumHolder holder, final int position, @NonNull final Umum model) {
 
                 /*Kita tukar pakai yg class untuk tukar time to text
 
@@ -131,10 +154,8 @@ public class UmumActivity extends SkinActivity {
                     holder.getTextViewDibalasOleh().setVisibility(View.GONE);
                 }
 
-
                 if (model.getMasaDibalasOleh() != null) {
                     //This for the masa dibalas oleh
-                    // holder.getTextViewMasaDibalasOleh().setText(new TimeCustom().convertTimeToAgo(model.getMasaDibalasOleh()));
                     holder.getTextViewMasaDibalasOleh().setText(TarikhMasa.GetTarikhMasaTimeAgo(model.getMasaDibalasOleh(), "MY", true, false));
                 } else {
                     holder.getTextViewMasaDibalasOleh().setVisibility(View.GONE);
@@ -142,7 +163,7 @@ public class UmumActivity extends SkinActivity {
 
 
                 //This part we take the umumUid to display the total reply
-                String umumUid = model.getUmumUid();
+                final String umumUid = model.getUmumUid();
                 databaseReference.child("umumPos").child(forumUid).child(umumUid).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -194,6 +215,36 @@ public class UmumActivity extends SkinActivity {
                         startActivities(new Intent[]{intent});
                     }
                 });
+
+                //Set on Long listener to delete this specific, check the user
+                if (userType.equals("admin") || userType.equals("moderator")) {
+                    holder.getView().setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View view) {
+                            AlertDialog alertDialog = new AlertDialog.Builder(UmumActivity.this)
+                                    .setTitle("Options")
+                                    .setMessage("Are you sure you want to delete this?")
+                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            firebaseRecyclerAdapter.getRef(position).removeValue();
+                                            databaseReference.child("umumPos").child(forumUid).child(umumUid).removeValue();
+                                        }
+                                    })
+                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.dismiss();
+                                        }
+                                    })
+                                    .create();
+
+                            alertDialog.show();
+                            return true;
+                        }
+                    });
+                }
+
             }
 
             @NonNull
@@ -215,8 +266,6 @@ public class UmumActivity extends SkinActivity {
         linearLayoutManager.setReverseLayout(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(firebaseRecyclerAdapter);
-        firebaseRecyclerAdapter.startListening();
-        firebaseRecyclerAdapter.notifyDataSetChanged();
     }
 
     private void listID() {
@@ -232,6 +281,7 @@ public class UmumActivity extends SkinActivity {
 
         setTotalOnlineSpecific(userUid, "Online");
         setFirebaseRecyclerAdapter();
+        retrieveFirebase();
     }
 
     @Override
@@ -262,6 +312,28 @@ public class UmumActivity extends SkinActivity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (firebaseRecyclerAdapter != null) {
+            firebaseRecyclerAdapter.startListening();
+            firebaseRecyclerAdapter.notifyDataSetChanged();
+        }
+
+        //Check if there is internet or not
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (progressBar.getVisibility() == View.VISIBLE) {
+                    messageInternetMessage(UmumActivity.this);
+                }
+
+            }
+        }, 5000);
+    }
+
+
     //Button topik
     private void setButtonTopikBaru() {
         buttonTopikBaru.setOnClickListener(new View.OnClickListener() {
@@ -281,21 +353,6 @@ public class UmumActivity extends SkinActivity {
         });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        //Check if there is internet or not
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (progressBar.getVisibility() == View.VISIBLE) {
-                    messageInternetMessage(UmumActivity.this);
-                }
-
-            }
-        }, 5000);
-    }
 
     private void setTotalOnlineSpecific(final String userUid, String onlineStatus) {
         //Update the total user is seeing this umum activity.

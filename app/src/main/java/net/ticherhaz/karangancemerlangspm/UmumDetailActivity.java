@@ -46,6 +46,7 @@ import net.ticherhaz.karangancemerlangspm.Util.UserTypeColor;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.UmumDetailHolder;
 import net.ticherhaz.tarikhmasa.TarikhMasa;
 
+import static net.ticherhaz.tarikhmasa.TarikhMasa.ConvertTarikhMasa2LocalTimePattern;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class UmumDetailActivity extends SkinActivity {
@@ -161,14 +162,14 @@ public class UmumDetailActivity extends SkinActivity {
                                 String onDateCreatedA = registeredUser.getOnDateCreated();
 
                                 //Call another class to change color
-                                new UserTypeColor().setTextColorUserUmumDetail(registeredUser, holder);
+                                new UserTypeColor().setTextColorUserUmumDetail(registeredUser, holder, UmumDetailActivity.this);
 
 
                                 //This part is to display
                                 holder.getTextViewUsername().setText(usernameA);
                                 holder.getTextViewUserTitle().setText(titleTypeA);
                                 holder.getTextViewSekolah().setText(sekolahA);
-                                holder.getTextViewUserJoinDate().setText("Tarikh Sertai: " + TarikhMasa.ConvertTarikhMasa2LocalTimePattern(onDateCreatedA, "MMM yyyy"));
+                                holder.getTextViewUserJoinDate().setText("Tarikh Sertai: " + ConvertTarikhMasa2LocalTimePattern(onDateCreatedA, "MMM yyyy"));
                                 holder.getTextViewGender().setText("Jantina: " + genderA);
                                 holder.getTextViewPos().setText("Pos: " + postCountA);
                                 holder.getTextViewReputation().setText(String.valueOf(reputationA));
@@ -185,7 +186,6 @@ public class UmumDetailActivity extends SkinActivity {
 
                                         //Hide the giving of the reputation
                                         holder.getTextViewGiveReputation().setVisibility(View.GONE);
-
 
                                         holder.getTextViewEditReply().setOnClickListener(new View.OnClickListener() {
                                             @Override
@@ -209,20 +209,26 @@ public class UmumDetailActivity extends SkinActivity {
                                                     @Override
                                                     public void onClick(View v) {
                                                         String newDeskripsi = holder.getEditTextEdit().getText().toString();
-                                                        //here we triggered to change in the database
-                                                        databaseReference.child("umumPos").child(forumUid).child(umumUid).child(model.getUmumDetailUid()).child("deskripsi").setValue(newDeskripsi);
-                                                        //After we finish
-                                                        //back to normal
-                                                        //then we change back all to normal
-                                                        //we hide the edittext deskripsi
-                                                        holder.getEditTextEdit().setVisibility(View.GONE);
-                                                        //we display textview deskripsi
-                                                        holder.getTextViewDeskripsi().setVisibility(View.VISIBLE);
-                                                        //We hide this button cancel and yes
-                                                        holder.getTextViewEditYes().setVisibility(View.GONE);
-                                                        holder.getTextViewEditCancel().setVisibility(View.GONE);
-                                                        //Then we display back the edit button
-                                                        holder.getTextViewEditReply().setVisibility(View.VISIBLE);
+
+                                                        if (newDeskripsi.isEmpty() && holder.getEditTextEdit().getText().toString().contains(" ")) {
+                                                            Toast.makeText(getApplicationContext(), "Sila isi ayat anda...", Toast.LENGTH_LONG).show();
+                                                        } else {
+                                                            //here we triggered to change in the database
+                                                            databaseReference.child("umumPos").child(forumUid).child(umumUid).child(model.getUmumDetailUid()).child("deskripsi").setValue(newDeskripsi);
+                                                            //After we finish
+                                                            //back to normal
+                                                            //then we change back all to normal
+                                                            //we hide the edittext deskripsi
+                                                            holder.getEditTextEdit().setVisibility(View.GONE);
+                                                            //we display textview deskripsi
+                                                            holder.getTextViewDeskripsi().setVisibility(View.VISIBLE);
+                                                            //We hide this button cancel and yes
+                                                            holder.getTextViewEditYes().setVisibility(View.GONE);
+                                                            holder.getTextViewEditCancel().setVisibility(View.GONE);
+                                                            //Then we display back the edit button
+                                                            holder.getTextViewEditReply().setVisibility(View.VISIBLE);
+                                                        }
+
                                                     }
                                                 });
 

@@ -174,9 +174,9 @@ public class TopikBaruActivity extends SkinActivity {
 
         UmumDetail umumDetail = new UmumDetail(umumDetailUid, registeredUid, onCreatedDate, deskripsi);
 
-        if (umumUid != null) {
+        if (umumUid != null && umumDetailUid != null) {
             databaseReference.child("umum").child(forumUid).child(umumUid).setValue(umum);
-            databaseReference.child("umumPos").child(forumUid).child(umumUid).child(umumUid).setValue(umumDetail).addOnCompleteListener(new OnCompleteListener<Void>() {
+            databaseReference.child("umumPos").child(forumUid).child(umumUid).child(umumDetailUid).setValue(umumDetail).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {

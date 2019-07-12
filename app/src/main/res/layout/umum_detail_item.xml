@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/styleCardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="3dp"
-    android:orientation="vertical"
-    app:cardBackgroundColor="?attr/colorBackgroundRecyclerView">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -113,7 +112,6 @@
                         android:gravity="center_vertical"
                         android:textColor="?attr/colorText" />
 
-
                     <TextView
                         android:id="@+id/text_view_status"
                         android:layout_width="wrap_content"
@@ -128,7 +126,6 @@
                         android:textColor="?attr/colorText" />
 
                 </RelativeLayout>
-
 
                 <TextView
                     android:id="@+id/text_view_pos"
@@ -163,28 +160,43 @@
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/text_view_deskripsi"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:maxLines="29"
-            android:scrollbars="vertical"
-            android:textColor="?attr/colorText" />
+            android:layout_height="170dp"
+            android:background="@drawable/linear_layout_border"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/edit_text_deskripsi"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:maxLines="29"
-            android:scrollbars="vertical"
-            android:textColor="?attr/colorText"
-            android:textColorHint="?attr/colorText"
-            android:visibility="gone" />
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/text_view_deskripsi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/colorText" />
+
+            </ScrollView>
+
+
+            <EditText
+                android:id="@+id/edit_text_deskripsi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:maxLines="29"
+                android:scrollbars="vertical"
+                android:textColor="?attr/colorText"
+                android:textColorHint="?attr/colorText"
+                android:visibility="gone" />
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary">
+            android:layout_marginTop="7dp"
+            android:background="@drawable/relative_layout_border_umum_detail_item"
+            android:paddingLeft="7dp"
+            android:paddingRight="7dp">
 
             <TextView
                 android:id="@+id/text_view_give_reputation"

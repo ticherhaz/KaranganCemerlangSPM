@@ -83,7 +83,7 @@ public class OnlineUserActivity extends SkinActivity {
 
                 //change the color of the user
                 if (model.getTitleType() != null) {
-                    new UserTypeColor().setTextColorUserOnlineUserActivity(model, holder);
+                    new UserTypeColor().setTextColorUserOnlineUserActivity(model, holder, OnlineUserActivity.this);
                 }
             }
 

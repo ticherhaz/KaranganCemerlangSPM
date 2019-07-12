@@ -400,6 +400,22 @@ public class ForumActivity extends SkinActivity {
                             }
                             textViewReputation.setText(reputation);
                             textViewSekolah.setText(sekolah);
+
+                            //Check type of user
+                            switch (registeredUser.getTypeUser()) {
+                                case "admin":
+                                    textViewUsername.setTextColor(getResources().getColor(R.color.colorAdmin));
+                                    break;
+                                case "moderator":
+                                    textViewUsername.setTextColor(getResources().getColor(R.color.colorModerator));
+                                    break;
+                                case "cikgu":
+                                    textViewUsername.setTextColor(getResources().getColor(R.color.colorCikgu));
+                                    break;
+                                case "ahliPremium":
+                                    textViewUsername.setTextColor(getResources().getColor(R.color.colorAhliPremium));
+                                    break;
+                            }
                             textViewUsername.setText(username);
                             textViewTotalPosCount.setText(totalPos);
                             new Others().setStatus(status, textViewStatus);
@@ -561,7 +577,11 @@ public class ForumActivity extends SkinActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        firebaseRecyclerAdapter.startListening();
+
+        if (firebaseRecyclerAdapter != null) {
+            firebaseRecyclerAdapter.startListening();
+            firebaseRecyclerAdapter.notifyDataSetChanged();
+        }
 
         //Check if there is internet or not
         new Handler().postDelayed(new Runnable() {
