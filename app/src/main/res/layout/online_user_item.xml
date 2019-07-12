@@ -1,41 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/styleCardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="3dp"
-    android:background="?attr/colorBackgroundRecyclerView"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/text_view_username"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_margin="3dp"
+            android:layout_toStartOf="@id/text_view_sekolah"
+            android:layout_toLeftOf="@id/text_view_sekolah"
             android:drawableStart="@drawable/ic_sign_online_green"
             android:drawableLeft="@drawable/ic_sign_online_green"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:gravity="center_vertical"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
             android:textColor="?attr/colorText"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/text_view_sekolah"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="3dp"
+            android:layout_toStartOf="@id/text_view_reputation"
+            android:layout_toLeftOf="@id/text_view_reputation"
+            android:drawableStart="@drawable/ic_school"
+            android:drawableLeft="@drawable/ic_school"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:gravity="center_vertical"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
             android:textColor="?attr/colorText" />
 
         <TextView
             android:id="@+id/text_view_reputation"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_toStartOf="@+id/text_view_status"
+            android:layout_toLeftOf="@+id/text_view_status"
             android:drawableStart="@drawable/ic_reputation"
             android:drawableLeft="@drawable/ic_reputation"
             android:gravity="center_vertical"
@@ -45,12 +65,13 @@
             android:id="@+id/text_view_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="3dp"
             android:drawableStart="@drawable/ic_status_neutral"
             android:drawableLeft="@drawable/ic_status_neutral"
             android:gravity="center_vertical"
             android:textColor="?attr/colorText" />
 
-    </LinearLayout>
-</LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -168,9 +168,6 @@ public class JenisKaranganActivity extends SkinActivity {
             public void run() {
                 if (progressBar.getVisibility() == View.VISIBLE) {
                     messageInternetMessage(JenisKaranganActivity.this);
-//                    Toast toast = Toast.makeText(getApplicationContext(), new InternetMessage().getMessage(), Toast.LENGTH_SHORT);
-//                    toast.setGravity(Gravity.CENTER, 0, 0);
-//                    toast.show();
                 }
 
             }

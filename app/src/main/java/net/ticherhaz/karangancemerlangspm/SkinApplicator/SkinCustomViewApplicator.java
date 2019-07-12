@@ -1,4 +1,4 @@
-package net.ticherhaz.karangancemerlangspm.skinapplicator;
+package net.ticherhaz.karangancemerlangspm.SkinApplicator;
 
 import android.content.res.TypedArray;
 import android.graphics.Color;

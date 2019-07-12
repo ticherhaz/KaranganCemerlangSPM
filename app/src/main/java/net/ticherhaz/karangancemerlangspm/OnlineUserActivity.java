@@ -75,7 +75,9 @@ public class OnlineUserActivity extends SkinActivity {
             @Override
             protected void onBindViewHolder(@NonNull OnlineStatusViewHolder holder, int position, @NonNull RegisteredUser model) {
                 holder.getTextViewUsername().setText(model.getUsername());
+                holder.getTextViewUsername().setSelected(true);
                 holder.getTextViewSekolah().setText(model.getSekolah());
+                holder.getTextViewSekolah().setSelected(true);
                 holder.getTextViewReputation().setText(String.valueOf(model.getReputation()));
                 new Others().setStatus(model.getMode(), holder.getTextViewStatus());
 

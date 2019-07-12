@@ -27,11 +27,12 @@
 
         <Button
             android:id="@+id/button_topik"
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="3dp"
             android:background="@drawable/button_selector"
-            android:padding="5dp"
+            android:padding="3dp"
             android:text="@string/topik_baru"
             android:textAllCaps="false"
             android:textColor="@color/colorTextWhite" />
@@ -40,7 +41,7 @@
             android:id="@+id/recycler_view_umum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="7dp" />
 
     </LinearLayout>
 </RelativeLayout>

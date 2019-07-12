@@ -43,7 +43,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.zxy.skin.sdk.SkinActivity;
 import com.zxy.skin.sdk.SkinEngine;
 
-import net.ticherhaz.karangancemerlangspm.Model.AboutClicked;
 import net.ticherhaz.karangancemerlangspm.Model.Karangan;
 import net.ticherhaz.karangancemerlangspm.Util.Others;
 import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
@@ -51,8 +50,6 @@ import net.ticherhaz.karangancemerlangspm.ViewHolder.KaranganViewHolder;
 
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
-
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class MainActivity extends SkinActivity {
 
@@ -740,49 +737,6 @@ public class MainActivity extends SkinActivity {
         super.onSaveInstanceState(outState, outPersistentState);
     }
 
-//    private void setBillingClient() {
-//        billingClient = BillingClient.newBuilder(this)
-//                .setListener(this)
-//                .enablePendingPurchases()
-//                .build();
-//
-//        billingClient.startConnection(new BillingClientStateListener() {
-//            @Override
-//            public void onBillingSetupFinished(BillingResult billingResult) {
-////                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-////                    Toast.makeText(getApplicationContext(), "Success connect billing", Toast.LENGTH_SHORT).show();
-////                } else {
-////                    Toast.makeText(getApplicationContext(), "Result: " + billingResult, Toast.LENGTH_SHORT).show();
-////                }
-//
-//            }
-//
-//            @Override
-//            public void onBillingServiceDisconnected() {
-//                // Toast.makeText(getApplicationContext(), "Disconnected from Billing...", Toast.LENGTH_SHORT).show();
-//            }
-//
-//        });
-//    }
-//
-//    private void loadProduct(List<SkuDetails> skuDetails, RecyclerView recyclerView) {
-//        MyTipsAdapter myTipsAdapter = new MyTipsAdapter(this, skuDetails, billingClient);
-//        recyclerView.setAdapter(myTipsAdapter);
-//    }
-
-
-//    //23.6.2019
-//    @Override
-//    public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> purchases) {
-//        if (purchases != null) {
-//            Toast.makeText(getApplicationContext(), "Terima kasih atas tips anda RM" + purchases.size() + ", sangat membantu :)", Toast.LENGTH_SHORT).show();
-//            //After that, we store the information that the user made the payment.
-//            final String itemUid = FirebaseDatabase.getInstance().getReference().push().getKey();
-//            Donation donation = new Donation(userUid, itemUid, GetTarikhMasa(), String.valueOf(purchases.size()));
-//            FirebaseDatabase.getInstance().getReference().child("donation").child(userUid).setValue(donation);
-//        }
-//    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -793,13 +747,6 @@ public class MainActivity extends SkinActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
 
-            //27.7.2019 so we store the information if the user press the about.
-            final String uid = FirebaseDatabase.getInstance().getReference().push().getKey();
-            AboutClicked aboutClicked = new AboutClicked(userUid, uid, GetTarikhMasa());
-            if (uid != null)
-                FirebaseDatabase.getInstance().getReference().child("aboutClicked").child(userUid).setValue(aboutClicked);
-
-
             //23.6.2019: We will use new custom alert dialog.
             //According to this tutor: https://stackoverflow.com/questions/23669296/create-a-alertdialog-in-android-with-custom-xml-view
             final Dialog dialogAbout = new Dialog(MainActivity.this);
@@ -807,15 +754,7 @@ public class MainActivity extends SkinActivity {
             dialogAbout.setContentView(R.layout.dialog_about);
             TextView textViewTitle = dialogAbout.findViewById(R.id.text_view_about_title);
             final TextView textViewCredit = dialogAbout.findViewById(R.id.text_view_about_credit);
-            // final long timestamp = ServerValue.TIMESTAMP.values();
-
             textViewTitle.setText(Html.fromHtml(getString(R.string.about_title)));
-            //   textViewTitle.setText(String.valueOf(timestamp));
-//
-//          / final RecyclerView recyclerViewProduct = dialogAbout.findViewById(R.id.recycler_view_product);
-//
-//            // recyclerViewProduct.setHasFixedSize(true);
-//            recyclerViewProduct.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
             textViewCredit.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -830,26 +769,6 @@ public class MainActivity extends SkinActivity {
                     }
                 }
             });
-
-
-            //TODO: Payment we will hold on. 9.7.2019.
-//            //Make billing, check if ready or not (this part we creating the billing)
-//            if (billingClient.isReady()) {
-//                SkuDetailsParams skuDetailsParams = SkuDetailsParams.newBuilder()
-//                        .setSkusList(Arrays.asList("tips_1", "tips_5"))
-//                        .setType(BillingClient.SkuType.INAPP)
-//                        .build();
-//
-//                billingClient.querySkuDetailsAsync(skuDetailsParams, new SkuDetailsResponseListener() {
-//                    @Override
-//                    public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> skuDetailsList) {
-//                        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-//                            loadProduct(skuDetailsList, recyclerViewProduct);
-//                        }
-//                    }
-//                });
-//            }
-
 
             dialogAbout.show();
             return true;
@@ -877,7 +796,7 @@ public class MainActivity extends SkinActivity {
                 editor.putString(SHARED_PREFERENCES_MOD, mod);
                 editor.apply();
 
-                // we clear the text search to avoid the changes of the color night mode
+                //we clear the text search to avoid the changes of the color night mode
                 editTextSearch.setText("");
             } else {
                 SkinEngine.changeSkin(R.style.AppNightTheme);

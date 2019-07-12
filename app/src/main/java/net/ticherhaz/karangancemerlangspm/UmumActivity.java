@@ -3,6 +3,7 @@ package net.ticherhaz.karangancemerlangspm;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,7 @@ import net.ticherhaz.karangancemerlangspm.Model.Umum;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.UmumHolder;
 import net.ticherhaz.tarikhmasa.TarikhMasa;
 
+import static net.ticherhaz.karangancemerlangspm.Util.Others.messageInternetMessage;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasaTimeAgo;
 
 public class UmumActivity extends SkinActivity {
@@ -72,7 +74,6 @@ public class UmumActivity extends SkinActivity {
                 .setQuery(query, Umum.class)
                 .build();
 
-
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Umum, UmumHolder>(firebaseRecyclerOptions) {
             @SuppressLint("SetTextI18n")
             @Override
@@ -92,7 +93,6 @@ public class UmumActivity extends SkinActivity {
                         if (dataSnapshot.exists()) {
                             RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
                             if (registeredUser != null) {
-                                //   String dimulaiOleh = "Dimulai Oleh <b>" + registeredUser.getUsername() + "</b>, " + new TimeCustom().convertTimeToAgo(model.getOnCreatedDate());
                                 String dimulaiOleh = "Dimulai Oleh <b>" + registeredUser.getUsername() + "</b>, " + GetTarikhMasaTimeAgo(model.getOnCreatedDate(), "MY", true, false);
                                 holder.getTextViewDimulaiOleh().setText(Html.fromHtml(dimulaiOleh));
                             }
@@ -194,8 +194,6 @@ public class UmumActivity extends SkinActivity {
                         startActivities(new Intent[]{intent});
                     }
                 });
-
-
             }
 
             @NonNull
@@ -208,7 +206,6 @@ public class UmumActivity extends SkinActivity {
             @Override
             public void onDataChanged() {
                 progressBar.setVisibility(View.INVISIBLE);
-
             }
         };
 
@@ -282,6 +279,22 @@ public class UmumActivity extends SkinActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        //Check if there is internet or not
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (progressBar.getVisibility() == View.VISIBLE) {
+                    messageInternetMessage(UmumActivity.this);
+                }
+
+            }
+        }, 5000);
     }
 
     private void setTotalOnlineSpecific(final String userUid, String onlineStatus) {

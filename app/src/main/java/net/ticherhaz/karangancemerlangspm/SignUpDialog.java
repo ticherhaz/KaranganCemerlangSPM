@@ -270,7 +270,7 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
                         //Store the value in the object
                         RegisteredUser registeredUser = new RegisteredUser(registeredUserUid, userUid, typeUser, profileUrl, email, username, sekolah, titleType, customTitle,
                                 bio, gender, state, birthday, mode, postCount, reputation, reputationPower, onlineStatus, lastOnline, lastCreatedThread,
-                                onDateCreated, emailUpperCase, usernameUpperCase, bioUpperCase, stateUpperCase);
+                                onDateCreated, emailUpperCase, usernameUpperCase, bioUpperCase, stateUpperCase, true);
 
                         //Store the value in the database
                         databaseReference.child("registeredUser").child(registeredUserUid).setValue(registeredUser).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -316,7 +316,7 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
                                                 Intent intent = new Intent(context, ForumActivity.class);
                                                 intent.putExtra("userUid", userUid);
                                                 context.startActivity(intent);
-                                                Toast.makeText(context, "Berjaya Daftar " + firebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(context, "Berjaya Daftar " + username, Toast.LENGTH_SHORT).show();
                                                 progressDialog.dismiss();
                                                 dismiss();
                                                 ((ForumActivity) context).finish();

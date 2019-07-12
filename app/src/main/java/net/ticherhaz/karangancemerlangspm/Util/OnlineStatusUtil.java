@@ -16,6 +16,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static net.ticherhaz.tarikhmasa.TarikhMasa.ConvertTarikhMasa2LocalTimePattern;
+import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
+
 public class OnlineStatusUtil {
 
 
@@ -28,9 +31,6 @@ public class OnlineStatusUtil {
     public void updateUserOnlineStatus(String onlineStatus, String registeredUid, FirebaseUser firebaseUser, DatabaseReference databaseReference, final String activitySessionUid, final String activityDate) {
         if (firebaseUser != null) {
             databaseReference.child("registeredUser").child(registeredUid).child("onlineStatus").setValue(onlineStatus);
-
-
-            //    databaseReference.child("registeredUser").child("main").child(registeredUid).child("onlineStatus").onDisconnect().setValue("Offline");
             //After we update the online status, then we CHECK the online status, finally we update the total online status.
             checkOnlineStatus(registeredUid, onlineStatus, databaseReference, activitySessionUid, activityDate);
         }
@@ -38,12 +38,9 @@ public class OnlineStatusUtil {
 
     //OKchange plan, we check the user onlinestatus at the registered account.
     private void checkOnlineStatus(final String registeredUid, final String onlineStatusA, final DatabaseReference databaseReference, final String activitySessionUid, final String activityDate) {
-
         //After that we make a new session which is when the user online, then we start take the date that he online than make a new table.
-        //   final String activitySession = databaseReference.push().getKey();
-        // Date currentDate = Calendar.getInstance().getTime();
-        //  String date = String.valueOf(android.text.format.DateFormat.format("yyyy-MM-dd hh:mm:ss a", new Date()));
-        String onlineTime = String.valueOf(android.text.format.DateFormat.format("hh:mm:ss a", new Date()));
+        // String onlineTime = String.valueOf(android.text.format.DateFormat.format("hh:mm:ss a", new Date()));
+        final String onlineTime = ConvertTarikhMasa2LocalTimePattern(GetTarikhMasa(), "hh:mm:ss a");
 
 
         //After the user is updating to ONLINE then it proceed here
@@ -61,7 +58,10 @@ public class OnlineStatusUtil {
 
             final DatabaseReference databaseReferenceLastOnline = FirebaseDatabase.getInstance().getReference().child("registeredUser").child(registeredUid);
             databaseReferenceLastOnline.child("lastOnline").setValue(ServerValue.TIMESTAMP);
-            final String offlineTime = String.valueOf(android.text.format.DateFormat.format("hh:mm:ss a", new Date()));
+            // final String offlineTime = String.valueOf(android.text.format.DateFormat.format("hh:mm:ss a", new Date()));
+
+            final String offlineTime = ConvertTarikhMasa2LocalTimePattern(GetTarikhMasa(), "hh:mm:ss a");
+
             if (activitySessionUid != null) {
                 databaseReference.child("activitySession").child(registeredUid).child(activityDate).child(activitySessionUid).child("offlineTime").setValue(offlineTime);
                 //After that we calculate the total second that he active in the forum
@@ -124,7 +124,9 @@ public class OnlineStatusUtil {
                         databaseReferenceLastOnline.onDisconnect().setValue(ServerValue.TIMESTAMP);
 
                         //Then we update the activity after he want to close
-                        final String offlineTime = String.valueOf(android.text.format.DateFormat.format("hh:mm:ss a", new Date()));
+                        //    final String offlineTime = String.valueOf(android.text.format.DateFormat.format("hh:mm:ss a", new Date()));
+                        final String offlineTime = ConvertTarikhMasa2LocalTimePattern(GetTarikhMasa(), "hh:mm:ss a");
+
                         if (activitySessionUid != null) {
 
                             //ok new plan, since they will update base on this session uid,

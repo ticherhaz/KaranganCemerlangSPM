@@ -1,7 +1,7 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import android.app.Activity;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,17 +30,18 @@ import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 
+import static net.ticherhaz.karangancemerlangspm.Util.ProgressDialogCustom.dismissProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.Util.ProgressDialogCustom.showProgressDialog;
+
 public class SignInDialog extends Dialog implements View.OnClickListener {
 
     private Context context;
-
+    private Activity activity;
     //Edit text
     private EditText editTextEmailOrUsername;
     private EditText editTextPassword;
     //Button
     private Button buttonSignIn;
-    //ProgressDialog
-    private ProgressDialog progressDialog;
     //Database
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -56,6 +57,14 @@ public class SignInDialog extends Dialog implements View.OnClickListener {
     public SignInDialog(Context context) {
         super(context);
         this.context = context;
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
     }
 
     public String getUserUid() {
@@ -113,42 +122,34 @@ public class SignInDialog extends Dialog implements View.OnClickListener {
         buttonSignIn = findViewById(R.id.button_sign_in);
         buttonSignIn.setOnClickListener(this);
 
-        //Making the progress dialog
-        progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Loading...");
-        progressDialog.setIndeterminate(false);
-        progressDialog.setCancelable(false);
-
         //Database
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("registeredUser");
         firebaseAuth = FirebaseAuth.getInstance();
-
     }
 
 
     //Method check signin
     private void checkSignIn() {
         //Display the progress dialog
-        progressDialog.show();
+        showProgressDialog(activity);
         //Check if user fill in the blank or not
         if (TextUtils.isEmpty(editTextEmailOrUsername.getText().toString()) || TextUtils.isEmpty(editTextPassword.getText().toString())) {
             Toast.makeText(context, "Sila isikan tempat kosong", Toast.LENGTH_SHORT).show();
             //Dismiss the progress dialog
-            progressDialog.dismiss();
+            dismissProgressDialog();
         } else if (editTextPassword.getText().toString().length() <= 8) {
             Toast.makeText(context, "Kata Laluan Salah. Sila Cuba Lagi.", Toast.LENGTH_SHORT).show();
             //Dismiss the progress dialog
-            progressDialog.dismiss();
+            dismissProgressDialog();
         } else {
             //When the condition is met.
             //We check if the email or username is exist or not
-            final String usernameOrEmailUpperCase = editTextEmailOrUsername.getText().toString().trim().toUpperCase();
+            final String usernameOrEmailUpperCase = editTextEmailOrUsername.getText().toString().toUpperCase();
             final String password = editTextPassword.getText().toString();
 
             //OK, change plan, first we check if its valid email or not
             if (isEmailValid(editTextEmailOrUsername.getText().toString())) {
-                Toast.makeText(context, "email", Toast.LENGTH_SHORT).show();
                 //If its valid we compare using the email
                 Query query = databaseReference.orderByChild("emailUpperCase").equalTo(usernameOrEmailUpperCase);
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -158,24 +159,29 @@ public class SignInDialog extends Dialog implements View.OnClickListener {
                         if (dataSnapshot.exists()) {
                             //If yes, we get the email from the database
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
-
                                 //Call the class of model
                                 RegisteredUser registeredUser = child.getValue(RegisteredUser.class);
-
                                 if (registeredUser != null) {
-                                    //   String username = registeredUser.getUsername();
-                                    String emailUser = registeredUser.getEmail();
-                                    String userType = registeredUser.getTypeUser();
-                                    //At this part we check the type of user
-                                    if (userType.equals("Member")) {
-                                        signInAuth(emailUser, password);
-                                    } else if (userType.equals("Admin")) {
-                                        signInAuth(emailUser, password);
+                                    final String emailUser = registeredUser.getEmail();
+                                    final String userType = registeredUser.getTypeUser();
+                                    final boolean isActive = registeredUser.isActive();
+
+                                    //Here we check if the user is get ban or not
+                                    if (isActive) {
+                                        //At this part we check the type of user
+                                        if (userType.equals("ahli")) {
+                                            signInAuth(emailUser, password);
+                                        } else if (userType.equals("admin")) {
+                                            signInAuth(emailUser, password);
+                                        }
+                                    } else {
+                                        Toast.makeText(context, "Maaf, akaun anda kena ban, sila contact ticherhaz@gmail.com untuk lebih lanjut", Toast.LENGTH_SHORT).show();
                                     }
+
                                 }
                             }
                         } else {
-                            progressDialog.dismiss();
+                            dismissProgressDialog();
                             Toast.makeText(context, "Email/Nama Samaran yang anda masukkan tidak sama untuk semua akaun", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -197,22 +203,26 @@ public class SignInDialog extends Dialog implements View.OnClickListener {
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
                                 //Call the class of model
                                 RegisteredUser registeredUser = child.getValue(RegisteredUser.class);
-
                                 if (registeredUser != null) {
-                                    //   String username = registeredUser.getUsername();
-                                    String emailUser = registeredUser.getEmail();
-                                    String userType = registeredUser.getTypeUser();
-                                    //At this part we check the type of user
-                                    if (userType.equals("Member")) {
-                                        signInAuth(emailUser, password);
-                                    } else if (userType.equals("Admin")) {
-                                        signInAuth(emailUser, password);
+                                    final String emailUser = registeredUser.getEmail();
+                                    final String userType = registeredUser.getTypeUser();
+                                    final boolean isActive = registeredUser.isActive();
+
+                                    //Here we check if the user is get ban or not
+                                    if (isActive) {
+                                        //At this part we check the type of user
+                                        if (userType.equals("ahli")) {
+                                            signInAuth(emailUser, password);
+                                        } else if (userType.equals("admin")) {
+                                            signInAuth(emailUser, password);
+                                        }
+                                    } else {
+                                        Toast.makeText(context, "Maaf, akaun anda kena ban, sila contact ticherhaz@gmail.com untuk lebih lanjut", Toast.LENGTH_SHORT).show();
                                     }
                                 }
-
                             }
                         } else {
-                            progressDialog.dismiss();
+                            dismissProgressDialog();
                             Toast.makeText(context, "Email/Nama Samaran yang anda masukkan tidak sama untuk semua akaun", Toast.LENGTH_SHORT).show();
                         }
 
@@ -233,7 +243,6 @@ public class SignInDialog extends Dialog implements View.OnClickListener {
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-
                 if (task.isSuccessful()) {
                     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                     if (firebaseUser != null) {
@@ -241,17 +250,13 @@ public class SignInDialog extends Dialog implements View.OnClickListener {
                         intent.putExtra("userUid", userUid);
                         context.startActivity(intent);
                         Toast.makeText(context, "Selamat Kembali " + firebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
+                        dismissProgressDialog();
                         dismiss();
                         ((ForumActivity) context).finish();
                     }
                 } else {
-                    //   if (task.getException() != null) {
-                    progressDialog.dismiss();
+                    dismissProgressDialog();
                     editTextPassword.setError("Kata Laluan Salah, Sila Cuba Lagi");
-                    //  Toast.makeText(context, "" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    //   }
-
                 }
             }
         });

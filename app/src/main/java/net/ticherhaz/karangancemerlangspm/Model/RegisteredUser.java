@@ -27,11 +27,12 @@ public class RegisteredUser {
     private String usernameUpperCase;
     private String bioUpperCase;
     private String stateUpperCase;
+    private boolean isActive;
 
     public RegisteredUser() {
     }
 
-    public RegisteredUser(String registeredUserUid, String userUid, String typeUser, String profileUrl, String email, String username, String sekolah, String titleType, String customTitle, String bio, String gender, String state, String birthday, String mode, long postCount, long reputation, long reputationPower, String onlineStatus, long lastOnline, String lastCreatedThread, String onDateCreated, String emailUpperCase, String usernameUpperCase, String bioUpperCase, String stateUpperCase) {
+    public RegisteredUser(String registeredUserUid, String userUid, String typeUser, String profileUrl, String email, String username, String sekolah, String titleType, String customTitle, String bio, String gender, String state, String birthday, String mode, long postCount, long reputation, long reputationPower, String onlineStatus, long lastOnline, String lastCreatedThread, String onDateCreated, String emailUpperCase, String usernameUpperCase, String bioUpperCase, String stateUpperCase, boolean isActive) {
         this.registeredUserUid = registeredUserUid;
         this.userUid = userUid;
         this.typeUser = typeUser;
@@ -57,6 +58,15 @@ public class RegisteredUser {
         this.usernameUpperCase = usernameUpperCase;
         this.bioUpperCase = bioUpperCase;
         this.stateUpperCase = stateUpperCase;
+        this.isActive = isActive;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     public String getRegisteredUserUid() {

@@ -14,17 +14,17 @@ public class UserTypeColor {
 
     public void setTextColorUserUmumDetail(RegisteredUser registeredUser, UmumDetailHolder holder) {
         switch (registeredUser.getTypeUser()) {
-            case "Admin":
+            case "admin":
                 holder.getTextViewUserTitle().setTextColor(Color.RED);
                 holder.getTextViewUserTitle().setTypeface(null, Typeface.BOLD);
                 holder.getTextViewUsername().setTextColor(Color.RED);
                 break;
-            case "Cikgu":
+            case "cikgu":
                 holder.getTextViewUserTitle().setTextColor(Color.CYAN);
                 holder.getTextViewUserTitle().setTypeface(null, Typeface.BOLD);
                 holder.getTextViewUsername().setTextColor(Color.RED);
                 break;
-            case "PremiumMember":
+            case "ahliPremium":
                 holder.getTextViewUserTitle().setTextColor(Color.GREEN);
                 holder.getTextViewUserTitle().setTypeface(null, Typeface.BOLD);
                 holder.getTextViewUsername().setTextColor(Color.GREEN);
@@ -34,13 +34,13 @@ public class UserTypeColor {
 
     public void setTextColorUserOnlineUserActivity(RegisteredUser registeredUser, OnlineStatusViewHolder holder) {
         switch (registeredUser.getTypeUser()) {
-            case "Admin":
+            case "admin":
                 holder.getTextViewUsername().setTextColor(Color.RED);
                 break;
-            case "Cikgu":
+            case "cikgu":
                 holder.getTextViewUsername().setTextColor(Color.CYAN);
                 break;
-            case "PremiumMember":
+            case "ahliPremium":
                 holder.getTextViewUsername().setTextColor(Color.GREEN);
                 break;
         }

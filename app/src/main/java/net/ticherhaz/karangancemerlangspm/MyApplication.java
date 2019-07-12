@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 
 import com.zxy.skin.sdk.SkinEngine;
 
-import net.ticherhaz.karangancemerlangspm.skinapplicator.SkinCustomViewApplicator;
+import net.ticherhaz.karangancemerlangspm.SkinApplicator.SkinCustomViewApplicator;
 import net.ticherhaz.karangancemerlangspm.widget.CustomView;
 
 import static net.ticherhaz.tarikhmasa.TarikhMasa.AndroidThreeTenBP;

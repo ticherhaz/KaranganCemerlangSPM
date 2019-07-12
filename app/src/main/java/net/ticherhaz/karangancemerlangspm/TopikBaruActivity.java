@@ -1,6 +1,5 @@
 package net.ticherhaz.karangancemerlangspm;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -28,9 +27,12 @@ import com.zxy.skin.sdk.SkinActivity;
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.Model.Umum;
 import net.ticherhaz.karangancemerlangspm.Model.UmumDetail;
-import net.ticherhaz.karangancemerlangspm.Util.InternetCheck;
 import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
 
+import static net.ticherhaz.karangancemerlangspm.Util.Others.isNetworkAvailable;
+import static net.ticherhaz.karangancemerlangspm.Util.Others.messageInternetMessage;
+import static net.ticherhaz.karangancemerlangspm.Util.ProgressDialogCustom.dismissProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.Util.ProgressDialogCustom.showProgressDialog;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class TopikBaruActivity extends SkinActivity {
@@ -55,8 +57,6 @@ public class TopikBaruActivity extends SkinActivity {
     private long pos;
     private long reputation;
 
-
-    private ProgressDialog progressDialog;
     private String title;
     private String forumUid;
 
@@ -64,11 +64,6 @@ public class TopikBaruActivity extends SkinActivity {
         editTextTajuk = findViewById(R.id.edit_text_tajuk);
         editTextDeskripsi = findViewById(R.id.edit_text_deskripsi);
         buttonHantar = findViewById(R.id.button_hantar);
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("Loading...");
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
@@ -82,7 +77,6 @@ public class TopikBaruActivity extends SkinActivity {
 
             retrieveData();
         }
-
     }
 
     //Retrieve value
@@ -91,12 +85,15 @@ public class TopikBaruActivity extends SkinActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    userTitle = dataSnapshot.getValue(RegisteredUser.class).getTitleType();
-                    sekolah = dataSnapshot.getValue(RegisteredUser.class).getSekolah();
-                    onAccountCreatedDate = dataSnapshot.getValue(RegisteredUser.class).getOnDateCreated();
-                    pos = dataSnapshot.getValue(RegisteredUser.class).getPostCount();
-                    reputation = dataSnapshot.getValue(RegisteredUser.class).getReputation();
-                    gender = dataSnapshot.getValue(RegisteredUser.class).getGender();
+                    RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
+                    if (registeredUser != null) {
+                        userTitle = registeredUser.getTitleType();
+                        sekolah = registeredUser.getSekolah();
+                        onAccountCreatedDate = registeredUser.getOnDateCreated();
+                        pos = registeredUser.getPostCount();
+                        reputation = registeredUser.getReputation();
+                        gender = registeredUser.getGender();
+                    }
                 }
             }
 
@@ -126,22 +123,14 @@ public class TopikBaruActivity extends SkinActivity {
     }
 
     private void checkInternet() {
-        progressDialog.show();
+        showProgressDialog(TopikBaruActivity.this);
         //I think it is better we check the edittext is write down or not then we check the internet connection.
         if (!TextUtils.isEmpty(editTextTajuk.getText().toString()) && !TextUtils.isEmpty(editTextDeskripsi.getText().toString())) {
-            new InternetCheck(new InternetCheck.Consumer() {
-                @Override
-                public void accept(Boolean internet) {
-                    //If internet is available
-                    //    if (internet) {
-                    storeDatabase();
-                    //   } else {
-                    //       Toast.makeText(getApplicationContext(), new InternetMessage().getMessage(), Toast.LENGTH_SHORT).show();
-                    //  }
-
-
-                }
-            });
+            if (isNetworkAvailable(TopikBaruActivity.this)) {
+                storeDatabase();
+            } else {
+                messageInternetMessage(TopikBaruActivity.this);
+            }
         }
     }
 
@@ -164,18 +153,9 @@ public class TopikBaruActivity extends SkinActivity {
          *
          * */
 
-//        //TODO: For the time UTC we will use Instant and threetenbp
-//        Instant instant = Instant.now();
-//        final String onCreatedDate = instant.toString();
-//        // final String uid = databaseReference.push().getKey();
-
-
-        //3.6.2019: NEW WAY: WE JUST GET THE VALUE FROM THE TIMECUSTOM.JAVA
         final String onCreatedDate = GetTarikhMasa();
 
         String registeredUidLastReply = null;
-
-        //String onCreatedDate = String.valueOf(android.text.format.DateFormat.format("yyyy-MM-dd'T'HH:mm:ss", new Date()));
 
         String activityUmumLogUid = databaseReference.push().push().getKey();
         String activityKududukanLogUid = databaseReference.push().push().push().getKey();
@@ -210,7 +190,7 @@ public class TopikBaruActivity extends SkinActivity {
                         //This one we check if the user post is 50 or not togive reputation power
                         new RunTransaction().postCountReward(databaseReference, registeredUid, pos);
 
-                        progressDialog.dismiss();
+                        dismissProgressDialog();
                         editTextTajuk.setText("");
                         editTextDeskripsi.setText("");
                         Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();

@@ -46,7 +46,7 @@ import net.ticherhaz.karangancemerlangspm.Util.UserTypeColor;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.UmumDetailHolder;
 import net.ticherhaz.tarikhmasa.TarikhMasa;
 
-import java.util.Date;
+import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class UmumDetailActivity extends SkinActivity {
 
@@ -130,10 +130,6 @@ public class UmumDetailActivity extends SkinActivity {
             @SuppressLint("SetTextI18n")
             @Override
             protected void onBindViewHolder(@NonNull final UmumDetailHolder holder, int position, @NonNull final UmumDetail model) {
-
-                // @SuppressLint("SimpleDateFormat") final SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-
-
                 //1.
                 //Here we will retrieve user data (this specific) from user database.
                 databaseReference.child("registeredUser").child(model.getRegisteredUid()).addValueEventListener(new ValueEventListener() {
@@ -163,7 +159,6 @@ public class UmumDetailActivity extends SkinActivity {
                                 long lastOnlineA = registeredUser.getLastOnline();
                                 String lastCreatedThreadA = registeredUser.getLastCreatedThread();
                                 String onDateCreatedA = registeredUser.getOnDateCreated();
-                                String onDateCreatedMonthYearA = registeredUser.getOnDateCreated();
 
                                 //Call another class to change color
                                 new UserTypeColor().setTextColorUserUmumDetail(registeredUser, holder);
@@ -173,7 +168,7 @@ public class UmumDetailActivity extends SkinActivity {
                                 holder.getTextViewUsername().setText(usernameA);
                                 holder.getTextViewUserTitle().setText(titleTypeA);
                                 holder.getTextViewSekolah().setText(sekolahA);
-                                holder.getTextViewUserJoinDate().setText("Tarikh Sertai: " + onDateCreatedMonthYearA);
+                                holder.getTextViewUserJoinDate().setText("Tarikh Sertai: " + TarikhMasa.ConvertTarikhMasa2LocalTimePattern(onDateCreatedA, "MMM yyyy"));
                                 holder.getTextViewGender().setText("Jantina: " + genderA);
                                 holder.getTextViewPos().setText("Pos: " + postCountA);
                                 holder.getTextViewReputation().setText(String.valueOf(reputationA));
@@ -535,7 +530,7 @@ public class UmumDetailActivity extends SkinActivity {
             if (firebaseUser != null) {
                 String umumDetailUid = databaseReference.push().getKey();
                 //TODO: this is format date to store string and we can retrieve the string like this : 2 minit yang lalu.
-                final String onCreatedDate = String.valueOf(android.text.format.DateFormat.format("yyyy-MM-dd'T'HH:mm:ss", new Date()));
+                final String onCreatedDate = GetTarikhMasa();
                 String reply = editTextReply.getText().toString();
                 UmumDetail umumDetail = new UmumDetail(umumDetailUid, registeredUidReply, onCreatedDate, reply);
 
@@ -557,7 +552,9 @@ public class UmumDetailActivity extends SkinActivity {
                                 try {
                                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                                     if (UmumDetailActivity.this.getCurrentFocus() != null)
-                                        imm.hideSoftInputFromWindow(UmumDetailActivity.this.getCurrentFocus().getWindowToken(), 0);
+                                        if (imm != null) {
+                                            imm.hideSoftInputFromWindow(UmumDetailActivity.this.getCurrentFocus().getWindowToken(), 0);
+                                        }
                                 } catch (Exception ignored) {
                                 }
                             }

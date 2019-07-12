@@ -1,9 +1,13 @@
 package net.ticherhaz.karangancemerlangspm;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -40,7 +44,10 @@ import net.ticherhaz.karangancemerlangspm.Util.Others;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.ForumViewHolder;
 
 import java.util.Calendar;
-import java.util.Date;
+
+import static net.ticherhaz.karangancemerlangspm.Util.Others.messageInternetMessage;
+import static net.ticherhaz.tarikhmasa.TarikhMasa.ConvertTarikhMasa2LocalTimePattern;
+import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class ForumActivity extends SkinActivity {
 
@@ -61,7 +68,6 @@ public class ForumActivity extends SkinActivity {
     private Button buttonSignIn;
     private Button buttonSignUp;
 
-
     //Linear Layout
     private LinearLayout linearLayoutNewUser;
     private LinearLayout linearLayoutOlderUser;
@@ -76,7 +82,8 @@ public class ForumActivity extends SkinActivity {
 
     //ActivitySessionUid
     private String activitySessionUid = FirebaseDatabase.getInstance().getReference().push().getKey();
-    private String activityDate = String.valueOf(android.text.format.DateFormat.format("dd:MM:yyyy", new Date()));
+
+    private String activityDate = ConvertTarikhMasa2LocalTimePattern(GetTarikhMasa(), "dd:MM:yyyy");
 
     //Progressbar
     private ProgressBar progressBar;
@@ -225,17 +232,8 @@ public class ForumActivity extends SkinActivity {
         recyclerViewForum.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerViewForum.setAdapter(firebaseRecyclerAdapter);
         //2. FirebaseUI
-//          firebaseRecyclerAdapter.notifyDataSetChanged();
-        firebaseRecyclerAdapter.startListening();
-
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        new OnlineStatusUtil().onDisc(firebaseUser, databaseReference, registeredUid, activitySessionUid, activityDate);
-        firebaseRecyclerAdapter.stopListening();
-    }
 
     //Make a new calculation.
     private void calculateAllOnlineRegisteredUser() {
@@ -328,7 +326,6 @@ public class ForumActivity extends SkinActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
 
-
         //Get the value of the userUid
         Intent intent = getIntent();
         if (intent.getExtras() != null) {
@@ -348,14 +345,12 @@ public class ForumActivity extends SkinActivity {
         //Check if already login or not
         if (firebaseUser != null) {
 
-
             registeredUid = firebaseUser.getUid();
             //already sign in
             linearLayoutOlderUser.setVisibility(View.VISIBLE);
             linearLayoutNewUser.setVisibility(View.GONE);
 
             //TODO: This part is for the reset day, it is for the reputation. When the new day, it will reset and give user to give reputation for other user.
-
             //First we need to detect the date
             Calendar calendar = Calendar.getInstance();
             int thisDay = calendar.get(Calendar.DAY_OF_YEAR);
@@ -377,14 +372,8 @@ public class ForumActivity extends SkinActivity {
                 databaseReference.child("reputationLimit").child(registeredUid).setValue(newReputation);
             }
 
-//            long newReputation = 3;
-//            //Then we store the
-//            databaseReference.child("reputationLimit").child(registeredUid).setValue(newReputation);
-
-
             //Add the info in the userOnlineStatus
             new OnlineStatusUtil().updateUserOnlineStatus("Online", registeredUid, firebaseUser, databaseReference, activitySessionUid, activityDate);
-
 
             //Get the data from the database
             databaseReference.child("registeredUser").child(registeredUid).addValueEventListener(new ValueEventListener() {
@@ -472,6 +461,7 @@ public class ForumActivity extends SkinActivity {
             @Override
             public void onClick(View v) {
                 SignInDialog signInDialog = new SignInDialog(ForumActivity.this);
+                signInDialog.setActivity(ForumActivity.this);
                 signInDialog.setLinearLayoutNewUser(linearLayoutNewUser);
                 signInDialog.setLinearLayoutOldUser(linearLayoutOlderUser);
                 signInDialog.setTextViewUsername(textViewUsername);
@@ -507,15 +497,54 @@ public class ForumActivity extends SkinActivity {
         textViewSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference, activitySessionUid, activityDate);
-                firebaseAuth.signOut();
-                Intent intent = new Intent(ForumActivity.this, ForumActivity.class);
-                intent.putExtra("userUid", userUid);
-                startActivities(new Intent[]{intent});
-                finish();
-                Toast.makeText(getApplicationContext(), "Sign Out Successfully", Toast.LENGTH_SHORT).show();
+                //Make alert dialog
+                AlertDialog alertDialog = new AlertDialog.Builder(ForumActivity.this)
+                        .setTitle("Log Keluar?")
+                        .setMessage("Anda pasti untuk log keluar?")
+                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference, activitySessionUid, activityDate);
+                                firebaseAuth.signOut();
+                                Intent intent = new Intent(ForumActivity.this, ForumActivity.class);
+                                intent.putExtra("userUid", userUid);
+                                startActivities(new Intent[]{intent});
+                                finish();
+                                Toast.makeText(getApplicationContext(), "Sign Out Successfully", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        })
+                        .create();
+
+                alertDialog.show();
+                alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(Color.GREEN);
+                alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.RED);
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        new OnlineStatusUtil().onDisc(firebaseUser, databaseReference, registeredUid, activitySessionUid, activityDate);
+        if (firebaseRecyclerAdapter != null) {
+            firebaseRecyclerAdapter.stopListening();
+            firebaseRecyclerAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (firebaseRecyclerAdapter != null) {
+            firebaseRecyclerAdapter.startListening();
+            firebaseRecyclerAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -523,7 +552,7 @@ public class ForumActivity extends SkinActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forum);
         listID();
-        //   setFirebaseRecyclerAdapter();
+        setFirebaseRecyclerAdapter();
         setButtonSignIn();
         setButtonSignUp();
         setTextViewSignOut();
@@ -532,8 +561,18 @@ public class ForumActivity extends SkinActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        setFirebaseRecyclerAdapter();
         firebaseRecyclerAdapter.startListening();
+
+        //Check if there is internet or not
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (progressBar.getVisibility() == View.VISIBLE) {
+                    messageInternetMessage(ForumActivity.this);
+                }
+
+            }
+        }, 5000);
     }
 
 
