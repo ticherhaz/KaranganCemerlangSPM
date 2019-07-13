@@ -18,6 +18,8 @@ import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 
+import java.util.Locale;
+
 public class ProfileActivity extends SkinActivity {
 
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -26,12 +28,34 @@ public class ProfileActivity extends SkinActivity {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
 
-    private TextView textViewUsername;
-    private TextView textViewSekolah;
-    private TextView textViewGender;
-    private TextView textViewTitleType;
-    private TextView textViewStatus;
+    private TextView tvUsername, tvSekolah, tvTitleType, tvCustomTitle, tvBio, tvGender,
+            tvState, tvBirthday, tvMode, tvPostCount, tvReputation, tvReputationPower,
+            tvOnlineStatus, tvLastOnline, tvOnCreatedDate;
     private ImageView imageViewProfile;
+
+    private void listID() {
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+        setSwipeRefreshLayout();
+        tvUsername = findViewById(R.id.tv_username);
+        tvSekolah = findViewById(R.id.tv_sekolah);
+        tvGender = findViewById(R.id.tv_gender);
+        tvTitleType = findViewById(R.id.tv_title_type);
+        tvOnlineStatus = findViewById(R.id.tv_online_status);
+        tvCustomTitle = findViewById(R.id.tv_custom_title);
+        tvBio = findViewById(R.id.tv_bio);
+        tvState = findViewById(R.id.tv_state);
+        tvBirthday = findViewById(R.id.tv_birthday);
+        tvMode = findViewById(R.id.tv_mode);
+        tvPostCount = findViewById(R.id.tv_post_count);
+        tvReputation = findViewById(R.id.tv_reputation);
+        tvReputationPower = findViewById(R.id.tv_reputation_power);
+        tvLastOnline = findViewById(R.id.tv_last_online);
+        tvOnCreatedDate = findViewById(R.id.tv_created_date);
+        imageViewProfile = findViewById(R.id.iv_profile);
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference().child("registeredUser").child(registeredUid);
+    }
 
     private void retrieveIntent() {
         Intent intent = getIntent();
@@ -58,12 +82,21 @@ public class ProfileActivity extends SkinActivity {
                                     .load(profileUrl)
                                     .into(imageViewProfile);
                         }
-                        textViewUsername.setText(registeredUser.getUsername());
-                        textViewSekolah.setText(registeredUser.getSekolah());
-                        textViewGender.setText(registeredUser.getGender());
-                        textViewTitleType.setText(registeredUser.getTitleType());
-                        textViewStatus.setText(registeredUser.getOnlineStatus());
-
+                        tvUsername.setText(registeredUser.getUsername());
+                        tvSekolah.setText(registeredUser.getSekolah());
+                        tvGender.setText(registeredUser.getGender());
+                        tvTitleType.setText(registeredUser.getTitleType());
+                        tvOnlineStatus.setText(registeredUser.getOnlineStatus());
+                        tvCustomTitle.setText(registeredUser.getCustomTitle());
+                        tvBio.setText(registeredUser.getBio());
+                        tvState.setText(registeredUser.getState());
+                        tvBirthday.setText(registeredUser.getBirthday());
+                        tvMode.setText(registeredUser.getMode());
+                        tvPostCount.setText(String.format(Locale.getDefault(), "%d", registeredUser.getPostCount()));
+                        tvReputation.setText(String.format(Locale.getDefault(), "%d", registeredUser.getReputation()));
+                        tvReputationPower.setText(String.format(Locale.getDefault(), "%d", registeredUser.getReputationPower()));
+                        tvLastOnline.setText(String.format(Locale.getDefault(), "%d", registeredUser.getLastOnline()));
+                        tvOnCreatedDate.setText(registeredUser.getOnDateCreated());
                     }
                 }
             }
@@ -75,19 +108,6 @@ public class ProfileActivity extends SkinActivity {
         });
     }
 
-    private void listID() {
-        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
-        setSwipeRefreshLayout();
-        textViewUsername = findViewById(R.id.text_view_username);
-        textViewSekolah = findViewById(R.id.text_view_sekolah);
-        textViewGender = findViewById(R.id.text_view_gender);
-        textViewTitleType = findViewById(R.id.text_view_user_title);
-        textViewStatus = findViewById(R.id.text_view_status);
-        imageViewProfile = findViewById(R.id.image_view_profile);
-
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference().child("registeredUser").child(registeredUid);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
