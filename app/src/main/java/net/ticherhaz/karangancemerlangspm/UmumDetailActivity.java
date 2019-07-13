@@ -435,13 +435,24 @@ public class UmumDetailActivity extends SkinActivity {
                 holder.getTextViewDeskripsi().setText(model.getDeskripsi());
 
                 //Display the 1minit yg lalu
-                //   holder.getTextViewMasaDibalasOleh().setText(new TimeCustom().convertTimeToAgo(model.getPostCreatedDate()));
                 holder.getTextViewMasaDibalasOleh().setText(TarikhMasa.GetTarikhMasaTimeAgo(model.getPostCreatedDate(), "MY", true, false));
 
-                holder.getView().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                //On click
+//                holder.getView().setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//
+//                    }
+//                });
 
+                //Click to the user
+                holder.getTextViewUsername().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(UmumDetailActivity.this, ProfileActivity.class);
+                        intent.putExtra("registeredUid", model.getRegisteredUid());
+                        intent.putExtra("username", username);
+                        startActivities(new Intent[]{intent});
                     }
                 });
 

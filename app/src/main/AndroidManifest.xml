@@ -18,9 +18,22 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         tools:ignore="GoogleAppIndexingWarning,HardcodedDebugMode">
+        <activity android:name=".ProfileEditActivity">
+            <!-- This is for the back button navigation -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SettingActivity" />
+        </activity>
+        <activity android:name=".ProfileActivity">
+            <!-- This is for the back button navigation -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".UmumDetailActivity" />
+        </activity>
         <activity
             android:name=".PeribahasaActivity"
             android:label="@string/peribahasa">
+
             <!-- This is for the back button navigation -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

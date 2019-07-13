@@ -71,6 +71,8 @@
             android:drawableStart="@drawable/ic_status_neutral"
             android:drawableLeft="@drawable/ic_status_neutral"
             android:gravity="center_vertical"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
             android:textColor="?attr/colorText" />
 
     </RelativeLayout>
