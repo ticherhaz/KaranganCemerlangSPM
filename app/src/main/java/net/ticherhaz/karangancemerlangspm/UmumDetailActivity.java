@@ -2,7 +2,6 @@ package net.ticherhaz.karangancemerlangspm;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -46,6 +46,8 @@ import net.ticherhaz.karangancemerlangspm.Util.UserTypeColor;
 import net.ticherhaz.karangancemerlangspm.ViewHolder.UmumDetailHolder;
 import net.ticherhaz.tarikhmasa.TarikhMasa;
 
+import static net.ticherhaz.karangancemerlangspm.Util.ProgressDialogCustom.dismissProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.Util.ProgressDialogCustom.showProgressDialog;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.ConvertTarikhMasa2LocalTimePattern;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
@@ -89,7 +91,7 @@ public class UmumDetailActivity extends SkinActivity {
     private long reputation;
     private long reputationPower;
 
-    private ProgressDialog progressDialog;
+    private LinearLayout linearLayoutBottom;
 
     private void retrieveUserData() {
         databaseReference.child("registeredUser").child(registeredUidReply).addValueEventListener(new ValueEventListener() {
@@ -203,6 +205,9 @@ public class UmumDetailActivity extends SkinActivity {
                                                 holder.getTextViewEditYes().setVisibility(View.VISIBLE);
                                                 holder.getTextViewEditCancel().setVisibility(View.VISIBLE);
 
+                                                //and then we hide the bottom fab
+                                                linearLayoutBottom.setVisibility(View.GONE);
+
 
                                                 //After that we triggered the button yes to edit
                                                 holder.getTextViewEditYes().setOnClickListener(new View.OnClickListener() {
@@ -227,6 +232,9 @@ public class UmumDetailActivity extends SkinActivity {
                                                             holder.getTextViewEditCancel().setVisibility(View.GONE);
                                                             //Then we display back the edit button
                                                             holder.getTextViewEditReply().setVisibility(View.VISIBLE);
+
+                                                            //display fab
+                                                            linearLayoutBottom.setVisibility(View.VISIBLE);
                                                         }
 
                                                     }
@@ -246,6 +254,9 @@ public class UmumDetailActivity extends SkinActivity {
                                                         holder.getTextViewEditCancel().setVisibility(View.GONE);
                                                         //Then we display back the edit button
                                                         holder.getTextViewEditReply().setVisibility(View.VISIBLE);
+
+                                                        //display fab
+                                                        linearLayoutBottom.setVisibility(View.VISIBLE);
                                                     }
                                                 });
                                             }
@@ -266,7 +277,7 @@ public class UmumDetailActivity extends SkinActivity {
                                                     @Override
                                                     public void onClick(final DialogInterface dialog, int which) {
                                                         //Display the progress dialog
-                                                        progressDialog.show();
+                                                        showProgressDialog(UmumDetailActivity.this);
 
                                                         //First we check the reputationLimit for this guy
                                                         databaseReference.child("reputationLimit").child(registeredUidReply).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -293,7 +304,7 @@ public class UmumDetailActivity extends SkinActivity {
                                                                                         //then check
                                                                                         if (model.getRegisteredUid().equals(existedUser)) {
                                                                                             Toast.makeText(getApplicationContext(), "Sila memberi reputasi kepada orang lain sama", Toast.LENGTH_SHORT).show();
-                                                                                            progressDialog.dismiss();
+                                                                                            dismissProgressDialog();
                                                                                         } else if (!model.getRegisteredUid().equals(existedUser)) {
 
                                                                                             //If yes, then we add the reputation power in this specfic user who post.
@@ -321,14 +332,14 @@ public class UmumDetailActivity extends SkinActivity {
                                                                                                     databaseReference.child("reputationRecord").child(registeredUidReply).push().setValue(model.getRegisteredUid());
 
 
-                                                                                                    progressDialog.dismiss();
+                                                                                                    dismissProgressDialog();
                                                                                                     Toast.makeText(getApplicationContext(), "Berjaya memberi reputasi", Toast.LENGTH_SHORT).show();
                                                                                                     dialog.cancel();
                                                                                                 }
                                                                                             });
                                                                                         } else {
                                                                                             Toast.makeText(getApplicationContext(), "Masalah", Toast.LENGTH_SHORT).show();
-                                                                                            progressDialog.dismiss();
+                                                                                            dismissProgressDialog();
                                                                                         }
 
                                                                                     }
@@ -361,7 +372,7 @@ public class UmumDetailActivity extends SkinActivity {
                                                                                             databaseReference.child("reputationRecord").child(registeredUidReply).push().setValue(model.getRegisteredUid());
 
 
-                                                                                            progressDialog.dismiss();
+                                                                                            dismissProgressDialog();
                                                                                             Toast.makeText(getApplicationContext(), "Berjaya memberi reputasi", Toast.LENGTH_SHORT).show();
                                                                                             dialog.cancel();
                                                                                         }
@@ -380,7 +391,7 @@ public class UmumDetailActivity extends SkinActivity {
                                                                     }
                                                                     //Then if the user already reach 0 total to give reputation
                                                                     else {
-                                                                        progressDialog.dismiss();
+                                                                        dismissProgressDialog();
                                                                         Toast.makeText(getApplicationContext(), "Maaf, reputatasi hari ini sudah habis, sila tunggu esok", Toast.LENGTH_SHORT).show();
                                                                     }
 
@@ -493,10 +504,7 @@ public class UmumDetailActivity extends SkinActivity {
         editTextReply = findViewById(R.id.edit_text_reply_pos);
         floatingActionButton = findViewById(R.id.button_reply);
 
-        progressDialog = new ProgressDialog(UmumDetailActivity.this);
-        progressDialog.setCancelable(false);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Memuat Naik...");
+        linearLayoutBottom = findViewById(R.id.linear_layout_bottom);
 
         //Get uid/ check if the user is not null or not
         if (firebaseUser != null) {
@@ -504,9 +512,7 @@ public class UmumDetailActivity extends SkinActivity {
             retrieveUserData();
         }
 
-
         setFirebaseRecyclerAdapter();
-
         setFloatingActionButton();
     }
 

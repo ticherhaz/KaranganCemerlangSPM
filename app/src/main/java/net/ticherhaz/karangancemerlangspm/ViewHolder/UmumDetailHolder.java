@@ -55,6 +55,7 @@ public class UmumDetailHolder extends RecyclerView.ViewHolder {
         textViewEditYes = itemView.findViewById(R.id.text_view_edit_reply_submit);
         textViewEditCancel = itemView.findViewById(R.id.text_view_edit_reply_cancel);
 
+        //This is to enable the scroll view at textview
         textViewDeskripsi.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {

@@ -216,34 +216,37 @@ public class UmumActivity extends SkinActivity {
                     }
                 });
 
-                //Set on Long listener to delete this specific, check the user
-                if (userType.equals("admin") || userType.equals("moderator")) {
-                    holder.getView().setOnLongClickListener(new View.OnLongClickListener() {
-                        @Override
-                        public boolean onLongClick(View view) {
-                            AlertDialog alertDialog = new AlertDialog.Builder(UmumActivity.this)
-                                    .setTitle("Options")
-                                    .setMessage("Are you sure you want to delete this?")
-                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            firebaseRecyclerAdapter.getRef(position).removeValue();
-                                            databaseReference.child("umumPos").child(forumUid).child(umumUid).removeValue();
-                                        }
-                                    })
-                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            dialogInterface.dismiss();
-                                        }
-                                    })
-                                    .create();
+                if (firebaseUser != null) {
+                    //Set on Long listener to delete this specific, check the user
+                    if (userType.equals("admin") || userType.equals("moderator")) {
+                        holder.getView().setOnLongClickListener(new View.OnLongClickListener() {
+                            @Override
+                            public boolean onLongClick(View view) {
+                                AlertDialog alertDialog = new AlertDialog.Builder(UmumActivity.this)
+                                        .setTitle("Options")
+                                        .setMessage("Are you sure you want to delete this?")
+                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                firebaseRecyclerAdapter.getRef(position).removeValue();
+                                                databaseReference.child("umumPos").child(forumUid).child(umumUid).removeValue();
+                                            }
+                                        })
+                                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.dismiss();
+                                            }
+                                        })
+                                        .create();
 
-                            alertDialog.show();
-                            return true;
-                        }
-                    });
+                                alertDialog.show();
+                                return true;
+                            }
+                        });
+                    }
                 }
+
 
             }
 

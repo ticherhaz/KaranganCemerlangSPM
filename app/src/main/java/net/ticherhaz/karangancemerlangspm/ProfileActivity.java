@@ -28,6 +28,9 @@ public class ProfileActivity extends SkinActivity {
 
     private TextView textViewUsername;
     private TextView textViewSekolah;
+    private TextView textViewGender;
+    private TextView textViewTitleType;
+    private TextView textViewStatus;
     private ImageView imageViewProfile;
 
     private void retrieveIntent() {
@@ -55,8 +58,11 @@ public class ProfileActivity extends SkinActivity {
                                     .load(profileUrl)
                                     .into(imageViewProfile);
                         }
-                        textViewUsername.setText("Username: " + registeredUser.getUsername());
-                        textViewSekolah.setText("Sekolah: " + registeredUser.getSekolah());
+                        textViewUsername.setText(registeredUser.getUsername());
+                        textViewSekolah.setText(registeredUser.getSekolah());
+                        textViewGender.setText(registeredUser.getGender());
+                        textViewTitleType.setText(registeredUser.getTitleType());
+                        textViewStatus.setText(registeredUser.getOnlineStatus());
 
                     }
                 }
@@ -74,6 +80,9 @@ public class ProfileActivity extends SkinActivity {
         setSwipeRefreshLayout();
         textViewUsername = findViewById(R.id.text_view_username);
         textViewSekolah = findViewById(R.id.text_view_sekolah);
+        textViewGender = findViewById(R.id.text_view_gender);
+        textViewTitleType = findViewById(R.id.text_view_user_title);
+        textViewStatus = findViewById(R.id.text_view_status);
         imageViewProfile = findViewById(R.id.image_view_profile);
 
         firebaseDatabase = FirebaseDatabase.getInstance();

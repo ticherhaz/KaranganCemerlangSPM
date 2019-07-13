@@ -13,6 +13,7 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
@@ -349,6 +350,7 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
         });
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void listID() {
         editTextEmail = findViewById(R.id.edit_text_email);
         editTextUsername = findViewById(R.id.edit_text_username);
@@ -360,6 +362,15 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
         spinnerGender = findViewById(R.id.spinner_gender);
 
         textViewRules = findViewById(R.id.text_view_rules);
+        //This is to enable the scroll view at textview
+        textViewRules.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                // Disallow the touch request for parent scroll on touch of child view
+                view.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
         textViewRules.setText(Html.fromHtml(context.getString(R.string.rules_terms)));
 
         editTextDay = findViewById(R.id.edit_text_day);
