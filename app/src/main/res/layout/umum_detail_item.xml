@@ -170,24 +170,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/text_view_deskripsi"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="?attr/colorText" />
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:id="@+id/text_view_deskripsi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="?attr/colorText" />
+
+                    <EditText
+                        android:id="@+id/edit_text_deskripsi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="29"
+                        android:scrollbars="vertical"
+                        android:textColor="?attr/colorText"
+                        android:textColorHint="?attr/colorText"
+                        android:visibility="gone" />
+
+                </LinearLayout>
             </ScrollView>
-
-
-            <EditText
-                android:id="@+id/edit_text_deskripsi"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:maxLines="29"
-                android:scrollbars="vertical"
-                android:textColor="?attr/colorText"
-                android:textColorHint="?attr/colorText"
-                android:visibility="gone" />
         </LinearLayout>
 
         <RelativeLayout

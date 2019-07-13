@@ -1,5 +1,7 @@
 package net.ticherhaz.karangancemerlangspm.ViewHolder;
 
+import android.annotation.SuppressLint;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,6 +33,7 @@ public class UmumDetailHolder extends RecyclerView.ViewHolder {
     private TextView textViewEditYes;
     private TextView textViewEditCancel;
 
+    @SuppressLint("ClickableViewAccessibility")
     public UmumDetailHolder(@NonNull View itemView) {
         super(itemView);
         view = itemView;
@@ -51,6 +54,17 @@ public class UmumDetailHolder extends RecyclerView.ViewHolder {
         editTextEdit = itemView.findViewById(R.id.edit_text_deskripsi);
         textViewEditYes = itemView.findViewById(R.id.text_view_edit_reply_submit);
         textViewEditCancel = itemView.findViewById(R.id.text_view_edit_reply_cancel);
+
+        textViewDeskripsi.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                // Disallow the touch request for parent scroll on touch of child view
+                view.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+
+        //  textViewDeskripsi.setMovementMethod(new ScrollingMovementMethod());
     }
 
     public TextView getTextViewEditYes() {
