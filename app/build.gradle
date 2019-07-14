@@ -51,6 +51,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     implementation project(path: ':lib')
     //For time
-    implementation 'com.github.ticherhaz:tarikhmasa:1.5.4'
+    implementation 'com.github.ticherhaz:tarikhmasa:1.5.7'
 }
 apply plugin: 'com.google.gms.google-services'

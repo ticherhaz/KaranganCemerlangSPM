@@ -232,6 +232,10 @@ public class ForumActivity extends SkinActivity {
         recyclerViewForum.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerViewForum.setAdapter(firebaseRecyclerAdapter);
         //2. FirebaseUI
+        if (firebaseRecyclerAdapter != null) {
+            firebaseRecyclerAdapter.startListening();
+            firebaseRecyclerAdapter.notifyDataSetChanged();
+        }
     }
 
 
@@ -548,19 +552,15 @@ public class ForumActivity extends SkinActivity {
     protected void onStop() {
         super.onStop();
         new OnlineStatusUtil().onDisc(firebaseUser, databaseReference, registeredUid, activitySessionUid, activityDate);
-        if (firebaseRecyclerAdapter != null) {
-            firebaseRecyclerAdapter.stopListening();
-            firebaseRecyclerAdapter.notifyDataSetChanged();
-        }
+//        if (firebaseRecyclerAdapter != null) {
+//            firebaseRecyclerAdapter.stopListening();
+//            firebaseRecyclerAdapter.notifyDataSetChanged();
+//        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (firebaseRecyclerAdapter != null) {
-            firebaseRecyclerAdapter.startListening();
-            firebaseRecyclerAdapter.notifyDataSetChanged();
-        }
     }
 
     @Override
@@ -568,7 +568,7 @@ public class ForumActivity extends SkinActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forum);
         listID();
-        setFirebaseRecyclerAdapter();
+        //setFirebaseRecyclerAdapter();
         setButtonSignIn();
         setButtonSignUp();
         setTextViewSignOut();
@@ -577,11 +577,11 @@ public class ForumActivity extends SkinActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        if (firebaseRecyclerAdapter != null) {
-            firebaseRecyclerAdapter.startListening();
-            firebaseRecyclerAdapter.notifyDataSetChanged();
-        }
+        setFirebaseRecyclerAdapter();
+//        if (firebaseRecyclerAdapter != null) {
+//            firebaseRecyclerAdapter.startListening();
+//            firebaseRecyclerAdapter.notifyDataSetChanged();
+//        }
 
         //Check if there is internet or not
         new Handler().postDelayed(new Runnable() {

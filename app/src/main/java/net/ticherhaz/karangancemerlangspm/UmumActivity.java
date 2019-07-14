@@ -269,6 +269,11 @@ public class UmumActivity extends SkinActivity {
         linearLayoutManager.setReverseLayout(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(firebaseRecyclerAdapter);
+        //Firebase
+        if (firebaseRecyclerAdapter != null) {
+            firebaseRecyclerAdapter.startListening();
+            firebaseRecyclerAdapter.notifyDataSetChanged();
+        }
     }
 
     private void listID() {
@@ -283,7 +288,7 @@ public class UmumActivity extends SkinActivity {
         recyclerView = findViewById(R.id.recycler_view_umum);
 
         setTotalOnlineSpecific(userUid, "Online");
-        setFirebaseRecyclerAdapter();
+        // setFirebaseRecyclerAdapter();
         retrieveFirebase();
     }
 
@@ -300,29 +305,29 @@ public class UmumActivity extends SkinActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if (firebaseRecyclerAdapter != null) {
-            firebaseRecyclerAdapter.stopListening();
-            firebaseRecyclerAdapter.notifyDataSetChanged();
-        }
+//        if (firebaseRecyclerAdapter != null) {
+//            firebaseRecyclerAdapter.stopListening();
+//            firebaseRecyclerAdapter.notifyDataSetChanged();
+//        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (firebaseRecyclerAdapter != null) {
-            firebaseRecyclerAdapter.startListening();
-            firebaseRecyclerAdapter.notifyDataSetChanged();
-        }
+//        if (firebaseRecyclerAdapter != null) {
+//            firebaseRecyclerAdapter.startListening();
+//            firebaseRecyclerAdapter.notifyDataSetChanged();
+//        }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
-        if (firebaseRecyclerAdapter != null) {
-            firebaseRecyclerAdapter.startListening();
-            firebaseRecyclerAdapter.notifyDataSetChanged();
-        }
+        setFirebaseRecyclerAdapter();
+//        if (firebaseRecyclerAdapter != null) {
+//            firebaseRecyclerAdapter.startListening();
+//            firebaseRecyclerAdapter.notifyDataSetChanged();
+//        }
 
         //Check if there is internet or not
         new Handler().postDelayed(new Runnable() {

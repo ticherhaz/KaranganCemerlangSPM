@@ -2,6 +2,7 @@ package net.ticherhaz.karangancemerlangspm;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +20,10 @@ import com.zxy.skin.sdk.SkinActivity;
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 
 import java.util.Locale;
+
+import static net.ticherhaz.tarikhmasa.TarikhMasa.ConvertTarikhMasa2LocalTimePattern;
+import static net.ticherhaz.tarikhmasa.TarikhMasa.ConvertTimeStamp2TarikhMasa;
+import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasaTimeAgo;
 
 public class ProfileActivity extends SkinActivity {
 
@@ -83,20 +88,51 @@ public class ProfileActivity extends SkinActivity {
                                     .into(imageViewProfile);
                         }
                         tvUsername.setText(registeredUser.getUsername());
+                        switch (registeredUser.getTypeUser()) {
+                            case "admin":
+                                tvUsername.setTextColor(getResources().getColor(R.color.colorAdmin));
+                                break;
+                            case "moderator":
+                                tvUsername.setTextColor(getResources().getColor(R.color.colorModerator));
+                                break;
+                            case "cikgu":
+                                tvUsername.setTextColor(getResources().getColor(R.color.colorCikgu));
+                                break;
+                            case "ahliPremium":
+                                tvUsername.setTextColor(getResources().getColor(R.color.colorAhliPremium));
+                                break;
+                        }
+
+
                         tvSekolah.setText(registeredUser.getSekolah());
                         tvGender.setText(registeredUser.getGender());
                         tvTitleType.setText(registeredUser.getTitleType());
                         tvOnlineStatus.setText(registeredUser.getOnlineStatus());
                         tvCustomTitle.setText(registeredUser.getCustomTitle());
-                        tvBio.setText(registeredUser.getBio());
+                        String bioHere = "";
+                        if (registeredUser.getBio() == null) {
+                            bioHere = "";
+                        } else {
+                            bioHere = registeredUser.getBio();
+                        }
+                        tvBio.setText(String.format(Locale.getDefault(), "Bio: %s", bioHere));
                         tvState.setText(registeredUser.getState());
                         tvBirthday.setText(registeredUser.getBirthday());
                         tvMode.setText(registeredUser.getMode());
-                        tvPostCount.setText(String.format(Locale.getDefault(), "%d", registeredUser.getPostCount()));
-                        tvReputation.setText(String.format(Locale.getDefault(), "%d", registeredUser.getReputation()));
-                        tvReputationPower.setText(String.format(Locale.getDefault(), "%d", registeredUser.getReputationPower()));
-                        tvLastOnline.setText(String.format(Locale.getDefault(), "%d", registeredUser.getLastOnline()));
-                        tvOnCreatedDate.setText(registeredUser.getOnDateCreated());
+                        tvPostCount.setText(String.format(Locale.getDefault(), "Jumlah Pos: %d", registeredUser.getPostCount()));
+                        tvReputation.setText(String.format(Locale.getDefault(), "Reputasi: %d", registeredUser.getReputation()));
+                        tvReputationPower.setText(String.format(Locale.getDefault(), "Reputasi Kuasa: %d", registeredUser.getReputationPower()));
+
+                        //Check if online or not
+                        if (registeredUser.getOnlineStatus().equals("Offline")) {
+                            final String lastOnline = ConvertTimeStamp2TarikhMasa(registeredUser.getLastOnline());
+                            final String getAgo = GetTarikhMasaTimeAgo(lastOnline, "MY", true, false);
+                            tvLastOnline.setText(String.format(Locale.getDefault(), "Last online: %s", getAgo));
+                        } else {
+                            tvLastOnline.setVisibility(View.GONE);
+                        }
+
+                        tvOnCreatedDate.setText(String.format(Locale.getDefault(), "Tarikh Sertai: %s", ConvertTarikhMasa2LocalTimePattern(registeredUser.getOnDateCreated(), "MMM yyyy")));
                     }
                 }
             }

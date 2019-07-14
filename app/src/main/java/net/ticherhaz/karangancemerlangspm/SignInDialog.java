@@ -163,17 +163,11 @@ public class SignInDialog extends Dialog implements View.OnClickListener {
                                 RegisteredUser registeredUser = child.getValue(RegisteredUser.class);
                                 if (registeredUser != null) {
                                     final String emailUser = registeredUser.getEmail();
-                                    final String userType = registeredUser.getTypeUser();
                                     final boolean isActive = registeredUser.isActive();
 
                                     //Here we check if the user is get ban or not
                                     if (isActive) {
-                                        //At this part we check the type of user
-                                        if (userType.equals("ahli")) {
-                                            signInAuth(emailUser, password);
-                                        } else if (userType.equals("admin")) {
-                                            signInAuth(emailUser, password);
-                                        }
+                                        signInAuth(emailUser, password);
                                     } else {
                                         Toast.makeText(context, "Maaf, akaun anda kena ban, sila contact ticherhaz@gmail.com untuk lebih lanjut", Toast.LENGTH_SHORT).show();
                                     }
@@ -205,17 +199,11 @@ public class SignInDialog extends Dialog implements View.OnClickListener {
                                 RegisteredUser registeredUser = child.getValue(RegisteredUser.class);
                                 if (registeredUser != null) {
                                     final String emailUser = registeredUser.getEmail();
-                                    final String userType = registeredUser.getTypeUser();
                                     final boolean isActive = registeredUser.isActive();
 
                                     //Here we check if the user is get ban or not
                                     if (isActive) {
-                                        //At this part we check the type of user
-                                        if (userType.equals("ahli")) {
-                                            signInAuth(emailUser, password);
-                                        } else if (userType.equals("admin")) {
-                                            signInAuth(emailUser, password);
-                                        }
+                                        signInAuth(emailUser, password);
                                     } else {
                                         Toast.makeText(context, "Maaf, akaun anda kena ban, sila contact ticherhaz@gmail.com untuk lebih lanjut", Toast.LENGTH_SHORT).show();
                                     }
