@@ -19,6 +19,21 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/iv_profile"
+                    android:layout_width="210dp"
+                    android:layout_height="210dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="7dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/emblem" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
@@ -28,33 +43,15 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentLeft="true"
                     android:layout_marginTop="7dp"
+                    android:layout_toStartOf="@+id/tv_mode"
+                    android:layout_toLeftOf="@+id/tv_mode"
                     android:clickable="true"
                     android:drawableStart="@drawable/ic_sign_online"
                     android:drawableLeft="@drawable/ic_sign_online"
                     android:focusable="true"
                     android:gravity="center_vertical"
+                    android:singleLine="true"
                     android:textColor="?attr/colorText" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:id="@+id/iv_profile"
-                        android:layout_width="210dp"
-                        android:layout_height="210dp"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="7dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/emblem" />
-                </RelativeLayout>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tv_mode"
@@ -63,55 +60,59 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="7dp"
-                    android:clickable="true"
-                    android:focusable="true"
+                    android:drawableStart="@drawable/ic_status_neutral"
+                    android:drawableLeft="@drawable/ic_status_neutral"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:textColor="?attr/colorText" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/text_view_shape"
+                    android:gravity="center"
+                    android:padding="7dp"
+                    android:singleLine="true"
+                    android:textColor="?attr/colorText"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_title_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/text_view_shape"
+                    android:gravity="center"
+                    android:padding="7dp"
+                    android:singleLine="true"
                     android:textColor="?attr/colorText" />
 
                 <TextView
-                    android:id="@+id/tv_last_online"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
+                    android:id="@+id/tv_custom_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginTop="7dp"
-                    android:clickable="true"
-                    android:focusable="true"
+                    android:background="@drawable/text_view_shape"
+                    android:gravity="center"
+                    android:padding="7dp"
+                    android:singleLine="true"
                     android:textColor="?attr/colorText" />
-            </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tv_username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:background="@drawable/text_view_shape"
-                android:clickable="true"
-                android:focusable="true"
-                android:padding="7dp"
-                android:textColor="?attr/colorText" />
-
-            <TextView
-                android:id="@+id/tv_title_type"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:background="@drawable/text_view_shape"
-                android:clickable="true"
-                android:focusable="true"
-                android:padding="7dp"
-                android:textColor="?attr/colorText" />
-
-
-            <TextView
-                android:id="@+id/tv_custom_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:background="@drawable/text_view_shape"
-                android:clickable="true"
-                android:focusable="true"
-                android:padding="7dp"
-                android:textColor="?attr/colorText" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tv_gender"
@@ -120,8 +121,12 @@
                 android:layout_marginTop="7dp"
                 android:background="@drawable/text_view_shape"
                 android:clickable="true"
+                android:drawableStart="@drawable/ic_gender"
+                android:drawableLeft="@drawable/ic_gender"
                 android:focusable="true"
+                android:gravity="center_vertical"
                 android:padding="7dp"
+                android:singleLine="true"
                 android:textColor="?attr/colorText" />
 
             <TextView
@@ -131,8 +136,12 @@
                 android:layout_marginTop="7dp"
                 android:background="@drawable/text_view_shape"
                 android:clickable="true"
+                android:drawableStart="@drawable/ic_birth"
+                android:drawableLeft="@drawable/ic_birth"
                 android:focusable="true"
+                android:gravity="center_vertical"
                 android:padding="7dp"
+                android:singleLine="true"
                 android:textColor="?attr/colorText" />
 
             <TextView
@@ -142,8 +151,12 @@
                 android:layout_marginTop="7dp"
                 android:background="@drawable/text_view_shape"
                 android:clickable="true"
+                android:drawableStart="@drawable/ic_school"
+                android:drawableLeft="@drawable/ic_school"
                 android:focusable="true"
+                android:gravity="center_vertical"
                 android:padding="7dp"
+                android:singleLine="true"
                 android:textColor="?attr/colorText" />
 
             <TextView
@@ -153,8 +166,12 @@
                 android:layout_marginTop="7dp"
                 android:background="@drawable/text_view_shape"
                 android:clickable="true"
+                android:drawableStart="@drawable/ic_lokasi"
+                android:drawableLeft="@drawable/ic_lokasi"
                 android:focusable="true"
+                android:gravity="center_vertical"
                 android:padding="7dp"
+                android:singleLine="true"
                 android:textColor="?attr/colorText" />
 
             <TextView
@@ -164,7 +181,10 @@
                 android:layout_marginTop="7dp"
                 android:background="@drawable/text_view_shape"
                 android:clickable="true"
+                android:drawableStart="@drawable/ic_bio"
+                android:drawableLeft="@drawable/ic_bio"
                 android:focusable="true"
+                android:gravity="center_vertical"
                 android:padding="7dp"
                 android:textColor="?attr/colorText" />
 
@@ -175,8 +195,12 @@
                 android:layout_marginTop="7dp"
                 android:background="@drawable/text_view_shape"
                 android:clickable="true"
+                android:drawableStart="@drawable/ic_date"
+                android:drawableLeft="@drawable/ic_date"
                 android:focusable="true"
+                android:gravity="center_vertical"
                 android:padding="7dp"
+                android:singleLine="true"
                 android:textColor="?attr/colorText" />
 
             <TextView
@@ -186,8 +210,12 @@
                 android:layout_marginTop="7dp"
                 android:background="@drawable/text_view_shape"
                 android:clickable="true"
+                android:drawableStart="@drawable/ic_pos"
+                android:drawableLeft="@drawable/ic_pos"
                 android:focusable="true"
+                android:gravity="center_vertical"
                 android:padding="7dp"
+                android:singleLine="true"
                 android:textColor="?attr/colorText" />
 
             <TextView
@@ -197,8 +225,12 @@
                 android:layout_marginTop="7dp"
                 android:background="@drawable/text_view_shape"
                 android:clickable="true"
+                android:drawableStart="@drawable/ic_reputation"
+                android:drawableLeft="@drawable/ic_reputation"
                 android:focusable="true"
+                android:gravity="center_vertical"
                 android:padding="7dp"
+                android:singleLine="true"
                 android:textColor="?attr/colorText" />
 
             <TextView
@@ -206,12 +238,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"
+                android:layout_marginBottom="11dp"
                 android:background="@drawable/text_view_shape"
                 android:clickable="true"
+                android:drawableStart="@drawable/ic_rep_kuasa"
+                android:drawableLeft="@drawable/ic_rep_kuasa"
                 android:focusable="true"
-                android:layout_marginBottom="11dp"
+                android:gravity="center_vertical"
                 android:padding="7dp"
+                android:singleLine="true"
                 android:textColor="?attr/colorText" />
+
+            <Button
+                android:id="@+id/b_disable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:background="@color/colorRed"
+                android:text="@string/disable"
+                android:textColor="?attr/colorText"
+                android:visibility="gone" />
 
         </LinearLayout>
     </ScrollView>

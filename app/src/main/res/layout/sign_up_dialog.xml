@@ -193,7 +193,7 @@
                 </ScrollView>
             </LinearLayout>
 
-            <CheckBox
+            <TextView
                 android:id="@+id/checkbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

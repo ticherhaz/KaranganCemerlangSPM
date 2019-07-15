@@ -26,7 +26,6 @@
         android:orientation="vertical"
         android:visibility="visible">
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_umum_detail"
             android:layout_width="match_parent"
@@ -51,7 +50,8 @@
                 android:id="@+id/edit_text_reply_pos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="9dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:layout_toStartOf="@+id/button_reply"
                 android:layout_toLeftOf="@+id/button_reply"
                 android:hint="@string/type_mesej"
@@ -64,7 +64,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_margin="3dp"
                 android:src="@drawable/ic_send" />
 
         </RelativeLayout>

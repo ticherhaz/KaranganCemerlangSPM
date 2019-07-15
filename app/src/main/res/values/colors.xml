@@ -10,9 +10,10 @@
     <color name="colorText">#575757</color>
     <color name="colorTextWhite">#E6E6E6</color>
     <color name="colorLine">#2AC0AB</color>
+    <color name="colorRed">#940202</color>
 
     <color name="colorAdmin">#FA6D00</color>
-    <color name="colorModerator">#611A3B</color>
+    <color name="colorModerator">#B46A40</color>
     <color name="colorCikgu">#6DA824</color>
     <color name="colorAhliPremium">#2E88FA</color>
 </resources>

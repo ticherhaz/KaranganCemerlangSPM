@@ -227,7 +227,8 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
     <string name="tips">Tips</string>
     <string name="definition_tips">Setiap tips yang diberikan tidak boleh bayar balik. Seikhlas hati anda. Terima kasih yang teramat kepada yang membantu saya :)</string>
     <string name="patuh_peraturan">Saya sudah baca dan setuju untuk mematuhi peraturan Forum Karangan Cemerlang SPM peraturan.</string>
-    <string name="main_terms">Untuk meneruskan, anda mesti bersetuju dengan peraturan berikut: (tekan skrin peraturan, skrolkan)</string>
+    <string name="main_terms">Untuk meneruskan, anda mesti bersetuju dengan peraturan berikut:</string>
+    <string name="disable">Disable</string>
     <string-array name="feedback_array">
         <item>Cadangan</item>
         <item>Pujian</item>

@@ -462,7 +462,6 @@ public class UmumDetailActivity extends SkinActivity {
                     public void onClick(View view) {
                         Intent intent = new Intent(UmumDetailActivity.this, ProfileActivity.class);
                         intent.putExtra("registeredUid", model.getRegisteredUid());
-                        intent.putExtra("username", username);
                         startActivities(new Intent[]{intent});
                     }
                 });

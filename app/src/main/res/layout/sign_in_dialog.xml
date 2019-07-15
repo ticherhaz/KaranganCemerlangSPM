@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/email_or_username"
+        android:inputType="textEmailAddress"
         android:singleLine="true" />
 
     <EditText
@@ -19,7 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:singleLine="true" />
 
     <Button
         android:id="@+id/button_sign_in"
@@ -27,9 +29,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="7dp"
-        android:textColor="@color/colorTextWhite"
         android:background="@drawable/button_selector"
         android:text="@string/sign_in"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:textColor="@color/colorTextWhite" />
 
 </LinearLayout>
