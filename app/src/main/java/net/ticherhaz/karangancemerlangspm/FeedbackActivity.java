@@ -20,10 +20,11 @@ import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.Model.Feedback;
 
-import java.util.Calendar;
-
 import static net.ticherhaz.karangancemerlangspm.Util.Others.isNetworkAvailable;
 import static net.ticherhaz.karangancemerlangspm.Util.Others.messageInternetMessage;
+import static net.ticherhaz.karangancemerlangspm.Util.ProgressDialogCustom.dismissProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.Util.ProgressDialogCustom.showProgressDialog;
+import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class FeedbackActivity extends SkinActivity {
 
@@ -82,17 +83,17 @@ public class FeedbackActivity extends SkinActivity {
             @Override
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(editTextEmail.getText().toString()) && !TextUtils.isEmpty(editTextDescription.getText().toString()) && isEmailValid(editTextEmail.getText().toString())) {
+                    showProgressDialog(FeedbackActivity.this);
                     String typeProblem = spinner.getSelectedItem().toString();
                     String email = editTextEmail.getText().toString();
                     String description = editTextDescription.getText().toString();
-                    String date = Calendar.getInstance().getTime().toString();
+                    String date = GetTarikhMasa();
                     String uid = databaseReference.push().getKey();
 
                     Feedback feedback = new Feedback(uid, userUid, phoneModel, typeProblem, email, description, date);
 
                     if (isNetworkAvailable(FeedbackActivity.this)) {
-                        //if yes, there is no connection
-                        //Then store the data into firebase
+                        //if yes, then store the data into firebase
                         if (uid != null)
                             databaseReference.child(uid).setValue(feedback).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -101,6 +102,7 @@ public class FeedbackActivity extends SkinActivity {
                                         editTextEmail.setText("");
                                         editTextDescription.setText("");
                                         Toast.makeText(getApplicationContext(), "Terima kasih atas maklum balas anda\nKami akan hubungi anda dalam masa terdekat", Toast.LENGTH_SHORT).show();
+                                        editTextEmail.requestFocus();
                                     }
                                 }
                             });
@@ -108,27 +110,10 @@ public class FeedbackActivity extends SkinActivity {
                         //No connection
                         messageInternetMessage(FeedbackActivity.this);
                     }
-
-
-//                    //Check the internet connection
-//                    new InternetCheck(new InternetCheck.Consumer() {
-//                        @Override
-//                        public void accept(Boolean internet) {
-//                            if (internet) {
-//
-//
-//
-//                            } else {
-//
-//                            }
-//                        }
-//                    });
-
                 } else {
                     Toast.makeText(getApplicationContext(), "Sila isi email dan deskripsi anda", Toast.LENGTH_SHORT).show();
                 }
-
-
+                dismissProgressDialog();
             }
         });
     }
