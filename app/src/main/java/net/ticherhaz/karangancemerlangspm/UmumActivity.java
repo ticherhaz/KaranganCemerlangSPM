@@ -129,30 +129,86 @@ public class UmumActivity extends SkinActivity {
                 });
 
 
+                /*
+                ok this is new, read last node.
+                 */
                 //check if null or not
-                if (model.getRegisteredUidLastReply() != null) {
-                    //for the name of last reply
-                    databaseReference.child("registeredUser").child(model.getRegisteredUidLastReply()).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()) {
-                                RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
-                                if (registeredUser != null) {
-                                    String dibalasOleh = "Dibalas Oleh <b>" + registeredUser.getUsername() + "</b>";
-                                    holder.getTextViewDibalasOleh().setText(Html.fromHtml(dibalasOleh));
+                Query queryDibbalasOleh = databaseReference.child("umumPos").child(forumUid).child(model.getUmumUid()).orderByKey().limitToLast(1);
+                queryDibbalasOleh.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+
+                                final String registerUidReply = dataSnapshot1.child("registeredUid").getValue(String.class);
+                                final String umumDetailUidFirst = dataSnapshot1.child("umumDetailUid").getValue(String.class);
+
+                                //checking umumuid here if same or not to check whether it really the new user reply or not
+                                if (model.getUmumUid().equals(umumDetailUidFirst)) {
+                                    //After that we GONE it
+                                    holder.getTextViewDibalasOleh().setVisibility(View.GONE);
+                                } else {
+                                    //    After we get this, we display
+                                    if (registerUidReply != null) {
+                                        databaseReference.child("registeredUser").child(registerUidReply).addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                                if (dataSnapshot.exists()) {
+                                                    RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
+                                                    if (registeredUser != null) {
+                                                        String dibalasOleh = "Dibalas Oleh <b>" + registeredUser.getUsername() + "</b>";
+                                                        holder.getTextViewDibalasOleh().setText(Html.fromHtml(dibalasOleh));
+                                                    }
+
+                                                }
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                            }
+                                        });
+                                    }
                                 }
                             }
 
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
                         }
-                    });
-                } else {
-                    holder.getTextViewDibalasOleh().setVisibility(View.GONE);
-                }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
+//                if (model.getRegisteredUidLastReply() != null) {
+//                    //for the name of last reply
+//                    databaseReference.child("registeredUser").child(model.getRegisteredUidLastReply()).addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                            if (dataSnapshot.exists()) {
+//                                RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
+//                                if (registeredUser != null) {
+//                                    String dibalasOleh = "Dibalas Oleh <b>" + registeredUser.getUsername() + "</b>";
+//                                    holder.getTextViewDibalasOleh().setText(Html.fromHtml(dibalasOleh));
+//                                }
+//                            }
+//
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                        }
+//                    });
+//                } else {
+//                    holder.getTextViewDibalasOleh().setVisibility(View.GONE);
+//                }
+
 
                 if (model.getMasaDibalasOleh() != null) {
                     //This for the masa dibalas oleh

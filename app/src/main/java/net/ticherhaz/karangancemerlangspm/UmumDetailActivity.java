@@ -87,6 +87,7 @@ public class UmumDetailActivity extends SkinActivity {
     private String sekolah;
     private String onDateCreatedMonthYear;
     private String gender;
+    private String userType;
     private long post;
     private long reputation;
     private long reputationPower;
@@ -109,6 +110,7 @@ public class UmumDetailActivity extends SkinActivity {
                         post = registeredUser.getPostCount();
                         reputation = registeredUser.getReputation();
                         reputationPower = registeredUser.getReputationPower();
+                        userType = registeredUser.getTypeUser();
                     }
 
 
@@ -132,7 +134,8 @@ public class UmumDetailActivity extends SkinActivity {
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<UmumDetail, UmumDetailHolder>(firebaseRecyclerOptions) {
             @SuppressLint("SetTextI18n")
             @Override
-            protected void onBindViewHolder(@NonNull final UmumDetailHolder holder, int position, @NonNull final UmumDetail model) {
+            protected void onBindViewHolder(@NonNull final UmumDetailHolder holder, final int position, @NonNull final UmumDetail model) {
+
                 //1.
                 //Here we will retrieve user data (this specific) from user database.
                 databaseReference.child("registeredUser").child(model.getRegisteredUid()).addValueEventListener(new ValueEventListener() {
@@ -435,6 +438,8 @@ public class UmumDetailActivity extends SkinActivity {
                                 });
                             }
                         }
+
+
                     }
 
                     @Override
@@ -467,6 +472,43 @@ public class UmumDetailActivity extends SkinActivity {
                 });
 
 
+                //Admin part to delete
+                if (firebaseUser != null) {
+                    //Set on Long listener to delete this specific, check the user
+                    if (userType.equals("admin") || userType.equals("moderator")) {
+                        holder.getView().setOnLongClickListener(new View.OnLongClickListener() {
+                            @Override
+                            public boolean onLongClick(View view) {
+                                AlertDialog alertDialog = new AlertDialog.Builder(UmumDetailActivity.this)
+                                        .setTitle("Options")
+                                        .setMessage("Are you sure you want to delete this?")
+                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                //Ok after we remove, we need to update the total post of that user who post this reply.
+                                                firebaseRecyclerAdapter.getRef(position).removeValue();
+                                                new RunTransaction().runTransactionRegisteredUserPostCountRemove(databaseReference, registeredUidReply);
+
+
+                                            }
+                                        })
+                                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.dismiss();
+                                            }
+                                        })
+                                        .create();
+
+                                alertDialog.show();
+                                return true;
+                            }
+                        });
+                    }
+                }
+
+
             }
 
             @NonNull
@@ -480,6 +522,8 @@ public class UmumDetailActivity extends SkinActivity {
             public void onDataChanged() {
                 progressBar.setVisibility(View.INVISIBLE);
             }
+
+
         };
 
         //Display
