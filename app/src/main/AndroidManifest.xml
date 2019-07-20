@@ -18,7 +18,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         tools:ignore="GoogleAppIndexingWarning,HardcodedDebugMode">
-        <activity android:name=".Profile2Activity"></activity>
+        <activity android:name=".ChangePasswordActivity"></activity>
+        <activity android:name=".Profile2Activity" />
         <activity android:name=".ProfileEditActivity">
 
             <!-- This is for the back button navigation -->

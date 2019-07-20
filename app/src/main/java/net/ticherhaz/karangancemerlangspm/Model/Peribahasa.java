@@ -6,17 +6,15 @@ public class Peribahasa {
     private String title;
     private String description;
     private String date;
-    private String dateUTC;
 
     public Peribahasa() {
     }
 
-    public Peribahasa(String uid, String title, String description, String date, String dateUTC) {
+    public Peribahasa(String uid, String title, String description, String date) {
         this.uid = uid;
         this.title = title;
         this.description = description;
         this.date = date;
-        this.dateUTC = dateUTC;
     }
 
     public String getUid() {
@@ -50,13 +48,5 @@ public class Peribahasa {
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public String getDateUTC() {
-        return dateUTC;
-    }
-
-    public void setDateUTC(String dateUTC) {
-        this.dateUTC = dateUTC;
     }
 }

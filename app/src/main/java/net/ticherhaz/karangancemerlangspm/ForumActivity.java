@@ -33,6 +33,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.zxy.skin.sdk.SkinActivity;
@@ -112,21 +113,53 @@ public class ForumActivity extends SkinActivity {
                 holder.getTextViewForumDescrption().setText(model.getForumDescription());
                 holder.getTextViewForumViews().setText(String.valueOf(model.getForumViews()));
 
-                String tajukTerbaru = model.getLastThreadPost();
-                if (tajukTerbaru.equals("")) {
-                    holder.getTextViewLastThreadPost().setVisibility(View.GONE);
-                } else {
-                    holder.getTextViewLastThreadPost().setText("Tajuk Terbaru: " + model.getLastThreadPost());
-                }
 
-                String lastThreadByUser = model.getLastThreadByUser();
-                if (lastThreadByUser.equals("")) {
-                    holder.getTextViewLastThreadByUser().setVisibility(View.GONE);
-                } else {
-                    //making the name bold
-                    String daripada = "Daripada <b>" + model.getLastThreadByUser() + "</b>";
-                    holder.getTextViewLastThreadByUser().setText(Html.fromHtml(daripada));
-                }
+                  /*
+                ok this is new, read last node.
+                 */
+                //check if null or not
+                Query queryDibbalasOleh = databaseReference.child("umum").child(model.getForumUid()).orderByKey().limitToLast(1);
+                queryDibbalasOleh.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            //Get children
+                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                if (dataSnapshot1.exists()) {
+
+                                    final String tajuk = dataSnapshot1.child("tajuk").getValue(String.class);
+                                    final String dimulaiOleh = dataSnapshot1.child("dimulaiOleh").getValue(String.class);
+
+                                    // String tajukTerbaru = model.getLastThreadPost();
+                                    if (tajuk == null) {
+                                        holder.getTextViewLastThreadPost().setVisibility(View.GONE);
+                                    } else {
+                                        holder.getTextViewLastThreadPost().setText("Tajuk Terbaru: " + model.getLastThreadPost());
+                                    }
+
+                                    //  String lastThreadByUser = model.getLastThreadByUser();
+                                    if (dimulaiOleh == null) {
+                                        holder.getTextViewLastThreadByUser().setVisibility(View.GONE);
+                                    } else {
+                                        //making the name bold
+                                        String daripada = "Daripada <b>" + dimulaiOleh + "</b>";
+                                        holder.getTextViewLastThreadByUser().setText(Html.fromHtml(daripada));
+                                    }
+
+
+                                }
+                            }
+                        } else {
+                            holder.getTextViewLastThreadPost().setVisibility(View.GONE);
+                            holder.getTextViewLastThreadByUser().setVisibility(View.GONE);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
 
                 //value for the jumlah tajuk

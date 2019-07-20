@@ -52,6 +52,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
                 android:layout_toStartOf="@+id/button_reply"
                 android:layout_toLeftOf="@+id/button_reply"
                 android:hint="@string/type_mesej"
@@ -64,6 +66,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
+                android:layout_marginEnd="3dp"
+                android:layout_marginRight="3dp"
                 android:src="@drawable/ic_send" />
 
         </RelativeLayout>

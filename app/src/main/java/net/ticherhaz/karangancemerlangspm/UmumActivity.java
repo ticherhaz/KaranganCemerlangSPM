@@ -1,7 +1,6 @@
 package net.ticherhaz.karangancemerlangspm;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -143,6 +143,7 @@ public class UmumActivity extends SkinActivity {
                                 final String registerUidReply = dataSnapshot1.child("registeredUid").getValue(String.class);
                                 final String umumDetailUidFirst = dataSnapshot1.child("umumDetailUid").getValue(String.class);
 
+
                                 //checking umumuid here if same or not to check whether it really the new user reply or not
                                 if (model.getUmumUid().equals(umumDetailUidFirst)) {
                                     //After that we GONE it
@@ -183,32 +184,6 @@ public class UmumActivity extends SkinActivity {
 
                     }
                 });
-
-
-//                if (model.getRegisteredUidLastReply() != null) {
-//                    //for the name of last reply
-//                    databaseReference.child("registeredUser").child(model.getRegisteredUidLastReply()).addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                            if (dataSnapshot.exists()) {
-//                                RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
-//                                if (registeredUser != null) {
-//                                    String dibalasOleh = "Dibalas Oleh <b>" + registeredUser.getUsername() + "</b>";
-//                                    holder.getTextViewDibalasOleh().setText(Html.fromHtml(dibalasOleh));
-//                                }
-//                            }
-//
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                        }
-//                    });
-//                } else {
-//                    holder.getTextViewDibalasOleh().setVisibility(View.GONE);
-//                }
-
 
                 if (model.getMasaDibalasOleh() != null) {
                     //This for the masa dibalas oleh
@@ -280,12 +255,17 @@ public class UmumActivity extends SkinActivity {
                             public boolean onLongClick(View view) {
                                 AlertDialog alertDialog = new AlertDialog.Builder(UmumActivity.this)
                                         .setTitle("Options")
-                                        .setMessage("Are you sure you want to delete this?")
+                                        .setMessage("Are you sure you want to delete this? \nps: please make sure you remove all the posts inside this thread")
                                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 firebaseRecyclerAdapter.getRef(position).removeValue();
                                                 databaseReference.child("umumPos").child(forumUid).child(umumUid).removeValue();
+                                                //And then we need to remove the total post that user post
+                                                //for example: ticherhaz post in this umumUid 3 posts. how to remove them?
+
+
+
                                             }
                                         })
                                         .setNegativeButton("No", new DialogInterface.OnClickListener() {

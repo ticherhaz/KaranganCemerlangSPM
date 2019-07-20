@@ -27,6 +27,7 @@ import com.zxy.skin.sdk.SkinActivity;
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.Model.Umum;
 import net.ticherhaz.karangancemerlangspm.Model.UmumDetail;
+import net.ticherhaz.karangancemerlangspm.Model.UmumPosUser;
 import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
 
 import static net.ticherhaz.karangancemerlangspm.Util.Others.isNetworkAvailable;
@@ -159,12 +160,9 @@ public class TopikBaruActivity extends SkinActivity {
 
         String activityUmumLogUid = databaseReference.push().push().getKey();
         String activityKududukanLogUid = databaseReference.push().push().push().getKey();
+        String umumPosUserUid = databaseReference.push().push().push().push().getKey();
         String type = title;
         String lastVisitedUser = userName;
-
-
-        //--------------------
-        String umumDetailUid = databaseReference.push().push().push().push().getKey();
 
 
         //Call class to store the value
@@ -172,11 +170,17 @@ public class TopikBaruActivity extends SkinActivity {
                 masaDibalasOleh, onCreatedDate, activityUmumLogUid, activityKududukanLogUid, type, lastVisitedUser);
 
 
-        UmumDetail umumDetail = new UmumDetail(umumDetailUid, registeredUid, onCreatedDate, deskripsi);
+        UmumDetail umumDetail = new UmumDetail(umumUid, registeredUid, onCreatedDate, deskripsi);
 
-        if (umumUid != null && umumDetailUid != null) {
+        //Update umumPos of this user who want to post
+        UmumPosUser umumPosUser = new UmumPosUser(umumPosUserUid, umumUid, registeredUid, 1);
+
+        if (umumUid != null) {
+            if (umumPosUserUid != null) {
+                databaseReference.child("umumPosUser").child(umumUid).setValue(umumPosUser);
+            }
             databaseReference.child("umum").child(forumUid).child(umumUid).setValue(umum);
-            databaseReference.child("umumPos").child(forumUid).child(umumUid).child(umumDetailUid).setValue(umumDetail).addOnCompleteListener(new OnCompleteListener<Void>() {
+            databaseReference.child("umumPos").child(forumUid).child(umumUid).child(umumUid).setValue(umumDetail).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
