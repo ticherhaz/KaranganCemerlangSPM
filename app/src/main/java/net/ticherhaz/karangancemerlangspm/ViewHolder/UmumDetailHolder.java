@@ -64,8 +64,6 @@ public class UmumDetailHolder extends RecyclerView.ViewHolder {
                 return false;
             }
         });
-
-        //  textViewDeskripsi.setMovementMethod(new ScrollingMovementMethod());
     }
 
     public TextView getTextViewEditYes() {

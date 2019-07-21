@@ -125,7 +125,7 @@ public class ProfileActivity extends SkinActivity {
                         setTitle(registeredUser.getUsername());
                         //Check for image if null or not (profileUrl)
                         if (profileUrl != null) {
-                            Glide.with(ProfileActivity.this)
+                            Glide.with(getApplicationContext())
                                     .load(profileUrl)
                                     .into(imageViewProfile);
                         }
@@ -154,7 +154,6 @@ public class ProfileActivity extends SkinActivity {
                                 }
                                 break;
                         }
-
 
                         tvSekolah.setText(registeredUser.getSekolah());
                         tvGender.setText(registeredUser.getGender());
@@ -187,7 +186,6 @@ public class ProfileActivity extends SkinActivity {
 
                         tvMode.setText(registeredUser.getMode());
                         new Others().setStatus(registeredUser.getMode(), tvMode);
-
 
                         tvPostCount.setText(String.format(Locale.getDefault(), "Jumlah Pos: %d", registeredUser.getPostCount()));
                         tvReputation.setText(String.format(Locale.getDefault(), "Reputasi: %d", registeredUser.getReputation()));

@@ -1,6 +1,7 @@
 package net.ticherhaz.karangancemerlangspm.ViewHolder;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ public class UmumHolder extends RecyclerView.ViewHolder {
     private TextView textViewDimulaiOleh;
     private TextView textViewDibalasOleh;
     private TextView textViewMasaDibalasOleh;
+    private ImageView imageViewProfile;
 
     public UmumHolder(@NonNull View itemView) {
         super(itemView);
@@ -28,6 +30,15 @@ public class UmumHolder extends RecyclerView.ViewHolder {
         textViewDimulaiOleh = itemView.findViewById(R.id.text_view_dimulai_oleh);
         textViewDibalasOleh = itemView.findViewById(R.id.text_view_dibalas_oleh);
         textViewMasaDibalasOleh = itemView.findViewById(R.id.text_view_masa_dibalas_oleh);
+        imageViewProfile = itemView.findViewById(R.id.iv_profile);
+    }
+
+    public ImageView getImageViewProfile() {
+        return imageViewProfile;
+    }
+
+    public void setImageViewProfile(ImageView imageViewProfile) {
+        this.imageViewProfile = imageViewProfile;
     }
 
     public View getView() {

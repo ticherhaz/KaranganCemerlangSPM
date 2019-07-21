@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -91,6 +93,7 @@ public class ForumActivity extends SkinActivity {
     private TextView textViewTotalPosCount;
     private TextView textViewSetting;
     private TextView textViewStatus;
+    private ImageView ivProfile;
 
     //Method setFirebaseRecycler
     private void setFirebaseRecyclerAdapter() {
@@ -271,7 +274,6 @@ public class ForumActivity extends SkinActivity {
         }
     }
 
-
     //Make a new calculation.
     private void calculateAllOnlineRegisteredUser() {
         databaseReference.child("registeredUser").addValueEventListener(new ValueEventListener() {
@@ -330,7 +332,6 @@ public class ForumActivity extends SkinActivity {
         });
     }
 
-
     private void listID() {
         textViewUsername = findViewById(R.id.text_view_username);
         //This is for the textview auto gerak kalau nama dia panjang sangat
@@ -342,6 +343,9 @@ public class ForumActivity extends SkinActivity {
         textViewTotalPosCount = findViewById(R.id.text_view_pos);
         textViewSetting = findViewById(R.id.text_view_setting);
         textViewStatus = findViewById(R.id.text_view_status);
+
+        //Image View
+        ivProfile = findViewById(R.id.iv_profile);
 
         //Button Initialize
         buttonSignIn = findViewById(R.id.button_sign_in);
@@ -421,12 +425,13 @@ public class ForumActivity extends SkinActivity {
                         RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
 
                         if (registeredUser != null) {
-                            String sekolah = registeredUser.getSekolah();
-                            String reputation = String.valueOf(registeredUser.getReputation());
-                            String username = registeredUser.getUsername();
-                            String onlineStatus = registeredUser.getOnlineStatus();
-                            String totalPos = String.valueOf(registeredUser.getPostCount());
-                            String status = registeredUser.getMode();
+                            final String sekolah = registeredUser.getSekolah();
+                            final String reputation = String.valueOf(registeredUser.getReputation());
+                            final String username = registeredUser.getUsername();
+                            final String onlineStatus = registeredUser.getOnlineStatus();
+                            final String totalPos = String.valueOf(registeredUser.getPostCount());
+                            final String status = registeredUser.getMode();
+                            final String profileUrl = registeredUser.getProfileUrl();
                             //Check the online status, if online or not
                             if (onlineStatus.equals("Online")) {
                                 textViewUsername.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sign_online_green, 0, 0, 0);
@@ -453,6 +458,13 @@ public class ForumActivity extends SkinActivity {
                                     textViewUsername.setTextColor(getResources().getColor(R.color.colorAhliPremium));
                                     break;
                             }
+
+                            //Check for image if null or not (profileUrl)
+                            if (profileUrl != null) {
+                                Glide.with(getApplicationContext())
+                                        .load(profileUrl)
+                                        .into(ivProfile);
+                            }
                             textViewUsername.setText(username);
                             textViewTotalPosCount.setText(totalPos);
                             new Others().setStatus(status, textViewStatus);
@@ -474,7 +486,6 @@ public class ForumActivity extends SkinActivity {
             linearLayoutOlderUser.setVisibility(View.GONE);
         }
     }
-
 
     private void setTextViewSetting() {
         textViewSetting.setOnClickListener(new View.OnClickListener() {
@@ -601,7 +612,6 @@ public class ForumActivity extends SkinActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forum);
         listID();
-        //setFirebaseRecyclerAdapter();
         setButtonSignIn();
         setButtonSignUp();
         setTextViewSignOut();

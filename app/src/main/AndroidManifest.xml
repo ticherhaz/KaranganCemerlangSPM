@@ -6,9 +6,10 @@
 
     <uses-sdk tools:overrideLibrary="com.zxy.skin.sdk" />
 
-    <dist:module dist:instant="true" /> <!-- Using the internet connection -->
+    <dist:module dist:instant="true" />
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -18,18 +19,27 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         tools:ignore="GoogleAppIndexingWarning,HardcodedDebugMode">
-        <activity android:name=".ChangePasswordActivity"></activity>
-        <activity android:name=".Profile2Activity" />
-        <activity android:name=".ProfileEditActivity">
-
-            <!-- This is for the back button navigation -->
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:label="@string/change_password">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SettingActivity" />
+        </activity>
+        <activity android:name=".Profile2Activity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ForumActivity" />
+        </activity>
+        <activity
+            android:name=".ProfileEditActivity"
+            android:label="@string/edit_profil">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SettingActivity" />
         </activity>
         <activity android:name=".ProfileActivity">
-
-            <!-- This is for the back button navigation -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".UmumDetailActivity" />
@@ -37,8 +47,6 @@
         <activity
             android:name=".PeribahasaActivity"
             android:label="@string/peribahasa">
-
-            <!-- This is for the back button navigation -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -46,15 +54,11 @@
         <activity
             android:name=".SettingActivity"
             android:label="@string/tetapan">
-
-            <!-- This is for the back button navigation -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ForumActivity" />
         </activity>
         <activity android:name=".UmumDetailActivity">
-
-            <!-- This is for the back button navigation -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".UmumActivity" />
@@ -62,15 +66,11 @@
         <activity
             android:name=".TopikBaruActivity"
             android:label="Mulakan Topik Baru">
-
-            <!-- This is for the back button navigation -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".UmumActivity" />
         </activity>
         <activity android:name=".UmumActivity">
-
-            <!-- This is for the back button navigation -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ForumActivity" />
@@ -78,8 +78,6 @@
         <activity
             android:name=".JenisKaranganActivity"
             android:label="@string/jenis_karangan">
-
-            <!-- This is for the back button navigation -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -87,7 +85,6 @@
         <activity
             android:name=".OnlineUserActivity"
             android:label="Jumlah Orang Dalam Talian">
-
             <!-- This is for the back button navigation -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -104,8 +101,6 @@
         <activity
             android:name=".ForumActivity"
             android:label="@string/forum">
-
-            <!-- This is for the back button navigation -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -114,8 +109,6 @@
         <activity
             android:name=".HantarKaranganActivity"
             android:label="@string/hantar_karangan">
-
-            <!-- This is for the back button navigation -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -123,8 +116,6 @@
         <activity
             android:name=".SenaraiKaranganActivity"
             android:label="Senarai Karangan">
-
-            <!-- This is for the back button navigation -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -133,8 +124,6 @@
             android:name=".FeedbackActivity"
             android:label="@string/feedback"
             android:windowSoftInputMode="stateHidden">
-
-            <!-- This is for the back button navigation -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -142,8 +131,6 @@
         <activity
             android:name=".TipsKaranganActivity"
             android:label="@string/tips_karangan">
-
-            <!-- This is for the back button navigation -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -151,8 +138,6 @@
         <activity
             android:name=".KaranganDetailActivity"
             android:label="@string/karangan">
-
-            <!-- This is for the back button navigation -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -175,5 +160,4 @@
             android:exported="false"
             tools:ignore="InnerclassSeparator" />
     </application>
-
 </manifest>

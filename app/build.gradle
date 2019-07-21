@@ -52,5 +52,7 @@ dependencies {
     implementation project(path: ':lib')
     //For time
     implementation 'com.github.ticherhaz:tarikhmasa:1.5.7'
+    //Image Crop
+    implementation 'com.soundcloud.android:android-crop:1.0.1@aar'
 }
 apply plugin: 'com.google.gms.google-services'

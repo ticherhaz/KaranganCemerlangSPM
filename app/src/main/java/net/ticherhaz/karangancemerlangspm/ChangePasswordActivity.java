@@ -11,4 +11,15 @@ public class ChangePasswordActivity extends SkinActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }

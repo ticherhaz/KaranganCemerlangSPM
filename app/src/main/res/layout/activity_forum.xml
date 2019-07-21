@@ -108,10 +108,12 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/image_view_profile"
+                    android:id="@+id/iv_profile"
                     android:layout_width="61dp"
                     android:layout_height="61dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginLeft="3dp"
                     android:src="@drawable/emblem" />
 
                 <LinearLayout

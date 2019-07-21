@@ -19,6 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -116,8 +117,16 @@ public class UmumActivity extends SkinActivity {
                         if (dataSnapshot.exists()) {
                             RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
                             if (registeredUser != null) {
-                                String dimulaiOleh = "Dimulai Oleh <b>" + registeredUser.getUsername() + "</b>, " + GetTarikhMasaTimeAgo(model.getOnCreatedDate(), "MY", true, false);
+                                final String dimulaiOleh = "Dimulai Oleh <b>" + registeredUser.getUsername() + "</b>, " + GetTarikhMasaTimeAgo(model.getOnCreatedDate(), "MY", true, false);
                                 holder.getTextViewDimulaiOleh().setText(Html.fromHtml(dimulaiOleh));
+
+                                final String profileUrl = registeredUser.getProfileUrl();
+                                //Check if profileUrl is null or not
+                                if (profileUrl != null) {
+                                    Glide.with(getApplicationContext())
+                                            .load(profileUrl)
+                                            .into(holder.getImageViewProfile());
+                                }
                             }
                         }
                     }
@@ -263,7 +272,6 @@ public class UmumActivity extends SkinActivity {
                                                 databaseReference.child("umumPos").child(forumUid).child(umumUid).removeValue();
                                                 //And then we need to remove the total post that user post
                                                 //for example: ticherhaz post in this umumUid 3 posts. how to remove them?
-
 
 
                                             }

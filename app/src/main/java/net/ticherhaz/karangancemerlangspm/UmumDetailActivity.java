@@ -18,10 +18,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -54,7 +54,7 @@ import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class UmumDetailActivity extends SkinActivity {
 
-    int _count = 5;//5 seconds
+    int _count = 30;//30 seconds
     //Firebase
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -99,12 +99,11 @@ public class UmumDetailActivity extends SkinActivity {
                 }
             }
 
-            _count = 60;//again set to 60 seconds
+            _count = 30;//again set to 30 seconds
             canSendMessage = true;//enable send
 
         }
     };
-    private long delay = 7000;
 
     private void retrieveUserData() {
         databaseReference.child("registeredUser").child(registeredUidReply).addValueEventListener(new ValueEventListener() {
@@ -156,27 +155,23 @@ public class UmumDetailActivity extends SkinActivity {
                         if (dataSnapshot.exists()) {
                             final RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
                             if (registeredUser != null) {
-                                String registeredUserUidA = registeredUser.getRegisteredUserUid();
-                                String userUidA = registeredUser.getUserUid();
-                                String typeUserA = registeredUser.getTypeUser();
-                                String profileUrlA = registeredUser.getProfileUrl();
-                                String emailA = registeredUser.getEmail();
-                                String usernameA = registeredUser.getUsername();
-                                String sekolahA = registeredUser.getSekolah();
-                                String titleTypeA = registeredUser.getTitleType();
-                                String customTitleA = registeredUser.getCustomTitle();
-                                String bioA = registeredUser.getBio();
-                                String genderA = registeredUser.getGender();
-                                String stateA = registeredUser.getState();
-                                String birthdayA = registeredUser.getBirthday();
-                                String modeA = registeredUser.getMode();
-                                long postCountA = registeredUser.getPostCount();
-                                long reputationA = registeredUser.getReputation();
-                                long reputationPowerA = registeredUser.getReputationPower();
-                                String onlineStatusA = registeredUser.getOnlineStatus();
-                                long lastOnlineA = registeredUser.getLastOnline();
-                                String lastCreatedThreadA = registeredUser.getLastCreatedThread();
-                                String onDateCreatedA = registeredUser.getOnDateCreated();
+                                final String profileUrlA = registeredUser.getProfileUrl();
+                                final String usernameA = registeredUser.getUsername();
+                                final String sekolahA = registeredUser.getSekolah();
+                                final String titleTypeA = registeredUser.getTitleType();
+                                final String genderA = registeredUser.getGender();
+                                final String stateA = registeredUser.getState();
+                                final String modeA = registeredUser.getMode();
+                                final long postCountA = registeredUser.getPostCount();
+                                final long reputationA = registeredUser.getReputation();
+                                final String onDateCreatedA = registeredUser.getOnDateCreated();
+
+                                //Check if profileUrl is null or not
+                                if (profileUrlA != null) {
+                                    Glide.with(getApplicationContext())
+                                            .load(profileUrlA)
+                                            .into(holder.getImageViewProfile());
+                                }
 
                                 //Call another class to change color
                                 new UserTypeColor().setTextColorUserUmumDetail(registeredUser, holder, UmumDetailActivity.this);
@@ -590,79 +585,60 @@ public class UmumDetailActivity extends SkinActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkEmpty(v);
+                checkEmpty();
             }
         });
     }
 
     //Method check
-    private void checkEmpty(final View view) {
+    private void checkEmpty() {
         if (!TextUtils.isEmpty(editTextReply.getText().toString())) {
 
             //check if the user is already signed in or not
             if (firebaseUser != null) {
 
-                //After that we create countdown to avoid any spams
-                view.setEnabled(false);
-                view.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (ViewCompat.isAttachedToWindow(view)) {
-                            view.setEnabled(true);
-                            String umumDetailUid = databaseReference.push().getKey();
-                            //TODO: this is format date to store string and we can retrieve the string like this : 2 minit yang lalu.
-                            final String onCreatedDate = GetTarikhMasa();
-                            String reply = editTextReply.getText().toString();
-                            UmumDetail umumDetail = new UmumDetail(umumDetailUid, registeredUidReply, onCreatedDate, reply);
+                if (canSendMessage) {
 
-                            if (umumDetailUid != null) {
-                                databaseReference.child("umumPos").child(forumUid).child(umumUid).child(umumDetailUid).setValue(umumDetail).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            //Then we store the data into the umum
-                                            databaseReference.child("umum").child(forumUid).child(umumUid).child("masaDibalasOleh").setValue(onCreatedDate);
-                                            databaseReference.child("umum").child(forumUid).child(umumUid).child("registeredUidLastReply").setValue(registeredUidReply);
+                    String umumDetailUid = databaseReference.push().getKey();
+                    //TODO: this is format date to store string and we can retrieve the string like this : 2 minit yang lalu.
+                    final String onCreatedDate = GetTarikhMasa();
+                    String reply = editTextReply.getText().toString();
+                    UmumDetail umumDetail = new UmumDetail(umumDetailUid, registeredUidReply, onCreatedDate, reply);
 
-                                            //after that we increase the amount of post
-                                            new RunTransaction().runTransactionRegisteredUserPostCount(databaseReference, registeredUidReply);
+                    if (umumDetailUid != null) {
+                        databaseReference.child("umumPos").child(forumUid).child(umumUid).child(umumDetailUid).setValue(umumDetail).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    //Then we store the data into the umum
+                                    databaseReference.child("umum").child(forumUid).child(umumUid).child("masaDibalasOleh").setValue(onCreatedDate);
+                                    databaseReference.child("umum").child(forumUid).child(umumUid).child("registeredUidLastReply").setValue(registeredUidReply);
 
-                                            Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
-                                            editTextReply.setText("");
-                                            //then hide the keyboard
-                                            try {
-                                                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                                                if (UmumDetailActivity.this.getCurrentFocus() != null)
-                                                    if (imm != null) {
-                                                        imm.hideSoftInputFromWindow(UmumDetailActivity.this.getCurrentFocus().getWindowToken(), 0);
-                                                    }
-                                            } catch (Exception ignored) {
+                                    //after that we increase the amount of post
+                                    new RunTransaction().runTransactionRegisteredUserPostCount(databaseReference, registeredUidReply);
+
+                                    Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                                    editTextReply.setText("");
+                                    //then hide the keyboard
+                                    try {
+                                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                                        if (UmumDetailActivity.this.getCurrentFocus() != null)
+                                            if (imm != null) {
+                                                imm.hideSoftInputFromWindow(UmumDetailActivity.this.getCurrentFocus().getWindowToken(), 0);
                                             }
-                                        }
+                                    } catch (Exception ignored) {
                                     }
-                                });
+                                }
                             }
-                        }
+                        });
                     }
-                }, 7000);
 
-
-//
-//                if (canSendMessage) {
-//
-//
-//
-//
-//
-//
-//                    canSendMessage = false;
-//                    Thread t = new Thread(countDown);
-//                    t.start();
-//                } else {
-//                    Toast.makeText(getApplicationContext(), "You can send After " + _count + " Seconds", Toast.LENGTH_SHORT).show();
-//                }
-
-
+                    canSendMessage = false;
+                    Thread t = new Thread(countDown);
+                    t.start();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Kamu boleh membalas semula " + _count + " saat lagi...", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 //So tell the user to login 1st.
                 Toast.makeText(UmumDetailActivity.this, "Sila Daftar/Log Masuk Terlebih Dahulu", Toast.LENGTH_SHORT).show();
@@ -671,7 +647,6 @@ public class UmumDetailActivity extends SkinActivity {
 
         }
     }
-
 
     //OnBackPressed
     @Override
