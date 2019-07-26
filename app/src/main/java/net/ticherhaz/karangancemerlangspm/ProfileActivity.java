@@ -50,7 +50,7 @@ public class ProfileActivity extends SkinActivity {
     private TextView tvUsername, tvSekolah, tvTitleType, tvCustomTitle, tvBio, tvGender,
             tvState, tvBirthday, tvMode, tvPostCount, tvReputation, tvReputationPower,
             tvOnlineStatus, tvOnCreatedDate;
-    private ImageView imageViewProfile;
+    private ImageView ivProfile;
     private Button bDisable;
 
     private FirebaseAuth fAuth;
@@ -73,7 +73,7 @@ public class ProfileActivity extends SkinActivity {
         tvReputation = findViewById(R.id.tv_reputation);
         tvReputationPower = findViewById(R.id.tv_reputation_power);
         tvOnCreatedDate = findViewById(R.id.tv_created_date);
-        imageViewProfile = findViewById(R.id.iv_profile);
+        ivProfile = findViewById(R.id.iv_profile);
         bDisable = findViewById(R.id.b_disable);
         setbDisable();
 
@@ -94,6 +94,45 @@ public class ProfileActivity extends SkinActivity {
                         final String typeUser = registeredUser.getTypeUser();
                         if (typeUser.equals("admin") || typeUser.equals("moderator")) {
                             bDisable.setVisibility(View.VISIBLE);
+                            ivProfile.setOnLongClickListener(new View.OnLongClickListener() {
+                                @Override
+                                public boolean onLongClick(View view) {
+                                    AlertDialog ag = new AlertDialog.Builder(ProfileActivity.this)
+                                            .setMessage("Are you sure you want to delete this profile image?")
+                                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    showProgressDialog(ProfileActivity.this);
+                                                    //Database
+                                                    FirebaseDatabase.getInstance().getReference().child("registeredUser").child(registeredUid).child("profileUrl").removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()) {
+                                                                dismissProgressDialog();
+                                                                Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                                                            } else {
+                                                                dismissProgressDialog();
+                                                                if (task.getException() != null)
+                                                                    Toast.makeText(getApplicationContext(), String.format(Locale.getDefault(), "Err: %s", task.getException().getMessage()), Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        }
+                                                    });
+                                                }
+                                            })
+                                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    dialogInterface.dismiss();
+                                                }
+                                            })
+                                            .create();
+
+                                    ag.show();
+                                    ag.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(Color.GREEN);
+                                    ag.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.RED);
+                                    return true;
+                                }
+                            });
                         }
                     }
                 }
@@ -127,7 +166,7 @@ public class ProfileActivity extends SkinActivity {
                         if (profileUrl != null) {
                             Glide.with(getApplicationContext())
                                     .load(profileUrl)
-                                    .into(imageViewProfile);
+                                    .into(ivProfile);
                         }
                         tvUsername.setText(registeredUser.getUsername());
 

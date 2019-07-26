@@ -691,6 +691,7 @@ public class MainActivity extends SkinActivity {
                         // your action here
                         if (!TextUtils.isEmpty(editTextSearch.getText().toString())) {
                             setFirebaseRecyclerAdapter(editTextSearch.getText().toString());
+                            // editTextSearch.getText().clear();
                         }
 
                         return true;

@@ -19,15 +19,11 @@ public class UmumDetailHolder extends RecyclerView.ViewHolder {
     private ImageView imageViewProfile;
     private TextView textViewUsername;
     private TextView textViewUserTitle;
-    private TextView textViewSekolah;
-    private TextView textViewUserJoinDate;
-    private TextView textViewGender;
     private TextView textViewPos;
     private TextView textViewReputation;
     private TextView textViewDeskripsi;
     private TextView textViewGiveReputation;
     private TextView textViewStatus;
-    private TextView textViewState;
     private TextView textViewEditReply;
     private EditText editTextEdit;
     private TextView textViewEditYes;
@@ -41,15 +37,12 @@ public class UmumDetailHolder extends RecyclerView.ViewHolder {
         imageViewProfile = itemView.findViewById(R.id.image_view_profile);
         textViewUsername = itemView.findViewById(R.id.text_view_username);
         textViewUserTitle = itemView.findViewById(R.id.text_view_user_title);
-        textViewSekolah = itemView.findViewById(R.id.text_view_sekolah);
-        textViewUserJoinDate = itemView.findViewById(R.id.text_view_user_join_date);
-        textViewGender = itemView.findViewById(R.id.text_view_gender);
         textViewPos = itemView.findViewById(R.id.text_view_pos);
         textViewReputation = itemView.findViewById(R.id.text_view_reputation);
         textViewDeskripsi = itemView.findViewById(R.id.text_view_deskripsi);
         textViewGiveReputation = itemView.findViewById(R.id.text_view_give_reputation);
         textViewStatus = itemView.findViewById(R.id.text_view_status);
-        textViewState = itemView.findViewById(R.id.text_view_state);
+
         textViewEditReply = itemView.findViewById(R.id.text_view_edit_reply);
         editTextEdit = itemView.findViewById(R.id.edit_text_deskripsi);
         textViewEditYes = itemView.findViewById(R.id.text_view_edit_reply_submit);
@@ -96,14 +89,6 @@ public class UmumDetailHolder extends RecyclerView.ViewHolder {
 
     public void setTextViewEditReply(TextView textViewEditReply) {
         this.textViewEditReply = textViewEditReply;
-    }
-
-    public TextView getTextViewState() {
-        return textViewState;
-    }
-
-    public void setTextViewState(TextView textViewState) {
-        this.textViewState = textViewState;
     }
 
     public TextView getTextViewStatus() {
@@ -154,30 +139,6 @@ public class UmumDetailHolder extends RecyclerView.ViewHolder {
         this.textViewUserTitle = textViewUserTitle;
     }
 
-    public TextView getTextViewSekolah() {
-        return textViewSekolah;
-    }
-
-    public void setTextViewSekolah(TextView textViewSekolah) {
-        this.textViewSekolah = textViewSekolah;
-    }
-
-    public TextView getTextViewUserJoinDate() {
-        return textViewUserJoinDate;
-    }
-
-    public void setTextViewUserJoinDate(TextView textViewUserJoinDate) {
-        this.textViewUserJoinDate = textViewUserJoinDate;
-    }
-
-    public TextView getTextViewGender() {
-        return textViewGender;
-    }
-
-    public void setTextViewGender(TextView textViewGender) {
-        this.textViewGender = textViewGender;
-    }
-
     public TextView getTextViewPos() {
         return textViewPos;
     }
@@ -209,5 +170,4 @@ public class UmumDetailHolder extends RecyclerView.ViewHolder {
     public void setTextViewGiveReputation(TextView textViewGiveReputation) {
         this.textViewGiveReputation = textViewGiveReputation;
     }
-
 }

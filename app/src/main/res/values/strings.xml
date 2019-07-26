@@ -233,6 +233,8 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
     <string name="change_password">Tukar Kata Laluan</string>
     <string name="old_password">Kata Laluan Lama</string>
     <string name="edit_profil">Mengubah Profil</string>
+    <string name="mencari_peribahasa">Mencari Peribahasa</string>
+    <string name="peribahasa_rekod">Maaf tiada dalam rekod...</string>
     <string-array name="feedback_array">
         <item>Cadangan</item>
         <item>Pujian</item>

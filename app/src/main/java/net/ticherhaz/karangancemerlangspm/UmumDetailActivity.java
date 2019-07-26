@@ -49,7 +49,6 @@ import net.ticherhaz.tarikhmasa.TarikhMasa;
 
 import static net.ticherhaz.karangancemerlangspm.Util.ProgressDialogCustom.dismissProgressDialog;
 import static net.ticherhaz.karangancemerlangspm.Util.ProgressDialogCustom.showProgressDialog;
-import static net.ticherhaz.tarikhmasa.TarikhMasa.ConvertTarikhMasa2LocalTimePattern;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class UmumDetailActivity extends SkinActivity {
@@ -180,12 +179,9 @@ public class UmumDetailActivity extends SkinActivity {
                                 //This part is to display
                                 holder.getTextViewUsername().setText(usernameA);
                                 holder.getTextViewUserTitle().setText(titleTypeA);
-                                holder.getTextViewSekolah().setText(sekolahA);
-                                holder.getTextViewUserJoinDate().setText("Tarikh Sertai: " + ConvertTarikhMasa2LocalTimePattern(onDateCreatedA, "MMM yyyy"));
-                                holder.getTextViewGender().setText("Jantina: " + genderA);
-                                holder.getTextViewPos().setText("Pos: " + postCountA);
+                                //    holder.getTextViewUserJoinDate().setText("Tarikh Sertai: " + ConvertTarikhMasa2LocalTimePattern(onDateCreatedA, "MMM yyyy"));
+                                holder.getTextViewPos().setText(String.valueOf(postCountA));
                                 holder.getTextViewReputation().setText(String.valueOf(reputationA));
-                                holder.getTextViewState().setText("Negeri: " + stateA);
                                 new Others().setStatus(modeA, holder.getTextViewStatus());
 
                                 //Edit part
