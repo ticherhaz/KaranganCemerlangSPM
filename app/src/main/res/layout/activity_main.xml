@@ -141,18 +141,31 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
+                    <!--<Button-->
+                    <!--android:id="@+id/button_hantar_karangan"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="13dp"-->
+                    <!--android:background="@drawable/button_selector"-->
+                    <!--android:drawableTop="@drawable/hantar"-->
+                    <!--android:paddingLeft="11dp"-->
+                    <!--android:paddingTop="19dp"-->
+                    <!--android:paddingRight="11dp"-->
+                    <!--android:paddingBottom="11dp"-->
+                    <!--android:text="@string/hantar_karangan"-->
+                    <!--android:textAllCaps="false"-->
+                    <!--android:textColor="@color/colorTextWhite" />-->
+
                     <Button
-                        android:id="@+id/button_hantar_karangan"
+                        android:id="@+id/button_peribahasa"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="13dp"
                         android:background="@drawable/button_selector"
-                        android:drawableTop="@drawable/hantar"
-                        android:paddingLeft="11dp"
-                        android:paddingTop="19dp"
-                        android:paddingRight="11dp"
-                        android:paddingBottom="11dp"
-                        android:text="@string/hantar_karangan"
+                        android:drawableTop="@drawable/peri"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:text="@string/peribahasa"
                         android:textAllCaps="false"
                         android:textColor="@color/colorTextWhite" />
 
@@ -178,18 +191,6 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/button_peribahasa"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="13dp"
-                        android:background="@drawable/button_selector"
-                        android:drawableTop="@drawable/peri"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="11dp"
-                        android:text="@string/peribahasa"
-                        android:textAllCaps="false"
-                        android:textColor="@color/colorTextWhite" />
 
                 </LinearLayout>
             </LinearLayout>

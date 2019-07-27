@@ -1,5 +1,6 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,7 +74,7 @@ public class OnlineUserActivity extends SkinActivity {
 
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<RegisteredUser, OnlineStatusViewHolder>(firebaseRecyclerOptions) {
             @Override
-            protected void onBindViewHolder(@NonNull OnlineStatusViewHolder holder, int position, @NonNull RegisteredUser model) {
+            protected void onBindViewHolder(@NonNull OnlineStatusViewHolder holder, int position, @NonNull final RegisteredUser model) {
                 holder.getTextViewUsername().setText(model.getUsername());
                 holder.getTextViewUsername().setSelected(true);
                 holder.getTextViewSekolah().setText(model.getSekolah());
@@ -85,6 +86,15 @@ public class OnlineUserActivity extends SkinActivity {
                 if (model.getTitleType() != null) {
                     new UserTypeColor().setTextColorUserOnlineUserActivity(model, holder, OnlineUserActivity.this);
                 }
+
+                holder.getView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(OnlineUserActivity.this, ProfileActivity.class);
+                        intent.putExtra("registeredUid", model.getRegisteredUserUid());
+                        startActivities(new Intent[]{intent});
+                    }
+                });
             }
 
             @NonNull

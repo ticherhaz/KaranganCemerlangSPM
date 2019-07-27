@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -108,8 +109,21 @@ public class ProfileActivity extends SkinActivity {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
                                                             if (task.isSuccessful()) {
-                                                                dismissProgressDialog();
-                                                                Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                                                                //After that we remove value in the profile request
+                                                                //After that store in the firebase user profile request
+                                                                UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder()
+                                                                        .setPhotoUri(null)
+                                                                        .build();
+                                                                fUser.updateProfile(userProfileChangeRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                        if (task.isSuccessful()) {
+                                                                            dismissProgressDialog();
+                                                                            Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                    }
+                                                                });
+
                                                             } else {
                                                                 dismissProgressDialog();
                                                                 if (task.getException() != null)
@@ -181,6 +195,12 @@ public class ProfileActivity extends SkinActivity {
                                 }
                                 break;
                             case "cikgu":
+                                tvUsername.setTextColor(getResources().getColor(R.color.colorCikgu));
+                                if (fUser != null) {
+                                    enablingButton();
+                                }
+                                break;
+                            case "ahli":
                                 tvUsername.setTextColor(getResources().getColor(R.color.colorCikgu));
                                 if (fUser != null) {
                                     enablingButton();

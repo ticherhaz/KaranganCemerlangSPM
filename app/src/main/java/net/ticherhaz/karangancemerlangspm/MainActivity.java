@@ -90,7 +90,7 @@ public class MainActivity extends SkinActivity {
     //Button
     private Button buttonSenaraiKarangan;
     private Button buttonTipsKarangan;
-    private Button buttonHantarKarangan;
+    // private Button buttonHantarKarangan;
     private Button buttonForum;
     private Button buttonPeribahasa;
     private TextView textViewAnnouncement;
@@ -129,7 +129,7 @@ public class MainActivity extends SkinActivity {
         //Button
         buttonSenaraiKarangan = findViewById(R.id.button_senarai_karangan);
         buttonTipsKarangan = findViewById(R.id.button_tips_karangan);
-        buttonHantarKarangan = findViewById(R.id.button_hantar_karangan);
+        //buttonHantarKarangan = findViewById(R.id.button_hantar_karangan);
         buttonForum = findViewById(R.id.button_forum);
         buttonPeribahasa = findViewById(R.id.button_peribahasa);
 
@@ -717,7 +717,6 @@ public class MainActivity extends SkinActivity {
 //                mod = sharedPreferences.getString(SHARED_PREFERENCES_MOD, "");
 //            }
         }
-
         setmCountDownTimer();
         setEditTextSearchEditor();
         setEditTextSearchDrawableRight();
@@ -875,14 +874,14 @@ public class MainActivity extends SkinActivity {
                 startActivity(new Intent(MainActivity.this, TipsKaranganActivity.class));
             }
         });
-        buttonHantarKarangan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, HantarKaranganActivity.class);
-                intent.putExtra("userUid", userUid);
-                startActivities(new Intent[]{intent});
-            }
-        });
+//        buttonHantarKarangan.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, HantarKaranganActivity.class);
+//                intent.putExtra("userUid", userUid);
+//                startActivities(new Intent[]{intent});
+//            }
+//        });
         buttonForum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

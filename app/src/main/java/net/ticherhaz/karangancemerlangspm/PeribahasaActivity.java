@@ -174,18 +174,18 @@ public class PeribahasaActivity extends SkinActivity {
         tPeri.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                final int DRAWABLE_LEFT = 0;
-                //     final int DRAWABLE_TOP = 1;
-                final int DRAWABLE_RIGHT = 2;
-                //  final int DRAWABLE_BOTTOM = 3;
+                // final int DRAWABLE_LEFT = 0;
+                //final int DRAWABLE_TOP = 1;
+                //final int DRAWABLE_RIGHT = 2;
+                //final int DRAWABLE_BOTTOM = 3;
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (event.getRawX() >= (tPeri.getRight() - tPeri.getCompoundPaddingRight())) {
-                        // your action here
-                        if (!TextUtils.isEmpty(tPeri.getText().toString())) {
-
-                            tPeri.getText().clear();
-                        }
+                        //Then check it and clear
+                        if (tPeri.getText() != null)
+                            if (!TextUtils.isEmpty(tPeri.getText().toString())) {
+                                tPeri.getText().clear();
+                            }
                         return true;
                     }
                 }

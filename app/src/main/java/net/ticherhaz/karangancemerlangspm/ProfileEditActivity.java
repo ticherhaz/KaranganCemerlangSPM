@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -41,13 +43,14 @@ public class ProfileEditActivity extends SkinActivity {
     private ImageView iVProfile, iVUploadProfile;
     private Uri pUrl;
     private Button bUpdate;
-
+    private TextInputEditText tietBio;
     private String registeredUid;
 
     private void listID() {
         iVProfile = findViewById(R.id.iv_profile);
         iVUploadProfile = findViewById(R.id.iv_upload_profile);
         bUpdate = findViewById(R.id.b_update);
+        tietBio = findViewById(R.id.tiet_bio);
         fDe = FirebaseDatabase.getInstance();
         dRe = fDe.getReference();
         fSe = FirebaseStorage.getInstance();
@@ -60,12 +63,28 @@ public class ProfileEditActivity extends SkinActivity {
         setiVUploadProfile();
     }
 
+    private void setTietBio() {
+        if (tietBio.getText() != null)
+            if (!TextUtils.isEmpty(tietBio.getText().toString())) {
+                final String bio = tietBio.getText().toString();
+                //And then update data in database
+                dRe.child("registeredUser").child(registeredUid).child("bio").setValue(bio).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Berjaya mengemas kini bio", Toast.LENGTH_SHORT).show();
+                            tietBio.getText().clear();
+                        }
+                    }
+                });
+            }
+    }
+
     private void uploadImage() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Registering...");
+        // progressDialog.setTitle("Memuat Naik Gambar Profil...");
         progressDialog.show();
         if (pUrl != null) {
-
             final String uploadUid = dRe.push().getKey();
             final StorageReference ref = sRe.child("profileImage/" + registeredUid + "/" + uploadUid);
             ref.putFile(pUrl)
@@ -74,7 +93,7 @@ public class ProfileEditActivity extends SkinActivity {
                         public void onFailure(@NonNull Exception e) {
                             progressDialog.dismiss();
                             // dismissProgressDialog();
-                            Toast.makeText(ProfileEditActivity.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ProfileEditActivity.this, "Gagal: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
@@ -114,12 +133,11 @@ public class ProfileEditActivity extends SkinActivity {
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                             double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
                                     .getTotalByteCount());
-                            progressDialog.setMessage("Registering " + (int) progress + "%");
+                            progressDialog.setMessage("Memuat Naik Gambar: " + (int) progress + "%");
                         }
                     });
         } else {
-
-
+            progressDialog.dismiss();
             Toast.makeText(ProfileEditActivity.this, "Hello", Toast.LENGTH_SHORT).show();
         }
     }
@@ -137,11 +155,11 @@ public class ProfileEditActivity extends SkinActivity {
         bUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setTietBio();
                 uploadImage();
             }
         });
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
