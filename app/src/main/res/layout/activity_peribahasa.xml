@@ -41,7 +41,9 @@
                     android:drawableLeft="@drawable/ic_search"
                     android:gravity="center_vertical"
                     android:inputType="text"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textColor="?attr/colorText"
+                    android:textColorHint="?attr/colorText" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>

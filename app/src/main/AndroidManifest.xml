@@ -19,10 +19,26 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         tools:ignore="GoogleAppIndexingWarning,HardcodedDebugMode">
+        <activity
+            android:name=".HubungiKamiUserActivity"
+            android:label="@string/senarai_user">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SettingActivity" />
+        </activity>
+        <activity
+            android:name=".HubungiKamiActivity"
+            android:label="Hubungi Kami"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SettingActivity" />
+        </activity>
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
         <activity
             android:name=".ChangePasswordActivity"
-            android:label="@string/change_password">
+            android:label="@string/change_password"
+            android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SettingActivity" />
@@ -34,7 +50,8 @@
         </activity>
         <activity
             android:name=".ProfileEditActivity"
-            android:label="@string/edit_profil">
+            android:label="@string/edit_profil"
+            android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SettingActivity" />
@@ -46,7 +63,8 @@
         </activity>
         <activity
             android:name=".PeribahasaActivity"
-            android:label="@string/peribahasa">
+            android:label="@string/peribahasa"
+            android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -85,6 +103,7 @@
         <activity
             android:name=".OnlineUserActivity"
             android:label="Jumlah Orang Dalam Talian">
+
             <!-- This is for the back button navigation -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -160,4 +179,5 @@
             android:exported="false"
             tools:ignore="InnerclassSeparator" />
     </application>
+
 </manifest>

@@ -39,6 +39,14 @@
         <item name="cardElevation">3dp</item>
     </style>
 
+    <style name="styleCardViewRight">
+        <item name="android:gravity">right</item>
+        <item name="android:layout_gravity">right</item>
+        <item name="cardBackgroundColor">?attr/colorBackgroundRecyclerView</item>
+        <item name="cardCornerRadius">11dp</item>
+        <item name="cardElevation">3dp</item>
+    </style>
+
     <style name="styleSpinner" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
         <item name="android:background">?attr/colorBackgroundRecyclerView</item>
         <item name="android:textColorHighlight">@color/colorTextWhite</item>

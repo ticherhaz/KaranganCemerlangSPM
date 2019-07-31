@@ -11,7 +11,6 @@ public class ProgressDialogCustom {
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(activity);
             progressDialog.setMessage("Memuatkan...");
-            progressDialog.setIndeterminate(true);
             progressDialog.setCancelable(false);
             progressDialog.show();
         }
@@ -20,6 +19,7 @@ public class ProgressDialogCustom {
     public static void dismissProgressDialog() {
         if (progressDialog != null) {
             progressDialog.dismiss();
+            progressDialog = null;
         }
     }
 }

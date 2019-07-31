@@ -41,6 +41,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.Phone;
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
+import net.ticherhaz.karangancemerlangspm.Util.Others;
 
 import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
@@ -157,7 +158,13 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
             editTextConfirmPassword.requestFocus();
         } else if (editTextPassword.length() <= 8) {
             setToast("Kata laluan hendaklah melebihi 8 digit");
-            editTextPassword.setText("");
+            editTextPassword.getText().clear();
+            editTextConfirmPassword.getText().clear();
+            editTextPassword.requestFocus();
+        } else if (Others.PasswordStrength.calculateStrength(editTextPassword.getText().toString()).getValue() < Others.PasswordStrength.STRONG.getValue()) {
+            setToast("Kata Laluan Perlu Ada Sekurangnya 1 Huruf Kecil, 1 Huruf Besar dan 1 Nombor Angka");
+            editTextPassword.getText().clear();
+            editTextConfirmPassword.getText().clear();
             editTextPassword.requestFocus();
         } else if (Integer.parseInt(editTextDay.getText().toString()) == 0 || Integer.parseInt(editTextDay.getText().toString()) >= 32 ||
                 Integer.parseInt(editTextMonth.getText().toString()) == 0 || Integer.parseInt(editTextMonth.getText().toString()) >= 13 ||

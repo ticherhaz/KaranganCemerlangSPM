@@ -5,8 +5,6 @@
     <string name="password">Kata Laluan</string>
     <string name="title">Tajuk</string>
     <string name="description">Deskripsi</string>
-
-    <!--<string name="karangan">Karangan</string>-->
     <string name="add">Tambah</string>
     <string name="update">Kemas Kini</string>
     <string name="versi">versi</string>
@@ -59,7 +57,7 @@
     <string name="about_title">
         <![CDATA[
         <h3>Karangan Cemerlang SPM</h3>
-        <i>versi 3.00</i><br>
+        <i>versi 3.01</i><br>
         hazman45.blogspot.com<br>
         Ticherhaz©2019
 
@@ -145,8 +143,6 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
     <string name="about_credit">Cikgu Mariani - Cikgu Badrunsham - Cikgu Hamidah - Cikgu Rohani - Cikgu Harum Awang - Cikgu Samat - Cikgu Che Noranuwi - Cikgu Qamarul Abdullah - Nabil Fikri - Muhd Arif (Bob) - Luqman K - Affiq Shamil - Peah - Chekta - Eisom - Achik - Jumper - Fini - chocoberry520</string>
     <string name="submit">Hantar</string>
     <string name="logo_kcspm">Logo KCSPM</string>
-    <!--<string name="viewer">Penonton</string>-->
-    <!--<string name="fav">Kegemaran</string>-->
     <string name="senarai_karangan">Senarai</string>
     <string name="hantar_karangan">Hantar</string>
     <string name="muat_naik_file">Muat Naik Fail</string>
@@ -162,15 +158,9 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
     <string name="progress_uploading">Memuat Naik…</string>
     <string name="upload_success">Memuat Naik Berjaya</string>
     <string name="upload_failure">Memuat Naik Gagal</string>
-    <!--<string name="umum">Umum</string>-->
-    <!--<string name="views">0</string>-->
-    <!--<string name="posts">Pos:</string>-->
-    <!--<string name="last_thread">Last Thread</string>-->
-    <!--<string name="by_user">daripada Penggunar</string>-->
     <string name="sign_in">Log Masuk</string>
     <string name="sign_up">Daftar</string>
     <string name="to_reply_thread_sign_up_today">Untuk Membalas Forum, Sila Daftar/Log Masuk</string>
-    <!--<string name="reputation">Reputasi: </string>-->
     <string name="sign_out">Log Keluar</string>
     <string name="username">Nama Samaran</string>
     <string name="confirm_password">Mengesahkan Kata Laluan</string>
@@ -184,17 +174,11 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
     <string name="merriweather">Merriweather</string>
     <string name="roboto">Roboto</string>
     <string name="default_font">Default</string>
-    <!--<string name="black">Mod Hitam</string>-->
     <string name="timenewroman">Times New Roman</string>
     <string name="arial">Arial</string>
     <string name="topik_baru">+ Topik Baru</string>
-    <!--<string name="topik">Topik</string>-->
     <string name="kedudukan">0</string>
-    <!--<string name="dibalas_oleh">Dibalas oleh</string>-->
-    <!--<string name="_1_minit_yang_lalu">1 Minit Yang Lalu</string>-->
-    <!--<string name="dimulai_oleh">Dimulai Oleh N/A, 1 Minit Yang Lalu</string>-->
     <string name="kosong">0</string>
-    <!--<string name="tajuk">Tajuk</string>-->
     <string name="deskripsi">Deskripsi</string>
     <string name="hantar">Hantar</string>
     <string name="join_date">Join Date</string>
@@ -235,6 +219,11 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
     <string name="edit_profil">Mengubah Profil</string>
     <string name="mencari_peribahasa">Mencari Peribahasa</string>
     <string name="peribahasa_rekod">Maaf tiada dalam rekod…</string>
+    <string name="new_password">Kata Laluan Baru</string>
+    <string name="new_password_confirm">Mengesahkan Kata Laluan Baru</string>
+    <string name="bio">Bio</string>
+    <string name="contact_us">Hubungi Kami</string>
+    <string name="senarai_user">Senarai Pengguna</string>
     <string-array name="feedback_array">
         <item>Cadangan</item>
         <item>Pujian</item>

@@ -48,5 +48,42 @@
             android:text="@string/change_password"
             android:textColor="?attr/colorText" />
 
+        <TextView
+            android:id="@+id/tv_contact_us"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginRight="3dp"
+            android:background="@drawable/edit_text_border"
+            android:clickable="true"
+            android:drawableStart="@drawable/ic_contact_us"
+            android:drawableLeft="@drawable/ic_contact_us"
+            android:drawablePadding="11dp"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:padding="17dp"
+            android:text="@string/contact_us"
+            android:textColor="?attr/colorText" />
+
+        <TextView
+            android:id="@+id/tv_admin_contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginRight="3dp"
+            android:background="@drawable/edit_text_border"
+            android:clickable="true"
+            android:drawableStart="@drawable/ic_contact_us"
+            android:drawableLeft="@drawable/ic_contact_us"
+            android:drawablePadding="11dp"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:padding="17dp"
+            android:text="@string/senarai_user"
+            android:textColor="?attr/colorText"
+            android:visibility="gone" />
+
     </LinearLayout>
 </ScrollView>

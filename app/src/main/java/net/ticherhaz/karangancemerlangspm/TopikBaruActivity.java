@@ -197,7 +197,7 @@ public class TopikBaruActivity extends SkinActivity {
                         dismissProgressDialog();
                         editTextTajuk.setText("");
                         editTextDeskripsi.setText("");
-                        Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Berjaya pos topik baru", Toast.LENGTH_SHORT).show();
 
                         //Then we proceed to the activity for that
                         Intent intent = new Intent(TopikBaruActivity.this, UmumDetailActivity.class);

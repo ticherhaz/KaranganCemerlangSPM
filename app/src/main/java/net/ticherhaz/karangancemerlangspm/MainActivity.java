@@ -513,7 +513,6 @@ public class MainActivity extends SkinActivity {
         recyclerViewNumber.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerViewNumber.setAdapter(firebaseRecyclerAdapter3);
         //2. FirebaseUI
-        // firebaseRecyclerAdapter3.notifyDataSetChanged();
         firebaseRecyclerAdapter3.startListening();
     }
 
@@ -761,7 +760,7 @@ public class MainActivity extends SkinActivity {
                 public void onClick(View view) {
                     //textViewCredit.setText(R.string.about_credit);
                     if (!isDisplaying) {
-                        textViewCredit.setText(R.string.about_credit); //TODO: Update version 2.44
+                        textViewCredit.setText(R.string.about_credit); //TODO: Update version 3.01
                         isDisplaying = true;
                     } else {
                         textViewCredit.setText(R.string.kredit);

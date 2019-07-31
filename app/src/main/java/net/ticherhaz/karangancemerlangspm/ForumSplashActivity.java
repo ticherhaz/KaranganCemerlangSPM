@@ -32,18 +32,11 @@ public class ForumSplashActivity extends SkinActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
-                //Making special toast to center the toast
-//                Toast toast = Toast.makeText(getApplicationContext(), "Akan Datang... (Aug 2019)", Toast.LENGTH_SHORT);
-//                toast.setGravity(Gravity.CENTER, 0, 0);
-//                toast.show();
-//                finish();
-
                 Intent intent = new Intent(ForumSplashActivity.this, ForumActivity.class);
                 intent.putExtra("userUid", userUid);
                 startActivities(new Intent[]{intent});
                 finish();
             }
-        }, 100);
+        }, 1100);
     }
 }

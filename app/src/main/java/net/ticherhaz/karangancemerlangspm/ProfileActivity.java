@@ -201,7 +201,7 @@ public class ProfileActivity extends SkinActivity {
                                 }
                                 break;
                             case "ahli":
-                                tvUsername.setTextColor(getResources().getColor(R.color.colorCikgu));
+                                //  tvUsername.setTextColor(getResources().getColor(R.color.colorah));
                                 if (fUser != null) {
                                     enablingButton();
                                 }

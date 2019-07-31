@@ -64,55 +64,11 @@
                         android:fontFamily="@font/merriweather"
                         android:textColor="?attr/colorText" />
 
-                    <!--<TextView-->
-                    <!--android:id="@+id/text_view_sekolah"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginStart="3dp"-->
-                    <!--android:layout_marginLeft="3dp"-->
-                    <!--android:textColor="?attr/colorText" />-->
-
-                    <!--<TextView-->
-                    <!--android:id="@+id/text_view_user_join_date"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginStart="3dp"-->
-                    <!--android:layout_marginLeft="3dp"-->
-                    <!--android:textColor="?attr/colorText" />-->
-
                 </LinearLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
-                    <!--<TextView-->
-                    <!--android:id="@+id/text_view_state"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_alignParentStart="true"-->
-                    <!--android:layout_alignParentLeft="true"-->
-                    <!--android:layout_alignParentTop="true"-->
-                    <!--android:layout_marginStart="3dp"-->
-                    <!--android:layout_marginLeft="3dp"-->
-                    <!--android:layout_toStartOf="@+id/text_view_status"-->
-                    <!--android:layout_toLeftOf="@+id/text_view_status"-->
-                    <!--android:gravity="center_vertical"-->
-                    <!--android:textColor="?attr/colorText" />-->
-
-                    <!--<TextView-->
-                    <!--android:id="@+id/text_view_gender"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_below="@+id/text_view_state"-->
-                    <!--android:layout_alignParentStart="true"-->
-                    <!--android:layout_alignParentLeft="true"-->
-                    <!--android:layout_marginStart="3dp"-->
-                    <!--android:layout_marginLeft="3dp"-->
-                    <!--android:layout_toStartOf="@+id/text_view_status"-->
-                    <!--android:layout_toLeftOf="@+id/text_view_status"-->
-                    <!--android:gravity="center_vertical"-->
-                    <!--android:textColor="?attr/colorText" />-->
 
                     <TextView
                         android:id="@+id/text_view_status"

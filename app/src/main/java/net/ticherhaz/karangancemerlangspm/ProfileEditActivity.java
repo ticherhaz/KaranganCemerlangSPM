@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,8 +22,11 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -30,7 +34,12 @@ import com.google.firebase.storage.UploadTask;
 import com.soundcloud.android.crop.Crop;
 import com.zxy.skin.sdk.SkinActivity;
 
+import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
+
 import java.io.File;
+
+import static net.ticherhaz.karangancemerlangspm.Util.Others.isNetworkAvailable;
+import static net.ticherhaz.karangancemerlangspm.Util.Others.messageInternetMessage;
 
 public class ProfileEditActivity extends SkinActivity {
 
@@ -43,7 +52,7 @@ public class ProfileEditActivity extends SkinActivity {
     private ImageView iVProfile, iVUploadProfile;
     private Uri pUrl;
     private Button bUpdate;
-    private TextInputEditText tietBio;
+    private TextInputEditText tietBio, tietSekolah;
     private String registeredUid;
 
     private void listID() {
@@ -51,6 +60,7 @@ public class ProfileEditActivity extends SkinActivity {
         iVUploadProfile = findViewById(R.id.iv_upload_profile);
         bUpdate = findViewById(R.id.b_update);
         tietBio = findViewById(R.id.tiet_bio);
+        tietSekolah = findViewById(R.id.tiet_sekolah);
         fDe = FirebaseDatabase.getInstance();
         dRe = fDe.getReference();
         fSe = FirebaseStorage.getInstance();
@@ -59,8 +69,54 @@ public class ProfileEditActivity extends SkinActivity {
         fU = fA.getCurrentUser();
         if (fU != null)
             registeredUid = fU.getUid();
+        retrieveFirebase();
         setbUpload();
         setiVUploadProfile();
+    }
+
+    private void retrieveFirebase() {
+        if (fU != null) {
+            dRe.child("registeredUser").child(registeredUid).child("profileUrl").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        RegisteredUser user = dataSnapshot.getValue(RegisteredUser.class);
+                        if (user != null) {
+                            final String profileUrl = user.getProfileUrl();
+                            //Check for image if null or not (profileUrl)
+                            if (profileUrl != null) {
+                                Glide.with(getApplicationContext())
+                                        .load(profileUrl)
+                                        .into(iVProfile);
+                            }
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
+
+    private void setTietSekolah() {
+        if (tietSekolah.getText() != null)
+            if (!TextUtils.isEmpty(tietSekolah.getText().toString())) {
+                final String bio = tietSekolah.getText().toString();
+                //And then update data in database
+                dRe.child("registeredUser").child(registeredUid).child("sekolah").setValue(bio).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Berjaya mengemas kini sekolah", Toast.LENGTH_SHORT).show();
+                            tietSekolah.getText().clear();
+                        }
+                    }
+                });
+            }
     }
 
     private void setTietBio() {
@@ -112,13 +168,17 @@ public class ProfileEditActivity extends SkinActivity {
 
                                             fU.updateProfile(userProfileChangeRequest);
 
-
                                             //Store in registeredUser
-                                            dRe.child("registeredUser").child(registeredUid).child("profileUrl").setValue(profileStoredUrl);
-                                            progressDialog.dismiss();
-                                            // progressDialog.dismiss();
-                                            //CustomProgressDialog.HideProgressDialog();
-                                            //     Toast.makeText(RegisterActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                                            dRe.child("registeredUser").child(registeredUid).child("profileUrl").setValue(profileStoredUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        progressDialog.dismiss();
+                                                        recreate();
+                                                    }
+                                                }
+                                            });
+
                                         }
 
                                     }
@@ -138,7 +198,6 @@ public class ProfileEditActivity extends SkinActivity {
                     });
         } else {
             progressDialog.dismiss();
-            Toast.makeText(ProfileEditActivity.this, "Hello", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -155,8 +214,14 @@ public class ProfileEditActivity extends SkinActivity {
         bUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setTietBio();
-                uploadImage();
+                if (isNetworkAvailable(ProfileEditActivity.this)) {
+                    setTietBio();
+                    setTietSekolah();
+                    uploadImage();
+                } else {
+                    //No connection
+                    messageInternetMessage(ProfileEditActivity.this);
+                }
             }
         });
     }

@@ -100,7 +100,6 @@ public class UmumDetailActivity extends SkinActivity {
 
             _count = 30;//again set to 30 seconds
             canSendMessage = true;//enable send
-
         }
     };
 

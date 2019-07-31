@@ -123,7 +123,6 @@ public class FeedbackActivity extends SkinActivity {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-
     @Override
     public void onBackPressed() {
         finish();
