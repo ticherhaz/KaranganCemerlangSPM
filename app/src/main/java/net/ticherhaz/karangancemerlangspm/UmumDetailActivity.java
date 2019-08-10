@@ -636,7 +636,7 @@ public class UmumDetailActivity extends SkinActivity {
                 }
             } else {
                 //So tell the user to login 1st.
-                Toast.makeText(UmumDetailActivity.this, "Sila Daftar/Log Masuk Terlebih Dahulu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UmumDetailActivity.this, "Sila Daftar/Log Masuk Terlebih Dahulu", Toast.LENGTH_LONG).show();
                 editTextReply.setText("");
             }
 
