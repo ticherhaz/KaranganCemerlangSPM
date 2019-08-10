@@ -41,7 +41,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.Model.Phone;
 import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
-import net.ticherhaz.karangancemerlangspm.Util.Others;
 
 import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
@@ -161,11 +160,6 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
             editTextPassword.getText().clear();
             editTextConfirmPassword.getText().clear();
             editTextPassword.requestFocus();
-        } else if (Others.PasswordStrength.calculateStrength(editTextPassword.getText().toString()).getValue() < Others.PasswordStrength.STRONG.getValue()) {
-            setToast("Kata Laluan Perlu Ada Sekurangnya 1 Huruf Kecil, 1 Huruf Besar dan 1 Nombor Angka");
-            editTextPassword.getText().clear();
-            editTextConfirmPassword.getText().clear();
-            editTextPassword.requestFocus();
         } else if (Integer.parseInt(editTextDay.getText().toString()) == 0 || Integer.parseInt(editTextDay.getText().toString()) >= 32 ||
                 Integer.parseInt(editTextMonth.getText().toString()) == 0 || Integer.parseInt(editTextMonth.getText().toString()) >= 13 ||
                 Integer.parseInt(editTextYear.getText().toString()) <= 1911 || Integer.parseInt(editTextMonth.getText().toString()) >= 2017) {
@@ -201,7 +195,7 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.exists()) {
                                     //If got
-                                    Toast.makeText(context, "Email Sudah Diambil", Toast.LENGTH_SHORT).show();
+                                    setToast("Email Sudah Diambil");
                                     editTextEmail.getText().clear();
                                     editTextEmail.requestFocus();
                                     progressDialog.dismiss();
@@ -243,7 +237,8 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                                setToast("Error: " + databaseError.getDetails());
+                                progressDialog.dismiss();
                             }
                         });
                     }
@@ -251,7 +246,8 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                    setToast("Error: " + databaseError.getDetails());
+                    progressDialog.dismiss();
                 }
             });
         }
