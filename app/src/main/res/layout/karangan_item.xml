@@ -12,21 +12,6 @@
         android:layout_margin="5dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/text_view_tajuk"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:textColor="?attr/colorText"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/text_view_deskripsi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:textColor="?attr/colorText" />
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,5 +47,20 @@
                 android:textColor="?attr/colorText"
                 android:textSize="12sp" />
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/text_view_deskripsi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:textColor="?attr/colorText" />
+
+        <TextView
+            android:id="@+id/text_view_tajuk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:textColor="?attr/colorText"
+            android:textStyle="bold" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

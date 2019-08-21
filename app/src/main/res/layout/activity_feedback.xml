@@ -12,29 +12,15 @@
         android:layout_margin="3dp"
         android:orientation="vertical">
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/button_submit"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="9dp"
-            android:layout_marginTop="11dp"
-            android:layout_marginRight="9dp"
-            android:background="?attr/colorBackgroundRecyclerView"
-            android:popupBackground="?attr/colorBackgroundRecyclerView" />
-
-        <EditText
-            android:id="@+id/edit_text_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="9dp"
-            android:autofillHints="@string/email"
-            android:background="@drawable/edit_text_border"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:padding="7dp"
-            android:singleLine="true"
-            android:textColor="?attr/colorText"
-            tools:targetApi="o" />
+            android:layout_gravity="center"
+            android:background="@drawable/button_selector"
+            android:text="@string/submit"
+            android:textAllCaps="false"
+            android:textColor="@color/colorTextWhite" />
 
         <EditText
             android:id="@+id/text_view_description"
@@ -52,15 +38,29 @@
             android:textColor="?attr/colorText"
             tools:targetApi="o" />
 
-        <Button
-            android:id="@+id/button_submit"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/edit_text_email"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/button_selector"
-            android:text="@string/submit"
-            android:textAllCaps="false"
-            android:textColor="@color/colorTextWhite" />
+            android:layout_margin="9dp"
+            android:autofillHints="@string/email"
+            android:background="@drawable/edit_text_border"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:padding="7dp"
+            android:singleLine="true"
+            android:textColor="?attr/colorText"
+            tools:targetApi="o" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="9dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginRight="9dp"
+            android:background="?attr/colorBackgroundRecyclerView"
+            android:popupBackground="?attr/colorBackgroundRecyclerView" />
 
     </LinearLayout>
 </ScrollView>

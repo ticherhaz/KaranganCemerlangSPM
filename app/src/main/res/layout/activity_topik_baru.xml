@@ -14,23 +14,6 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/edit_text_tajuk"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/tajuk"
-            android:singleLine="true"
-            android:textColor="?attr/colorText"
-            android:textColorHint="?attr/colorText" />
-
-        <EditText
-            android:id="@+id/edit_text_deskripsi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/deskripsi"
-            android:textColor="?attr/colorText"
-            android:textColorHint="?attr/colorText" />
-
         <Button
             android:id="@+id/button_hantar"
             android:layout_width="match_parent"
@@ -40,6 +23,23 @@
             android:text="@string/hantar"
             android:textAllCaps="false"
             android:textColor="@color/colorTextWhite" />
+
+        <EditText
+            android:id="@+id/edit_text_deskripsi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/deskripsi"
+            android:textColor="?attr/colorText"
+            android:textColorHint="?attr/colorText" />
+
+        <EditText
+            android:id="@+id/edit_text_tajuk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tajuk"
+            android:singleLine="true"
+            android:textColor="?attr/colorText"
+            android:textColorHint="?attr/colorText" />
 
     </LinearLayout>
 </ScrollView>

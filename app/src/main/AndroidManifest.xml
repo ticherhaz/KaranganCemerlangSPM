@@ -4,14 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="net.ticherhaz.karangancemerlangspm">
 
-    <uses-sdk tools:overrideLibrary="com.zxy.skin.sdk" />
-
-    <dist:module dist:instant="true" />
-
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <application
         android:name=".MyApplication"
         android:configChanges="orientation"
@@ -110,13 +102,6 @@
                 android:value=".ForumActivity" />
         </activity>
 
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/emblem" />
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorPrimarySoft" />
-
         <activity
             android:name=".ForumActivity"
             android:label="@string/forum">
@@ -125,6 +110,7 @@
                 android:value=".MainActivity" />
         </activity>
         <activity android:name=".ForumSplashActivity" />
+
         <activity
             android:name=".HantarKaranganActivity"
             android:label="@string/hantar_karangan">
@@ -174,10 +160,26 @@
             android:name=".MainActivity"
             android:windowSoftInputMode="stateHidden" />
 
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/emblem" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorPrimarySoft" />
+
         <service
             android:name=".Util.MyUploadService"
             android:exported="false"
             tools:ignore="InnerclassSeparator" />
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-sdk tools:overrideLibrary="com.zxy.skin.sdk" />
+
+    <dist:module dist:instant="true" />
 
 </manifest>

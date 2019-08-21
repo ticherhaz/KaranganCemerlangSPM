@@ -76,7 +76,7 @@ public class ProfileEditActivity extends SkinActivity {
 
     private void retrieveFirebase() {
         if (fU != null) {
-            dRe.child("registeredUser").child(registeredUid).child("profileUrl").addListenerForSingleValueEvent(new ValueEventListener() {
+            dRe.child("registeredUser").child(registeredUid).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {

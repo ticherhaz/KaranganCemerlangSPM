@@ -13,47 +13,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/text_view_announcement"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ellipsize="marquee"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:scrollHorizontally="true"
-            android:singleLine="true"
-            android:textColor="?attr/colorText" />
-
-        <ImageView
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_gravity="center"
-            android:layout_margin="7dp"
-            android:contentDescription="@string/logo_kcspm"
-            android:src="@drawable/emblem" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="3dp"
-            android:fontFamily="@font/merriweather"
-            android:text="@string/spm_2019"
-            android:textColor="?attr/colorText"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/text_view_countdown_spm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="3dp"
-            android:fontFamily="@font/merriweather"
-            android:textColor="?attr/colorText" />
-
         <EditText
             android:id="@+id/edit_text_search"
             android:layout_width="match_parent"
@@ -73,17 +32,13 @@
             android:textColorHint="?attr/colorText"
             tools:ignore="UnusedAttribute" />
 
-        <ProgressBar
-            android:id="@+id/progressbar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="-7dp"
-            android:layout_marginEnd="45dp"
-            android:indeterminate="true"
-            android:max="100"
-            android:visibility="invisible" />
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center"
+            android:layout_margin="7dp"
+            android:contentDescription="@string/logo_kcspm"
+            android:src="@drawable/emblem" />
 
         <LinearLayout
             android:id="@+id/linear_layout_utama"
@@ -264,5 +219,50 @@
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
         </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="-7dp"
+            android:layout_marginEnd="45dp"
+            android:indeterminate="true"
+            android:max="100"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/text_view_countdown_spm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="3dp"
+            android:fontFamily="@font/merriweather"
+            android:textColor="?attr/colorText" />
+
+        <TextView
+            android:id="@+id/text_view_announcement"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textColor="?attr/colorText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="3dp"
+            android:fontFamily="@font/merriweather"
+            android:text="@string/spm_2019"
+            android:textColor="?attr/colorText"
+            android:textSize="17sp"
+            android:textStyle="bold" />
     </LinearLayout>
 </ScrollView>

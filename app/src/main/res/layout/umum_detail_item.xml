@@ -12,14 +12,6 @@
         android:layout_margin="7dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/text_view_masa_dibalas_oleh"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="?attr/colorText"
-            android:textSize="12sp"
-            android:textStyle="italic" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,6 +58,29 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginLeft="3dp"
+                        android:textColor="?attr/colorText" />
+
+                    <TextView
+                        android:id="@+id/text_view_reputation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_reputation"
+                        android:drawableLeft="@drawable/ic_reputation"
+                        android:gravity="center_vertical"
+                        android:textColor="?attr/colorText" />
+
+                </LinearLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -95,29 +110,6 @@
                     android:drawableLeft="@drawable/ic_pos"
                     android:gravity="center_vertical"
                     android:textColor="?attr/colorText" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="3dp"
-                        android:layout_marginLeft="3dp"
-                        android:textColor="?attr/colorText" />
-
-                    <TextView
-                        android:id="@+id/text_view_reputation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_reputation"
-                        android:drawableLeft="@drawable/ic_reputation"
-                        android:gravity="center_vertical"
-                        android:textColor="?attr/colorText" />
-
-                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
@@ -136,12 +128,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/text_view_deskripsi"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="?attr/colorText" />
-
                     <EditText
                         android:id="@+id/edit_text_deskripsi"
                         android:layout_width="match_parent"
@@ -151,6 +137,12 @@
                         android:textColor="?attr/colorText"
                         android:textColorHint="?attr/colorText"
                         android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/text_view_deskripsi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="?attr/colorText" />
 
                 </LinearLayout>
             </ScrollView>
@@ -237,5 +229,13 @@
                 android:visibility="gone" />
 
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/text_view_masa_dibalas_oleh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorText"
+            android:textSize="12sp"
+            android:textStyle="italic" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -7,22 +7,6 @@
     android:minHeight="20dp"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/edit_text_email_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/email_or_username"
-        android:inputType="textEmailAddress"
-        android:singleLine="true" />
-
-    <EditText
-        android:id="@+id/edit_text_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:singleLine="true" />
-
     <Button
         android:id="@+id/button_sign_in"
         android:layout_width="match_parent"
@@ -33,5 +17,21 @@
         android:text="@string/sign_in"
         android:textAllCaps="false"
         android:textColor="@color/colorTextWhite" />
+
+    <EditText
+        android:id="@+id/edit_text_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/edit_text_email_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/email_or_username"
+        android:inputType="textEmailAddress"
+        android:singleLine="true" />
 
 </LinearLayout>

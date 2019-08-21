@@ -13,15 +13,15 @@
         android:layout_margin="3dp"
         android:orientation="vertical">
 
-        <ProgressBar
-            android:id="@+id/progressbar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="fill_parent"
+        <Button
+            android:id="@+id/b_update"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-7dp"
-            android:indeterminate="true"
-            android:max="100"
-            android:visibility="invisible" />
+            android:layout_marginTop="7dp"
+            android:background="@drawable/button_selector"
+            android:text="@string/update"
+            android:textAllCaps="false"
+            android:textColor="@color/colorTextWhite" />
 
         <FrameLayout
             android:layout_width="wrap_content"
@@ -46,21 +46,15 @@
 
         </FrameLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_bio"
-            android:layout_width="match_parent"
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tiet_bio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/bio"
-                android:inputType="text"
-                android:textColor="?attr/colorText" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="-7dp"
+            android:indeterminate="true"
+            android:max="100"
+            android:visibility="invisible" />
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -79,14 +73,20 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/b_update"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_bio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:background="@drawable/button_selector"
-            android:text="@string/update"
-            android:textAllCaps="false"
-            android:textColor="@color/colorTextWhite" />
+            android:layout_marginTop="7dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/bio"
+                android:inputType="text"
+                android:textColor="?attr/colorText" />
+
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 </ScrollView>
