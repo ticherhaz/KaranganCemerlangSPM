@@ -29,13 +29,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.zxy.skin.sdk.SkinActivity;
 
-import net.ticherhaz.karangancemerlangspm.Model.HubungiKamiChat;
-import net.ticherhaz.karangancemerlangspm.Model.HubungiKamiMessage;
-import net.ticherhaz.karangancemerlangspm.ViewHolder.HubungiKamiViewHolder;
+import net.ticherhaz.karangancemerlangspm.model.HubungiKamiChat;
+import net.ticherhaz.karangancemerlangspm.model.HubungiKamiMessage;
+import net.ticherhaz.karangancemerlangspm.viewHolder.HubungiKamiViewHolder;
 import net.ticherhaz.tarikhmasa.TarikhMasa;
 
-import static net.ticherhaz.karangancemerlangspm.Util.Others.isNetworkAvailable;
-import static net.ticherhaz.karangancemerlangspm.Util.Others.messageInternetMessage;
+import static net.ticherhaz.karangancemerlangspm.util.Others.isNetworkAvailable;
+import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class HubungiKamiActivity extends SkinActivity {
@@ -55,7 +55,7 @@ public class HubungiKamiActivity extends SkinActivity {
     private EditText etSend;
     private RecyclerView rvHubungiKami;
     private ProgressBar pB;
-    private String chatUid2, senderUid;
+    private String senderUid;
     private boolean canSendMessage = true;
     private Runnable countDown = new Runnable() {
         @Override
@@ -73,6 +73,8 @@ public class HubungiKamiActivity extends SkinActivity {
             canSendMessage = true;//enable send
         }
     };
+    private String chatChatUid;
+    private String chatUid;
 
     private void listID() {
         faBSend = findViewById(R.id.btn_send);
@@ -87,34 +89,15 @@ public class HubungiKamiActivity extends SkinActivity {
         Intent intent = getIntent();
         if (intent.getExtras() != null) {
             senderUid = intent.getExtras().getString("senderUid");
+            chatChatUid = intent.getExtras().getString("chatUid");
             setfRaAdmin();
             setFaBSendAdmin();
         } else if (fUr != null) {
             registeredUid = fUr.getUid();
-            callChatUid();
+            getChatUid();
             setfRa();
             setFaBSend();
         }
-
-    }
-
-    private void callChatUid() {
-        dRe.child("hubungiKamiUid").child(registeredUid).child("chatUid").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    final String chatUid = dataSnapshot.getValue(String.class);
-                    if (chatUid != null) {
-                        chatUid2 = chatUid;
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
     }
 
     private void setfRaAdmin() {
@@ -143,10 +126,30 @@ public class HubungiKamiActivity extends SkinActivity {
         };
 
         //Display
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(HubungiKamiActivity.this);
+
         fRa.startListening();
         fRa.notifyDataSetChanged();
-        rvHubungiKami.setLayoutManager(new LinearLayoutManager(HubungiKamiActivity.this));
+        rvHubungiKami.setLayoutManager(linearLayoutManager);
         rvHubungiKami.setAdapter(fRa);
+
+        fRa.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                int friendlyMessageCount = fRa.getItemCount();
+                int lastVisiblePosition =
+                        linearLayoutManager.findLastCompletelyVisibleItemPosition();
+                // If the recycler view is initially being loaded or the
+                // user is at the bottom of the list, scroll to the bottom
+                // of the list to show the newly added message.
+                if (lastVisiblePosition == -1 ||
+                        (positionStart >= (friendlyMessageCount - 1) &&
+                                lastVisiblePosition == (positionStart - 1))) {
+                    rvHubungiKami.scrollToPosition(positionStart);
+                }
+            }
+        });
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -202,13 +205,31 @@ public class HubungiKamiActivity extends SkinActivity {
         };
 
         //Display
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(HubungiKamiActivity.this);
+
         fRa.startListening();
         fRa.notifyDataSetChanged();
-        rvHubungiKami.setLayoutManager(new LinearLayoutManager(HubungiKamiActivity.this));
+        rvHubungiKami.setLayoutManager(linearLayoutManager);
         rvHubungiKami.setAdapter(fRa);
 
-        if (rvHubungiKami.getAdapter() != null)
-            rvHubungiKami.scrollToPosition(rvHubungiKami.getAdapter().getItemCount());
+        fRa.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                int friendlyMessageCount = fRa.getItemCount();
+                int lastVisiblePosition =
+                        linearLayoutManager.findLastCompletelyVisibleItemPosition();
+                // If the recycler view is initially being loaded or the
+                // user is at the bottom of the list, scroll to the bottom
+                // of the list to show the newly added message.
+                if (lastVisiblePosition == -1 ||
+                        (positionStart >= (friendlyMessageCount - 1) &&
+                                lastVisiblePosition == (positionStart - 1))) {
+                    rvHubungiKami.scrollToPosition(positionStart);
+                }
+            }
+        });
+
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -227,26 +248,31 @@ public class HubungiKamiActivity extends SkinActivity {
                 if (!TextUtils.isEmpty(etSend.getText().toString())) {
                     if (isNetworkAvailable(HubungiKamiActivity.this)) {
                         //Send message
-                        final String chatUid = dRe.push().push().getKey();
+                        final String messageUid = dRe.push().push().getKey();
                         final String hkUid = dRe.push().getKey();
                         final String date = GetTarikhMasa();
                         final String message = etSend.getText().toString();
 
                         //Class
-                        HubungiKamiMessage hubungiKamiMessage = new HubungiKamiMessage(hkUid, chatUid, senderUid, date, message, senderUid);
-                        HubungiKamiChat hubungiKamiChat = new HubungiKamiChat(chatUid, senderUid, senderUid, date);
+                        final HubungiKamiMessage hubungiKamiMessage = new HubungiKamiMessage(hkUid, chatChatUid, senderUid, date, message, senderUid);
+                        final HubungiKamiChat hubungiKamiChat = new HubungiKamiChat(chatChatUid, senderUid, senderUid, date);
 
-                        if (hkUid != null && chatUid != null) {
-                            dRe.child("hubungiKamiUid").child(senderUid).child(chatUid).child("chatUid").setValue(chatUid);
-                            dRe.child("hubungiKamiParticipant").child(chatUid).child(adminUid).setValue(true);
-                            dRe.child("hubungiKamiParticipant").child(chatUid).child(senderUid).setValue(true);
+                        if (hkUid != null && messageUid != null) {
+                            //Store the chat uid
+                            //dRe.child("hubungiKamiChatUid").child(senderUid).child(chatUid).setValue(true);
+                            //Store participantUid
+                            dRe.child("hubungiKamiParticipant").child(chatChatUid).child(adminUid).setValue(true);
+                            dRe.child("hubungiKamiParticipant").child(chatChatUid).child(senderUid).setValue(true);
 
-                            dRe.child("hubungiKamiChat").child(senderUid).child(chatUid).setValue(hubungiKamiChat);
+                            //Store the title of the message
+                            dRe.child("hubungiKamiChat").child(senderUid).child(chatChatUid).setValue(hubungiKamiChat);
+
                             //Store the message at admin too
                             dRe.child("hubungiKamiChat").child(adminUid).child(senderUid).setValue(hubungiKamiChat);
+
                             //Store the message at user
-                            dRe.child("hubungiKamiMessage").child(adminUid).child(senderUid).child(chatUid).setValue(hubungiKamiMessage);
-                            dRe.child("hubungiKamiMessage").child(senderUid).child(adminUid).child(chatUid).setValue(hubungiKamiMessage).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            dRe.child("hubungiKamiMessage").child(adminUid).child(senderUid).child(messageUid).setValue(hubungiKamiMessage);
+                            dRe.child("hubungiKamiMessage").child(senderUid).child(adminUid).child(messageUid).setValue(hubungiKamiMessage).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
@@ -256,12 +282,33 @@ public class HubungiKamiActivity extends SkinActivity {
                                 }
                             });
                         }
-
-
                     } else {
                         messageInternetMessage(HubungiKamiActivity.this);
                     }
                 }
+            }
+        });
+    }
+
+    private void getChatUid() {
+        //We check if the user already create the chatUid
+        dRe.child("hubungiKamiChatUid").child(registeredUid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        //We get the value of the chatuid
+                        chatUid = dataSnapshot1.getKey();
+                    }
+                } else {
+                    //If not created yet, we create it.
+                    dRe.child("hubungiKamiChatUid").child(registeredUid).push().setValue(true);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }
@@ -275,7 +322,7 @@ public class HubungiKamiActivity extends SkinActivity {
                         if (canSendMessage) {
 
                             //Send message
-                            final String chatUid = dRe.push().push().getKey();
+                            //final String chatUid = dRe.push().push().getKey();
                             final String hkUid = dRe.push().getKey();
                             final String date = GetTarikhMasa();
                             final String message = etSend.getText().toString();
@@ -284,13 +331,24 @@ public class HubungiKamiActivity extends SkinActivity {
                             HubungiKamiMessage hubungiKamiMessage = new HubungiKamiMessage(hkUid, chatUid, registeredUid, date, message, adminUid);
                             HubungiKamiChat hubungiKamiChat = new HubungiKamiChat(chatUid, registeredUid, registeredUid, date);
 
+
                             if (hkUid != null && chatUid != null) {
+
+                                //Store the chat uid
+                                //dRe.child("hubungiKamiChatUid").child(registeredUid).child(adminUid).setValue(true);
+                                //Store participantUid
+                                dRe.child("hubungiKamiParticipant").child(chatUid).child(adminUid).setValue(true);
+                                dRe.child("hubungiKamiParticipant").child(chatUid).child(registeredUid).setValue(true);
+
+                                //Store the title of the message
                                 dRe.child("hubungiKamiChat").child(registeredUid).child(chatUid).setValue(hubungiKamiChat);
+
                                 //Store the message at admin too
                                 dRe.child("hubungiKamiChat").child(adminUid).child(registeredUid).setValue(hubungiKamiChat);
+
                                 //Store the message at user
-                                dRe.child("hubungiKamiMessage").child(adminUid).child(registeredUid).child(chatUid).setValue(hubungiKamiMessage);
-                                dRe.child("hubungiKamiMessage").child(registeredUid).child(adminUid).child(chatUid).setValue(hubungiKamiMessage).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                dRe.child("hubungiKamiMessage").child(adminUid).child(registeredUid).push().setValue(hubungiKamiMessage);
+                                dRe.child("hubungiKamiMessage").child(registeredUid).child(adminUid).push().setValue(hubungiKamiMessage).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {

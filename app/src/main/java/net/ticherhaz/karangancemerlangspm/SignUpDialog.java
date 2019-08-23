@@ -39,8 +39,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import net.ticherhaz.karangancemerlangspm.Model.Phone;
-import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
+import net.ticherhaz.karangancemerlangspm.model.Phone;
+import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
 
 import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 

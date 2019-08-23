@@ -20,10 +20,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.zxy.skin.sdk.SkinActivity;
 
-import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
-import net.ticherhaz.karangancemerlangspm.Util.Others;
-import net.ticherhaz.karangancemerlangspm.Util.UserTypeColor;
-import net.ticherhaz.karangancemerlangspm.ViewHolder.OnlineStatusViewHolder;
+import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
+import net.ticherhaz.karangancemerlangspm.util.Others;
+import net.ticherhaz.karangancemerlangspm.util.UserTypeColor;
+import net.ticherhaz.karangancemerlangspm.viewHolder.OnlineStatusViewHolder;
 
 public class OnlineUserActivity extends SkinActivity {
 

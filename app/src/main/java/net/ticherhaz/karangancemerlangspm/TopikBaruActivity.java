@@ -24,16 +24,16 @@ import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.zxy.skin.sdk.SkinActivity;
 
-import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
-import net.ticherhaz.karangancemerlangspm.Model.Umum;
-import net.ticherhaz.karangancemerlangspm.Model.UmumDetail;
-import net.ticherhaz.karangancemerlangspm.Model.UmumPosUser;
-import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
+import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
+import net.ticherhaz.karangancemerlangspm.model.Umum;
+import net.ticherhaz.karangancemerlangspm.model.UmumDetail;
+import net.ticherhaz.karangancemerlangspm.model.UmumPosUser;
+import net.ticherhaz.karangancemerlangspm.util.RunTransaction;
 
-import static net.ticherhaz.karangancemerlangspm.Util.Others.isNetworkAvailable;
-import static net.ticherhaz.karangancemerlangspm.Util.Others.messageInternetMessage;
-import static net.ticherhaz.karangancemerlangspm.Util.ProgressDialogCustom.dismissProgressDialog;
-import static net.ticherhaz.karangancemerlangspm.Util.ProgressDialogCustom.showProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.util.Others.isNetworkAvailable;
+import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
+import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.dismissProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.showProgressDialog;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class TopikBaruActivity extends SkinActivity {

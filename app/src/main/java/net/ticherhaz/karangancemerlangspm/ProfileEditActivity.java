@@ -34,12 +34,12 @@ import com.google.firebase.storage.UploadTask;
 import com.soundcloud.android.crop.Crop;
 import com.zxy.skin.sdk.SkinActivity;
 
-import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
+import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
 
 import java.io.File;
 
-import static net.ticherhaz.karangancemerlangspm.Util.Others.isNetworkAvailable;
-import static net.ticherhaz.karangancemerlangspm.Util.Others.messageInternetMessage;
+import static net.ticherhaz.karangancemerlangspm.util.Others.isNetworkAvailable;
+import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
 
 public class ProfileEditActivity extends SkinActivity {
 

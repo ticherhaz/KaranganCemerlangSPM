@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="7dp"
     android:minWidth="300dp"
+    android:background="?attr/colorBackground"
     android:minHeight="20dp"
     android:orientation="vertical">
 
@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/password"
+        android:textColor="?attr/colorText"
         android:inputType="textPassword"
         android:singleLine="true" />
 
@@ -32,6 +33,6 @@
         android:layout_height="wrap_content"
         android:hint="@string/email_or_username"
         android:inputType="textEmailAddress"
-        android:singleLine="true" />
-
+        android:singleLine="true"
+        android:textColor="?attr/colorText" />
 </LinearLayout>

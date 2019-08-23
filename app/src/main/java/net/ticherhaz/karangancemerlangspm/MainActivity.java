@@ -43,10 +43,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.zxy.skin.sdk.SkinActivity;
 import com.zxy.skin.sdk.SkinEngine;
 
-import net.ticherhaz.karangancemerlangspm.Model.Karangan;
-import net.ticherhaz.karangancemerlangspm.Util.Others;
-import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
-import net.ticherhaz.karangancemerlangspm.ViewHolder.KaranganViewHolder;
+import net.ticherhaz.karangancemerlangspm.model.Karangan;
+import net.ticherhaz.karangancemerlangspm.util.Others;
+import net.ticherhaz.karangancemerlangspm.util.RunTransaction;
+import net.ticherhaz.karangancemerlangspm.viewHolder.KaranganViewHolder;
 
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
@@ -171,6 +171,7 @@ public class MainActivity extends SkinActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     String textAnnouncement = dataSnapshot.getValue(String.class);
+                    textViewAnnouncement.setSelected(true);
                     textViewAnnouncement.setText(textAnnouncement);
 
                 }
@@ -760,7 +761,7 @@ public class MainActivity extends SkinActivity {
                 public void onClick(View view) {
                     //textViewCredit.setText(R.string.about_credit);
                     if (!isDisplaying) {
-                        textViewCredit.setText(R.string.about_credit); //TODO: Update version 3.03
+                        textViewCredit.setText(R.string.about_credit); //TODO: Update version 3.04
                         isDisplaying = true;
                     } else {
                         textViewCredit.setText(R.string.kredit);

@@ -30,11 +30,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.zxy.skin.sdk.SkinActivity;
 
-import net.ticherhaz.karangancemerlangspm.Model.Peribahasa;
-import net.ticherhaz.karangancemerlangspm.ViewHolder.PeribahasaViewHolder;
+import net.ticherhaz.karangancemerlangspm.model.Peribahasa;
+import net.ticherhaz.karangancemerlangspm.viewHolder.PeribahasaViewHolder;
 
-import static net.ticherhaz.karangancemerlangspm.Util.Others.isNetworkAvailable;
-import static net.ticherhaz.karangancemerlangspm.Util.Others.messageInternetMessage;
+import static net.ticherhaz.karangancemerlangspm.util.Others.isNetworkAvailable;
+import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
 
 public class PeribahasaActivity extends SkinActivity {
 

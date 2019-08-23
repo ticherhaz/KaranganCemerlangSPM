@@ -39,16 +39,16 @@ import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.zxy.skin.sdk.SkinActivity;
 
-import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
-import net.ticherhaz.karangancemerlangspm.Model.UmumDetail;
-import net.ticherhaz.karangancemerlangspm.Util.Others;
-import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
-import net.ticherhaz.karangancemerlangspm.Util.UserTypeColor;
-import net.ticherhaz.karangancemerlangspm.ViewHolder.UmumDetailHolder;
+import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
+import net.ticherhaz.karangancemerlangspm.model.UmumDetail;
+import net.ticherhaz.karangancemerlangspm.util.Others;
+import net.ticherhaz.karangancemerlangspm.util.RunTransaction;
+import net.ticherhaz.karangancemerlangspm.util.UserTypeColor;
+import net.ticherhaz.karangancemerlangspm.viewHolder.UmumDetailHolder;
 import net.ticherhaz.tarikhmasa.TarikhMasa;
 
-import static net.ticherhaz.karangancemerlangspm.Util.ProgressDialogCustom.dismissProgressDialog;
-import static net.ticherhaz.karangancemerlangspm.Util.ProgressDialogCustom.showProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.dismissProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.showProgressDialog;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class UmumDetailActivity extends SkinActivity {

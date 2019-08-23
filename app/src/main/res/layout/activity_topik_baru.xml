@@ -40,6 +40,5 @@
             android:singleLine="true"
             android:textColor="?attr/colorText"
             android:textColorHint="?attr/colorText" />
-
     </LinearLayout>
 </ScrollView>

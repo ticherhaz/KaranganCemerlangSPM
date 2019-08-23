@@ -17,7 +17,6 @@
         android:max="100"
         android:visibility="invisible" />
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_online_user"
         android:layout_width="match_parent"
@@ -25,5 +24,4 @@
         android:layout_margin="3dp">
 
     </androidx.recyclerview.widget.RecyclerView>
-
 </LinearLayout>

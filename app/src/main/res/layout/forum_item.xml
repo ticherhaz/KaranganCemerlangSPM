@@ -33,9 +33,7 @@
                 android:layout_margin="3dp"
                 android:textColor="?attr/colorText"
                 android:textStyle="italic" />
-
         </LinearLayout>
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -61,7 +59,6 @@
                 android:text="@string/kosong"
                 android:textColor="?attr/colorText"
                 android:textSize="12sp" />
-
         </RelativeLayout>
 
         <RelativeLayout

@@ -17,7 +17,6 @@
         android:max="100"
         android:visibility="invisible" />
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_hubungi_kami"
         android:layout_width="match_parent"

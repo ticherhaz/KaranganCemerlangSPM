@@ -22,11 +22,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.zxy.skin.sdk.SkinActivity;
 
-import net.ticherhaz.karangancemerlangspm.Model.Jenis;
-import net.ticherhaz.karangancemerlangspm.ViewHolder.JenisViewHolder;
+import net.ticherhaz.karangancemerlangspm.model.Jenis;
+import net.ticherhaz.karangancemerlangspm.viewHolder.JenisViewHolder;
 
-import static net.ticherhaz.karangancemerlangspm.Util.Others.isNetworkAvailable;
-import static net.ticherhaz.karangancemerlangspm.Util.Others.messageInternetMessage;
+import static net.ticherhaz.karangancemerlangspm.util.Others.isNetworkAvailable;
+import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
 
 public class JenisKaranganActivity extends SkinActivity {
 

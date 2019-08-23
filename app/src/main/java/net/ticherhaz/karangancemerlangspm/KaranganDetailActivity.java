@@ -17,8 +17,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.zxy.skin.sdk.SkinActivity;
 
-import net.ticherhaz.karangancemerlangspm.Util.DoubleClickListener;
-import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
+import net.ticherhaz.karangancemerlangspm.util.DoubleClickListener;
+import net.ticherhaz.karangancemerlangspm.util.RunTransaction;
 
 public class KaranganDetailActivity extends SkinActivity {
 

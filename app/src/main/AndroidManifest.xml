@@ -22,6 +22,14 @@
             android:name=".HubungiKamiActivity"
             android:label="Hubungi Kami"
             android:windowSoftInputMode="stateHidden">
+
+            <!-- When the FCM Triggered and user pressed the notification, it will check the action name, and triggered, and will proceed to this activity -->
+            <intent-filter>
+                <action android:name="HubungiKami" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SettingActivity" />
@@ -168,7 +176,7 @@
             android:resource="@color/colorPrimarySoft" />
 
         <service
-            android:name=".Util.MyUploadService"
+            android:name=".util.MyUploadService"
             android:exported="false"
             tools:ignore="InnerclassSeparator" />
     </application>

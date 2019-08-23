@@ -21,13 +21,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.zxy.skin.sdk.SkinActivity;
 
-import net.ticherhaz.karangancemerlangspm.Model.Karangan;
-import net.ticherhaz.karangancemerlangspm.Util.Others;
-import net.ticherhaz.karangancemerlangspm.Util.RunTransaction;
-import net.ticherhaz.karangancemerlangspm.ViewHolder.KaranganViewHolder;
+import net.ticherhaz.karangancemerlangspm.model.Karangan;
+import net.ticherhaz.karangancemerlangspm.util.Others;
+import net.ticherhaz.karangancemerlangspm.util.RunTransaction;
+import net.ticherhaz.karangancemerlangspm.viewHolder.KaranganViewHolder;
 
-import static net.ticherhaz.karangancemerlangspm.Util.Others.isNetworkAvailable;
-import static net.ticherhaz.karangancemerlangspm.Util.Others.messageInternetMessage;
+import static net.ticherhaz.karangancemerlangspm.util.Others.isNetworkAvailable;
+import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
 
 public class SenaraiKaranganActivity extends SkinActivity {
 

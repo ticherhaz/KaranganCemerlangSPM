@@ -14,8 +14,8 @@ android {
         applicationId "net.ticherhaz.karangancemerlangspm"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 303
-        versionName "3.03"
+        versionCode 304
+        versionName "3.04"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

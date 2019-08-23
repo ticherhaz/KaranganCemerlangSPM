@@ -18,12 +18,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.zxy.skin.sdk.SkinActivity;
 
-import net.ticherhaz.karangancemerlangspm.Util.Others;
+import net.ticherhaz.karangancemerlangspm.util.Others;
 
 import java.util.Locale;
 
-import static net.ticherhaz.karangancemerlangspm.Util.ProgressDialogCustom.dismissProgressDialog;
-import static net.ticherhaz.karangancemerlangspm.Util.ProgressDialogCustom.showProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.dismissProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.showProgressDialog;
 
 public class ChangePasswordActivity extends SkinActivity {
 

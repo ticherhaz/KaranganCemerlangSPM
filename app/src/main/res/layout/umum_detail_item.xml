@@ -12,6 +12,14 @@
         android:layout_margin="7dp"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/text_view_masa_dibalas_oleh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorText"
+            android:textSize="12sp"
+            android:textStyle="italic" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -166,20 +174,6 @@
                 android:text="@string/memberi_reputasi"
                 android:textColor="@color/colorTextWhite" />
 
-            <!--<TextView-->
-            <!--android:id="@+id/text_view_membalas"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_marginStart="5dp"-->
-            <!--android:layout_marginLeft="5dp"-->
-            <!--android:drawableStart="@drawable/ic_reply"-->
-            <!--android:drawableLeft="@drawable/ic_reply"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:text="@string/membalas"-->
-            <!--android:visibility="gone" />-->
-
             <TextView
                 android:id="@+id/text_view_edit_reply_cancel"
                 android:layout_width="wrap_content"
@@ -229,13 +223,5 @@
                 android:visibility="gone" />
 
         </RelativeLayout>
-
-        <TextView
-            android:id="@+id/text_view_masa_dibalas_oleh"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="?attr/colorText"
-            android:textSize="12sp"
-            android:textStyle="italic" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

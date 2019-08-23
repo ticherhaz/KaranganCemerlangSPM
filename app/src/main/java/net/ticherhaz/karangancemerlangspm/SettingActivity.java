@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.zxy.skin.sdk.SkinActivity;
 
-import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
+import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
 
 public class SettingActivity extends SkinActivity {
 

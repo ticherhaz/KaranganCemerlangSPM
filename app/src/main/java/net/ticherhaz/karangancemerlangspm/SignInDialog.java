@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,11 +28,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
-import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
+import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
 
-import static net.ticherhaz.karangancemerlangspm.Util.ProgressDialogCustom.dismissProgressDialog;
-import static net.ticherhaz.karangancemerlangspm.Util.ProgressDialogCustom.showProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.dismissProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.showProgressDialog;
 
 public class SignInDialog extends Dialog implements View.OnClickListener {
 
@@ -232,15 +235,22 @@ public class SignInDialog extends Dialog implements View.OnClickListener {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                    final FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                     if (firebaseUser != null) {
-                        Intent intent = new Intent(context, ForumActivity.class);
-                        intent.putExtra("userUid", userUid);
-                        context.startActivity(intent);
-                        Toast.makeText(context, "Selamat Kembali " + firebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
-                        dismissProgressDialog();
-                        dismiss();
-                        ((ForumActivity) context).finish();
+                        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+                            @Override
+                            public void onSuccess(InstanceIdResult instanceIdResult) {
+                                final String tokenUid = instanceIdResult.getToken();
+                                FirebaseDatabase.getInstance().getReference().child("registeredUserTokenUid").child(firebaseUser.getUid()).child(tokenUid).setValue(true);
+                                Intent intent = new Intent(context, ForumActivity.class);
+                                intent.putExtra("userUid", userUid);
+                                context.startActivity(intent);
+                                Toast.makeText(context, "Selamat Kembali " + firebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
+                                dismissProgressDialog();
+                                dismiss();
+                                ((ForumActivity) context).finish();
+                            }
+                        });
                     }
                 } else {
                     dismissProgressDialog();

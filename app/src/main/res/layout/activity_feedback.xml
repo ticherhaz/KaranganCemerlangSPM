@@ -14,8 +14,10 @@
 
         <Button
             android:id="@+id/button_submit"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="9dp"
+            android:layout_marginRight="9dp"
             android:layout_gravity="center"
             android:background="@drawable/button_selector"
             android:text="@string/submit"
@@ -61,6 +63,5 @@
             android:layout_marginRight="9dp"
             android:background="?attr/colorBackgroundRecyclerView"
             android:popupBackground="?attr/colorBackgroundRecyclerView" />
-
     </LinearLayout>
 </ScrollView>

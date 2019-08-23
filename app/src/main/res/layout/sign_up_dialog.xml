@@ -17,18 +17,6 @@
             android:layout_margin="3dp"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/button_sign_up"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="7dp"
-                android:background="@drawable/button_selector"
-                android:text="@string/sign_up"
-                android:textAllCaps="false"
-                android:textColor="@color/colorTextWhite" />
-
             <EditText
                 android:id="@+id/edit_text_username"
                 android:layout_width="match_parent"
@@ -76,6 +64,18 @@
                 android:hint="@string/confirm_password"
                 android:inputType="textPassword"
                 android:textColor="?attr/colorText" />
+
+            <Button
+                android:id="@+id/button_sign_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:background="@drawable/button_selector"
+                android:text="@string/sign_up"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextWhite" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -150,6 +150,15 @@
                 android:background="?attr/colorBackgroundRecyclerView"
                 android:popupBackground="?attr/colorBackgroundRecyclerView" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/negeri"
+                android:textColor="?attr/colorText" />
+
             <Spinner
                 android:id="@+id/spinner_state"
                 android:layout_width="match_parent"
@@ -158,6 +167,15 @@
                 android:layout_marginRight="9dp"
                 android:background="?attr/colorBackgroundRecyclerView"
                 android:popupBackground="?attr/colorBackgroundRecyclerView" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/status"
+                android:textColor="?attr/colorText" />
 
             <Spinner
                 android:id="@+id/spinner_mode"
@@ -169,34 +187,6 @@
                 android:popupBackground="?attr/colorBackgroundRecyclerView" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="@string/tarikh_lahir"
-                android:textColor="?attr/colorText" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="@string/jantina"
-                android:textColor="?attr/colorText" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="@string/negeri"
-                android:textColor="?attr/colorText" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="@string/status"
-                android:textColor="?attr/colorText" />
-
-            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"
@@ -206,6 +196,15 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/tarikh_lahir"
+                android:textColor="?attr/colorText" />
+
+            <TextView
                 android:id="@+id/checkbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -213,6 +212,15 @@
                 android:text="@string/patuh_peraturan"
                 android:textColor="?attr/colorText"
                 android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/jantina"
+                android:textColor="?attr/colorText" />
 
         </LinearLayout>
     </ScrollView>

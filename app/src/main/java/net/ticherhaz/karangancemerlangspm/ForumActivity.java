@@ -40,15 +40,15 @@ import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.zxy.skin.sdk.SkinActivity;
 
-import net.ticherhaz.karangancemerlangspm.Model.Forum;
-import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
-import net.ticherhaz.karangancemerlangspm.Util.OnlineStatusUtil;
-import net.ticherhaz.karangancemerlangspm.Util.Others;
-import net.ticherhaz.karangancemerlangspm.ViewHolder.ForumViewHolder;
+import net.ticherhaz.karangancemerlangspm.model.Forum;
+import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
+import net.ticherhaz.karangancemerlangspm.util.OnlineStatusUtil;
+import net.ticherhaz.karangancemerlangspm.util.Others;
+import net.ticherhaz.karangancemerlangspm.viewHolder.ForumViewHolder;
 
 import java.util.Calendar;
 
-import static net.ticherhaz.karangancemerlangspm.Util.Others.messageInternetMessage;
+import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.ConvertTarikhMasa2LocalTimePattern;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
@@ -569,6 +569,8 @@ public class ForumActivity extends SkinActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference, activitySessionUid, activityDate);
+                                //Clear the tokenUid
+                                FirebaseDatabase.getInstance().getReference().child("registeredUserTokenUid").child(firebaseUser.getUid()).removeValue();
                                 firebaseAuth.signOut();
                                 Intent intent = new Intent(ForumActivity.this, ForumActivity.class);
                                 intent.putExtra("userUid", userUid);

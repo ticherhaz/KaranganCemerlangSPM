@@ -18,10 +18,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.zxy.skin.sdk.SkinActivity;
 
-import net.ticherhaz.karangancemerlangspm.Model.HubungiKamiChat;
-import net.ticherhaz.karangancemerlangspm.ViewHolder.HubungiKamiViewHolder;
+import net.ticherhaz.karangancemerlangspm.model.HubungiKamiChat;
+import net.ticherhaz.karangancemerlangspm.viewHolder.HubungiKamiViewHolder;
 
-import static net.ticherhaz.karangancemerlangspm.Util.Others.messageInternetMessage;
+import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
 
 public class HubungiKamiUserActivity extends SkinActivity {
 
@@ -63,6 +63,7 @@ public class HubungiKamiUserActivity extends SkinActivity {
                     public void onClick(View view) {
                         Intent intent = new Intent(HubungiKamiUserActivity.this, HubungiKamiActivity.class);
                         intent.putExtra("senderUid", hubungiKamiChat.getSenderUid());
+                        intent.putExtra("chatUid", hubungiKamiChat.getChatUid());
                         startActivities(new Intent[]{intent});
                     }
                 });

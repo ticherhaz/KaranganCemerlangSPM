@@ -29,13 +29,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
-import net.ticherhaz.karangancemerlangspm.Util.Others;
+import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
+import net.ticherhaz.karangancemerlangspm.util.Others;
 
 import java.util.Locale;
 
-import static net.ticherhaz.karangancemerlangspm.Util.ProgressDialogCustom.dismissProgressDialog;
-import static net.ticherhaz.karangancemerlangspm.Util.ProgressDialogCustom.showProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.dismissProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.showProgressDialog;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.ConvertTarikhMasa2LocalTimePattern;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.ConvertTimeStamp2TarikhMasa;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasaTimeAgo;

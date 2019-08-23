@@ -34,12 +34,12 @@ import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.zxy.skin.sdk.SkinActivity;
 
-import net.ticherhaz.karangancemerlangspm.Model.RegisteredUser;
-import net.ticherhaz.karangancemerlangspm.Model.Umum;
-import net.ticherhaz.karangancemerlangspm.ViewHolder.UmumHolder;
+import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
+import net.ticherhaz.karangancemerlangspm.model.Umum;
+import net.ticherhaz.karangancemerlangspm.viewHolder.UmumHolder;
 import net.ticherhaz.tarikhmasa.TarikhMasa;
 
-import static net.ticherhaz.karangancemerlangspm.Util.Others.messageInternetMessage;
+import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasaTimeAgo;
 
 public class UmumActivity extends SkinActivity {

@@ -84,6 +84,5 @@
             android:text="@string/senarai_user"
             android:textColor="?attr/colorText"
             android:visibility="gone" />
-
     </LinearLayout>
 </ScrollView>

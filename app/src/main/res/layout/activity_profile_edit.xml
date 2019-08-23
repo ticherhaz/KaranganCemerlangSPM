@@ -43,18 +43,7 @@
                 android:background="@drawable/text_view_shape"
                 android:src="@drawable/ic_camera"
                 tools:ignore="RtlHardcoded" />
-
         </FrameLayout>
-
-        <ProgressBar
-            android:id="@+id/progressbar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-7dp"
-            android:indeterminate="true"
-            android:max="100"
-            android:visibility="invisible" />
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -88,5 +77,15 @@
                 android:textColor="?attr/colorText" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-7dp"
+            android:indeterminate="true"
+            android:max="100"
+            android:visibility="invisible" />
     </LinearLayout>
 </ScrollView>

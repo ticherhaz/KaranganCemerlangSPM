@@ -9,7 +9,7 @@ import android.widget.CompoundButton;
 
 import com.google.firebase.database.FirebaseDatabase;
 
-import net.ticherhaz.karangancemerlangspm.Model.ActivityStatusChanges;
+import net.ticherhaz.karangancemerlangspm.model.ActivityStatusChanges;
 
 import java.util.Calendar;
 
