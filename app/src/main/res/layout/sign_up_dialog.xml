@@ -65,17 +65,14 @@
                 android:inputType="textPassword"
                 android:textColor="?attr/colorText" />
 
-            <Button
-                android:id="@+id/button_sign_up"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="7dp"
-                android:background="@drawable/button_selector"
-                android:text="@string/sign_up"
-                android:textAllCaps="false"
-                android:textColor="@color/colorTextWhite" />
+                android:layout_marginStart="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/tarikh_lahir"
+                android:textColor="?attr/colorText" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -119,27 +116,16 @@
                     android:maxLength="4"
                     android:padding="5dp"
                     android:textColor="?attr/colorText" />
-
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:orientation="vertical">
-
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/text_view_rules"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="?attr/colorText"
-                        android:textSize="12sp" />
-
-                </ScrollView>
-            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/jantina"
+                android:textColor="?attr/colorText" />
 
             <Spinner
                 android:id="@+id/spinner_gender"
@@ -195,14 +181,24 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:layout_marginLeft="3dp"
-                android:layout_marginTop="5dp"
-                android:text="@string/tarikh_lahir"
-                android:textColor="?attr/colorText" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="vertical">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/text_view_rules"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="?attr/colorText"
+                        android:textSize="12sp" />
+
+                </ScrollView>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/checkbox"
@@ -213,15 +209,17 @@
                 android:textColor="?attr/colorText"
                 android:textSize="12sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/button_sign_up"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:text="@string/jantina"
-                android:textColor="?attr/colorText" />
-
+                android:layout_gravity="center"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:background="@drawable/button_selector"
+                android:text="@string/sign_up"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextWhite" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -83,7 +83,6 @@
                 android:textColor="?attr/colorText"
                 android:textSize="12sp"
                 android:textStyle="italic" />
-
         </RelativeLayout>
 
         <TextView

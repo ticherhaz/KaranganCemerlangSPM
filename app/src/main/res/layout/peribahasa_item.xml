@@ -26,6 +26,5 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="?attr/colorText" />
-
     </LinearLayout>
 </androidx.cardview.widget.CardView>

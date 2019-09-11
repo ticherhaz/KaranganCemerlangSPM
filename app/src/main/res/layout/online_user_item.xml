@@ -74,6 +74,5 @@
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
             android:textColor="?attr/colorText" />
-
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

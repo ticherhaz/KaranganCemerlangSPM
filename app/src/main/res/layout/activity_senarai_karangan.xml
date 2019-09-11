@@ -30,7 +30,6 @@
             android:padding="3dp"
             android:paddingBottom="3dp">
 
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"

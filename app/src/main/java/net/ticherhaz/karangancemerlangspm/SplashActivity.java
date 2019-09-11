@@ -182,8 +182,8 @@ public class SplashActivity extends AppCompatActivity {
                             toast.show();
                         }
                         //After that, we chat the value
-                        else if (system.getVersi() == 304) {
-                            //TODO: Version right now is 304. Please update when the new version is released. testing for beta forum (44)
+                        else if (system.getVersi() == 305) {
+                            //TODO: Version right now is 305. Please update when the new version is released. testing for beta forum (44)
                             //If all the condition above is met, it will NOT GOING THIS PART INSTEAD THEY WILL GO OUTSIDE FROM THE onDataChange
                             //It not met, then it will proceed here.
                             storeUserInfo(userUid);

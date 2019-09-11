@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -50,6 +51,7 @@ public class PeribahasaActivity extends SkinActivity {
     private FirebaseRecyclerAdapter<Peribahasa, PeribahasaViewHolder> firebaseRecyclerAdapter;
     private TextInputEditText tPeri;
     private TextView tvPeriRekod;
+    private Toast toast;
 
     private void settPeri() {
         tPeri.addTextChangedListener(new TextWatcher() {
@@ -80,6 +82,14 @@ public class PeribahasaActivity extends SkinActivity {
             }
         });
         setEditTextSearchDrawableRight();
+    }
+
+    public void ShowToast(Context context, final String message) {
+        if (toast == null) {
+            toast = Toast.makeText(context, message, Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
     }
 
     private void setFirebaseRecyclerAdapter(final boolean isSearching) {
@@ -115,7 +125,7 @@ public class PeribahasaActivity extends SkinActivity {
                         if (clipboard != null)
                             clipboard.setPrimaryClip(clip);
 
-                        Toast.makeText(getApplicationContext(), "Disalin ke Papan Klip", Toast.LENGTH_SHORT).show();
+                        ShowToast(PeribahasaActivity.this, "Disalin ke Papan Klip");
 
                         peribahasaViewHolder.getView().setEnabled(false);
 

@@ -44,6 +44,5 @@
             android:text="@string/kosong"
             android:textColor="?attr/colorText"
             android:textSize="12sp" />
-
     </LinearLayout>
 </androidx.cardview.widget.CardView>

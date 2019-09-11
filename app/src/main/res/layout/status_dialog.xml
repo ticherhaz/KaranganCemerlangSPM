@@ -39,6 +39,5 @@
             android:drawableRight="@drawable/ic_status_sad"
             android:text="@string/sedih"
             android:textColor="?attr/colorText" />
-
     </LinearLayout>
 </LinearLayout>
