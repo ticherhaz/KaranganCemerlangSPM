@@ -15,6 +15,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,21 +37,17 @@ public class JenisKaranganActivity extends SkinActivity {
 
     //RecyclerView
     private RecyclerView recyclerView;
-
     //FirebaseUI
     private FirebaseRecyclerOptions<Jenis> firebaseRecyclerOptions;
     private FirebaseRecyclerAdapter<Jenis, JenisViewHolder> firebaseRecyclerAdapter;
-
     //Firebase Database
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
-
     private ProgressBar progressBar;
-
     private String userUid;
     private String karanganJenis;
-
     private SwipeRefreshLayout swipeRefreshLayout;
+    private AdView adView;
 
     private void setSwipeRefreshLayout() {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -80,8 +81,72 @@ public class JenisKaranganActivity extends SkinActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("jenis");
 
+        adsLoaderBanner();
         retrieveData();
         setFirebaseRecyclerAdapter();
+    }
+
+    private void adsLoaderBanner() {
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        // Initialize the Mobile Ads SDK.
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        // Gets the ad view defined in layout/ad_fragment.xml with ad unit ID set in
+        // values/strings.xml.
+        adView = findViewById(R.id.ad_view);
+
+        // Create an ad request. Check your logcat output for the hashed device ID to
+        // get test ads on a physical device. e.g.
+        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+
+        // Start loading the ad in the background.
+        adView.loadAd(adRequest);
+
+    }
+
+    /**
+     * Called when returning to the activity
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (adView != null) {
+            adView.resume();
+        }
+    }
+
+    /**
+     * Called when leaving the activity
+     */
+    @Override
+    protected void onPause() {
+        if (adView != null) {
+            adView.pause();
+        }
+        super.onPause();
+    }
+
+    /**
+     * Called before the activity is destroyed
+     */
+    @Override
+    public void onDestroy() {
+        if (adView != null) {
+            adView.destroy();
+        }
+        super.onDestroy();
     }
 
     //Method retrieve the data
@@ -92,6 +157,7 @@ public class JenisKaranganActivity extends SkinActivity {
             karanganJenis = intent.getExtras().getString("karanganJenis");
         }
     }
+
 
     //Set firebaseAdapter
     private void setFirebaseRecyclerAdapter() {

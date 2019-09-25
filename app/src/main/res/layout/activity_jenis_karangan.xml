@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
@@ -30,12 +31,33 @@
             android:padding="3dp"
             android:paddingBottom="3dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_ads_jenis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            </androidx.recyclerview.widget.RecyclerView>
-        </LinearLayout>
+                <com.google.android.gms.ads.AdView
+                    android:id="@+id/ad_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    ads:adSize="BANNER"
+                    ads:adUnitId="@string/banner_ad_unit_id_jenis" />
+            </RelativeLayout>
+        </RelativeLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

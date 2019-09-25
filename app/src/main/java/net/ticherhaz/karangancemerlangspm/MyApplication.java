@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import androidx.multidex.MultiDex;
+
 import com.zxy.skin.sdk.SkinEngine;
 
 import net.ticherhaz.karangancemerlangspm.skinApplicator.SkinCustomViewApplicator;
@@ -26,6 +28,12 @@ public class MyApplication extends Application {
         SkinEngine.changeSkin(R.style.AppTheme);
         SkinEngine.registerSkinApplicator(CustomView.class, new SkinCustomViewApplicator());
         setSharedPreferences();
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     //At this part we called the shared preference and then we update the themes as soon as user enter the activity

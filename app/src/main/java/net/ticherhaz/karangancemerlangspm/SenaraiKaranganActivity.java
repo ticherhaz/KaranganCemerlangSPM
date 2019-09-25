@@ -16,6 +16,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -54,6 +59,9 @@ public class SenaraiKaranganActivity extends SkinActivity {
     private String userUid;
     private String karanganJenis;
 
+    //Ads
+    private InterstitialAd mInterstitialAd;
+
     //Method listID
     private void listID() {
         recyclerView = findViewById(R.id.recycler_view);
@@ -63,7 +71,7 @@ public class SenaraiKaranganActivity extends SkinActivity {
         //Firebase
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
-
+        adsInterstitalAd();
         retrieveData();
         setFirebaseRecyclerAdapter();
     }
@@ -77,6 +85,25 @@ public class SenaraiKaranganActivity extends SkinActivity {
         }
     }
 
+    private void adsInterstitalAd() {
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mInterstitialAd = new InterstitialAd(this);
+        //ca-app-pub-4598038295422798/4843892710
+        mInterstitialAd.setAdUnitId(getResources().getString(R.string.inter_ad_unit_id_senarai));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (mInterstitialAd.isLoaded())
+                    mInterstitialAd.show();
+            }
+        }, 3000);
+    }
 
     //Method firebaseUI
     private void setFirebaseRecyclerAdapter() {

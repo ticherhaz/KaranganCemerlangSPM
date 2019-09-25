@@ -126,6 +126,8 @@ public class UmumActivity extends SkinActivity {
                                     Glide.with(getApplicationContext())
                                             .load(profileUrl)
                                             .into(holder.getImageViewProfile());
+                                } else {
+                                    holder.getImageViewProfile().setImageResource(R.drawable.emblem);
                                 }
                             }
                         }
