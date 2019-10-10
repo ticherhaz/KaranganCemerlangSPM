@@ -1,17 +1,12 @@
 package net.ticherhaz.karangancemerlangspm;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.startapp.android.publish.adsCommon.StartAppSDK;
 import com.zxy.skin.sdk.SkinActivity;
 
 public class TipsKaranganActivity extends SkinActivity {
@@ -20,11 +15,12 @@ public class TipsKaranganActivity extends SkinActivity {
     private Button buttonDecreaseSize;
     private Button buttonFont;
     private TextView textViewTips;
-    private InterstitialAd mInterstitialAd;
+    //private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StartAppSDK.init(this, getResources().getString(R.string.start_apps_id), false);
         setContentView(R.layout.activity_tips_karangan);
         buttonIncreaseSize = findViewById(R.id.button_increase_size);
         buttonDecreaseSize = findViewById(R.id.button_decrease_size);
@@ -32,31 +28,31 @@ public class TipsKaranganActivity extends SkinActivity {
         textViewTips = findViewById(R.id.text_view_tips);
         textViewTips.setText(Html.fromHtml(getString(R.string.tips_karangan_explain)));
 
-        adsInterstitalAd();
+        //  adsInterstitalAd();
         setButtonIncreaseSize();
         setButtonDecreaseSizeSize();
         setButtonFont();
     }
 
-    private void adsInterstitalAd() {
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-        mInterstitialAd = new InterstitialAd(this);
-        //ca-app-pub-4598038295422798/4843892710
-        mInterstitialAd.setAdUnitId(getResources().getString(R.string.inter_ad_unit_id_tips));
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (mInterstitialAd.isLoaded())
-                    mInterstitialAd.show();
-            }
-        }, 3000);
-    }
+//    private void adsInterstitalAd() {
+//        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+//            @Override
+//            public void onInitializationComplete(InitializationStatus initializationStatus) {
+//            }
+//        });
+//        mInterstitialAd = new InterstitialAd(this);
+//        //ca-app-pub-4598038295422798/4843892710
+//        mInterstitialAd.setAdUnitId(getResources().getString(R.string.inter_ad_unit_id_tips));
+//        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+//
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                if (mInterstitialAd.isLoaded())
+//                    mInterstitialAd.show();
+//            }
+//        }, 3000);
+//    }
 
     //Method increase size text
     private void setButtonIncreaseSize() {
@@ -92,7 +88,7 @@ public class TipsKaranganActivity extends SkinActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
+        super.onBackPressed();
     }
 
     @Override
