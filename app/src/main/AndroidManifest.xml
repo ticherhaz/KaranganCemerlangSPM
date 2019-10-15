@@ -121,8 +121,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".ForumSplashActivity" />
+        <activity android:name=".ForumSplashActivity">
 
+            <!-- When the FCM Triggered and user pressed the notification, it will check the action name, and triggered, and will proceed to this activity -->
+            <intent-filter>
+                <action android:name="ForumSplash" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".HantarKaranganActivity"
             android:label="@string/hantar_karangan">
@@ -215,7 +222,6 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-sdk tools:overrideLibrary="com.zxy.skin.sdk" />
 

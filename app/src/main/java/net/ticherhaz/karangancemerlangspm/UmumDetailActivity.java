@@ -588,6 +588,7 @@ public class UmumDetailActivity extends SkinActivity {
     //Method check
     private void checkEmpty() {
         if (!TextUtils.isEmpty(editTextReply.getText().toString())) {
+            floatingActionButton.setEnabled(false);
 
             //check if the user is already signed in or not
             if (firebaseUser != null) {
@@ -612,8 +613,14 @@ public class UmumDetailActivity extends SkinActivity {
                                     //after that we increase the amount of post
                                     new RunTransaction().runTransactionRegisteredUserPostCount(databaseReference, registeredUidReply);
 
-                                    Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                                    //Create umum pos participants for notification
+                                    databaseReference.child("umumPosParticipants").child(umumUid).child(firebaseUser.getUid()).setValue(true);
+
+                                    Toast.makeText(getApplicationContext(), "Berjaya membalas forum ini", Toast.LENGTH_LONG).show();
+
+                                    //Clear text and enable back the button
                                     editTextReply.setText("");
+                                    floatingActionButton.setEnabled(true);
                                     //then hide the keyboard
                                     try {
                                         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

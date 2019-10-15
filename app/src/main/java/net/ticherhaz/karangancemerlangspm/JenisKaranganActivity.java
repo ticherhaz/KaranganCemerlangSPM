@@ -68,7 +68,6 @@ public class JenisKaranganActivity extends SkinActivity {
     private void setAdsColony() {
         // Construct optional app options object to be sent with configure
         AdColonyAppOptions appOptions = new AdColonyAppOptions()
-                //.setUserID("")
                 .setKeepScreenOn(true);
 
         // Configure AdColony in your launching Activity's onCreate() method so that cached ads can
@@ -76,13 +75,13 @@ public class JenisKaranganActivity extends SkinActivity {
         AdColony.configure(this, appOptions, getResources().getString(R.string.adColony_app_id), getResources().getString(R.string.adColony_zone_id_2));
 
         // Optional user metadata sent with the ad options in each request
-        AdColonyUserMetadata metadata = new AdColonyUserMetadata()
-                .setUserAge(26)
-                .setUserEducation(AdColonyUserMetadata.USER_EDUCATION_BACHELORS_DEGREE)
-                .setUserGender(AdColonyUserMetadata.USER_MALE);
+//        AdColonyUserMetadata metadata = new AdColonyUserMetadata()
+//                .setUserAge(26)
+//                .setUserEducation(AdColonyUserMetadata.USER_EDUCATION_BACHELORS_DEGREE)
+//                .setUserGender(AdColonyUserMetadata.USER_MALE);
 
         // Ad specific options to be sent with request
-        adOptions = new AdColonyAdOptions().setUserMetadata(metadata);
+        adOptions = new AdColonyAdOptions().setUserMetadata(new AdColonyUserMetadata());
 
         // Set up listener for interstitial ad callbacks. You only need to implement the callbacks
         // that you care about. The only required callback is onRequestFilled, as this is the only
@@ -102,15 +101,12 @@ public class JenisKaranganActivity extends SkinActivity {
             @Override
             public void onOpened(AdColonyInterstitial ad) {
                 // Ad opened, reset UI to reflect state change
-
             }
 
             @Override
             public void onExpiring(AdColonyInterstitial ad) {
                 // Request a new ad if ad is expiring
-
                 AdColony.requestInterstitial(getResources().getString(R.string.adColony_zone_id_2), this, adOptions);
-
             }
         };
     }

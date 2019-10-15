@@ -199,6 +199,9 @@ public class TopikBaruActivity extends SkinActivity {
                         editTextDeskripsi.setText("");
                         Toast.makeText(getApplicationContext(), "Berjaya pos topik baru", Toast.LENGTH_SHORT).show();
 
+                        //Create umum pos participants for notification
+                        databaseReference.child("umumPosParticipants").child(umumUid).child(registeredUid).setValue(true);
+
                         //Then we proceed to the activity for that
                         Intent intent = new Intent(TopikBaruActivity.this, UmumDetailActivity.class);
                         intent.putExtra("umumUid", umumUid);

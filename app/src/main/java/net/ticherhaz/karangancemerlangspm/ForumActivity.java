@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -38,6 +39,8 @@ import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.model.Forum;
@@ -332,6 +335,20 @@ public class ForumActivity extends SkinActivity {
         });
     }
 
+    //Make token for registeredUser
+    private void setTokenUid(final FirebaseUser firebaseUser) {
+        if (firebaseUser != null) {
+            FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+                @Override
+                public void onSuccess(InstanceIdResult instanceIdResult) {
+                    if (instanceIdResult != null)
+                        databaseReference.child("registeredUserTokenUid").child(firebaseUser.getUid()).child(instanceIdResult.getToken()).setValue(true);
+                }
+            });
+
+        }
+    }
+
     private void listID() {
         textViewUsername = findViewById(R.id.text_view_username);
         //This is for the textview auto gerak kalau nama dia panjang sangat
@@ -366,6 +383,7 @@ public class ForumActivity extends SkinActivity {
         //Auth
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
+        setTokenUid(firebaseUser);
 
         //Get the value of the userUid
         Intent intent = getIntent();
