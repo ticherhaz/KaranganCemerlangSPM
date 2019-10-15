@@ -1,6 +1,8 @@
+'use strict';
+
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
-admin.initializeApp(functions.config().firebase);
+admin.initializeApp();
 
 //HubungiKami Notification
 exports.hubungiKamiChatNotification = functions.database.ref("hubungiKamiMessage/{senderUid}/{adminUid}")
@@ -88,29 +90,53 @@ exports.hubungiKamiChatNotification = functions.database.ref("hubungiKamiMessage
 
 
 //Forum Notification
-exports.forumNotification = functions.database.ref("umumPos/{forumUid}/{umumUid}/{umumDetailUid}")
+exports.forumNotification = functions.database.ref('/umumPos/{forumUid}/{umumUid}/{umumDetailUid}')
 	.onWrite(async (change, context) => {
 
 		//Get the value from the ref
-		const forumUid = context.params.forumUid;
 		const umumUid = context.params.umumUid;
-		const umumDetailUid = context.params.umumDetailUid;
 
 		//Get the value
 		const snapShot = change.after.val();
 		const deskripsi = snapShot.deskripsi;
 		const senderUid = snapShot.registeredUid;
 
-		console.log(deskripsi);
+		// If nothing, we exit the function.
+		if (!change.after.val()) {
+			return console.log('User ', senderUid, 'nothing happened', deskripsi);
+		}
 
-		//Retrieve all adminsUid which are chatting at livechatChatUid
-		const getAllSubscribersPromise = admin.database().ref("umumPosParticipants/" + umumUid + "/").once('value');
+		//Get the list of participants
+		const getAllRegisteredParticipants = admin.database().ref(`/umumPosParticipants/${umumUid}/`).once('value');
+		//Get the users details
+		const getRegisteredUserProfilePromise = admin.database().ref(`/registeredUser/${senderUid}/`).once('value');
 
-		//Getting user name who send the message
-		const getRegisteredUserPromise = admin.database().ref("registeredUser/" + senderUid).once('value');
-		const result = await getRegisteredUserPromise;
-		//Get username of the admin
-		const username = result.val().username;
+		//Make promise
+		const resultFirst = await Promise.all([getAllRegisteredParticipants, getRegisteredUserProfilePromise]);
+		let listAllRegisteredUser = resultFirst[0];
+		const registeredUser = resultFirst[1];
+
+		//Details
+		const totalRegisteredUserInThatUmum = listAllRegisteredUser.numChildren();
+		const listAllRegisteredUserUid = Object.keys(listAllRegisteredUser.val());
+
+
+		// Check if there are any list of participants
+		if (!listAllRegisteredUser.hasChildren()) {
+			return console.log('There is no list of participant.');
+		}
+		// Check if there are any list of participants
+		if (!registeredUser.hasChildren()) {
+			return console.log('The user is not exist.');
+		}
+
+		console.log('There are', totalRegisteredUserInThatUmum, 'lists of participants in this Umum');
+		console.log('Fetched follower profile', registeredUser);
+
+
+		const username = registeredUser.val().username;
+		console.log('He, ', username, ' is sending the message: ', deskripsi);
+
 		//Create payload for the notification
 		const payload = {
 			notification: {
@@ -122,38 +148,57 @@ exports.forumNotification = functions.database.ref("umumPos/{forumUid}/{umumUid}
 			}
 		};
 
-		//results will have children having keys of subscribers uid.
-		const userUidSnapShot = await getAllSubscribersPromise;
+		console.log('All user uid: ', listAllRegisteredUserUid);
 
-		//Check if there is children or not
-		if (!userUidSnapShot.hasChildren()) {
-			return console.log('There are no subscribed users to write notifications.');
-		}
-		//Get the value total admin will receive the notification
-		const totalRegisteredUser = userUidSnapShot.numChildren();
-		//Get the values of userUid
-		const totalUserValue = Object.keys(userUidSnapShot.val()); //fetched the keys creating array of subscribed users
-		var AllFollowersFCMPromises = []; //create new array of promises of TokenList for every subscribed users
-		for (var i = 0; i < totalRegisteredUser; i++) {
+		var fcmPromise;
+		let tokens;
+
+		for (var y = 0; y < totalRegisteredUserInThatUmum; y++) {
 			//Get the userUid
-			const userUid = totalUserValue[i];
-			//Check if the userUid is same as sender
-			if (userUid !== senderUid) {
-				AllFollowersFCMPromises[i] = admin.database().ref("registeredUserTokenUid/" + userUid).once('value');
+			const userUid = listAllRegisteredUserUid[y];
+			if (senderUid !== userUid) {
+
+				console.log('All user uid will receive : ', userUid, ' except : ', senderUid);
+				fcmPromise = admin.database().ref(`/registeredUserTokenUid/${userUid}/`).once('value');
 			}
 		}
-		const results = await Promise.all(AllFollowersFCMPromises);
-		// here is created array of tokens now ill add all the fcm tokens of all the user and then send notification to all these.
-		var tokens = [];
-		for (var i_1 in results) {
-			var usersTokenSnapShot = results[i_1];
-			if (usersTokenSnapShot !== null) {
-				if (usersTokenSnapShot.hasChildren()) {
-					const t = Object.keys(usersTokenSnapShot.val()); //array of all tokens of user [n]
-					tokens = tokens.concat(t); //adding all tokens of user to token array
-				}
+
+		// eslint-disable-next-line no-await-in-loop
+		const results = await Promise.all([fcmPromise]);
+		var snapTing;
+
+		for (var x = 0; x < results.length; x++) {
+			snapTing = results[x];
+			if (!snapTing.hasChildren()) {
+				return console.log('There is no list of tokens');
 			}
+
+			// Listing all tokens as an array.
+			tokens = Object.keys(snapTing.val());
+
+			tokens = tokens.concat(tokens); //adding all tokens of user to token array
+
+			console.log("Tokens: " + tokens[x]);
 		}
+
+		// for (var i_1 in results) {
+
+		// 	var usersTokenSnapShot = results[i_1];
+
+		// 	if (usersTokenSnapShot !== null) {
+
+		// 		if (!usersTokenSnapShot.hasChildren()) {
+		// 			return console.log('There is no list of tokens');
+		// 		}
+
+		// 		if (usersTokenSnapShot.hasChildren()) {
+		// 			const t = Object.keys(usersTokenSnapShot.val());
+		// 			tokens = tokens.concat(t);
+		// 			console.log("Tokens: " + tokens);
+		// 		}
+		// 	}
+		// }
+
 		const response = await admin.messaging().sendToDevice(tokens, payload);
 		// For each message check if there was an error.
 		const tokensToRemove = [];
