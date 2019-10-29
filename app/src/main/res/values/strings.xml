@@ -57,7 +57,7 @@
     <string name="about_title">
         <![CDATA[
         <h3>Karangan Cemerlang SPM</h3>
-        <i>versi 3.09</i><br>
+        <i>versi 3.10</i><br>
         hazman45.blogspot.com<br>
         Ticherhaz©2019
 
@@ -256,8 +256,4 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
     <!--    <string name="banner_ad_unit_id_jenis">ca-app-pub-4598038295422798/5542251936</string>-->
     <!--    <string name="inter_ad_unit_id_tips">ca-app-pub-4598038295422798/4843892710</string>-->
     <!--    <string name="inter_ad_unit_id_senarai">ca-app-pub-4598038295422798/4288524790</string>-->
-    <string name="start_apps_id">208138035</string>
-    <string name="adColony_app_id">app38919b774a0e4624b1</string>
-    <string name="adColony_zone_id_1">vz3892393da1b04fd791</string>
-    <string name="adColony_zone_id_2">vzf7e8c5179caa441db7</string>
 </resources>

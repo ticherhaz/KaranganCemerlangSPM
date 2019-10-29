@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.startapp.android.publish.adsCommon.StartAppSDK;
 import com.zxy.skin.sdk.SkinActivity;
 
 public class TipsKaranganActivity extends SkinActivity {
@@ -20,7 +19,6 @@ public class TipsKaranganActivity extends SkinActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StartAppSDK.init(this, getResources().getString(R.string.start_apps_id), false);
         setContentView(R.layout.activity_tips_karangan);
         buttonIncreaseSize = findViewById(R.id.button_increase_size);
         buttonDecreaseSize = findViewById(R.id.button_decrease_size);

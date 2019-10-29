@@ -14,8 +14,8 @@ android {
         applicationId "net.ticherhaz.karangancemerlangspm"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 309
-        versionName "3.09"
+        versionCode 310
+        versionName "3.10"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -39,7 +39,7 @@ dependencies {
     //MultiDex
     implementation 'com.android.support:multidex:1.0.3'
     //Firebase
-    implementation 'com.google.firebase:firebase-database:19.1.0'
+    implementation 'com.google.firebase:firebase-database:19.2.0'
     implementation 'com.google.firebase:firebase-messaging:20.0.0'
     implementation 'com.google.firebase:firebase-storage:19.1.0'
     implementation "com.google.firebase:firebase-auth:19.1.0"
@@ -54,9 +54,5 @@ dependencies {
     implementation 'com.github.ticherhaz:tarikhmasa:1.5.14'
     //Image Crop
     implementation 'com.soundcloud.android:android-crop:1.0.1@aar'
-    //Ads StartApp
-    implementation 'com.startapp:inapp-sdk:3.10.1'
-    //Ads AdColony
-    implementation 'com.adcolony:sdk:4.1.0'
 }
 apply plugin: 'com.google.gms.google-services'
