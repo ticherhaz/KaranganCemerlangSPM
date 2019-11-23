@@ -12,12 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,12 +43,12 @@ import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.model.UmumDetail;
 import net.ticherhaz.karangancemerlangspm.util.Others;
 import net.ticherhaz.karangancemerlangspm.util.RunTransaction;
-import net.ticherhaz.karangancemerlangspm.util.UserTypeColor;
 import net.ticherhaz.karangancemerlangspm.viewHolder.UmumDetailHolder;
 import net.ticherhaz.tarikhmasa.TarikhMasa;
 
 import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.dismissProgressDialog;
 import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.showProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.util.UserTypeColor.setTextColorUserUmumDetail;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class UmumDetailActivity extends SkinActivity {
@@ -84,7 +84,7 @@ public class UmumDetailActivity extends SkinActivity {
     private long post;
     private long reputation;
     private long reputationPower;
-    private LinearLayout linearLayoutBottom;
+    private ConstraintLayout linearLayoutBottom;
     private boolean canSendMessage = true;
     private Runnable countDown = new Runnable() {
         @Override
@@ -169,10 +169,12 @@ public class UmumDetailActivity extends SkinActivity {
                                     Glide.with(getApplicationContext())
                                             .load(profileUrlA)
                                             .into(holder.getImageViewProfile());
+                                } else {
+                                    holder.getImageViewProfile().setImageResource(R.drawable.emblem);
                                 }
 
                                 //Call another class to change color
-                                new UserTypeColor().setTextColorUserUmumDetail(registeredUser, holder, UmumDetailActivity.this);
+                                setTextColorUserUmumDetail(registeredUser, holder, UmumDetailActivity.this);
 
 
                                 //This part is to display

@@ -22,8 +22,9 @@ import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.util.Others;
-import net.ticherhaz.karangancemerlangspm.util.UserTypeColor;
 import net.ticherhaz.karangancemerlangspm.viewHolder.OnlineStatusViewHolder;
+
+import static net.ticherhaz.karangancemerlangspm.util.UserTypeColor.setTextColorUserOnlineUserActivity;
 
 public class OnlineUserActivity extends SkinActivity {
 
@@ -84,7 +85,7 @@ public class OnlineUserActivity extends SkinActivity {
 
                 //change the color of the user
                 if (model.getTitleType() != null) {
-                    new UserTypeColor().setTextColorUserOnlineUserActivity(model, holder, OnlineUserActivity.this);
+                    setTextColorUserOnlineUserActivity(model, holder, OnlineUserActivity.this);
                 }
 
                 holder.getView().setOnClickListener(new View.OnClickListener() {

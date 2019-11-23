@@ -253,7 +253,5 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
         <item>Lelaki</item>
         <item>Perempuan</item>
     </string-array>
-    <!--    <string name="banner_ad_unit_id_jenis">ca-app-pub-4598038295422798/5542251936</string>-->
-    <!--    <string name="inter_ad_unit_id_tips">ca-app-pub-4598038295422798/4843892710</string>-->
-    <!--    <string name="inter_ad_unit_id_senarai">ca-app-pub-4598038295422798/4288524790</string>-->
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 </resources>

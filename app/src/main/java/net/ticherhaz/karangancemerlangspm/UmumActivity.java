@@ -250,7 +250,7 @@ public class UmumActivity extends SkinActivity {
                         });
 
 
-                        Intent intent = new Intent(UmumActivity.this, UmumDetailActivity.class);
+                        Intent intent = new Intent(UmumActivity.this, UmumDetailActivity2.class);
                         intent.putExtra("umumUid", model.getUmumUid());
                         intent.putExtra("tajukPos", model.getTajuk());
                         intent.putExtra("forumUid", forumUid);

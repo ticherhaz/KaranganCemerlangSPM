@@ -63,7 +63,7 @@ public class Others {
         return "";
     }
 
-    public void setStatus(String status, TextView textViewStatus) {
+    public static void setStatus(String status, TextView textViewStatus) {
         switch (status) {
             case "Biasa":
                 textViewStatus.setText(status);

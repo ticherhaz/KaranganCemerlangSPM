@@ -1,13 +1,13 @@
 package net.ticherhaz.karangancemerlangspm.util;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 
 public class ProgressDialogCustom {
 
     private static ProgressDialog progressDialog;
 
-    public static void showProgressDialog(Activity activity) {
+    public static void showProgressDialog(Context activity) {
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(activity);
             progressDialog.setMessage("Memuatkan...");
