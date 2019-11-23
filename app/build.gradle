@@ -14,8 +14,8 @@ android {
         applicationId "net.ticherhaz.karangancemerlangspm"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 310
-        versionName "3.10"
+        versionCode 312
+        versionName "3.12"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -54,5 +54,7 @@ dependencies {
     //Image Crop
     implementation 'com.soundcloud.android:android-crop:1.0.1@aar'
     implementation 'androidx.work:work-runtime:2.2.0'
+    //App Billing
+    implementation 'com.android.billingclient:billing:2.0.3'
 }
 apply plugin: 'com.google.gms.google-services'

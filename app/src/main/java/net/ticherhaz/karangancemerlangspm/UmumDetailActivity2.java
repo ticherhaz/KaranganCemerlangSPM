@@ -164,6 +164,11 @@ public class UmumDetailActivity2 extends SkinActivity {
                     umumDetailRecyclerView = new UmumDetailRecyclerView(UmumDetailActivity2.this, linearLayoutBottom, mUserList, databaseReference, firebaseUser, forumUid, umumUid, registeredUidReply, userType, reputationPower);
                     recyclerView.setAdapter(umumDetailRecyclerView);
                     umumDetailRecyclerView.notifyDataSetChanged();
+
+                    if (mUserList.isEmpty())
+                        progressBar.setVisibility(View.VISIBLE);
+                    else
+                        progressBar.setVisibility(View.GONE);
                 }
 
             }

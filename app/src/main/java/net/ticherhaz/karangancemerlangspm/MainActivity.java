@@ -1,7 +1,6 @@
 package net.ticherhaz.karangancemerlangspm;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,7 +18,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -747,7 +745,7 @@ public class MainActivity extends SkinActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
 
-            //23.6.2019: We will use new custom alert dialog.
+      /*      //23.6.2019: We will use new custom alert dialog.
             //According to this tutor: https://stackoverflow.com/questions/23669296/create-a-alertdialog-in-android-with-custom-xml-view
             final Dialog dialogAbout = new Dialog(MainActivity.this);
             dialogAbout.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -770,7 +768,11 @@ public class MainActivity extends SkinActivity {
                 }
             });
 
-            dialogAbout.show();
+            dialogAbout.show();*/
+
+            startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
+
+
             return true;
         }
         if (id == R.id.action_feedback) {

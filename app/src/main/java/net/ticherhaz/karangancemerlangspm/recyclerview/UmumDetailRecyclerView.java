@@ -42,8 +42,12 @@ import static net.ticherhaz.karangancemerlangspm.util.UserTypeColor.setTextColor
 
 public class UmumDetailRecyclerView extends RecyclerView.Adapter<UmumDetailHolder> {
 
-    //We already created the UmumDetailHolder which is it is extends from RecyclerView.ViewHolder.
-    //as we know most tutorial, they don't split the viewholder from this class but we do.
+    /*
+     * We already created the UmumDetailHolder which is it is extends from RecyclerView.ViewHolder.
+     * as we know most tutorial, they don't split the view holder from this class but we do.
+     *
+     * 1. Create the variables that we want to use here, so we can communicate from here to UmumDetailActivity.
+     */
 
     //Context
     private Context context;
@@ -58,6 +62,9 @@ public class UmumDetailRecyclerView extends RecyclerView.Adapter<UmumDetailHolde
     private String forumUid, umumUid, registeredUidReply, userType;
     private long reputationPower;
 
+    /*
+     * This constructor will be called at init view of the activity.
+     */
     public UmumDetailRecyclerView(Context context, ConstraintLayout constraintLayout, List<UmumDetail> umumDetailList, DatabaseReference databaseReference, FirebaseUser firebaseUser, String forumUid, String umumUid, String registeredUidReply, String userType, long reputationPower) {
         this.context = context;
         this.constraintLayout = constraintLayout;
@@ -71,6 +78,12 @@ public class UmumDetailRecyclerView extends RecyclerView.Adapter<UmumDetailHolde
         this.reputationPower = reputationPower;
     }
 
+    /*
+     * When it create view, the view need to be inflater.
+     * 1. Create an empty xml layout and design the item.
+     * 2. Important, please add attachToRoot to false or it will catch an error.
+     * 3. It will return new view which is UmumDetailHolder.
+     */
     @NonNull
     @Override
     public UmumDetailHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -78,6 +91,11 @@ public class UmumDetailRecyclerView extends RecyclerView.Adapter<UmumDetailHolde
         return new UmumDetailHolder(view);
     }
 
+    /*
+     * When its on bind, we get the position of array umumdetaillist.
+     * and then we display the value.
+     *
+     */
     @Override
     public void onBindViewHolder(@NonNull final UmumDetailHolder holder, final int position) {
         final UmumDetail model = umumDetailList.get(position);
@@ -162,13 +180,11 @@ public class UmumDetailRecyclerView extends RecyclerView.Adapter<UmumDetailHolde
                                         //and then we hide the bottom fab
                                         constraintLayout.setVisibility(View.GONE);
 
-
                                         //After that we triggered the button yes to edit
                                         holder.getTextViewEditYes().setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                String newDeskripsi = holder.getEditTextEdit().getText().toString();
-
+                                                final String newDeskripsi = holder.getEditTextEdit().getText().toString();
                                                 if (newDeskripsi.isEmpty() && holder.getEditTextEdit().getText().toString().contains(" ")) {
                                                     Toast.makeText(context, "Sila isi ayat anda...", Toast.LENGTH_LONG).show();
                                                 } else {
@@ -217,7 +233,6 @@ public class UmumDetailRecyclerView extends RecyclerView.Adapter<UmumDetailHolde
                                 });
                             }
                         }
-
 
                         //GIVE REPUTATION
                         holder.getTextViewGiveReputation().setOnClickListener(new View.OnClickListener() {
@@ -298,8 +313,6 @@ public class UmumDetailRecyclerView extends RecyclerView.Adapter<UmumDetailHolde
 
                                                                             }
                                                                         } else {
-
-
                                                                             //If no data exist, then we proceed here.
                                                                             //If yes, then we add the reputation power in this specfic user who post.
                                                                             databaseReference.child("registeredUser").child(model.getRegisteredUid()).child("reputation").runTransaction(new Transaction.Handler() {
@@ -401,8 +414,8 @@ public class UmumDetailRecyclerView extends RecyclerView.Adapter<UmumDetailHolde
 
 
         /*
-            Admin and moderator part.
-            Remove specific umum detail
+         * Admin and moderator part.
+         * Remove specific umum detail
          */
         if (firebaseUser != null) {
             //Set on Long listener to delete this specific, check the user
@@ -442,6 +455,9 @@ public class UmumDetailRecyclerView extends RecyclerView.Adapter<UmumDetailHolde
 
     }
 
+    /*
+     * return the value of the size array umumdetail list.
+     */
     @Override
     public int getItemCount() {
         return umumDetailList.size();

@@ -42,21 +42,6 @@
 
                 </androidx.recyclerview.widget.RecyclerView>
             </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_ads_jenis"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <!--                <com.google.android.gms.ads.AdView-->
-                <!--                    android:id="@+id/ad_view"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_alignParentBottom="true"-->
-                <!--                    android:layout_centerHorizontal="true"-->
-                <!--                    ads:adSize="BANNER"-->
-                <!--                    ads:adUnitId="@string/banner_ad_unit_id_jenis" />-->
-            </RelativeLayout>
         </RelativeLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>
