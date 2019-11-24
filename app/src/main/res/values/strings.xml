@@ -254,8 +254,8 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
         <item>Perempuan</item>
     </string-array>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
-    <!-- TODO: Change apps version -->
-    <string name="apps_version">Karangan Cemerlang SPM v3.11\nhazman45.blogspot.com\nTicherhaz©2019</string>
+    <!-- TODO: Change apps version v3.15 -->
+    <string name="apps_version">Karangan Cemerlang SPM v3.15\nhazman45.blogspot.com\nTicherhaz©2019</string>
     <string name="penarafan">Penarafan</string>
     <string name="app_name_tentang">Tentang Karangan Cemerlang SPM</string>
 </resources>

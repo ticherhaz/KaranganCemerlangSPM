@@ -8,7 +8,7 @@
     tools:context=".UmumDetailActivity">
 
     <ProgressBar
-        android:id="@+id/progressbar"
+        android:id="@+id/pb_umum_detail"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,16 +21,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_umum_detail"
+        android:id="@+id/rv_umum_detail"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/linear_layout_bottom"
+        app:layout_constraintBottom_toTopOf="@id/cl_umum_detail"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/linear_layout_bottom"
+        android:id="@+id/cl_umum_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -43,7 +43,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <EditText
-            android:id="@+id/edit_text_reply_pos"
+            android:id="@+id/et_message_umum_detail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -54,16 +54,16 @@
             android:paddingRight="3dp"
             android:textColor="@color/colorTextWhite"
             android:textColorHint="@color/colorTextWhite"
-            app:layout_constraintBottom_toBottomOf="@id/linear_layout_bottom"
-            app:layout_constraintEnd_toStartOf="@id/button_reply"
+            app:layout_constraintBottom_toBottomOf="@id/cl_umum_detail"
+            app:layout_constraintEnd_toStartOf="@id/btn_send_umum_detail"
             app:layout_constraintHorizontal_weight="0.90"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/button_reply"
+            app:layout_constraintRight_toLeftOf="@id/btn_send_umum_detail"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/linear_layout_bottom" />
+            app:layout_constraintTop_toTopOf="@id/cl_umum_detail" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/button_reply"
+            android:id="@+id/btn_send_umum_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -75,7 +75,7 @@
             app:fabSize="mini"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_weight="0.10"
-            app:layout_constraintLeft_toRightOf="@id/edit_text_reply_pos"
+            app:layout_constraintLeft_toRightOf="@id/et_message_umum_detail"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

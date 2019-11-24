@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.PersistableBundle;
 import android.text.Editable;
 import android.text.Html;
@@ -45,9 +44,6 @@ import net.ticherhaz.karangancemerlangspm.model.Karangan;
 import net.ticherhaz.karangancemerlangspm.util.Others;
 import net.ticherhaz.karangancemerlangspm.util.RunTransaction;
 import net.ticherhaz.karangancemerlangspm.viewHolder.KaranganViewHolder;
-
-import java.util.Calendar;
-import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends SkinActivity {
 
@@ -759,7 +755,7 @@ public class MainActivity extends SkinActivity {
                 public void onClick(View view) {
                     //textViewCredit.setText(R.string.about_credit);
                     if (!isDisplaying) {
-                        textViewCredit.setText(R.string.about_credit); //TODO: Update version 3.10
+                        textViewCredit.setText(R.string.about_credit); //TODO: Update version 3.15
                         isDisplaying = true;
                     } else {
                         textViewCredit.setText(R.string.kredit);
@@ -902,46 +898,49 @@ public class MainActivity extends SkinActivity {
     }
 
     private void setmCountDownTimer() {
-        Calendar start_calendar = Calendar.getInstance();
-        Calendar end_calendar = Calendar.getInstance();
-        end_calendar.set(Calendar.DAY_OF_MONTH, 4);
-        end_calendar.set(Calendar.MONTH, 11 - 1);
-        end_calendar.set(Calendar.YEAR, 2019);
-        end_calendar.set(Calendar.HOUR_OF_DAY, 8);
-        end_calendar.set(Calendar.SECOND, 0);
-        end_calendar.set(Calendar.MINUTE, 0);
+//        Calendar start_calendar = Calendar.getInstance();
+//        Calendar end_calendar = Calendar.getInstance();
+//        end_calendar.set(Calendar.DAY_OF_MONTH, 4);
+//        end_calendar.set(Calendar.MONTH, 11 - 1);
+//        end_calendar.set(Calendar.YEAR, 2019);
+//        end_calendar.set(Calendar.HOUR_OF_DAY, 8);
+//        end_calendar.set(Calendar.SECOND, 0);
+//        end_calendar.set(Calendar.MINUTE, 0);
+//
+//        long start_millis = start_calendar.getTimeInMillis(); //get the start time in milliseconds
+//        long end_millis = end_calendar.getTimeInMillis(); //get the end time in milliseconds
+//        long total_millis = (end_millis - start_millis); //total time in milliseconds
+//
+//        //1000 = 1 second interval
+//        CountDownTimer cdt = new CountDownTimer(total_millis, 1000) {
+//            @SuppressLint("SetTextI18n")
+//            @Override
+//            public void onTick(long millisUntilFinished) {
+//                long days = TimeUnit.MILLISECONDS.toDays(millisUntilFinished);
+//                millisUntilFinished -= TimeUnit.DAYS.toMillis(days);
+//
+//                long hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished);
+//                millisUntilFinished -= TimeUnit.HOURS.toMillis(hours);
+//
+//                long minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished);
+//                millisUntilFinished -= TimeUnit.MINUTES.toMillis(minutes);
+//
+//                long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
+//
+//                String timerSPM = days + " Hari " + hours + " Jam " + minutes + " Minit " + seconds + " Saat";
+//                textViewCountdownSPM.setText(timerSPM); //You can compute the millisUntilFinished on hours/minutes/seconds
+//            }
+//
+//            @SuppressLint("SetTextI18n")
+//            @Override
+//            public void onFinish() {
+//                textViewCountdownSPM.setText("Finish!");
+//            }
+//        };
+//        cdt.start();
 
-        long start_millis = start_calendar.getTimeInMillis(); //get the start time in milliseconds
-        long end_millis = end_calendar.getTimeInMillis(); //get the end time in milliseconds
-        long total_millis = (end_millis - start_millis); //total time in milliseconds
 
-        //1000 = 1 second interval
-        CountDownTimer cdt = new CountDownTimer(total_millis, 1000) {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onTick(long millisUntilFinished) {
-                long days = TimeUnit.MILLISECONDS.toDays(millisUntilFinished);
-                millisUntilFinished -= TimeUnit.DAYS.toMillis(days);
-
-                long hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished);
-                millisUntilFinished -= TimeUnit.HOURS.toMillis(hours);
-
-                long minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished);
-                millisUntilFinished -= TimeUnit.MINUTES.toMillis(minutes);
-
-                long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
-
-                String timerSPM = days + " Hari " + hours + " Jam " + minutes + " Minit " + seconds + " Saat";
-                textViewCountdownSPM.setText(timerSPM); //You can compute the millisUntilFinished on hours/minutes/seconds
-            }
-
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onFinish() {
-                textViewCountdownSPM.setText("Finish!");
-            }
-        };
-        cdt.start();
+        textViewCountdownSPM.setText("");
     }
 
 

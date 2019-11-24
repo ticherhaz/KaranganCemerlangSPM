@@ -48,7 +48,7 @@
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" /> <!-- [END fcm_default_channel] -->
         <activity
-            android:name=".UmumDetailActivity2"
+            android:name=".UmumDetailActivity"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -118,11 +118,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ForumActivity" />
-        </activity>
-        <activity android:name=".UmumDetailActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".UmumActivity" />
         </activity>
         <activity
             android:name=".TopikBaruActivity"

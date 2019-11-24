@@ -1,29 +1,20 @@
 package net.ticherhaz.karangancemerlangspm;
 
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -33,96 +24,105 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.model.UmumDetail;
-import net.ticherhaz.karangancemerlangspm.util.Others;
+import net.ticherhaz.karangancemerlangspm.recyclerview.UmumDetailRecyclerView;
 import net.ticherhaz.karangancemerlangspm.util.RunTransaction;
-import net.ticherhaz.karangancemerlangspm.viewHolder.UmumDetailHolder;
-import net.ticherhaz.tarikhmasa.TarikhMasa;
 
-import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.dismissProgressDialog;
-import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.showProgressDialog;
-import static net.ticherhaz.karangancemerlangspm.util.UserTypeColor.setTextColorUserUmumDetail;
+import java.util.ArrayList;
+import java.util.List;
+
 import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
+/*
+ * @@important
+ * IMPORTANT:
+ * 24/11/2019: Preparation for the new update coming soon. I will code in here look clean and understandable.
+ *             The variable will be very short and readable for all dev. I try to reduce the size of the code by doing that.
+ *             1. About xml, we will try to specific xml that we use, for example umum detail xml, so edittext gonna be like this
+ *                et_umum_detail .
+ *             2. As you can see, we already specified the usage of the edittext only can be use in here.
+ */
 public class UmumDetailActivity extends SkinActivity {
 
-    int _count = 30;//30 seconds
-    //Firebase
-    private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
-    //FirebaseAuth
-    private FirebaseAuth firebaseAuth;
-    private FirebaseUser firebaseUser;
-    //FirebaseUi
-    private FirebaseRecyclerOptions<UmumDetail> firebaseRecyclerOptions;
-    private FirebaseRecyclerAdapter<UmumDetail, UmumDetailHolder> firebaseRecyclerAdapter;
+    /*
+     * Make it count when the user press the button send,
+     * and it will triggered for 30 seconds for the button
+     * disabled.
+     *
+     */
+    private static int c = 30;
+    //[START] Firebase [START]
+    private FirebaseDatabase fDe;
+    private DatabaseReference dRe;
+    private FirebaseAuth fAh;
+    private FirebaseUser fUr;
+    //[END] ---------- [END]
+
+    //[START] Make a recyclerview adapter to display umum detail [START]
+    private UmumDetailRecyclerView umumDetailRV;
+    private List<UmumDetail> umumDetailL = new ArrayList<>();
+    //[END] ---------------------------------------------------- [END]
+
     //ProgressBar
-    private ProgressBar progressBar;
+    private ProgressBar pB;
     //RecyclerView
-    private RecyclerView recyclerView;
+    private RecyclerView rV;
     //EditText
-    private EditText editTextReply;
-    //ButtonFabReply
-    private FloatingActionButton floatingActionButton;
-    private String umumUid;
-    private String tajukPos;
-    private String forumUid;
-    private String registeredUidReply;
-    private String username;
-    private String userTitle;
-    private String sekolah;
-    private String onDateCreatedMonthYear;
-    private String gender;
-    private String userType;
-    private long post;
-    private long reputation;
+    private EditText etMessage;
+    //Floating Action Button
+    private FloatingActionButton fAB;
+    //Constraint Layout
+    private ConstraintLayout cL;
+
+    //Variables
+    private String umumUid, tajukPos, forumUid, registeredUidReply, userType;
     private long reputationPower;
-    private ConstraintLayout linearLayoutBottom;
-    private boolean canSendMessage = true;
+    private boolean isSendable = true;
+
+    /**
+     * Countdown for the user after they send the message,
+     * and the button will disabled.
+     */
     private Runnable countDown = new Runnable() {
         @Override
         public void run() {
-            while (_count > 0) {
-                _count--;
+            while (c > 0) {
+                c--;
                 try {
-                    Thread.sleep(1000);//1 second
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-
-            _count = 30;//again set to 30 seconds
-            canSendMessage = true;//enable send
+            //It will set to 30 seconds again
+            c = 30;
+            //Enable the button to send
+            isSendable = true;
         }
     };
 
-    private void retrieveUserData() {
-        databaseReference.child("registeredUser").child(registeredUidReply).addValueEventListener(new ValueEventListener() {
+
+    /**
+     * We will get the reputation power and userType to store as String and long in this activity,
+     * it can accessible to another/transfer to another method to use.
+     * This is very crucial part where the userType will be initialized and reusable to another method/activity
+     */
+    private void initData() {
+        dRe.child("registeredUser").child(registeredUidReply).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
-
                     if (registeredUser != null) {
-                        username = registeredUser.getUsername();
-                        userTitle = registeredUser.getTitleType();
-                        sekolah = registeredUser.getSekolah();
-                        onDateCreatedMonthYear = registeredUser.getOnDateCreated();
-                        gender = registeredUser.getGender();
-                        post = registeredUser.getPostCount();
-                        reputation = registeredUser.getReputation();
+                        //Get the value of reputation power and user type and store in variables
                         reputationPower = registeredUser.getReputationPower();
                         userType = registeredUser.getTypeUser();
                     }
-
-
                 }
             }
 
@@ -133,497 +133,133 @@ public class UmumDetailActivity extends SkinActivity {
         });
     }
 
-    private void setFirebaseRecyclerAdapter() {
-        progressBar.setVisibility(View.VISIBLE);
-        Query query = databaseReference.child("umumPos").child(forumUid).child(umumUid);
-        firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<UmumDetail>()
-                .setQuery(query, UmumDetail.class)
-                .build();
-
-        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<UmumDetail, UmumDetailHolder>(firebaseRecyclerOptions) {
-            @SuppressLint("SetTextI18n")
-            @Override
-            protected void onBindViewHolder(@NonNull final UmumDetailHolder holder, final int position, @NonNull final UmumDetail model) {
-
-                //1.
-                //Here we will retrieve user data (this specific) from user database.
-                databaseReference.child("registeredUser").child(model.getRegisteredUid()).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            final RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
-                            if (registeredUser != null) {
-                                final String profileUrlA = registeredUser.getProfileUrl();
-                                final String usernameA = registeredUser.getUsername();
-                                final String sekolahA = registeredUser.getSekolah();
-                                final String titleTypeA = registeredUser.getTitleType();
-                                final String genderA = registeredUser.getGender();
-                                final String stateA = registeredUser.getState();
-                                final String modeA = registeredUser.getMode();
-                                final long postCountA = registeredUser.getPostCount();
-                                final long reputationA = registeredUser.getReputation();
-                                final String onDateCreatedA = registeredUser.getOnDateCreated();
-
-                                //Check if profileUrl is null or not
-                                if (profileUrlA != null) {
-                                    Glide.with(getApplicationContext())
-                                            .load(profileUrlA)
-                                            .into(holder.getImageViewProfile());
-                                } else {
-                                    holder.getImageViewProfile().setImageResource(R.drawable.emblem);
-                                }
-
-                                //Call another class to change color
-                                setTextColorUserUmumDetail(registeredUser, holder, UmumDetailActivity.this);
-
-
-                                //This part is to display
-                                holder.getTextViewUsername().setText(usernameA);
-                                holder.getTextViewUserTitle().setText(titleTypeA);
-                                //    holder.getTextViewUserJoinDate().setText("Tarikh Sertai: " + ConvertTarikhMasa2LocalTimePattern(onDateCreatedA, "MMM yyyy"));
-                                holder.getTextViewPos().setText(String.valueOf(postCountA));
-                                holder.getTextViewReputation().setText(String.valueOf(reputationA));
-                                new Others().setStatus(modeA, holder.getTextViewStatus());
-
-                                //Edit part
-                                //this part, first, we check if the user is already sign in or not and if the user valid, then he can edit his reply
-                                //check if the same person, then, he able to edit it
-                                if (firebaseUser != null) {
-                                    if (model.getRegisteredUid().equals(firebaseUser.getUid())) {
-                                        //then we show the button
-                                        holder.getTextViewEditReply().setVisibility(View.VISIBLE);
-
-                                        //Hide the giving of the reputation
-                                        holder.getTextViewGiveReputation().setVisibility(View.GONE);
-
-                                        holder.getTextViewEditReply().setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                //when we click this one, then we change the layout display from the textview become the edittext.
-                                                //so we gone the textview
-                                                holder.getTextViewDeskripsi().setVisibility(View.GONE);
-                                                //then we display the edit text
-                                                holder.getEditTextEdit().setVisibility(View.VISIBLE);
-                                                //after that we display the text of the reply.
-                                                holder.getEditTextEdit().setText(model.getDeskripsi());
-                                                //Then we hide the textview 'reply'
-                                                holder.getTextViewEditReply().setVisibility(View.GONE);
-                                                //We display with they yes, or cancel to edit
-                                                holder.getTextViewEditYes().setVisibility(View.VISIBLE);
-                                                holder.getTextViewEditCancel().setVisibility(View.VISIBLE);
-
-                                                //and then we hide the bottom fab
-                                                linearLayoutBottom.setVisibility(View.GONE);
-
-
-                                                //After that we triggered the button yes to edit
-                                                holder.getTextViewEditYes().setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View v) {
-                                                        String newDeskripsi = holder.getEditTextEdit().getText().toString();
-
-                                                        if (newDeskripsi.isEmpty() && holder.getEditTextEdit().getText().toString().contains(" ")) {
-                                                            Toast.makeText(getApplicationContext(), "Sila isi ayat anda...", Toast.LENGTH_LONG).show();
-                                                        } else {
-                                                            //here we triggered to change in the database
-                                                            databaseReference.child("umumPos").child(forumUid).child(umumUid).child(model.getUmumDetailUid()).child("deskripsi").setValue(newDeskripsi);
-                                                            //After we finish
-                                                            //back to normal
-                                                            //then we change back all to normal
-                                                            //we hide the edittext deskripsi
-                                                            holder.getEditTextEdit().setVisibility(View.GONE);
-                                                            //we display textview deskripsi
-                                                            holder.getTextViewDeskripsi().setVisibility(View.VISIBLE);
-                                                            //We hide this button cancel and yes
-                                                            holder.getTextViewEditYes().setVisibility(View.GONE);
-                                                            holder.getTextViewEditCancel().setVisibility(View.GONE);
-                                                            //Then we display back the edit button
-                                                            holder.getTextViewEditReply().setVisibility(View.VISIBLE);
-
-                                                            //display fab
-                                                            linearLayoutBottom.setVisibility(View.VISIBLE);
-                                                        }
-
-                                                    }
-                                                });
-
-                                                //This one is for cancel
-                                                holder.getTextViewEditCancel().setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View v) {
-                                                        //then we change back all to normal
-                                                        //we hide the edittext deskripsi
-                                                        holder.getEditTextEdit().setVisibility(View.GONE);
-                                                        //we display textview deskripsi
-                                                        holder.getTextViewDeskripsi().setVisibility(View.VISIBLE);
-                                                        //We hide this button cancel and yes
-                                                        holder.getTextViewEditYes().setVisibility(View.GONE);
-                                                        holder.getTextViewEditCancel().setVisibility(View.GONE);
-                                                        //Then we display back the edit button
-                                                        holder.getTextViewEditReply().setVisibility(View.VISIBLE);
-
-                                                        //display fab
-                                                        linearLayoutBottom.setVisibility(View.VISIBLE);
-                                                    }
-                                                });
-                                            }
-                                        });
-                                    }
-                                }
-
-
-                                //GIVE REPUTATION
-                                holder.getTextViewGiveReputation().setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        AlertDialog alertDialog = new AlertDialog.Builder(UmumDetailActivity.this)
-                                                .setCancelable(false)
-                                                .setTitle("Memberi Reputasi")
-                                                .setMessage("Adakah anda ingin memberi reputasi kepada " + registeredUser.getUsername() + "?")
-                                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(final DialogInterface dialog, int which) {
-                                                        //Display the progress dialog
-                                                        showProgressDialog(UmumDetailActivity.this);
-
-                                                        //First we check the reputationLimit for this guy
-                                                        databaseReference.child("reputationLimit").child(registeredUidReply).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                            @Override
-                                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                                if (dataSnapshot.exists()) {
-
-                                                                    final long totalLimitReputation = dataSnapshot.getValue(Long.class);
-
-                                                                    //If has
-                                                                    if (totalLimitReputation > 0) {
-
-                                                                        //Then we check if the user already given the reputation baru2 ni or not.
-                                                                        Query query1 = databaseReference.child("reputationRecord").child(registeredUidReply).limitToLast(2);
-
-                                                                        query1.addListenerForSingleValueEvent(new ValueEventListener() {
-                                                                            @Override
-                                                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                                                if (dataSnapshot.exists()) {
-                                                                                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-
-                                                                                        String existedUser = dataSnapshot1.getValue(String.class);
-
-                                                                                        //then check
-                                                                                        if (model.getRegisteredUid().equals(existedUser)) {
-                                                                                            Toast.makeText(getApplicationContext(), "Sila memberi reputasi kepada orang lain sama", Toast.LENGTH_SHORT).show();
-                                                                                            dismissProgressDialog();
-                                                                                        } else if (!model.getRegisteredUid().equals(existedUser)) {
-
-                                                                                            //If yes, then we add the reputation power in this specfic user who post.
-                                                                                            databaseReference.child("registeredUser").child(model.getRegisteredUid()).child("reputation").runTransaction(new Transaction.Handler() {
-                                                                                                @NonNull
-                                                                                                @Override
-                                                                                                public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
-                                                                                                    if (mutableData.getValue() == null) {
-                                                                                                        mutableData.setValue(0);
-                                                                                                    } else {
-                                                                                                        mutableData.setValue((Long) mutableData.getValue() + reputationPower); //add the reputation power
-                                                                                                    }
-                                                                                                    return Transaction.success(mutableData);
-                                                                                                }
-
-                                                                                                @Override
-                                                                                                public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
-                                                                                                    //Hide the progress dialog after finish give the reputation
-
-                                                                                                    //After we update the value, then we reduce the reputationLimit for this guy
-                                                                                                    long afterDeductReputationLimit = totalLimitReputation - 1;
-                                                                                                    databaseReference.child("reputationLimit").child(registeredUidReply).setValue(afterDeductReputationLimit);
-
-                                                                                                    //After that, we catat the data that user already given the reputation.
-                                                                                                    databaseReference.child("reputationRecord").child(registeredUidReply).push().setValue(model.getRegisteredUid());
-
-
-                                                                                                    dismissProgressDialog();
-                                                                                                    Toast.makeText(getApplicationContext(), "Berjaya memberi reputasi", Toast.LENGTH_SHORT).show();
-                                                                                                    dialog.cancel();
-                                                                                                }
-                                                                                            });
-                                                                                        } else {
-                                                                                            Toast.makeText(getApplicationContext(), "Masalah", Toast.LENGTH_SHORT).show();
-                                                                                            dismissProgressDialog();
-                                                                                        }
-
-                                                                                    }
-                                                                                } else {
-
-
-                                                                                    //If no data exist, then we proceed here.
-                                                                                    //If yes, then we add the reputation power in this specfic user who post.
-                                                                                    databaseReference.child("registeredUser").child(model.getRegisteredUid()).child("reputation").runTransaction(new Transaction.Handler() {
-                                                                                        @NonNull
-                                                                                        @Override
-                                                                                        public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
-                                                                                            if (mutableData.getValue() == null) {
-                                                                                                mutableData.setValue(0);
-                                                                                            } else {
-                                                                                                mutableData.setValue((Long) mutableData.getValue() + reputationPower); //add the reputation power
-                                                                                            }
-                                                                                            return Transaction.success(mutableData);
-                                                                                        }
-
-                                                                                        @Override
-                                                                                        public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
-                                                                                            //Hide the progress dialog after finish give the reputation
-
-                                                                                            //After we update the value, then we reduce the reputationLimit for this guy
-                                                                                            long afterDeductReputationLimit = totalLimitReputation - 1;
-                                                                                            databaseReference.child("reputationLimit").child(registeredUidReply).setValue(afterDeductReputationLimit);
-
-                                                                                            //After that, we catat the data that user already given the reputation.
-                                                                                            databaseReference.child("reputationRecord").child(registeredUidReply).push().setValue(model.getRegisteredUid());
-
-
-                                                                                            dismissProgressDialog();
-                                                                                            Toast.makeText(getApplicationContext(), "Berjaya memberi reputasi", Toast.LENGTH_SHORT).show();
-                                                                                            dialog.cancel();
-                                                                                        }
-                                                                                    });
-
-                                                                                }
-                                                                            }
-
-                                                                            @Override
-                                                                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                                                            }
-                                                                        });
-
-
-                                                                    }
-                                                                    //Then if the user already reach 0 total to give reputation
-                                                                    else {
-                                                                        dismissProgressDialog();
-                                                                        Toast.makeText(getApplicationContext(), "Maaf, reputatasi hari ini sudah habis, sila tunggu esok", Toast.LENGTH_SHORT).show();
-                                                                    }
-
-                                                                }
-
-
-                                                            }
-
-                                                            @Override
-                                                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                                            }
-                                                        });
-
-
-                                                    }
-                                                })
-                                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialog, int which) {
-                                                        //if press no
-                                                        dialog.cancel();
-                                                    }
-                                                })
-                                                .create();
-
-                                        //If the user is not null when pressing the button give reputation, mean its valid then display the alert dialog
-                                        if (firebaseUser != null) {
-                                            //and check if the user and the one who post is not the same person
-                                            if (!model.getRegisteredUid().equals(firebaseUser.getUid())) {
-                                                alertDialog.show();
-                                            } else {
-                                                Toast.makeText(UmumDetailActivity.this, "Tidak Boleh Reputasi Diri Sendiri", Toast.LENGTH_SHORT).show();
-                                            }
-                                        } else {
-                                            Toast.makeText(UmumDetailActivity.this, "Sila Daftar/Log Masuk Terlebih Dahulu", Toast.LENGTH_SHORT).show();
-                                        }
-
-
-                                    }
-                                });
-                            }
-                        }
-
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-                holder.getTextViewDeskripsi().setText(model.getDeskripsi());
-
-                //Display the 1minit yg lalu
-                holder.getTextViewMasaDibalasOleh().setText(TarikhMasa.GetTarikhMasaTimeAgo(model.getPostCreatedDate(), "MY", true, false));
-
-                //On click
-//                holder.getView().setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//
-//                    }
-//                });
-
-                //Click to the user
-                holder.getTextViewUsername().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(UmumDetailActivity.this, ProfileActivity.class);
-                        intent.putExtra("registeredUid", model.getRegisteredUid());
-                        startActivities(new Intent[]{intent});
-                    }
-                });
-
-
-                //Admin part to delete
-                if (firebaseUser != null) {
-                    //Set on Long listener to delete this specific, check the user
-                    if (userType.equals("admin") || userType.equals("moderator")) {
-                        holder.getView().setOnLongClickListener(new View.OnLongClickListener() {
-                            @Override
-                            public boolean onLongClick(View view) {
-                                AlertDialog alertDialog = new AlertDialog.Builder(UmumDetailActivity.this)
-                                        .setTitle("Options")
-                                        .setMessage("Are you sure you want to delete this?")
-                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-
-                                                //Ok after we remove, we need to update the total post of that user who post this reply.
-                                                firebaseRecyclerAdapter.getRef(position).removeValue();
-                                                new RunTransaction().runTransactionRegisteredUserPostCountRemove(databaseReference, registeredUidReply);
-
-
-                                            }
-                                        })
-                                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                dialogInterface.dismiss();
-                                            }
-                                        })
-                                        .create();
-
-                                alertDialog.show();
-                                return true;
-                            }
-                        });
-                    }
-                }
-            }
-
-            @NonNull
-            @Override
-            public UmumDetailHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.umum_detail_item, viewGroup, false);
-                return new UmumDetailHolder(view);
-            }
-
-            @Override
-            public void onDataChanged() {
-                progressBar.setVisibility(View.INVISIBLE);
-            }
-        };
-
-        //Display
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(firebaseRecyclerAdapter);
-        firebaseRecyclerAdapter.startListening();
-        firebaseRecyclerAdapter.notifyDataSetChanged();
-    }
-
+    /**
+     * This is listID where all the values are initialized. So the code will look clean.
+     */
     private void listID() {
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
+        fDe = FirebaseDatabase.getInstance();
+        dRe = fDe.getReference();
+        fAh = FirebaseAuth.getInstance();
+        fUr = fAh.getCurrentUser();
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
+        pB = findViewById(R.id.pb_umum_detail);
+        rV = findViewById(R.id.rv_umum_detail);
+        etMessage = findViewById(R.id.et_message_umum_detail);
+        fAB = findViewById(R.id.btn_send_umum_detail);
+        cL = findViewById(R.id.cl_umum_detail);
 
-        progressBar = findViewById(R.id.progressbar);
-        recyclerView = findViewById(R.id.recycler_view_umum_detail);
-
-        editTextReply = findViewById(R.id.edit_text_reply_pos);
-        floatingActionButton = findViewById(R.id.button_reply);
-
-        linearLayoutBottom = findViewById(R.id.linear_layout_bottom);
-
-        //Get uid/ check if the user is not null or not
-        if (firebaseUser != null) {
-            registeredUidReply = firebaseUser.getUid();
-            retrieveUserData();
+        //Get uid/check if the user is not null or not
+        if (fUr != null) {
+            registeredUidReply = fUr.getUid();
+            initData();
         }
 
-        setFirebaseRecyclerAdapter();
-        setFloatingActionButton();
+        /*
+         * Initialize the Floating Action Button where the button is pressed.
+         */
+        fAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initB();
+            }
+        });
+
+        /*
+         *
+         * Init view for recycler view.
+         * [START]
+         */
+        Query query = dRe.child("umumPos").child(forumUid).child(umumUid);
+        rV.setLayoutManager(new LinearLayoutManager(this));
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+
+                    umumDetailL.clear();
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        UmumDetail user = snapshot.getValue(UmumDetail.class);
+                        umumDetailL.add(user);
+                    }
+                    umumDetailRV = new UmumDetailRecyclerView(UmumDetailActivity.this, cL, umumDetailL, dRe, fUr, forumUid, umumUid, registeredUidReply, userType, reputationPower);
+                    rV.setAdapter(umumDetailRV);
+                    umumDetailRV.notifyDataSetChanged();
+
+                    if (umumDetailL.isEmpty())
+                        pB.setVisibility(View.VISIBLE);
+                    else
+                        pB.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 
-    private void retrieveIntent() {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        /*
+         *
+         * Init the intent, get the value intent from activity before which is UmumActivity
+         */
         Intent intent = getIntent();
         if (intent.getExtras() != null) {
             umumUid = intent.getExtras().getString("umumUid");
             tajukPos = intent.getExtras().getString("tajukPos");
             forumUid = intent.getExtras().getString("forumUid");
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        retrieveIntent();
         setContentView(R.layout.activity_umum_detail);
         setTitle(tajukPos);
         listID();
     }
 
-    //Button Reply FAB
-    private void setFloatingActionButton() {
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkEmpty();
-            }
-        });
-    }
-
-    //Method check
-    private void checkEmpty() {
-        if (!TextUtils.isEmpty(editTextReply.getText().toString())) {
-            floatingActionButton.setEnabled(false);
+    /**
+     * Check if the value is empty or not before send message press button
+     */
+    private void initB() {
+        if (!TextUtils.isEmpty(etMessage.getText().toString())) {
+            //Disable button once there is value, to avoid double data
+            fAB.setEnabled(false);
 
             //check if the user is already signed in or not
-            if (firebaseUser != null) {
+            if (fUr != null) {
+                if (isSendable) {
 
-                if (canSendMessage) {
-
-                    String umumDetailUid = databaseReference.push().getKey();
-                    //TODO: this is format date to store string and we can retrieve the string like this : 2 minit yang lalu.
+                    /*
+                     * Init variables to store the database umum detail model class
+                     */
+                    final String umumDetailUid = dRe.push().getKey();
                     final String onCreatedDate = GetTarikhMasa();
-                    String reply = editTextReply.getText().toString();
-                    UmumDetail umumDetail = new UmumDetail(umumDetailUid, registeredUidReply, onCreatedDate, reply);
+                    final String reply = etMessage.getText().toString();
+                    final UmumDetail umumDetail = new UmumDetail(umumDetailUid, registeredUidReply, onCreatedDate, reply);
 
                     if (umumDetailUid != null) {
-                        databaseReference.child("umumPos").child(forumUid).child(umumUid).child(umumDetailUid).setValue(umumDetail).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        dRe.child("umumPos").child(forumUid).child(umumUid).child(umumDetailUid).setValue(umumDetail).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
                                     //Then we store the data into the umum
-                                    databaseReference.child("umum").child(forumUid).child(umumUid).child("masaDibalasOleh").setValue(onCreatedDate);
-                                    databaseReference.child("umum").child(forumUid).child(umumUid).child("registeredUidLastReply").setValue(registeredUidReply);
+                                    dRe.child("umum").child(forumUid).child(umumUid).child("masaDibalasOleh").setValue(onCreatedDate);
+                                    dRe.child("umum").child(forumUid).child(umumUid).child("registeredUidLastReply").setValue(registeredUidReply);
 
-                                    //after that we increase the amount of post
-                                    new RunTransaction().runTransactionRegisteredUserPostCount(databaseReference, registeredUidReply);
+                                    //After that we increase the amount of post
+                                    new RunTransaction().runTransactionRegisteredUserPostCount(dRe, registeredUidReply);
 
                                     //Create umum pos participants for notification
-                                    databaseReference.child("umumPosParticipants").child(umumUid).child(firebaseUser.getUid()).setValue(true);
-
-                                    Toast.makeText(getApplicationContext(), "Berjaya membalas forum ini", Toast.LENGTH_LONG).show();
+                                    dRe.child("umumPosParticipants").child(umumUid).child(fUr.getUid()).setValue(true);
 
                                     //Clear text and enable back the button
-                                    editTextReply.setText("");
-                                    floatingActionButton.setEnabled(true);
-                                    //then hide the keyboard
+                                    etMessage.getText().clear();
+                                    fAB.setEnabled(true);
+
+                                    //Hide keyboard
                                     try {
                                         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                                         if (UmumDetailActivity.this.getCurrentFocus() != null)
@@ -637,30 +273,23 @@ public class UmumDetailActivity extends SkinActivity {
                         });
                     }
 
-                    canSendMessage = false;
+                    isSendable = false;
                     Thread t = new Thread(countDown);
                     t.start();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Kamu boleh membalas semula " + _count + " saat lagi...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Kamu boleh membalas semula " + c + " saat lagi...", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 //So tell the user to login 1st.
                 Toast.makeText(UmumDetailActivity.this, "Sila Daftar/Log Masuk Terlebih Dahulu", Toast.LENGTH_LONG).show();
-                editTextReply.setText("");
+                etMessage.getText().clear();
             }
 
         }
     }
 
-    //OnBackPressed
     @Override
     public void onBackPressed() {
         finish();
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 }

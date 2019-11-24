@@ -203,7 +203,7 @@ public class TopikBaruActivity extends SkinActivity {
                         databaseReference.child("umumPosParticipants").child(umumUid).child(registeredUid).setValue(true);
 
                         //Then we proceed to the activity for that
-                        Intent intent = new Intent(TopikBaruActivity.this, UmumDetailActivity2.class);
+                        Intent intent = new Intent(TopikBaruActivity.this, UmumDetailActivity.class);
                         intent.putExtra("umumUid", umumUid);
                         intent.putExtra("tajukPos", tajuk);
                         intent.putExtra("forumUid", forumUid);
