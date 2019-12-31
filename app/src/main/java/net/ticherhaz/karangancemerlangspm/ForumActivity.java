@@ -46,12 +46,12 @@ import com.zxy.skin.sdk.SkinActivity;
 import net.ticherhaz.karangancemerlangspm.model.Forum;
 import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.util.OnlineStatusUtil;
-import net.ticherhaz.karangancemerlangspm.util.Others;
 import net.ticherhaz.karangancemerlangspm.viewHolder.ForumViewHolder;
 
 import java.util.Calendar;
 
 import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
+import static net.ticherhaz.karangancemerlangspm.util.Others.setStatus;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.ConvertTarikhMasa2LocalTimePattern;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
@@ -103,9 +103,10 @@ public class ForumActivity extends SkinActivity {
         progressBar.setVisibility(View.VISIBLE);
         //We need to make the query for the firebase recycler adapter
         final DatabaseReference databaseReferenceForum = FirebaseDatabase.getInstance().getReference().child("forum");
+        Query query = databaseReferenceForum.orderByChild("forumPriority");
         //Setup for the recycler adapter option
         firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<Forum>()
-                .setQuery(databaseReferenceForum, Forum.class)
+                .setQuery(query, Forum.class)
                 .build();
 
         //After that apply in the firebase recycler adapter
@@ -479,13 +480,15 @@ public class ForumActivity extends SkinActivity {
 
                             //Check for image if null or not (profileUrl)
                             if (profileUrl != null) {
-                                Glide.with(getApplicationContext())
+                                Glide.with(ForumActivity.this)
                                         .load(profileUrl)
                                         .into(ivProfile);
+                            } else {
+                                ivProfile.setImageResource(R.drawable.emblem);
                             }
                             textViewUsername.setText(username);
                             textViewTotalPosCount.setText(totalPos);
-                            new Others().setStatus(status, textViewStatus);
+                            setStatus(status, textViewStatus);
                         }
 
                     }

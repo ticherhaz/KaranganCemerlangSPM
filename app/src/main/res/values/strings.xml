@@ -57,7 +57,7 @@
     <string name="about_title">
         <![CDATA[
         <h3>Karangan Cemerlang SPM</h3>
-        <i>versi 3.10</i><br>
+        <i>versi 3.17</i><br>
         hazman45.blogspot.com<br>
         Ticherhaz©2019
 
@@ -202,13 +202,13 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
     <string name="memberi_reputasi">Memberi Reputasi</string>
     <string name="ubah">Ubah</string>
     <string name="batal">Batal</string>
-    <string name="spm_2019">SPM 2019</string>
+    <string name="spm_2020">SPM 2020</string>
     <string name="karangan">Karangan</string>
     <string name="tajuk">Tajuk</string>
     <string name="mod_gelap">Mod Gelap</string>
     <string name="peribahasa">Peribahasa</string>
     <string name="kredit">Kredit</string>
-    <string name="tips">Tips</string>
+    <string name="sumbangan">Sumbangan</string>
     <string name="definition_tips">Setiap tips yang diberikan tidak boleh bayar balik. Seikhlas hati anda. Terima kasih yang teramat kepada yang membantu saya :)</string>
     <string name="patuh_peraturan">Saya sudah baca dan setuju untuk mematuhi peraturan Forum Karangan Cemerlang SPM peraturan.</string>
     <string name="main_terms">Untuk meneruskan, anda mesti bersetuju dengan peraturan berikut:</string>
@@ -254,8 +254,8 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
         <item>Perempuan</item>
     </string-array>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
-    <!-- TODO: Change apps version v3.15 -->
-    <string name="apps_version">Karangan Cemerlang SPM v3.15\nhazman45.blogspot.com\nTicherhaz©2019</string>
+    <!-- TODO: Change apps version v3.17 -->
+    <string name="apps_version">Karangan Cemerlang SPM v3.17\nhazman45.blogspot.com\nTicherhaz©2019</string>
     <string name="penarafan">Penarafan</string>
     <string name="app_name_tentang">Tentang Karangan Cemerlang SPM</string>
 </resources>

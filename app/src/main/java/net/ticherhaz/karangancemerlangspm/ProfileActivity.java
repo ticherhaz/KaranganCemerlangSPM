@@ -178,9 +178,11 @@ public class ProfileActivity extends SkinActivity {
                         setTitle(registeredUser.getUsername());
                         //Check for image if null or not (profileUrl)
                         if (profileUrl != null) {
-                            Glide.with(getApplicationContext())
+                            Glide.with(ProfileActivity.this)
                                     .load(profileUrl)
                                     .into(ivProfile);
+                        } else {
+                            ivProfile.setImageResource(R.drawable.emblem);
                         }
                         tvUsername.setText(registeredUser.getUsername());
 

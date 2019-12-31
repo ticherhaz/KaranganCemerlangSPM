@@ -23,7 +23,7 @@
         tools:ignore="GoogleAppIndexingWarning,HardcodedDebugMode">
         <activity
             android:name=".TipsActivity"
-            android:label="@string/tips">
+            android:label="@string/sumbangan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".AboutUsActivity" />

@@ -106,7 +106,7 @@ public class TipsActivity extends SkinActivity implements PurchasesUpdatedListen
                     public void onConsumeResponse(BillingResult billingResult, String purchaseToken) {
 
                         if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                            Toast.makeText(TipsActivity.this, "Berjaya memberi tips. Ribuan terima kasih :)", Toast.LENGTH_LONG).show();
+                            Toast.makeText(TipsActivity.this, "Berjaya memberi sumbangan. Terima kasih :)", Toast.LENGTH_LONG).show();
                             final String donatUid = FirebaseDatabase.getInstance().getReference().push().getKey();
                             final Donat donat = new Donat(donatUid, purchase.getPackageName(), purchase.getPurchaseToken(), purchase.getSignature(), purchase.getOrderId(), purchase.getDeveloperPayload(), purchase.getOriginalJson(), GetTarikhMasa());
                             //Store info in database

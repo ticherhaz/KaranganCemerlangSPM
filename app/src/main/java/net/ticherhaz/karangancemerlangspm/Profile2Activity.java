@@ -178,10 +178,13 @@ public class Profile2Activity extends AppCompatActivity {
                         setTitle(registeredUser.getUsername());
                         //Check for image if null or not (profileUrl)
                         if (profileUrl != null) {
-                            Glide.with(getApplicationContext())
+                            Glide.with(Profile2Activity.this)
                                     .load(profileUrl)
                                     .into(ivProfile);
+                        } else {
+                            ivProfile.setImageResource(R.drawable.emblem);
                         }
+
                         tvUsername.setText(registeredUser.getUsername());
 
                         switch (registeredUser.getTypeUser()) {
