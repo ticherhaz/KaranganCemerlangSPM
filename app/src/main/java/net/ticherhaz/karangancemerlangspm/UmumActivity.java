@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +38,6 @@ import net.ticherhaz.karangancemerlangspm.model.Umum;
 import net.ticherhaz.karangancemerlangspm.viewHolder.UmumHolder;
 import net.ticherhaz.tarikhmasa.TarikhMasa;
 
-import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasaTimeAgo;
 
 public class UmumActivity extends SkinActivity {
@@ -123,7 +121,7 @@ public class UmumActivity extends SkinActivity {
                                 final String profileUrl = registeredUser.getProfileUrl();
                                 //Check if profileUrl is null or not
                                 if (profileUrl != null) {
-                                    Glide.with(UmumActivity.this)
+                                    Glide.with(holder.getView())
                                             .load(profileUrl)
                                             .into(holder.getImageViewProfile());
                                 } else {
@@ -334,7 +332,7 @@ public class UmumActivity extends SkinActivity {
         recyclerView = findViewById(R.id.recycler_view_umum);
 
         setTotalOnlineSpecific(userUid, "Online");
-        // setFirebaseRecyclerAdapter();
+        setFirebaseRecyclerAdapter();
         retrieveFirebase();
     }
 
@@ -357,37 +355,6 @@ public class UmumActivity extends SkinActivity {
 //        }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        if (firebaseRecyclerAdapter != null) {
-//            firebaseRecyclerAdapter.startListening();
-//            firebaseRecyclerAdapter.notifyDataSetChanged();
-//        }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        setFirebaseRecyclerAdapter();
-//        if (firebaseRecyclerAdapter != null) {
-//            firebaseRecyclerAdapter.startListening();
-//            firebaseRecyclerAdapter.notifyDataSetChanged();
-//        }
-
-        //Check if there is internet or not
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (progressBar.getVisibility() == View.VISIBLE) {
-                    messageInternetMessage(UmumActivity.this);
-                }
-
-            }
-        }, 5000);
-    }
-
-
     //Button topik
     private void setButtonTopikBaru() {
         buttonTopikBaru.setOnClickListener(new View.OnClickListener() {
@@ -406,7 +373,6 @@ public class UmumActivity extends SkinActivity {
             }
         });
     }
-
 
     private void setTotalOnlineSpecific(final String userUid, String onlineStatus) {
         //Update the total user is seeing this umum activity.

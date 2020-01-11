@@ -216,7 +216,6 @@ public class TopikBaruActivity extends SkinActivity {
 
     }
 
-
     private void runTransac(final String tajuk) {
         databaseReference.child("forum").child(forumUid).child("postThreadsCount").runTransaction(new Transaction.Handler() {
             @NonNull

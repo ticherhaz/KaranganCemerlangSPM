@@ -205,12 +205,6 @@ public class JenisKaranganActivity extends SkinActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        firebaseRecyclerAdapter.startListening();
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //StartAppSDK.init(this, getResources().getString(R.string.start_apps_id), false);

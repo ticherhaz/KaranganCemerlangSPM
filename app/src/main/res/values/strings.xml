@@ -57,9 +57,9 @@
     <string name="about_title">
         <![CDATA[
         <h3>Karangan Cemerlang SPM</h3>
-        <i>versi 3.17</i><br>
+        <i>versi 3.18</i><br>
         hazman45.blogspot.com<br>
-        Ticherhaz©2019
+        Ticherhaz©2020
 
         <p><i>Ucapan ribuan terima kasih kepada semua yang memberi sokongan aplikasi saya ini. :) </i></p>
 
@@ -254,8 +254,8 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
         <item>Perempuan</item>
     </string-array>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
-    <!-- TODO: Change apps version v3.17 -->
-    <string name="apps_version">Karangan Cemerlang SPM v3.17\nhazman45.blogspot.com\nTicherhaz©2019</string>
+    <!-- TODO: Change apps version v3.18 -->
+    <string name="apps_version">Karangan Cemerlang SPM v3.18\nhazman45.blogspot.com\nTicherhaz©2020</string>
     <string name="penarafan">Penarafan</string>
     <string name="app_name_tentang">Tentang Karangan Cemerlang SPM</string>
 </resources>

@@ -480,7 +480,7 @@ public class ForumActivity extends SkinActivity {
 
                             //Check for image if null or not (profileUrl)
                             if (profileUrl != null) {
-                                Glide.with(ForumActivity.this)
+                                Glide.with(getApplicationContext())
                                         .load(profileUrl)
                                         .into(ivProfile);
                             } else {
