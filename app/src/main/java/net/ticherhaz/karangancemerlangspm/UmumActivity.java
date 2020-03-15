@@ -121,7 +121,7 @@ public class UmumActivity extends SkinActivity {
                                 final String profileUrl = registeredUser.getProfileUrl();
                                 //Check if profileUrl is null or not
                                 if (profileUrl != null) {
-                                    Glide.with(holder.getView())
+                                    Glide.with(getApplicationContext())
                                             .load(profileUrl)
                                             .into(holder.getImageViewProfile());
                                 } else {

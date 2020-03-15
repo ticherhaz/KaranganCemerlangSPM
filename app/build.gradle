@@ -14,8 +14,8 @@ android {
         applicationId "net.ticherhaz.karangancemerlangspm"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 318
-        versionName "3.18"
+        versionCode 320
+        versionName "3.20"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -34,26 +34,26 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     //MultiDex
     implementation 'com.android.support:multidex:1.0.3'
     //Firebase
-    implementation 'com.google.firebase:firebase-database:19.2.0'
-    implementation 'com.google.firebase:firebase-messaging:20.1.0'
-    implementation 'com.google.firebase:firebase-storage:19.1.0'
+    implementation 'com.google.firebase:firebase-database:19.2.1'
+    implementation 'com.google.firebase:firebase-messaging:20.1.2'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
     implementation "com.google.firebase:firebase-auth:19.2.0"
     //FirebaseUI
     implementation 'com.firebaseui:firebase-ui-database:6.2.0'
     //Image Glide
-    implementation 'com.github.bumptech.glide:glide:4.10.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation project(path: ':lib')
     //For time
     implementation 'com.github.ticherhaz:tarikhmasa:1.5.16'
     //Image Crop
     implementation 'com.soundcloud.android:android-crop:1.0.1@aar'
-    implementation 'androidx.work:work-runtime:2.2.0'
+    implementation 'androidx.work:work-runtime:2.3.3'
     //App Billing
     implementation 'com.android.billingclient:billing:2.1.0'
 }

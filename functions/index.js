@@ -241,14 +241,18 @@ exports.forumNotification2 = functions.region("asia-east2").database.ref('/umumP
 
 		//Create payload for the notification
 		const payload = {
-			notification: {
-				title: fullName,
-				subtitle: type,
-				body: message,
-				sound: "default",
-				icon: "default",
-				click_action: "ForumSplash"
-			}
+			// notification: {
+			// 	title: fullName,
+			// 	subtitle: type,
+			// 	body: message,
+			// 	sound: "default",
+			// 	icon: "default",
+			// 	click_action: "ForumSplash"
+			// },
+			data: { //baru add 15/3/2020
+                title: title,
+                message: message,
+            }
 		};
 
 		//results will have children having keys of subscribers uid.

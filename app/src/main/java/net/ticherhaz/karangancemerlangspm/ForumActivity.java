@@ -490,9 +490,7 @@ public class ForumActivity extends SkinActivity {
                             textViewTotalPosCount.setText(totalPos);
                             setStatus(status, textViewStatus);
                         }
-
                     }
-
                 }
 
                 @Override

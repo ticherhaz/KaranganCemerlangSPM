@@ -54,10 +54,10 @@
         <p><b><i>Selamat beramal dan semoga maju jaya! :)</i></b></p>
 ]]></string>
     <string name="feedback">Maklum Balas</string>
-    <string name="about_title">
+    <string name="about_title"> <!-- TODO v3.20 -->
         <![CDATA[
         <h3>Karangan Cemerlang SPM</h3>
-        <i>versi 3.18</i><br>
+        <i>versi 3.20</i><br>
         hazman45.blogspot.com<br>
         Ticherhaz©2020
 
@@ -254,8 +254,8 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
         <item>Perempuan</item>
     </string-array>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
-    <!-- TODO: Change apps version v3.18 -->
-    <string name="apps_version">Karangan Cemerlang SPM v3.18\nhazman45.blogspot.com\nTicherhaz©2020</string>
+    <!-- TODO: Change apps version v3.20 -->
+    <string name="apps_version">Karangan Cemerlang SPM v3.20\nhazman45.blogspot.com\nTicherhaz©2020</string>
     <string name="penarafan">Penarafan</string>
     <string name="app_name_tentang">Tentang Karangan Cemerlang SPM</string>
 </resources>

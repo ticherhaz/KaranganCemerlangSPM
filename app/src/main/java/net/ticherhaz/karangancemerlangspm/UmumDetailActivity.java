@@ -15,7 +15,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -291,9 +290,4 @@ public class UmumDetailActivity extends SkinActivity {
         finish();
     }
 
-    @Override
-    protected void onStop() {
-        Glide.with(this).pauseRequests();
-        super.onStop();
-    }
 }

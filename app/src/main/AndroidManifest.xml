@@ -6,10 +6,12 @@
 
     <uses-sdk tools:overrideLibrary="com.zxy.skin.sdk" />
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- <uses-permission android:name="android.permission.READ_CONTACTS" /> -->
     <uses-permission android:name="com.android.vending.BILLING" />
 
     <dist:module dist:instant="true" />
@@ -20,7 +22,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
-        tools:ignore="GoogleAppIndexingWarning,HardcodedDebugMode">
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning,HardcodedDebugMode">
         <activity
             android:name=".TipsActivity"
             android:label="@string/sumbangan">
@@ -39,8 +41,8 @@
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/emblem_noti"
-            android:value="@drawable/emblem_noti" />
+            android:resource="@drawable/icon_192dp"
+            android:value="@drawable/icon_192dp" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorPrimary" /> <!-- [START fcm_default_channel] -->

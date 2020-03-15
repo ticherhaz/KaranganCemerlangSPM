@@ -1,7 +1,6 @@
 package net.ticherhaz.karangancemerlangspm.recyclerview;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -27,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.ProfileActivity;
 import net.ticherhaz.karangancemerlangspm.R;
+import net.ticherhaz.karangancemerlangspm.UmumDetailActivity;
 import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.model.UmumDetail;
 import net.ticherhaz.karangancemerlangspm.util.RunTransaction;
@@ -50,7 +50,7 @@ public class UmumDetailRecyclerView extends RecyclerView.Adapter<UmumDetailHolde
      */
 
     //Context
-    private Context context;
+    private UmumDetailActivity context;
     //Constraint Layout
     private ConstraintLayout constraintLayout;
     //List
@@ -65,7 +65,7 @@ public class UmumDetailRecyclerView extends RecyclerView.Adapter<UmumDetailHolde
     /*
      * This constructor will be called at init view of the activity.
      */
-    public UmumDetailRecyclerView(Context context, ConstraintLayout constraintLayout, List<UmumDetail> umumDetailList, DatabaseReference databaseReference, FirebaseUser firebaseUser, String forumUid, String umumUid, String registeredUidReply, String userType, long reputationPower) {
+    public UmumDetailRecyclerView(UmumDetailActivity context, ConstraintLayout constraintLayout, List<UmumDetail> umumDetailList, DatabaseReference databaseReference, FirebaseUser firebaseUser, String forumUid, String umumUid, String registeredUidReply, String userType, long reputationPower) {
         this.context = context;
         this.constraintLayout = constraintLayout;
         this.umumDetailList = umumDetailList;
@@ -117,7 +117,7 @@ public class UmumDetailRecyclerView extends RecyclerView.Adapter<UmumDetailHolde
          * Here we will retrieve user data (this specific) from user database.
          *
          */
-        databaseReference.child("registeredUser").child(model.getRegisteredUid()).addValueEventListener(new ValueEventListener() {
+        databaseReference.child("registeredUser").child(model.getRegisteredUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -140,9 +140,11 @@ public class UmumDetailRecyclerView extends RecyclerView.Adapter<UmumDetailHolde
 
                         //Check if profileUrl is null or not
                         if (profileUrlA != null) {
-                            Glide.with(context)
-                                    .load(profileUrlA)
-                                    .into(holder.getImageViewProfile());
+                            if (context != null) {
+                                Glide.with(context)
+                                        .load(profileUrlA)
+                                        .into(holder.getImageViewProfile());
+                            }
                         } else {
                             holder.getImageViewProfile().setImageResource(R.drawable.emblem);
                         }

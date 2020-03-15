@@ -755,7 +755,7 @@ public class MainActivity extends SkinActivity {
                 public void onClick(View view) {
                     //textViewCredit.setText(R.string.about_credit);
                     if (!isDisplaying) {
-                        textViewCredit.setText(R.string.about_credit); //TODO: Update version 3.18
+                        textViewCredit.setText(R.string.about_credit); //TODO: Update version 3.19
                         isDisplaying = true;
                     } else {
                         textViewCredit.setText(R.string.kredit);
