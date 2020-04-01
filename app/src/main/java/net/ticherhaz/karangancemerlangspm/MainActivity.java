@@ -87,6 +87,7 @@ public class MainActivity extends SkinActivity {
     // private Button buttonHantarKarangan;
     private Button buttonForum;
     private Button buttonPeribahasa;
+    private Button buttonSumbangan;
     private TextView textViewAnnouncement;
     private TextView textViewCountdownSPM;
     private SharedPreferences sharedPreferences;
@@ -126,6 +127,7 @@ public class MainActivity extends SkinActivity {
         //buttonHantarKarangan = findViewById(R.id.button_hantar_karangan);
         buttonForum = findViewById(R.id.button_forum);
         buttonPeribahasa = findViewById(R.id.button_peribahasa);
+        buttonSumbangan = findViewById(R.id.button_sumbangan);
 
         textViewHow.setText(Html.fromHtml(getString(R.string.how)));
 
@@ -146,8 +148,17 @@ public class MainActivity extends SkinActivity {
         databaseReference = firebaseDatabase.getReference();
         setEditTextSearch();
         setTextViewAnnouncement();
-
         setButtonPeribahasa();
+        setButtonSumbangan();
+    }
+
+    private void setButtonSumbangan() {
+        buttonSumbangan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, TipsActivity.class));
+            }
+        });
     }
 
     private void setButtonPeribahasa() {
@@ -755,7 +766,7 @@ public class MainActivity extends SkinActivity {
                 public void onClick(View view) {
                     //textViewCredit.setText(R.string.about_credit);
                     if (!isDisplaying) {
-                        textViewCredit.setText(R.string.about_credit); //TODO: Update version 3.19
+                        textViewCredit.setText(R.string.about_credit); //TODO: Update version 3.21
                         isDisplaying = true;
                     } else {
                         textViewCredit.setText(R.string.kredit);

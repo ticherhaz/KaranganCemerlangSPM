@@ -3,16 +3,16 @@
     style="@style/styleCardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="3dp"
+    android:layout_margin="4dp"
     android:orientation="vertical"
-    android:paddingBottom="50dp">
+    android:padding="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/tv_product"

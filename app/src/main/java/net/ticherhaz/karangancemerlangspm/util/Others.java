@@ -1,9 +1,11 @@
 package net.ticherhaz.karangancemerlangspm.util;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.view.Gravity;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,25 @@ import java.util.List;
 
 public class Others {
 
+    private static Toast toast;
+    private static ProgressDialog progressDialog;
+
+    public static void ShowProgressDialog(Context context) {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setMessage("Loading...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
+    }
+
+    public static void DismissProgressDialog() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
+    }
+
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -31,6 +52,17 @@ public class Others {
 
     public static void messageInternetMessage(Context context) {
         Toast.makeText(context, "Sila pastikan internet anda stabil", Toast.LENGTH_SHORT).show();
+    }
+
+    public static void ShowToast(Context context, final String message) {
+        if (toast == null) {
+            toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            toast = null;
+        } else {
+            toast = null;
+        }
     }
 
     //Method to get IP Address

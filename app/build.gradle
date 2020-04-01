@@ -14,8 +14,8 @@ android {
         applicationId "net.ticherhaz.karangancemerlangspm"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 320
-        versionName "3.20"
+        versionCode 321
+        versionName "3.21"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -40,9 +40,9 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     //Firebase
     implementation 'com.google.firebase:firebase-database:19.2.1'
-    implementation 'com.google.firebase:firebase-messaging:20.1.2'
+    implementation 'com.google.firebase:firebase-messaging:20.1.4'
     implementation 'com.google.firebase:firebase-storage:19.1.1'
-    implementation "com.google.firebase:firebase-auth:19.2.0"
+    implementation "com.google.firebase:firebase-auth:19.3.0"
     //FirebaseUI
     implementation 'com.firebaseui:firebase-ui-database:6.2.0'
     //Image Glide
@@ -53,8 +53,8 @@ dependencies {
     implementation 'com.github.ticherhaz:tarikhmasa:1.5.16'
     //Image Crop
     implementation 'com.soundcloud.android:android-crop:1.0.1@aar'
-    implementation 'androidx.work:work-runtime:2.3.3'
+    implementation 'androidx.work:work-runtime:2.3.4'
     //App Billing
-    implementation 'com.android.billingclient:billing:2.1.0'
+    implementation 'com.android.billingclient:billing:2.2.0'
 }
 apply plugin: 'com.google.gms.google-services'

@@ -543,15 +543,17 @@ public class ForumActivity extends SkinActivity {
         buttonSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SignInDialog signInDialog = new SignInDialog(ForumActivity.this);
-                signInDialog.setActivity(ForumActivity.this);
-                signInDialog.setLinearLayoutNewUser(linearLayoutNewUser);
-                signInDialog.setLinearLayoutOldUser(linearLayoutOlderUser);
-                signInDialog.setTextViewUsername(textViewUsername);
-                signInDialog.setTextViewSekolah(textViewSekolah);
-                signInDialog.setTextViewReputation(textViewReputation);
-                signInDialog.setUserUid(userUid);
-                signInDialog.show();
+                startActivity(new Intent(ForumActivity.this, SignInActivity.class));
+                finish();
+//                SignInDialog signInDialog = new SignInDialog(ForumActivity.this);
+//                signInDialog.setActivity(ForumActivity.this);
+//                signInDialog.setLinearLayoutNewUser(linearLayoutNewUser);
+//                signInDialog.setLinearLayoutOldUser(linearLayoutOlderUser);
+//                signInDialog.setTextViewUsername(textViewUsername);
+//                signInDialog.setTextViewSekolah(textViewSekolah);
+//                signInDialog.setTextViewReputation(textViewReputation);
+//                signInDialog.setUserUid(userUid);
+//                signInDialog.show();
             }
         });
     }
@@ -561,15 +563,17 @@ public class ForumActivity extends SkinActivity {
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SignUpDialog signUpDialog = new SignUpDialog(ForumActivity.this);
-                signUpDialog.setInitialUid(userUid);
-                signUpDialog.setLinearLayoutNewUser(linearLayoutNewUser);
-                signUpDialog.setActivity(ForumActivity.this);
-                signUpDialog.setLinearLayoutOldUser(linearLayoutOlderUser);
-                signUpDialog.setTextViewUsername(textViewUsername);
-                signUpDialog.setTextViewSekolah(textViewSekolah);
-                signUpDialog.setTextViewReputation(textViewReputation);
-                signUpDialog.show();
+                startActivity(new Intent(ForumActivity.this, SignUpActivity.class));
+                finish();
+//                SignUpDialog signUpDialog = new SignUpDialog(ForumActivity.this);
+//                signUpDialog.setInitialUid(userUid);
+//                signUpDialog.setLinearLayoutNewUser(linearLayoutNewUser);
+//                signUpDialog.setActivity(ForumActivity.this);
+//                signUpDialog.setLinearLayoutOldUser(linearLayoutOlderUser);
+//                signUpDialog.setTextViewUsername(textViewUsername);
+//                signUpDialog.setTextViewSekolah(textViewSekolah);
+//                signUpDialog.setTextViewReputation(textViewReputation);
+//                signUpDialog.show();
             }
         });
     }

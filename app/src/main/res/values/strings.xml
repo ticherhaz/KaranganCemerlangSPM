@@ -54,10 +54,10 @@
         <p><b><i>Selamat beramal dan semoga maju jaya! :)</i></b></p>
 ]]></string>
     <string name="feedback">Maklum Balas</string>
-    <string name="about_title"> <!-- TODO v3.20 -->
+    <string name="about_title"> <!-- TODO v3.21 -->
         <![CDATA[
         <h3>Karangan Cemerlang SPM</h3>
-        <i>versi 3.20</i><br>
+        <i>versi 3.21</i><br>
         hazman45.blogspot.com<br>
         Ticherhaz©2020
 
@@ -209,7 +209,7 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
     <string name="peribahasa">Peribahasa</string>
     <string name="kredit">Kredit</string>
     <string name="sumbangan">Sumbangan</string>
-    <string name="definition_tips">Setiap tips yang diberikan tidak boleh bayar balik. Seikhlas hati anda. Terima kasih yang teramat kepada yang membantu saya :)</string>
+    <string name="definition_tips">Setiap sumbangan diberikan seikhlas hati saudara/saudari, tidak boleh bayaran balik. Terima kasih kerana menyokong aplikasi saya :)\n\nEvery donation is made wholeheartedly to the developer. Once made, cannot refund. Thank you so much! :)</string>
     <string name="patuh_peraturan">Saya sudah baca dan setuju untuk mematuhi peraturan Forum Karangan Cemerlang SPM peraturan.</string>
     <string name="main_terms">Untuk meneruskan, anda mesti bersetuju dengan peraturan berikut:</string>
     <string name="disable">Disable</string>
@@ -254,8 +254,9 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
         <item>Perempuan</item>
     </string-array>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
-    <!-- TODO: Change apps version v3.20 -->
-    <string name="apps_version">Karangan Cemerlang SPM v3.20\nhazman45.blogspot.com\nTicherhaz©2020</string>
+    <!-- TODO: Change apps version v3.21 -->
+    <string name="apps_version">Karangan Cemerlang SPM v3.21\nhazman45.blogspot.com\nTicherhaz©2020</string>
     <string name="penarafan">Penarafan</string>
     <string name="app_name_tentang">Tentang Karangan Cemerlang SPM</string>
+    <string name="internet_connection">Please Check Internet Connection</string>
 </resources>

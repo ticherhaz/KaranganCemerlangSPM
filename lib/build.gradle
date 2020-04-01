@@ -17,6 +17,6 @@ android {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    api 'androidx.fragment:fragment:1.1.0'
+    api 'androidx.fragment:fragment:1.2.3'
     api 'androidx.appcompat:appcompat:1.1.0'
 }
