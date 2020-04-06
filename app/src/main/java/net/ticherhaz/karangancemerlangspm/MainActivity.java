@@ -10,6 +10,8 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,6 +23,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -31,6 +34,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,6 +61,10 @@ public class MainActivity extends SkinActivity {
     private static final String SAVED_MOD = "mySavedMod";
     private static final String SHARED_PREFERENCES = "myPreference";
     boolean isDisplaying = false;
+    //---BANNER START ----
+    private FrameLayout adContainerView;
+    private AdView adView;
+    //---BANNER END ----
     private DatabaseReference databaseReference;
     private FirebaseRecyclerOptions<Karangan> firebaseRecyclerOptions;
     private FirebaseRecyclerOptions<Karangan> firebaseRecyclerOptions2;
@@ -142,6 +156,21 @@ public class MainActivity extends SkinActivity {
             mod = intent.getExtras().getString("mod");
         }
 
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        adContainerView = findViewById(R.id.ad_view_container);
+        // Since we're loading the banner based on the adContainerView size, we need to wait until this
+        // view is laid out before we can get the width.
+        adContainerView.post(new Runnable() {
+            @Override
+            public void run() {
+                loadBanner();
+            }
+        });
+
 
         //Firebase Database
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -150,6 +179,81 @@ public class MainActivity extends SkinActivity {
         setTextViewAnnouncement();
         setButtonPeribahasa();
         setButtonSumbangan();
+    }
+
+    private void loadBanner() {
+        // Create an ad request. Check your logcat output for the hashed device ID to
+        // get test ads on a physical device. e.g.
+        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
+        adView = new AdView(this);
+        adView.setAdUnitId(getString(R.string.bannerMainUid));
+        adContainerView.removeAllViews();
+        adContainerView.addView(adView);
+        AdSize adSize = getAdSize();
+        adView.setAdSize(adSize);
+        AdRequest adRequest =
+                new AdRequest.Builder().build();
+        // Start loading the ad in the background.
+        adView.loadAd(adRequest);
+        adView.setAdListener(new AdListener() {
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // AdsChecker(dahPremium, imageViewAds, adContainerView, false);
+            }
+
+            @Override
+            public void onAdClosed() {
+            }
+
+            @Override
+            public void onAdLoaded() {
+                // AdsChecker(dahPremium, imageViewAds, adContainerView, true);
+            }
+
+        });
+    }
+
+    private AdSize getAdSize() {
+        // Determine the screen width (less decorations) to use for the ad width.
+        Display display = getWindowManager().getDefaultDisplay();
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        display.getMetrics(outMetrics);
+
+        float density = outMetrics.density;
+
+        float adWidthPixels = adContainerView.getWidth();
+
+        // If the ad hasn't been laid out, default to the full screen width.
+        if (adWidthPixels == 0) {
+            adWidthPixels = outMetrics.widthPixels;
+        }
+
+        int adWidth = (int) (adWidthPixels / density);
+
+        return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidth);
+    }
+
+    /**
+     * Called when leaving the activity
+     */
+    @Override
+    public void onPause() {
+        if (adView != null) {
+            adView.pause();
+        }
+        super.onPause();
+    }
+
+
+    /**
+     * Called before the activity is destroyed
+     */
+    @Override
+    public void onDestroy() {
+        if (adView != null) {
+            adView.destroy();
+        }
+        super.onDestroy();
     }
 
     private void setButtonSumbangan() {
@@ -906,6 +1010,9 @@ public class MainActivity extends SkinActivity {
     protected void onResume() {
         super.onResume();
         FirebaseDatabase.getInstance().goOnline();
+        if (adView != null) {
+            adView.resume();
+        }
     }
 
     private void setmCountDownTimer() {

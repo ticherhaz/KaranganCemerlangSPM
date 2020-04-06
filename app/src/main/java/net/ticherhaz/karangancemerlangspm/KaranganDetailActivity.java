@@ -10,6 +10,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,6 +27,9 @@ import net.ticherhaz.karangancemerlangspm.util.DoubleClickListener;
 import net.ticherhaz.karangancemerlangspm.util.RunTransaction;
 
 public class KaranganDetailActivity extends SkinActivity {
+
+    //---INTERSTITIAL END ----
+    private InterstitialAd interstitialAd;
 
     //We need firebase to check like or not and update if the user like
     private FirebaseDatabase firebaseDatabase;
@@ -61,6 +70,31 @@ public class KaranganDetailActivity extends SkinActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        interstitialAd = new InterstitialAd(this);
+        // Defined in res/values/strings.xml
+        interstitialAd.setAdUnitId(getString(R.string.interstitialKaranganUid));
+        interstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+
+            }
+
+            @Override
+            public void onAdClosed() {
+
+            }
+        });
+        // Request a new ad if one isn't already loaded, hide the button, and kick off the timer.
+        if (!interstitialAd.isLoading() && !interstitialAd.isLoaded()) {
+            AdRequest adRequest = new AdRequest.Builder().build();
+            interstitialAd.loadAd(adRequest);
+        }
+
         retrieveData();
         displayData();
         checkLike();
@@ -69,6 +103,14 @@ public class KaranganDetailActivity extends SkinActivity {
         setButtonIncreaseSize();
         setButtonDecreaseSizeSize();
         setButtonFont();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (interstitialAd != null && interstitialAd.isLoaded()) {
+            interstitialAd.show();
+        }
     }
 
     //Method increase size text
@@ -102,7 +144,6 @@ public class KaranganDetailActivity extends SkinActivity {
             }
         });
     }
-
 
     //Method retrieve the data
     private void retrieveData() {
@@ -171,7 +212,6 @@ public class KaranganDetailActivity extends SkinActivity {
 
     private void setTextViewKarangan() {
         textViewKarangan.setOnClickListener(new DoubleClickListener() {
-
             //So we use the double click from the custom at the util.
             @Override
             public void onSingleClick(View v) {

@@ -1,21 +1,13 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.google.gms.google-services'
 android {
-    signingConfigs {
-        config {
-            keyAlias 'keyAlias'
-            keyPassword '112233'
-            storeFile file('C:/Ticherhaz/Challenger/AndroidStudio/keyAlias/karangancemerlangspm.jks')
-            storePassword '112233'
-        }
-    }
     compileSdkVersion 29
     defaultConfig {
         applicationId "net.ticherhaz.karangancemerlangspm"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 321
-        versionName "3.21"
+        versionCode 322
+        versionName "3.22"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -43,6 +35,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:20.1.4'
     implementation 'com.google.firebase:firebase-storage:19.1.1'
     implementation "com.google.firebase:firebase-auth:19.3.0"
+    implementation 'com.google.firebase:firebase-analytics:17.3.0'
+
     //FirebaseUI
     implementation 'com.firebaseui:firebase-ui-database:6.2.0'
     //Image Glide
@@ -56,5 +50,6 @@ dependencies {
     implementation 'androidx.work:work-runtime:2.3.4'
     //App Billing
     implementation 'com.android.billingclient:billing:2.2.0'
+    //Google Admob
+    implementation 'com.google.android.gms:play-services-ads:19.0.1'
 }
-apply plugin: 'com.google.gms.google-services'

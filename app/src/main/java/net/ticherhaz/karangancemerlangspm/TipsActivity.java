@@ -148,7 +148,7 @@ public class TipsActivity extends SkinActivity implements PurchasesUpdatedListen
                         //Store info in database
                         assert userUid != null;
                         final String finalDuitNakDisplay = duitNakDisplay;
-                        databaseReference.child(userUid).setValue(upurcm).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        databaseReference.child("donation2").child(userUid).setValue(upurcm).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {

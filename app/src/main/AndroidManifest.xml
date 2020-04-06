@@ -54,6 +54,9 @@
         </activity>
 
         <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/admobAppUid" />
+        <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/icon_192dp"
             android:value="@drawable/icon_192dp" />
@@ -63,6 +66,7 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" /> <!-- [END fcm_default_channel] -->
+
         <activity
             android:name=".UmumDetailActivity"
             android:launchMode="singleTop">
@@ -241,6 +245,13 @@
             android:name=".util.MyUploadService"
             android:exported="false"
             tools:ignore="InnerclassSeparator" />
+
+        <meta-data
+            android:name="firebase_messaging_auto_init_enabled"
+            android:value="false" />
+        <meta-data
+            android:name="firebase_analytics_collection_enabled"
+            android:value="false" />
     </application>
 
 </manifest>
