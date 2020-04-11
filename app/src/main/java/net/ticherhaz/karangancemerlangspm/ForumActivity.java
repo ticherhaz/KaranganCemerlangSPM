@@ -620,6 +620,7 @@ public class ForumActivity extends SkinActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference, activitySessionUid, activityDate);
         new OnlineStatusUtil().onDisc(firebaseUser, databaseReference, registeredUid, activitySessionUid, activityDate);
 //        if (firebaseRecyclerAdapter != null) {
 //            firebaseRecyclerAdapter.stopListening();
@@ -630,6 +631,7 @@ public class ForumActivity extends SkinActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        new OnlineStatusUtil().updateUserOnlineStatus("Online", registeredUid, firebaseUser, databaseReference, activitySessionUid, activityDate);
     }
 
     @Override
@@ -663,6 +665,11 @@ public class ForumActivity extends SkinActivity {
         }, 5000);
     }
 
+    @Override
+    protected void onDestroy() {
+        new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference, activitySessionUid, activityDate);
+        new OnlineStatusUtil().onDisc(firebaseUser, databaseReference, registeredUid, activitySessionUid, activityDate);
+    }
 
     //OnBackPressed
     @Override

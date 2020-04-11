@@ -57,6 +57,9 @@ import net.ticherhaz.karangancemerlangspm.viewHolder.KaranganViewHolder;
 
 public class MainActivity extends SkinActivity {
 
+    private static final String AD_UNIT_ID_BANNER = "ca-app-pub-3940256099942544/9214589741";
+    //private static final String AD_UNIT_ID_INTERSTITIAL = "ca-app-pub-3940256099942544/1033173712";
+
     private static final String SHARED_PREFERENCES_MOD = "myPreferenceMod";
     private static final String SAVED_MOD = "mySavedMod";
     private static final String SHARED_PREFERENCES = "myPreference";
@@ -186,13 +189,16 @@ public class MainActivity extends SkinActivity {
         // get test ads on a physical device. e.g.
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
         adView = new AdView(this);
-        adView.setAdUnitId(getString(R.string.bannerMainUid));
+        //adView.setAdUnitId(getString(R.string.bannerMainUid)); //TODO: ads
+        adView.setAdUnitId(AD_UNIT_ID_BANNER);
+
         adContainerView.removeAllViews();
         adContainerView.addView(adView);
         AdSize adSize = getAdSize();
         adView.setAdSize(adSize);
         AdRequest adRequest =
-                new AdRequest.Builder().build();
+                new AdRequest.Builder()
+                        .build();
         // Start loading the ad in the background.
         adView.loadAd(adRequest);
         adView.setAdListener(new AdListener() {

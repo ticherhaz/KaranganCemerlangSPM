@@ -70,6 +70,19 @@
                     android:textSize="12sp"
                     android:textStyle="italic" />
 
+                <ProgressBar
+                    android:id="@+id/pb_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/products"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:scrollbars="vertical" />
+
                 <LinearLayout
                     android:id="@+id/linear_layout_double_click"
                     android:layout_width="match_parent"

@@ -35,7 +35,6 @@
                     android:singleLine="true"
                     android:textColor="?attr/colorText"
                     android:textColorHint="?attr/colorText" />
-
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
@@ -65,9 +64,9 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </androidx.recyclerview.widget.RecyclerView>
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingBottom="64dp" />
         </LinearLayout>
     </LinearLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

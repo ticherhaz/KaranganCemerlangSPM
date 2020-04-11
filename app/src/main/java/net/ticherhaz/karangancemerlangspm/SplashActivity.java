@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -163,18 +164,22 @@ public class SplashActivity extends AppCompatActivity {
 
     //Method check the system about the version and mode
     private void checkSystem(final String userUid) {
+        Log.i("???", "Hesre");
         //Database Reference to check
         //If the connection is fine then it will proceed this part.
         final DatabaseReference databaseReferenceSystem = firebaseDatabase.getReference().child("system");
         databaseReferenceSystem.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.i("???", "Heddssssdre");
                 //This type of code is to retrieve all the value from a child.
                 //We are using the model class to be assigned from the database.
                 //Make sure it is the same variables here and in the database.
                 if (dataSnapshot.exists()) {
+                    Log.i("???", "Hedddre");
                     System system = dataSnapshot.getValue(System.class);
                     if (system != null) {
+
 
                         if (!system.isMod()) {
                             Toast toast = Toast.makeText(getApplicationContext(), "Di Bawah Penyelenggaran", Toast.LENGTH_LONG);
@@ -229,6 +234,7 @@ public class SplashActivity extends AppCompatActivity {
         if (userUid != null) {
             //Show to user to use stable connection
             //Making special toast to center the toast
+
 
             messageInternetMessage(SplashActivity.this);
 

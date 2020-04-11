@@ -40,6 +40,8 @@ import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMess
 
 public class JenisKaranganActivity extends SkinActivity {
 
+    private static final String AD_UNIT_ID_BANNER = "ca-app-pub-3940256099942544/9214589741";
+    // private static final String AD_UNIT_ID_INTERSTITIAL = "ca-app-pub-3940256099942544/1033173712";
     //---BANNER START ----
     private FrameLayout adContainerView;
     private AdView adView;
@@ -112,7 +114,8 @@ public class JenisKaranganActivity extends SkinActivity {
         // get test ads on a physical device. e.g.
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
         adView = new AdView(this);
-        adView.setAdUnitId(getString(R.string.bannerJenisUid));
+        // adView.setAdUnitId(getString(R.string.bannerJenisUid)); //TODO: Ads
+        adView.setAdUnitId(AD_UNIT_ID_BANNER);
         adContainerView.removeAllViews();
         adContainerView.addView(adView);
         AdSize adSize = getAdSize();
