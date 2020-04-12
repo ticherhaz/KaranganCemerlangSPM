@@ -665,12 +665,6 @@ public class ForumActivity extends SkinActivity {
         }, 5000);
     }
 
-    @Override
-    protected void onDestroy() {
-        new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference, activitySessionUid, activityDate);
-        new OnlineStatusUtil().onDisc(firebaseUser, databaseReference, registeredUid, activitySessionUid, activityDate);
-    }
-
     //OnBackPressed
     @Override
     public void onBackPressed() {

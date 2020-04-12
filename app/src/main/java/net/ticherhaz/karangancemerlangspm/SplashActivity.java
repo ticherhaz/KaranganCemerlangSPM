@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -164,19 +163,16 @@ public class SplashActivity extends AppCompatActivity {
 
     //Method check the system about the version and mode
     private void checkSystem(final String userUid) {
-        Log.i("???", "Hesre");
         //Database Reference to check
         //If the connection is fine then it will proceed this part.
         final DatabaseReference databaseReferenceSystem = firebaseDatabase.getReference().child("system");
         databaseReferenceSystem.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.i("???", "Heddssssdre");
                 //This type of code is to retrieve all the value from a child.
                 //We are using the model class to be assigned from the database.
                 //Make sure it is the same variables here and in the database.
                 if (dataSnapshot.exists()) {
-                    Log.i("???", "Hedddre");
                     System system = dataSnapshot.getValue(System.class);
                     if (system != null) {
 
@@ -187,8 +183,8 @@ public class SplashActivity extends AppCompatActivity {
                             toast.show();
                         }
                         //After that, we chat the value
-                        else if (system.getVersi() == 322) {
-                            //TODO: Version right now is 322. Please update when the new version is released. testing for beta forum (44)
+                        else if (system.getVersi() == 323) {
+                            //TODO: Version right now is 323. Please update when the new version is released. testing for beta forum (44)
                             //If all the condition above is met, it will NOT GOING THIS PART INSTEAD THEY WILL GO OUTSIDE FROM THE onDataChange
                             //It not met, then it will proceed here.
                             storeUserInfo(userUid);

@@ -35,7 +35,6 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,6 +50,7 @@ import net.ticherhaz.karangancemerlangspm.util.DoubleClickListener;
 import net.ticherhaz.karangancemerlangspm.util.MyProductDownloadKaranganAdapter;
 import net.ticherhaz.karangancemerlangspm.util.RunTransaction;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
@@ -63,7 +63,7 @@ import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 public class KaranganDetailActivity extends SkinActivity implements PurchasesUpdatedListener {
 
     // private static final String AD_UNIT_ID_BANNER = "ca-app-pub-3940256099942544/9214589741";
-    private static final String AD_UNIT_ID_INTERSTITIAL = "ca-app-pub-3940256099942544/1033173712";
+    //private static final String AD_UNIT_ID_INTERSTITIAL = "ca-app-pub-3940256099942544/1033173712";
     //---INTERSTITIAL END ----
     private InterstitialAd interstitialAd;
 
@@ -120,7 +120,6 @@ public class KaranganDetailActivity extends SkinActivity implements PurchasesUpd
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
-
         setBillingClient();
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -130,8 +129,8 @@ public class KaranganDetailActivity extends SkinActivity implements PurchasesUpd
         });
         interstitialAd = new InterstitialAd(this);
         // Defined in res/values/strings.xml
-        //interstitialAd.setAdUnitId(getString(R.string.interstitialKaranganUid)); //TODO: Tukar ads
-        interstitialAd.setAdUnitId(AD_UNIT_ID_INTERSTITIAL);
+        interstitialAd.setAdUnitId(getString(R.string.interstitialKaranganUid)); //TODO: Tukar ads
+        //interstitialAd.setAdUnitId(AD_UNIT_ID_INTERSTITIAL);
         interstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdFailedToLoad(int errorCode) {
@@ -212,13 +211,13 @@ public class KaranganDetailActivity extends SkinActivity implements PurchasesUpd
 
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
         // request.setDestinationInExternalFilesDir(context, destinationDirectory, fileName + fileExtension); //ini akan simpan dekat dalam folder net.ticherhaz.karangancemerlangspm
-        request.setDestinationInExternalPublicDir(destinationDirectory, "Karangan Cemerlang SPM/" + fileName + fileExtension); //ini kita akan simpan dkt downloads
+        request.setDestinationInExternalPublicDir(destinationDirectory, File.separator + "Karangan Cemerlang SPM" + File.separator + fileName + fileExtension); //ini kita akan simpan dkt downloads
 
         if (downloadManager != null) {
             downloadManager.enqueue(request);
         }
         DismissProgressDialog();
-        ShowToast(KaranganDetailActivity.this, "Selesai Muat Turun " + tajuk);
+        ShowToast(KaranganDetailActivity.this, "Selesai Muat Turun " + tajuk + "\nSila semak di 'Download'");
     }
 
     private void handleConsume(final Purchase purchase) {
@@ -261,12 +260,17 @@ public class KaranganDetailActivity extends SkinActivity implements PurchasesUpd
                                     final String description = "Sedang Muat Turun " + tajuk;
 
                                     //and then we download the data from firebase storage
-                                    storageReference.child(uidKarangan + ".pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    storageReference.child(uidKarangan + ".pdf").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                                         @Override
-                                        public void onSuccess(Uri uri) {
-                                            final String url = uri.toString();
-                                            ShowToast(KaranganDetailActivity.this, description);
-                                            downloadFile(KaranganDetailActivity.this, tajuk, ".pdf", DIRECTORY_DOWNLOADS, url);
+                                        public void onComplete(@NonNull Task<Uri> task) {
+                                            if (task.isSuccessful()) {
+                                                final String url = task.getResult().toString();
+                                                ShowToast(KaranganDetailActivity.this, description);
+                                                downloadFile(KaranganDetailActivity.this, tajuk, ".pdf", DIRECTORY_DOWNLOADS, url);
+                                            } else {
+                                                DismissProgressDialog();
+                                                ShowToast(KaranganDetailActivity.this, "Error: " + task.getException().getMessage() + "\nSila hubungi di ticherhaz@gmail.com");
+                                            }
                                         }
                                     });
 

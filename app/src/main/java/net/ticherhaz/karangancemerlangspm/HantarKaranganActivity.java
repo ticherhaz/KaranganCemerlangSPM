@@ -42,15 +42,12 @@ public class HantarKaranganActivity extends SkinActivity {
     private String name = null;
     private String sekolah = null;
 
-
     private void listID() {
         buttonMuatNaik = findViewById(R.id.button_muat_naik);
         editTextName = findViewById(R.id.edit_text_nama);
         editTextSekolah = findViewById(R.id.edit_text_sekolah);
         retrieveIntent();
-
     }
-
 
     //Retrieve value
     private void retrieveIntent() {

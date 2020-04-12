@@ -1,5 +1,11 @@
 package net.ticherhaz.karangancemerlangspm.util;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingFlowParams;
 import com.android.billingclient.api.SkuDetails;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import net.ticherhaz.karangancemerlangspm.KaranganDetailActivity;
 import net.ticherhaz.karangancemerlangspm.R;
@@ -45,10 +57,45 @@ public class MyProductDownloadKaranganAdapter extends RecyclerView.Adapter<MyPro
         holder.getButtonProduct().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
-                        .setSkuDetails(skuDetailsList.get(position))
-                        .build();
-                billingClient.launchBillingFlow(karanganDetailActivity, billingFlowParams);
+                Dexter.withActivity(karanganDetailActivity)
+                        .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .withListener(new PermissionListener() {
+                            @Override
+                            public void onPermissionGranted(PermissionGrantedResponse response) {
+                                // permission is granted, open the camera
+                                BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+                                        .setSkuDetails(skuDetailsList.get(position))
+                                        .build();
+                                billingClient.launchBillingFlow(karanganDetailActivity, billingFlowParams);
+                            }
+
+                            @Override
+                            public void onPermissionDenied(PermissionDeniedResponse response) {
+                                // check for permanent denial of permission
+                                if (response.isPermanentlyDenied()) {
+                                    // navigate user to app settings
+                                    AlertDialog alertDialog = new AlertDialog.Builder(karanganDetailActivity)
+                                            .setTitle("Info")
+                                            .setMessage("You need to enable write storage at app settings")
+                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                                    Uri uri = Uri.fromParts("package", karanganDetailActivity.getPackageName(), null);
+                                                    intent.setData(uri);
+                                                    karanganDetailActivity.startActivity(intent);
+                                                }
+                                            })
+                                            .create();
+                                    alertDialog.show();
+                                }
+                            }
+
+                            @Override
+                            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                                token.continuePermissionRequest();
+                            }
+                        }).check();
             }
         });
 //        holder.setiProductClickListener(new IProductClickListener() {
@@ -67,36 +114,21 @@ public class MyProductDownloadKaranganAdapter extends RecyclerView.Adapter<MyPro
         return skuDetailsList.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         private Button buttonProduct;
-        private IProductClickListener iProductClickListener;
 
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
             buttonProduct = itemView.findViewById(R.id.btn_product);
-            itemView.setOnClickListener(this);
         }
 
-        public IProductClickListener getiProductClickListener() {
-            return iProductClickListener;
-        }
-
-        void setiProductClickListener(IProductClickListener iProductClickListener) {
-            this.iProductClickListener = iProductClickListener;
-        }
-
-        public Button getButtonProduct() {
+        Button getButtonProduct() {
             return buttonProduct;
         }
 
         public void setButtonProduct(Button buttonProduct) {
             this.buttonProduct = buttonProduct;
-        }
-
-        @Override
-        public void onClick(View view) {
-            iProductClickListener.onProductClickListener(view, getAdapterPosition());
         }
     }
 }

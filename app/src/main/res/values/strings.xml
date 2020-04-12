@@ -54,10 +54,10 @@
         <p><b><i>Selamat beramal dan semoga maju jaya! :)</i></b></p>
 ]]></string>
     <string name="feedback">Maklum Balas</string>
-    <string name="about_title"> <!-- TODO v3.22 -->
+    <string name="about_title"> <!-- TODO v3.23 -->
         <![CDATA[
         <h3>Karangan Cemerlang SPM</h3>
-        <i>versi 3.22</i><br>
+        <i>versi 3.23</i><br>
         hazman45.blogspot.com<br>
         Ticherhaz©2020
 
@@ -140,7 +140,7 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
 <p>Pemilik dan kakitangan Karangan Cemerlang SPM berhak membuang, mengedit, memindahkan atau menutup sebarang kandungan untuk alasan apa pun.
 ]]>
     </string>
-    <string name="about_credit">Ucapan ribuan terima kasih kepada semua yang memberi sokongan aplikasi saya ini. :)\n\nCikgu Mariani - Cikgu Badrunsham - Cikgu Hamidah - Cikgu Rohani - Cikgu Harum Awang - Cikgu Samat - Cikgu Che Noranuwi - Cikgu Qamarul Abdullah - Cikgu Ishak Md Shah- Nabil Fikri - Muhd Arif (Bob) - Luqman K - Affiq Shamil - Peah - Chekta - Eisom - Achik - Jumper - Fini - chocoberry520 - Ifa</string>
+    <string name="about_credit">Ucapan ribuan terima kasih kepada semua yang memberi sokongan aplikasi saya ini. :)\n\nCikgu Mariani - Cikgu Badrunsham - Cikgu Hamidah - Cikgu Rohani - Cikgu Harum Awang - Cikgu Samat - Cikgu Che Noranuwi - Cikgu Qamarul Abdullah - Cikgu Ishak Md Shah - Cikgu Deen - Nabil Fikri - Muhd Arif (Bob) - Luqman K - Affiq Shamil - Peah - Chekta - Eisom - Achik - Jumper - Fini - chocoberry520 - Ifa - Yuyu</string>
     <string name="submit">Hantar</string>
     <string name="logo_kcspm">Logo KCSPM</string>
     <string name="senarai_karangan">Senarai</string>
@@ -254,8 +254,8 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
         <item>Perempuan</item>
     </string-array>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
-    <!-- TODO: Change apps version v3.22 -->
-    <string name="apps_version">Karangan Cemerlang SPM v3.22\nhazman45.blogspot.com\nTicherhaz©2020</string>
+    <!-- TODO: Change apps version v3.23 -->
+    <string name="apps_version">Karangan Cemerlang SPM v3.23\nhazman45.blogspot.com\nTicherhaz©2020</string>
     <string name="penarafan">Penarafan</string>
     <string name="app_name_tentang">Tentang Karangan Cemerlang SPM</string>
     <string name="internet_connection">Please Check Internet Connection</string>
@@ -264,6 +264,9 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
     <string name="bannerMainUid">ca-app-pub-7557499721953375/5464426270</string>
     <string name="bannerJenisUid">ca-app-pub-7557499721953375/3959772915</string>
     <string name="bannerSenaraiUid">ca-app-pub-7557499721953375/5965676074</string>
+    <string name="bannerPeribahasa">ca-app-pub-7557499721953375/5781982868</string>
+
     <string name="interstitialTipsUid">ca-app-pub-7557499721953375/3768201223</string>
     <string name="interstitialKaranganUid">ca-app-pub-7557499721953375/4586458873</string>
+    <string name="interstitialPeribahasa">ca-app-pub-7557499721953375/1034188681</string>
 </resources>

@@ -11,20 +11,14 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.zxy.skin.sdk.SkinActivity;
 
-import net.ticherhaz.karangancemerlangspm.util.Others;
-
-import java.util.Arrays;
-import java.util.List;
-
 public class TipsKaranganActivity extends SkinActivity {
 
     // private static final String AD_UNIT_ID_BANNER = "ca-app-pub-3940256099942544/9214589741";
-    private static final String AD_UNIT_ID_INTERSTITIAL = "ca-app-pub-3940256099942544/1033173712";
+    //private static final String AD_UNIT_ID_INTERSTITIAL = "ca-app-pub-3940256099942544/1033173712";
     //---INTERSTITIAL END ----
     private InterstitialAd interstitialAd;
 
@@ -49,19 +43,13 @@ public class TipsKaranganActivity extends SkinActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-        List<String> testDeviceIds = Arrays.asList("33BE2250B43518CCDA7DE426D04EE231");
-        RequestConfiguration configuration =
-                new RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build();
-        MobileAds.setRequestConfiguration(configuration);
-
         interstitialAd = new InterstitialAd(this);
         // Defined in res/values/strings.xml
-        //interstitialAd.setAdUnitId(getString(R.string.interstitialTipsUid));
-        interstitialAd.setAdUnitId(AD_UNIT_ID_INTERSTITIAL);
+        interstitialAd.setAdUnitId(getString(R.string.interstitialTipsUid)); //TODO Ads
+        //interstitialAd.setAdUnitId(AD_UNIT_ID_INTERSTITIAL);
         interstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdFailedToLoad(int errorCode) {
-                Others.ShowToast(TipsKaranganActivity.this, "Error: " + errorCode);
             }
 
             @Override
