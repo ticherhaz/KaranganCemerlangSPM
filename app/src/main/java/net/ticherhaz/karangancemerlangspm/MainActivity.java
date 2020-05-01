@@ -189,7 +189,7 @@ public class MainActivity extends SkinActivity {
         // get test ads on a physical device. e.g.
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
         adView = new AdView(this);
-        adView.setAdUnitId(getString(R.string.bannerMainUid)); //TODO: ads
+        adView.setAdUnitId(getString(R.string.bannerMainUid));
         //adView.setAdUnitId(AD_UNIT_ID_BANNER);
 
         adContainerView.removeAllViews();
@@ -876,7 +876,7 @@ public class MainActivity extends SkinActivity {
                 public void onClick(View view) {
                     //textViewCredit.setText(R.string.about_credit);
                     if (!isDisplaying) {
-                        textViewCredit.setText(R.string.about_credit); //TODO: Update version 3.21
+                        textViewCredit.setText(R.string.about_credit); // Update version 3.21
                         isDisplaying = true;
                     } else {
                         textViewCredit.setText(R.string.kredit);

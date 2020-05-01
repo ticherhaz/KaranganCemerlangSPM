@@ -120,7 +120,6 @@ public class ForumActivity extends SkinActivity {
                 holder.getTextViewForumDescrption().setText(model.getForumDescription());
                 holder.getTextViewForumViews().setText(String.valueOf(model.getForumViews()));
 
-
                   /*
                 ok this is new, read last node.
                  */
@@ -212,12 +211,10 @@ public class ForumActivity extends SkinActivity {
                         }
                     });
 
-
                     //Display for the total user who is watching the umum specific
                     calculateAllOnlineSpecific(model.getForumUid(), holder.getTextViewUserViewing());
 
                 }
-
 
                 //When it clicked
                 holder.getView().setOnClickListener(new View.OnClickListener() {
@@ -241,7 +238,6 @@ public class ForumActivity extends SkinActivity {
 
                             }
                         });
-
                         Intent intent = new Intent(ForumActivity.this, UmumActivity.class);
                         intent.putExtra("title", model.getForumTitle());
                         intent.putExtra("userUid", userUid);
@@ -249,7 +245,6 @@ public class ForumActivity extends SkinActivity {
                         startActivities(new Intent[]{intent});
                     }
                 });
-
             }
 
             @NonNull
@@ -346,7 +341,6 @@ public class ForumActivity extends SkinActivity {
                         databaseReference.child("registeredUserTokenUid").child(firebaseUser.getUid()).child(instanceIdResult.getToken()).setValue(true);
                 }
             });
-
         }
     }
 
@@ -431,7 +425,6 @@ public class ForumActivity extends SkinActivity {
                 //Then we store the
                 databaseReference.child("reputationLimit").child(registeredUid).setValue(newReputation);
             }
-
             //Add the info in the userOnlineStatus
             new OnlineStatusUtil().updateUserOnlineStatus("Online", registeredUid, firebaseUser, databaseReference, activitySessionUid, activityDate);
 
@@ -498,8 +491,6 @@ public class ForumActivity extends SkinActivity {
 
                 }
             });
-
-
         } else {
             linearLayoutNewUser.setVisibility(View.VISIBLE);
             linearLayoutOlderUser.setVisibility(View.GONE);
@@ -545,15 +536,6 @@ public class ForumActivity extends SkinActivity {
             public void onClick(View v) {
                 startActivity(new Intent(ForumActivity.this, SignInActivity.class));
                 finish();
-//                SignInDialog signInDialog = new SignInDialog(ForumActivity.this);
-//                signInDialog.setActivity(ForumActivity.this);
-//                signInDialog.setLinearLayoutNewUser(linearLayoutNewUser);
-//                signInDialog.setLinearLayoutOldUser(linearLayoutOlderUser);
-//                signInDialog.setTextViewUsername(textViewUsername);
-//                signInDialog.setTextViewSekolah(textViewSekolah);
-//                signInDialog.setTextViewReputation(textViewReputation);
-//                signInDialog.setUserUid(userUid);
-//                signInDialog.show();
             }
         });
     }
@@ -565,19 +547,9 @@ public class ForumActivity extends SkinActivity {
             public void onClick(View v) {
                 startActivity(new Intent(ForumActivity.this, SignUpActivity.class));
                 finish();
-//                SignUpDialog signUpDialog = new SignUpDialog(ForumActivity.this);
-//                signUpDialog.setInitialUid(userUid);
-//                signUpDialog.setLinearLayoutNewUser(linearLayoutNewUser);
-//                signUpDialog.setActivity(ForumActivity.this);
-//                signUpDialog.setLinearLayoutOldUser(linearLayoutOlderUser);
-//                signUpDialog.setTextViewUsername(textViewUsername);
-//                signUpDialog.setTextViewSekolah(textViewSekolah);
-//                signUpDialog.setTextViewReputation(textViewReputation);
-//                signUpDialog.show();
             }
         });
     }
-
 
     //Method sign out
     private void setTextViewSignOut() {
@@ -620,12 +592,7 @@ public class ForumActivity extends SkinActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference, activitySessionUid, activityDate);
         new OnlineStatusUtil().onDisc(firebaseUser, databaseReference, registeredUid, activitySessionUid, activityDate);
-//        if (firebaseRecyclerAdapter != null) {
-//            firebaseRecyclerAdapter.stopListening();
-//            firebaseRecyclerAdapter.notifyDataSetChanged();
-//        }
     }
 
     @Override
@@ -648,11 +615,6 @@ public class ForumActivity extends SkinActivity {
     protected void onStart() {
         super.onStart();
         setFirebaseRecyclerAdapter();
-//        if (firebaseRecyclerAdapter != null) {
-//            firebaseRecyclerAdapter.startListening();
-//            firebaseRecyclerAdapter.notifyDataSetChanged();
-//        }
-
         //Check if there is internet or not
         new Handler().postDelayed(new Runnable() {
             @Override

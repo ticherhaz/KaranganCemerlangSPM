@@ -114,7 +114,7 @@ public class JenisKaranganActivity extends SkinActivity {
         // get test ads on a physical device. e.g.
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
         adView = new AdView(this);
-        adView.setAdUnitId(getString(R.string.bannerJenisUid)); //TODO: Ads
+        adView.setAdUnitId(getString(R.string.bannerJenisUid));
         //adView.setAdUnitId(AD_UNIT_ID_BANNER);
         adContainerView.removeAllViews();
         adContainerView.addView(adView);

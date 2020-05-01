@@ -45,7 +45,7 @@ public class TipsKaranganActivity extends SkinActivity {
         });
         interstitialAd = new InterstitialAd(this);
         // Defined in res/values/strings.xml
-        interstitialAd.setAdUnitId(getString(R.string.interstitialTipsUid)); //TODO Ads
+        interstitialAd.setAdUnitId(getString(R.string.interstitialTipsUid));
         //interstitialAd.setAdUnitId(AD_UNIT_ID_INTERSTITIAL);
         interstitialAd.setAdListener(new AdListener() {
             @Override
@@ -78,7 +78,7 @@ public class TipsKaranganActivity extends SkinActivity {
                     interstitialAd.show();
                 }
             }
-        }, 2000); //TODO: sekarang ubah kepada 2 saat harini 8.4.2020 . prepare untuk release v3.23
+        }, 2000);
     }
 
     //Method increase size text

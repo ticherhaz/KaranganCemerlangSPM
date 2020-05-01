@@ -255,7 +255,7 @@ public class PeribahasaActivity extends SkinActivity {
 
         interstitialAd = new InterstitialAd(this);
         // Defined in res/values/strings.xml
-        interstitialAd.setAdUnitId(getString(R.string.interstitialPeribahasa)); //TODO: Tukar ads
+        interstitialAd.setAdUnitId(getString(R.string.interstitialPeribahasaUid));
         //interstitialAd.setAdUnitId(AD_UNIT_ID_INTERSTITIAL);
         interstitialAd.setAdListener(new AdListener() {
             @Override
@@ -284,7 +284,7 @@ public class PeribahasaActivity extends SkinActivity {
         // get test ads on a physical device. e.g.
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
         adView = new AdView(this);
-        adView.setAdUnitId(getString(R.string.bannerPeribahasa)); //TODO: Ads
+        adView.setAdUnitId(getString(R.string.bannerPeribahasa));
         //adView.setAdUnitId(AD_UNIT_ID_BANNER);
         adContainerView.removeAllViews();
         adContainerView.addView(adView);
@@ -375,7 +375,7 @@ public class PeribahasaActivity extends SkinActivity {
                     interstitialAd.show();
                 }
             }
-        }, 2000); //TODO: sekarang ubah kepada 2 saat harini 8.4.2020 . prepare untuk release v3.23
+        }, 2000);
     }
 
     private void setSwipeRefreshLayout() {
