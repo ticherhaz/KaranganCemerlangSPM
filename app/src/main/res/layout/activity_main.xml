@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/merriweather"
-                android:text="@string/spm_2020"
+                android:text="@string/spm_2021"
                 android:textColor="?attr/colorText"
                 android:textSize="17sp"
                 android:textStyle="bold" />

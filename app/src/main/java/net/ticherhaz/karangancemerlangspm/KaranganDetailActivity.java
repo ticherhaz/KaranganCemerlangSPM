@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -28,12 +27,6 @@ import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.SkuDetails;
 import com.android.billingclient.api.SkuDetailsParams;
 import com.android.billingclient.api.SkuDetailsResponseListener;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -65,7 +58,7 @@ public class KaranganDetailActivity extends SkinActivity implements PurchasesUpd
     // private static final String AD_UNIT_ID_BANNER = "ca-app-pub-3940256099942544/9214589741";
     //private static final String AD_UNIT_ID_INTERSTITIAL = "ca-app-pub-3940256099942544/1033173712";
     //---INTERSTITIAL END ----
-    private InterstitialAd interstitialAd;
+    // private InterstitialAd interstitialAd;
 
     private BillingClient billingClient;
     private RecyclerView recyclerView;
@@ -122,31 +115,31 @@ public class KaranganDetailActivity extends SkinActivity implements PurchasesUpd
 
         setBillingClient();
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-        interstitialAd = new InterstitialAd(this);
-        // Defined in res/values/strings.xml
-        interstitialAd.setAdUnitId(getString(R.string.interstitialKaranganUid));
-        //interstitialAd.setAdUnitId(AD_UNIT_ID_INTERSTITIAL);
-        interstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-
-            }
-
-            @Override
-            public void onAdClosed() {
-
-            }
-        });
-        // Request a new ad if one isn't already loaded, hide the button, and kick off the timer.
-        if (!interstitialAd.isLoading() && !interstitialAd.isLoaded()) {
-            AdRequest adRequest = new AdRequest.Builder().build();
-            interstitialAd.loadAd(adRequest);
-        }
+//        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+//            @Override
+//            public void onInitializationComplete(InitializationStatus initializationStatus) {
+//            }
+//        });
+//        interstitialAd = new InterstitialAd(this);
+//        // Defined in res/values/strings.xml
+//        interstitialAd.setAdUnitId(getString(R.string.interstitialKaranganUid));
+//        //interstitialAd.setAdUnitId(AD_UNIT_ID_INTERSTITIAL);
+//        interstitialAd.setAdListener(new AdListener() {
+//            @Override
+//            public void onAdFailedToLoad(int errorCode) {
+//
+//            }
+//
+//            @Override
+//            public void onAdClosed() {
+//
+//            }
+//        });
+//        // Request a new ad if one isn't already loaded, hide the button, and kick off the timer.
+//        if (!interstitialAd.isLoading() && !interstitialAd.isLoaded()) {
+//            AdRequest adRequest = new AdRequest.Builder().build();
+//            interstitialAd.loadAd(adRequest);
+//        }
 
         retrieveData();
         displayData();
@@ -166,7 +159,7 @@ public class KaranganDetailActivity extends SkinActivity implements PurchasesUpd
                 .build();
         billingClient.startConnection(new BillingClientStateListener() {
             @Override
-            public void onBillingSetupFinished(BillingResult billingResult) {
+            public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
                 //If the billing ready to display
                 if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                     if (billingClient.isReady()) {
@@ -180,7 +173,7 @@ public class KaranganDetailActivity extends SkinActivity implements PurchasesUpd
                                 .build();
                         billingClient.querySkuDetailsAsync(params, new SkuDetailsResponseListener() {
                             @Override
-                            public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> list) {
+                            public void onSkuDetailsResponse(@NonNull BillingResult billingResult, List<SkuDetails> list) {
                                 if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                                     MyProductDownloadKaranganAdapter adapter = new MyProductDownloadKaranganAdapter(KaranganDetailActivity.this, list, billingClient);
                                     recyclerView.setLayoutManager(new LinearLayoutManager(KaranganDetailActivity.this));
@@ -230,7 +223,7 @@ public class KaranganDetailActivity extends SkinActivity implements PurchasesUpd
              */
             ConsumeParams consumeParams = ConsumeParams.newBuilder()
                     .setPurchaseToken(purchase.getPurchaseToken())
-                    .setDeveloperPayload(purchase.getDeveloperPayload())
+                    //.setDeveloperPayload(purchase.getDeveloperPayload())
                     .build();
             billingClient.consumeAsync(consumeParams, new ConsumeResponseListener() {
                 @Override
@@ -299,18 +292,18 @@ public class KaranganDetailActivity extends SkinActivity implements PurchasesUpd
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (interstitialAd != null && interstitialAd.isLoaded()) {
-                    interstitialAd.show();
-                }
-            }
-        }, 2000);
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                if (interstitialAd != null && interstitialAd.isLoaded()) {
+//                    interstitialAd.show();
+//                }
+//            }
+//        }, 2000);
+//    }
 
     //Method increase size text
     private void setButtonIncreaseSize() {

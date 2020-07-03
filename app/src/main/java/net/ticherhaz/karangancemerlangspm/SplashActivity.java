@@ -183,8 +183,8 @@ public class SplashActivity extends AppCompatActivity {
                             toast.show();
                         }
                         //After that, we chat the value
-                        else if (system.getVersi() == 324) {
-                            //TODO: Version right now is 324. Please update when the new version is released. testing for beta forum (44)
+                        else if (system.getVersi() == 327) {
+                            //TODO: Version right now is 327. Please update when the new version is released. testing for beta forum (44)
                             //If all the condition above is met, it will NOT GOING THIS PART INSTEAD THEY WILL GO OUTSIDE FROM THE onDataChange
                             //It not met, then it will proceed here.
                             storeUserInfo(userUid);
@@ -236,7 +236,6 @@ public class SplashActivity extends AppCompatActivity {
 
             //If there is connection, then it will check the system
             //So, we using the async task to check the internet, this is the best way to check the internet connection
-            //TODO: Internet connection
 
             //note changes: 6.4.2019 change to old internet check to new one
 
@@ -267,6 +266,5 @@ public class SplashActivity extends AppCompatActivity {
 
 
     //AsyncTask to check the internet connection-------------------------------------
-    //TODO: Internet connection AsyncTask, but we transfer. we make a class for the AsyncTask to check the internet [1.2.2019]
 
 }

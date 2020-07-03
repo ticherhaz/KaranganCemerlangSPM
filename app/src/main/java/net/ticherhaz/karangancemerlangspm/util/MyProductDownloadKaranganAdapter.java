@@ -57,7 +57,7 @@ public class MyProductDownloadKaranganAdapter extends RecyclerView.Adapter<MyPro
         holder.getButtonProduct().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dexter.withActivity(karanganDetailActivity)
+                Dexter.withContext(karanganDetailActivity)
                         .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         .withListener(new PermissionListener() {
                             @Override

@@ -15,7 +15,6 @@ public class MyWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        // TODO(developer): add long running task here.
         return Result.success();
     }
 }

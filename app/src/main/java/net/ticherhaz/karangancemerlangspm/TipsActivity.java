@@ -65,7 +65,7 @@ public class TipsActivity extends SkinActivity implements PurchasesUpdatedListen
                 .build();
         billingClient.startConnection(new BillingClientStateListener() {
             @Override
-            public void onBillingSetupFinished(BillingResult billingResult) {
+            public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
                 //If the billing ready to display
                 if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                     if (billingClient.isReady()) {
@@ -79,7 +79,7 @@ public class TipsActivity extends SkinActivity implements PurchasesUpdatedListen
                                 .build();
                         billingClient.querySkuDetailsAsync(params, new SkuDetailsResponseListener() {
                             @Override
-                            public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> list) {
+                            public void onSkuDetailsResponse(@NonNull BillingResult billingResult, List<SkuDetails> list) {
                                 if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                                     MyProductAdapter adapter = new MyProductAdapter(TipsActivity.this, list, billingClient);
                                     recyclerView.setLayoutManager(new LinearLayoutManager(TipsActivity.this));
@@ -113,11 +113,10 @@ public class TipsActivity extends SkinActivity implements PurchasesUpdatedListen
              */
             ConsumeParams consumeParams = ConsumeParams.newBuilder()
                     .setPurchaseToken(purchase.getPurchaseToken())
-                    .setDeveloperPayload(purchase.getDeveloperPayload())
                     .build();
             billingClient.consumeAsync(consumeParams, new ConsumeResponseListener() {
                 @Override
-                public void onConsumeResponse(final BillingResult billingResult, String s) {
+                public void onConsumeResponse(@NonNull final BillingResult billingResult, @NonNull String s) {
                     if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                         //Success purchased
                         final String userPurchasedCoinsMoreUid = FirebaseDatabase.getInstance().getReference().push().getKey();
@@ -132,14 +131,19 @@ public class TipsActivity extends SkinActivity implements PurchasesUpdatedListen
                         final String developerPayload = purchase.getDeveloperPayload();
 
                         String duitNakDisplay = null;
-                        if (purchase.getSku().equals("sehelai_ringgit")) {
-                            duitNakDisplay = "RM1.00";
-                        } else if (purchase.getSku().equals("sejambak_ringgit")) {
-                            duitNakDisplay = "RM1.00";
-                        } else if (purchase.getSku().equals("sekantung_ringgit")) {
-                            duitNakDisplay = "RM1.00";
-                        } else if (purchase.getSku().equals("setimbun_syiling")) {
-                            duitNakDisplay = "RM1.00";
+                        switch (purchase.getSku()) {
+                            case "sehelai_ringgit":
+                                duitNakDisplay = "RM1.00";
+                                break;
+                            case "sejambak_ringgit":
+                                duitNakDisplay = "RM3.00";
+                                break;
+                            case "sekantung_ringgit":
+                                duitNakDisplay = "RM5.00";
+                                break;
+                            case "setimbun_ringgit":
+                                duitNakDisplay = "RM10.00";
+                                break;
                         }
 
                         final String userUid = databaseReference.push().getKey();

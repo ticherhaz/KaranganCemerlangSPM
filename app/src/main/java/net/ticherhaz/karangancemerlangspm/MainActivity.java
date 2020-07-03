@@ -5,13 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.PersistableBundle;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,7 +22,6 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -34,13 +32,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,6 +46,9 @@ import net.ticherhaz.karangancemerlangspm.util.Others;
 import net.ticherhaz.karangancemerlangspm.util.RunTransaction;
 import net.ticherhaz.karangancemerlangspm.viewHolder.KaranganViewHolder;
 
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
+
 public class MainActivity extends SkinActivity {
 
     //private static final String AD_UNIT_ID_BANNER = "ca-app-pub-3940256099942544/9214589741";
@@ -63,10 +57,10 @@ public class MainActivity extends SkinActivity {
     private static final String SHARED_PREFERENCES_MOD = "myPreferenceMod";
     private static final String SAVED_MOD = "mySavedMod";
     private static final String SHARED_PREFERENCES = "myPreference";
-    boolean isDisplaying = false;
+    //boolean isDisplaying = false;
     //---BANNER START ----
-    private FrameLayout adContainerView;
-    private AdView adView;
+    // private FrameLayout adContainerView;
+    //private AdView adView;
     //---BANNER END ----
     private DatabaseReference databaseReference;
     private FirebaseRecyclerOptions<Karangan> firebaseRecyclerOptions;
@@ -159,20 +153,20 @@ public class MainActivity extends SkinActivity {
             mod = intent.getExtras().getString("mod");
         }
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-        adContainerView = findViewById(R.id.ad_view_container);
-        // Since we're loading the banner based on the adContainerView size, we need to wait until this
-        // view is laid out before we can get the width.
-        adContainerView.post(new Runnable() {
-            @Override
-            public void run() {
-                loadBanner();
-            }
-        });
+//        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+//            @Override
+//            public void onInitializationComplete(InitializationStatus initializationStatus) {
+//            }
+//        });
+//        adContainerView = findViewById(R.id.ad_view_container);
+//        // Since we're loading the banner based on the adContainerView size, we need to wait until this
+//        // view is laid out before we can get the width.
+//        adContainerView.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                loadBanner();
+//            }
+//        });
 
 
         //Firebase Database
@@ -184,83 +178,83 @@ public class MainActivity extends SkinActivity {
         setButtonSumbangan();
     }
 
-    private void loadBanner() {
-        // Create an ad request. Check your logcat output for the hashed device ID to
-        // get test ads on a physical device. e.g.
-        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
-        adView = new AdView(this);
-        adView.setAdUnitId(getString(R.string.bannerMainUid));
-        //adView.setAdUnitId(AD_UNIT_ID_BANNER);
-
-        adContainerView.removeAllViews();
-        adContainerView.addView(adView);
-        AdSize adSize = getAdSize();
-        adView.setAdSize(adSize);
-        AdRequest adRequest =
-                new AdRequest.Builder()
-                        .build();
-        // Start loading the ad in the background.
-        adView.loadAd(adRequest);
-        adView.setAdListener(new AdListener() {
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                // AdsChecker(dahPremium, imageViewAds, adContainerView, false);
-            }
-
-            @Override
-            public void onAdClosed() {
-            }
-
-            @Override
-            public void onAdLoaded() {
-                // AdsChecker(dahPremium, imageViewAds, adContainerView, true);
-            }
-
-        });
-    }
-
-    private AdSize getAdSize() {
-        // Determine the screen width (less decorations) to use for the ad width.
-        Display display = getWindowManager().getDefaultDisplay();
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        display.getMetrics(outMetrics);
-
-        float density = outMetrics.density;
-
-        float adWidthPixels = adContainerView.getWidth();
-
-        // If the ad hasn't been laid out, default to the full screen width.
-        if (adWidthPixels == 0) {
-            adWidthPixels = outMetrics.widthPixels;
-        }
-
-        int adWidth = (int) (adWidthPixels / density);
-
-        return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidth);
-    }
-
-    /**
-     * Called when leaving the activity
-     */
-    @Override
-    public void onPause() {
-        if (adView != null) {
-            adView.pause();
-        }
-        super.onPause();
-    }
-
-
-    /**
-     * Called before the activity is destroyed
-     */
-    @Override
-    public void onDestroy() {
-        if (adView != null) {
-            adView.destroy();
-        }
-        super.onDestroy();
-    }
+//    private void loadBanner() {
+//        // Create an ad request. Check your logcat output for the hashed device ID to
+//        // get test ads on a physical device. e.g.
+//        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
+//        adView = new AdView(this);
+//        adView.setAdUnitId(getString(R.string.bannerMainUid));
+//        //adView.setAdUnitId(AD_UNIT_ID_BANNER);
+//
+//        adContainerView.removeAllViews();
+//        adContainerView.addView(adView);
+//        AdSize adSize = getAdSize();
+//        adView.setAdSize(adSize);
+//        AdRequest adRequest =
+//                new AdRequest.Builder()
+//                        .build();
+//        // Start loading the ad in the background.
+//        adView.loadAd(adRequest);
+//        adView.setAdListener(new AdListener() {
+//            @Override
+//            public void onAdFailedToLoad(int errorCode) {
+//                // AdsChecker(dahPremium, imageViewAds, adContainerView, false);
+//            }
+//
+//            @Override
+//            public void onAdClosed() {
+//            }
+//
+//            @Override
+//            public void onAdLoaded() {
+//                // AdsChecker(dahPremium, imageViewAds, adContainerView, true);
+//            }
+//
+//        });
+//    }
+//
+//    private AdSize getAdSize() {
+//        // Determine the screen width (less decorations) to use for the ad width.
+//        Display display = getWindowManager().getDefaultDisplay();
+//        DisplayMetrics outMetrics = new DisplayMetrics();
+//        display.getMetrics(outMetrics);
+//
+//        float density = outMetrics.density;
+//
+//        float adWidthPixels = adContainerView.getWidth();
+//
+//        // If the ad hasn't been laid out, default to the full screen width.
+//        if (adWidthPixels == 0) {
+//            adWidthPixels = outMetrics.widthPixels;
+//        }
+//
+//        int adWidth = (int) (adWidthPixels / density);
+//
+//        return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidth);
+//    }
+//
+//    /**
+//     * Called when leaving the activity
+//     */
+//    @Override
+//    public void onPause() {
+//        if (adView != null) {
+//            adView.pause();
+//        }
+//        super.onPause();
+//    }
+//
+//
+//    /**
+//     * Called before the activity is destroyed
+//     */
+//    @Override
+//    public void onDestroy() {
+//        if (adView != null) {
+//            adView.destroy();
+//        }
+//        super.onDestroy();
+//    }
 
     private void setButtonSumbangan() {
         buttonSumbangan.setOnClickListener(new View.OnClickListener() {
@@ -847,7 +841,7 @@ public class MainActivity extends SkinActivity {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+    public void onSaveInstanceState(Bundle outState, @NonNull PersistableBundle outPersistentState) {
         outState.putString(SAVED_MOD, mod);
         super.onSaveInstanceState(outState, outPersistentState);
     }
@@ -916,7 +910,6 @@ public class MainActivity extends SkinActivity {
                 editor.apply();
 
                 //we clear the text search to avoid the changes of the color night mode
-                editTextSearch.setText("");
             } else {
                 SkinEngine.changeSkin(R.style.AppNightTheme);
                 item.setChecked(true);
@@ -930,9 +923,8 @@ public class MainActivity extends SkinActivity {
                 editor.putString(SHARED_PREFERENCES_MOD, mod);
                 editor.apply();
 
-                editTextSearch.setText("");
-
             }
+            editTextSearch.setText("");
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -1016,52 +1008,52 @@ public class MainActivity extends SkinActivity {
     protected void onResume() {
         super.onResume();
         FirebaseDatabase.getInstance().goOnline();
-        if (adView != null) {
-            adView.resume();
-        }
+//        if (adView != null) {
+//            adView.resume();
+//        }
     }
 
     private void setmCountDownTimer() {
-//        Calendar start_calendar = Calendar.getInstance();
-//        Calendar end_calendar = Calendar.getInstance();
-//        end_calendar.set(Calendar.DAY_OF_MONTH, 4);
-//        end_calendar.set(Calendar.MONTH, 11 - 1);
-//        end_calendar.set(Calendar.YEAR, 2019);
-//        end_calendar.set(Calendar.HOUR_OF_DAY, 8);
-//        end_calendar.set(Calendar.SECOND, 0);
-//        end_calendar.set(Calendar.MINUTE, 0);
-//
-//        long start_millis = start_calendar.getTimeInMillis(); //get the start time in milliseconds
-//        long end_millis = end_calendar.getTimeInMillis(); //get the end time in milliseconds
-//        long total_millis = (end_millis - start_millis); //total time in milliseconds
-//
-//        //1000 = 1 second interval
-//        CountDownTimer cdt = new CountDownTimer(total_millis, 1000) {
-//            @SuppressLint("SetTextI18n")
-//            @Override
-//            public void onTick(long millisUntilFinished) {
-//                long days = TimeUnit.MILLISECONDS.toDays(millisUntilFinished);
-//                millisUntilFinished -= TimeUnit.DAYS.toMillis(days);
-//
-//                long hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished);
-//                millisUntilFinished -= TimeUnit.HOURS.toMillis(hours);
-//
-//                long minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished);
-//                millisUntilFinished -= TimeUnit.MINUTES.toMillis(minutes);
-//
-//                long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
-//
-//                String timerSPM = days + " Hari " + hours + " Jam " + minutes + " Minit " + seconds + " Saat";
-//                textViewCountdownSPM.setText(timerSPM); //You can compute the millisUntilFinished on hours/minutes/seconds
-//            }
-//
-//            @SuppressLint("SetTextI18n")
-//            @Override
-//            public void onFinish() {
-//                textViewCountdownSPM.setText("Finish!");
-//            }
-//        };
-//        cdt.start();
+        Calendar start_calendar = Calendar.getInstance();
+        Calendar end_calendar = Calendar.getInstance();
+        end_calendar.set(Calendar.DAY_OF_MONTH, 6);
+        end_calendar.set(Calendar.MONTH, 0); // 2 - 1 (need minus 1)
+        end_calendar.set(Calendar.YEAR, 2021);
+        end_calendar.set(Calendar.HOUR_OF_DAY, 0);
+        end_calendar.set(Calendar.SECOND, 0);
+        end_calendar.set(Calendar.MINUTE, 0);
+
+        long start_millis = start_calendar.getTimeInMillis(); //get the start time in milliseconds
+        long end_millis = end_calendar.getTimeInMillis(); //get the end time in milliseconds
+        long total_millis = (end_millis - start_millis); //total time in milliseconds
+
+        //1000 = 1 second interval
+        CountDownTimer cdt = new CountDownTimer(total_millis, 1000) {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onTick(long millisUntilFinished) {
+                long days = TimeUnit.MILLISECONDS.toDays(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.DAYS.toMillis(days);
+
+                long hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.HOURS.toMillis(hours);
+
+                long minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished);
+                millisUntilFinished -= TimeUnit.MINUTES.toMillis(minutes);
+
+                long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
+
+                String timerSPM = "RABU " + days + " Hari " + hours + " Jam " + minutes + " Minit " + seconds + " Saat";
+                textViewCountdownSPM.setText(timerSPM); //You can compute the millisUntilFinished on hours/minutes/seconds
+            }
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onFinish() {
+                textViewCountdownSPM.setText("Finish!");
+            }
+        };
+        cdt.start();
 
 
         textViewCountdownSPM.setText("");

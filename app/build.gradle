@@ -1,13 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.huawei.agconnect'
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     defaultConfig {
         applicationId "net.ticherhaz.karangancemerlangspm"
         minSdkVersion 16
-        targetSdkVersion 29
-        versionCode 324
-        versionName "3.24"
+        targetSdkVersion 30
+        versionCode 327
+        versionName "3.27"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -28,14 +29,17 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    //Huawei
+    //implementation 'com.huawei.agconnect:agconnect-core:1.0.0.300'
     //MultiDex
     implementation 'com.android.support:multidex:1.0.3'
     //Firebase
-    implementation 'com.google.firebase:firebase-database:19.2.1'
-    implementation 'com.google.firebase:firebase-messaging:20.1.4'
+    implementation 'com.google.firebase:firebase-database:19.3.1'
+    implementation 'com.google.firebase:firebase-messaging:20.2.1'
     implementation 'com.google.firebase:firebase-storage:19.1.1'
-    implementation "com.google.firebase:firebase-auth:19.3.0"
-    implementation 'com.google.firebase:firebase-analytics:17.3.0'
+    implementation 'com.google.firebase:firebase-auth:19.3.1'
+    implementation 'com.google.firebase:firebase-analytics:17.4.3'
 
     //FirebaseUI
     implementation 'com.firebaseui:firebase-ui-database:6.2.0'
@@ -44,14 +48,14 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation project(path: ':lib')
     //For time
-    implementation 'com.github.ticherhaz:tarikhmasa:1.5.16'
+    implementation 'com.github.ticherhaz:tarikhmasa:1.5.17'
     //Image Crop
     implementation 'com.soundcloud.android:android-crop:1.0.1@aar'
     implementation 'androidx.work:work-runtime:2.3.4'
     //App Billing
-    implementation 'com.android.billingclient:billing:2.2.0'
+    implementation 'com.android.billingclient:billing:3.0.0'
     //Google Admob
-    implementation 'com.google.android.gms:play-services-ads:19.0.1'
+    //implementation 'com.google.android.gms:play-services-ads:19.1.0'
     //Lib for permission granted
-    implementation 'com.karumi:dexter:4.2.0'
+    implementation 'com.karumi:dexter:6.2.0'
 }

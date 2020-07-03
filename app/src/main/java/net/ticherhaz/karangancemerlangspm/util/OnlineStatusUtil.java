@@ -118,7 +118,7 @@ public class OnlineStatusUtil {
                     final String online = dataSnapshot.getValue(String.class);
                     if (online != null && online.equals("Online")) {
                         //Ni kalau dia dc
-                        //TODO: OnDisconnect
+                        //OnDisconnect
                         databaseReference.child("registeredUser").child(registeredUid).child("onlineStatus").onDisconnect().setValue("Offline");
                         final DatabaseReference databaseReferenceLastOnline = FirebaseDatabase.getInstance().getReference().child("registeredUser").child(registeredUid).child("lastOnline");
                         databaseReferenceLastOnline.onDisconnect().setValue(ServerValue.TIMESTAMP);
@@ -227,7 +227,7 @@ public class OnlineStatusUtil {
 
 
 //    private void minusTotal(final DatabaseReference databaseReference) {
-//        //TODO: This run transaction is special for simultaneous user online or many user click like at the same time.
+//
 //        databaseReference.child("OnlineStatus").child("totalOnline").runTransaction(new Transaction.Handler() {
 //            @NonNull
 //            @Override
