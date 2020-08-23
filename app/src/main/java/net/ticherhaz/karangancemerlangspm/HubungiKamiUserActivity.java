@@ -14,14 +14,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.model.HubungiKamiChat;
+import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.viewHolder.HubungiKamiViewHolder;
 
 import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
+import static net.ticherhaz.tarikhmasa.TarikhMasa.ConvertTarikhMasa2LocalTime;
 
 public class HubungiKamiUserActivity extends SkinActivity {
 
@@ -42,21 +47,39 @@ public class HubungiKamiUserActivity extends SkinActivity {
         pB = findViewById(R.id.progressbar);
 
         fDe = FirebaseDatabase.getInstance();
-        dRe = fDe.getReference().child("hubungiKamiChat").child(adminUid);
+        dRe = fDe.getReference();
 
         setfRa();
     }
 
     private void setfRa() {
         fRO = new FirebaseRecyclerOptions.Builder<HubungiKamiChat>()
-                .setQuery(dRe, HubungiKamiChat.class)
+                .setQuery(dRe.child("hubungiKamiChat").child(adminUid), HubungiKamiChat.class)
                 .build();
 
         fRa = new FirebaseRecyclerAdapter<HubungiKamiChat, HubungiKamiViewHolder>(fRO) {
             @Override
-            protected void onBindViewHolder(@NonNull HubungiKamiViewHolder hubungiKamiViewHolder, final int i, @NonNull final HubungiKamiChat hubungiKamiChat) {
-                hubungiKamiViewHolder.getTvDate().setText(hubungiKamiChat.getLastUpdated());
-                hubungiKamiViewHolder.getTvMessage().setText(hubungiKamiChat.getChatUid());
+            protected void onBindViewHolder(@NonNull final HubungiKamiViewHolder hubungiKamiViewHolder, final int i, @NonNull final HubungiKamiChat hubungiKamiChat) {
+                hubungiKamiViewHolder.getTvDate().setText(ConvertTarikhMasa2LocalTime(hubungiKamiChat.getLastUpdated()));
+
+                dRe.child("registeredUser").child(hubungiKamiChat.getSenderUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            final RegisteredUser registeredUser = snapshot.getValue(RegisteredUser.class);
+                            if (registeredUser != null) {
+                                final String username = registeredUser.getUsername();
+                                hubungiKamiViewHolder.getTvMessage().setText(username);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
 
                 hubungiKamiViewHolder.getView().setOnClickListener(new View.OnClickListener() {
                     @Override

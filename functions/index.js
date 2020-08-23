@@ -16,8 +16,6 @@ exports.hubungiKamiChatNotification = functions.database.ref("hubungiKamiMessage
 		const message = snapShot.message;
 		const chatUid = snapShot.chatUid;
 
-		console.log('Message >>>>>>>> ' + message + ' ChatUid >>>>>> ' + chatUid);
-
 		// Get the list of device notification tokens.
 		const getDeviceTokensPromise = admin.database().ref(`/registeredUserTokenUid/${senderUid}`).once('value');
 
@@ -314,8 +312,6 @@ exports.forumNotification2 = functions.region("asia-east2").database.ref('/umumP
 		//Get fullName and type of the admin
 		const fullName = result.val().username;
 		const type = result.val().email;
-
-		console.log("umumUid: " + umumUid + " | SenderUid: " + senderUid);
 
 		//Create payload for the notification
 		const payload = {
