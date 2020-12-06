@@ -1016,8 +1016,8 @@ public class MainActivity extends SkinActivity {
     private void setmCountDownTimer() {
         Calendar start_calendar = Calendar.getInstance();
         Calendar end_calendar = Calendar.getInstance();
-        end_calendar.set(Calendar.DAY_OF_MONTH, 6);
-        end_calendar.set(Calendar.MONTH, 0); // 2 - 1 (need minus 1)
+        end_calendar.set(Calendar.DAY_OF_MONTH, 22);
+        end_calendar.set(Calendar.MONTH, 1); // 2 - 1 (need minus 1)
         end_calendar.set(Calendar.YEAR, 2021);
         end_calendar.set(Calendar.HOUR_OF_DAY, 0);
         end_calendar.set(Calendar.SECOND, 0);
@@ -1043,7 +1043,7 @@ public class MainActivity extends SkinActivity {
 
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
 
-                String timerSPM = "RABU " + days + " Hari " + hours + " Jam " + minutes + " Minit " + seconds + " Saat";
+                String timerSPM = days + " Hari " + hours + " Jam " + minutes + " Minit " + seconds + " Saat" + "(22 Februari 2021)";
                 textViewCountdownSPM.setText(timerSPM); //You can compute the millisUntilFinished on hours/minutes/seconds
             }
 
