@@ -10,10 +10,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -22,8 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
@@ -172,31 +167,27 @@ public class SignInActivity extends SkinActivity implements View.OnClickListener
 
     //Method Sign In
     private void signInAuth(final String email, final String password) {
-        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    final FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                    if (firebaseUser != null) {
-                        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
-                            @Override
-                            public void onSuccess(InstanceIdResult instanceIdResult) {
-                                final String tokenUid = instanceIdResult.getToken();
-                                FirebaseDatabase.getInstance().getReference().child("registeredUserTokenUid").child(firebaseUser.getUid()).child(tokenUid).setValue(true);
-//                                Intent intent = new Intent(context, ForumActivity.class);
-//                                intent.putExtra("userUid", userUid);
-//                                context.startActivity(intent);
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                final FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                if (firebaseUser != null) {
+
+                    FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful()) {
+                            final String token = task1.getResult();
+                            if (token != null) {
+                                FirebaseDatabase.getInstance().getReference().child("registeredUserTokenUid").child(firebaseUser.getUid()).child(token).setValue(true);
                                 Toast.makeText(SignInActivity.this, "Selamat Kembali " + firebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
                                 dismissProgressDialog();
                                 startActivity(new Intent(SignInActivity.this, ForumActivity.class));
                                 finish();
                             }
-                        });
-                    }
-                } else {
-                    dismissProgressDialog();
-                    editTextPassword.setError("Kata Laluan Salah, Sila Cuba Lagi");
+                        }
+                    });
                 }
+            } else {
+                dismissProgressDialog();
+                editTextPassword.setError("Kata Laluan Salah, Sila Cuba Lagi");
             }
         });
     }

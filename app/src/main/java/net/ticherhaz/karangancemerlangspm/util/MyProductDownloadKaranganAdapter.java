@@ -31,9 +31,9 @@ import java.util.List;
 
 public class MyProductDownloadKaranganAdapter extends RecyclerView.Adapter<MyProductDownloadKaranganAdapter.MyViewHolder> {
 
-    private KaranganDetailActivity karanganDetailActivity;
-    private List<SkuDetails> skuDetailsList;
-    private BillingClient billingClient;
+    private final KaranganDetailActivity karanganDetailActivity;
+    private final List<SkuDetails> skuDetailsList;
+    private final BillingClient billingClient;
 
     public MyProductDownloadKaranganAdapter(KaranganDetailActivity karanganDetailActivity, List<SkuDetails> skuDetailsList, BillingClient billingClient) {
         this.karanganDetailActivity = karanganDetailActivity;

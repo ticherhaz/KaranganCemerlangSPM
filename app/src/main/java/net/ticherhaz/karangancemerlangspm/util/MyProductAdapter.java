@@ -19,9 +19,9 @@ import java.util.List;
 
 public class MyProductAdapter extends RecyclerView.Adapter<MyProductAdapter.MyViewHolder> {
 
-    private TipsActivity tipsActivity;
-    private List<SkuDetails> skuDetailsList;
-    private BillingClient billingClient;
+    private final TipsActivity tipsActivity;
+    private final List<SkuDetails> skuDetailsList;
+    private final BillingClient billingClient;
 
     public MyProductAdapter(TipsActivity tipsActivity, List<SkuDetails> skuDetailsList, BillingClient billingClient) {
         this.tipsActivity = tipsActivity;
@@ -41,14 +41,11 @@ public class MyProductAdapter extends RecyclerView.Adapter<MyProductAdapter.MyVi
         //holder.getTextViewProduct().setText(skuDetailsList.get(position).getTitle());
         holder.getTextViewProduct().setText(skuDetailsList.get(position).getPrice());
 
-        holder.setiProductClickListener(new IProductClickListener() {
-            @Override
-            public void onProductClickListener(View view, int position) {
-                BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
-                        .setSkuDetails(skuDetailsList.get(position))
-                        .build();
-                billingClient.launchBillingFlow(tipsActivity, billingFlowParams);
-            }
+        holder.setiProductClickListener((view, position1) -> {
+            BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+                    .setSkuDetails(skuDetailsList.get(position1))
+                    .build();
+            billingClient.launchBillingFlow(tipsActivity, billingFlowParams);
         });
     }
 

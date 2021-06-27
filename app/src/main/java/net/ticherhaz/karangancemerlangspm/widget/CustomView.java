@@ -15,11 +15,11 @@ public class CustomView extends View {
 
     private int mLineColor = Color.BLACK;
 
-    private Paint mPaint;
+    private final Paint mPaint;
 
     private int mRadius = 0;
 
-    private PointF mCenter = new PointF();
+    private final PointF mCenter = new PointF();
 
     public CustomView(Context context) {
         this(context, null);

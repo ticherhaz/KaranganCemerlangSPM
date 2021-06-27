@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -14,19 +15,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.ConsumeParams;
-import com.android.billingclient.api.ConsumeResponseListener;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesUpdatedListener;
-import com.android.billingclient.api.SkuDetails;
 import com.android.billingclient.api.SkuDetailsParams;
-import com.android.billingclient.api.SkuDetailsResponseListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -104,8 +101,6 @@ public class KaranganDetailActivity extends SkinActivity implements PurchasesUpd
         buttonFont = findViewById(R.id.button_font);
         progressBarMain = findViewById(R.id.pb_main);
         recyclerView = findViewById(R.id.products);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference().child("karangan");
@@ -160,27 +155,29 @@ public class KaranganDetailActivity extends SkinActivity implements PurchasesUpd
         billingClient.startConnection(new BillingClientStateListener() {
             @Override
             public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
+                Log.i("???", "onBillingSetupFinished: " + billingResult.getResponseCode());
                 //If the billing ready to display
                 if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                     if (billingClient.isReady()) {
+                        Log.i("???", "billingClient: " + billingClient.isReady());
+
                         //and then hide the progress bar once it finish loading the app billing
                         //so productId and title kena ikut urutan alphabet
-                        progressBarMain.setVisibility(View.GONE);
+
                         SkuDetailsParams params = SkuDetailsParams.newBuilder()
                                 // .setSkusList(skuList) //yg ni yg asal (24/2/2020)
                                 .setSkusList(Collections.singletonList("muat_turun_karangan"))
                                 .setType(BillingClient.SkuType.INAPP)
                                 .build();
-                        billingClient.querySkuDetailsAsync(params, new SkuDetailsResponseListener() {
-                            @Override
-                            public void onSkuDetailsResponse(@NonNull BillingResult billingResult, List<SkuDetails> list) {
-                                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                                    MyProductDownloadKaranganAdapter adapter = new MyProductDownloadKaranganAdapter(KaranganDetailActivity.this, list, billingClient);
-                                    recyclerView.setLayoutManager(new LinearLayoutManager(KaranganDetailActivity.this));
-                                    recyclerView.setAdapter(adapter);
-                                }
+                        billingClient.querySkuDetailsAsync(params, (billingResult1, list) -> {
+                            Log.i("???", "ssss: " + billingResult1.getResponseCode());
+                            if (billingResult1.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                                final MyProductDownloadKaranganAdapter adapter = new MyProductDownloadKaranganAdapter(KaranganDetailActivity.this, list, billingClient);
+                                recyclerView.setAdapter(adapter);
                             }
                         });
+
+                        progressBarMain.setVisibility(View.GONE);
                     } else {
                         progressBarMain.setVisibility(View.GONE);
                         ShowToast(KaranganDetailActivity.this, "Please try again later.");
@@ -225,52 +222,49 @@ public class KaranganDetailActivity extends SkinActivity implements PurchasesUpd
                     .setPurchaseToken(purchase.getPurchaseToken())
                     //.setDeveloperPayload(purchase.getDeveloperPayload())
                     .build();
-            billingClient.consumeAsync(consumeParams, new ConsumeResponseListener() {
-                @Override
-                public void onConsumeResponse(final BillingResult billingResult, String s) {
-                    if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                        //Success purchased
-                        final String downloadKaranganUid = FirebaseDatabase.getInstance().getReference().push().getKey();
-                        final String onPurchasedDateUTC = GetTarikhMasa();
-                        final long onPurchasedDate = System.currentTimeMillis();
+            billingClient.consumeAsync(consumeParams, (billingResult, s) -> {
+                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                    //Success purchased
+                    final String downloadKaranganUid = FirebaseDatabase.getInstance().getReference().push().getKey();
+                    final String onPurchasedDateUTC = GetTarikhMasa();
+                    final long onPurchasedDate = System.currentTimeMillis();
 
-                        final String orderUid = purchase.getOrderId();
-                        final String skutName = purchase.getSku();
-                        final String signature = purchase.getSignature();
-                        final String originalJson = purchase.getOriginalJson();
-                        final int purchaseState = purchase.getPurchaseState();
-                        final String developerPayload = purchase.getDeveloperPayload();
+                    final String orderUid = purchase.getOrderId();
+                    final String skutName = purchase.getSkus().get(0);
+                    final String signature = purchase.getSignature();
+                    final String originalJson = purchase.getOriginalJson();
+                    final int purchaseState = purchase.getPurchaseState();
+                    final String developerPayload = purchase.getDeveloperPayload();
 
-                        final String userUid = databaseReference.push().getKey();
+                    final String userUid = databaseReference.push().getKey();
 
-                        final DownloadKarangan downloadKarangan = new DownloadKarangan(downloadKaranganUid, uidKarangan, orderUid, skutName, signature, originalJson, developerPayload, onPurchasedDateUTC, purchaseState, onPurchasedDate);
-                        //Store info in database
-                        assert userUid != null;
-                        databaseReference.child("downloadKarangan").child(userUid).setValue(downloadKarangan).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    final String description = "Sedang Muat Turun " + tajuk;
+                    final DownloadKarangan downloadKarangan = new DownloadKarangan(downloadKaranganUid, uidKarangan, orderUid, skutName, signature, originalJson, developerPayload, onPurchasedDateUTC, purchaseState, onPurchasedDate);
+                    //Store info in database
+                    assert userUid != null;
+                    databaseReference.child("downloadKarangan").child(userUid).setValue(downloadKarangan).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                final String description = "Sedang Muat Turun " + tajuk;
 
-                                    //and then we download the data from firebase storage
-                                    storageReference.child(uidKarangan + ".pdf").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Uri> task) {
-                                            if (task.isSuccessful()) {
-                                                final String url = task.getResult().toString();
-                                                ShowToast(KaranganDetailActivity.this, description);
-                                                downloadFile(KaranganDetailActivity.this, tajuk, ".pdf", DIRECTORY_DOWNLOADS, url);
-                                            } else {
-                                                DismissProgressDialog();
-                                                ShowToast(KaranganDetailActivity.this, "Error: " + task.getException().getMessage() + "\nSila hubungi di ticherhaz@gmail.com");
-                                            }
+                                //and then we download the data from firebase storage
+                                storageReference.child(uidKarangan + ".pdf").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Uri> task) {
+                                        if (task.isSuccessful()) {
+                                            final String url = task.getResult().toString();
+                                            ShowToast(KaranganDetailActivity.this, description);
+                                            downloadFile(KaranganDetailActivity.this, tajuk, ".pdf", DIRECTORY_DOWNLOADS, url);
+                                        } else {
+                                            DismissProgressDialog();
+                                            ShowToast(KaranganDetailActivity.this, "Error: " + task.getException().getMessage() + "\nSila hubungi di ticherhaz@gmail.com");
                                         }
-                                    });
+                                    }
+                                });
 
-                                }
                             }
-                        });
-                    }
+                        }
+                    });
                 }
             });
         }
@@ -307,33 +301,20 @@ public class KaranganDetailActivity extends SkinActivity implements PurchasesUpd
 
     //Method increase size text
     private void setButtonIncreaseSize() {
-        buttonIncreaseSize.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textViewKarangan.setTextSize(0, textViewKarangan.getTextSize() + 2.0f);
-            }
-        });
+        buttonIncreaseSize.setOnClickListener(v -> textViewKarangan.setTextSize(0, textViewKarangan.getTextSize() + 2.0f));
     }
 
     //Method increase size text
     private void setButtonDecreaseSizeSize() {
-        buttonDecreaseSize.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textViewKarangan.setTextSize(0, textViewKarangan.getTextSize() - 2.0f);
-            }
-        });
+        buttonDecreaseSize.setOnClickListener(v -> textViewKarangan.setTextSize(0, textViewKarangan.getTextSize() - 2.0f));
     }
 
     //Set button font
     private void setButtonFont() {
-        buttonFont.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FontDialog fontDialog = new FontDialog(KaranganDetailActivity.this);
-                fontDialog.setTextViewKarangan(textViewKarangan);
-                fontDialog.show();
-            }
+        buttonFont.setOnClickListener(v -> {
+            FontDialog fontDialog = new FontDialog(KaranganDetailActivity.this);
+            fontDialog.setTextViewKarangan(textViewKarangan);
+            fontDialog.show();
         });
     }
 
@@ -385,19 +366,16 @@ public class KaranganDetailActivity extends SkinActivity implements PurchasesUpd
 
     //Method click the like text view
     private void setTextViewLike() {
-        textViewFav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //If the text already become liked
-                if (textViewFav.getCompoundDrawablePadding() == 1) {
-                    Toast.makeText(getApplicationContext(), "Anda Sudah Suka Karangan Ini", Toast.LENGTH_SHORT).show();
-                } else {
-                    //1st. we read and update at karangan
-                    new RunTransaction().runTransactionUserVoteKarangan(databaseReference, karanganJenis, uidKarangan);
-                    databaseReference.child("userFirstKaranganClick").child(userUid).child(uidKarangan).child("like").setValue(1);
-                    textViewFav.setText(String.valueOf(vote + 1));
-                    Toast.makeText(getApplicationContext(), "Anda Suka Karangan Ini", Toast.LENGTH_SHORT).show();
-                }
+        textViewFav.setOnClickListener(v -> {
+            //If the text already become liked
+            if (textViewFav.getCompoundDrawablePadding() == 1) {
+                Toast.makeText(getApplicationContext(), "Anda Sudah Suka Karangan Ini", Toast.LENGTH_SHORT).show();
+            } else {
+                //1st. we read and update at karangan
+                new RunTransaction().runTransactionUserVoteKarangan(databaseReference, karanganJenis, uidKarangan);
+                databaseReference.child("userFirstKaranganClick").child(userUid).child(uidKarangan).child("like").setValue(1);
+                textViewFav.setText(String.valueOf(vote + 1));
+                Toast.makeText(getApplicationContext(), "Anda Suka Karangan Ini", Toast.LENGTH_SHORT).show();
             }
         });
     }

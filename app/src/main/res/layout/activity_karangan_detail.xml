@@ -76,12 +76,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center" />
 
-                <androidx.recyclerview.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/products"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="3dp"
-                    android:scrollbars="vertical" />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 <LinearLayout
                     android:id="@+id/linear_layout_double_click"

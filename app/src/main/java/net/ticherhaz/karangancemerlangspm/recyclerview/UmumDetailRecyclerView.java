@@ -50,17 +50,20 @@ public class UmumDetailRecyclerView extends RecyclerView.Adapter<UmumDetailHolde
      */
 
     //Context
-    private UmumDetailActivity context;
+    private final UmumDetailActivity context;
     //Constraint Layout
-    private ConstraintLayout constraintLayout;
+    private final ConstraintLayout constraintLayout;
     //List
-    private List<UmumDetail> umumDetailList;
+    private final List<UmumDetail> umumDetailList;
     //Firebase
-    private DatabaseReference databaseReference;
-    private FirebaseUser firebaseUser;
+    private final DatabaseReference databaseReference;
+    private final FirebaseUser firebaseUser;
     //Variables
-    private String forumUid, umumUid, registeredUidReply, userType;
-    private long reputationPower;
+    private final String forumUid;
+    private final String umumUid;
+    private final String registeredUidReply;
+    private final String userType;
+    private final long reputationPower;
 
     /*
      * This constructor will be called at init view of the activity.

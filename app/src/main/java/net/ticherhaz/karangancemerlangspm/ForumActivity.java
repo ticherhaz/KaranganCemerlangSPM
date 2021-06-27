@@ -28,7 +28,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -39,8 +38,7 @@ import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.model.Forum;
@@ -57,40 +55,32 @@ import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class ForumActivity extends SkinActivity {
 
+    //ActivitySessionUid
+    private final String activitySessionUid = FirebaseDatabase.getInstance().getReference().push().getKey();
+    private final String activityDate = ConvertTarikhMasa2LocalTimePattern(GetTarikhMasa(), "dd:MM:yyyy");
     //Database
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
-
     //TextView Signed User
     private TextView textViewUsername;
     private TextView textViewSekolah;
     private TextView textViewReputation;
     private TextView textViewSignOut;
     private TextView textViewOnlineRightNow;
-
     //Button
     private Button buttonSignIn;
     private Button buttonSignUp;
-
     //Linear Layout
     private LinearLayout linearLayoutNewUser;
     private LinearLayout linearLayoutOlderUser;
-
     private String registeredUid;
     private String userUid;
-
     //RecyclerView for the forum
     private RecyclerView recyclerViewForum;
     private FirebaseRecyclerOptions<Forum> firebaseRecyclerOptions;
     private FirebaseRecyclerAdapter<Forum, ForumViewHolder> firebaseRecyclerAdapter;
-
-    //ActivitySessionUid
-    private String activitySessionUid = FirebaseDatabase.getInstance().getReference().push().getKey();
-
-    private String activityDate = ConvertTarikhMasa2LocalTimePattern(GetTarikhMasa(), "dd:MM:yyyy");
-
     //Progressbar
     private ProgressBar progressBar;
     private TextView textViewTotalPosCount;
@@ -334,11 +324,12 @@ public class ForumActivity extends SkinActivity {
     //Make token for registeredUser
     private void setTokenUid(final FirebaseUser firebaseUser) {
         if (firebaseUser != null) {
-            FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
-                @Override
-                public void onSuccess(InstanceIdResult instanceIdResult) {
-                    if (instanceIdResult != null)
-                        databaseReference.child("registeredUserTokenUid").child(firebaseUser.getUid()).child(instanceIdResult.getToken()).setValue(true);
+            FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    final String token = task.getResult();
+                    if (token != null) {
+                        databaseReference.child("registeredUserTokenUid").child(firebaseUser.getUid()).child(token).setValue(true);
+                    }
                 }
             });
         }

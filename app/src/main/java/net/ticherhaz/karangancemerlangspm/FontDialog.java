@@ -12,7 +12,7 @@ import androidx.core.content.res.ResourcesCompat;
 
 public class FontDialog extends Dialog implements View.OnClickListener {
 
-    private Context context;
+    private final Context context;
     private Button buttonDefault;
     private Button buttonMerriweather;
     private Button buttonRoboto;

@@ -10,9 +10,9 @@ import net.ticherhaz.karangancemerlangspm.R;
 
 public class KaranganViewHolder extends RecyclerView.ViewHolder {
 
-    private View view;
-    private TextView textViewTajuk;
-    private TextView textViewDeskripsi;
+    private final View view;
+    private final TextView textViewTajuk;
+    private final TextView textViewDeskripsi;
     private TextView textViewViewer;
     private TextView textViewFav;
 

@@ -65,7 +65,7 @@ public class UmumDetailActivity extends SkinActivity {
 
     //[START] Make a recyclerview adapter to display umum detail [START]
     private UmumDetailRecyclerView umumDetailRV;
-    private List<UmumDetail> umumDetailL = new ArrayList<>();
+    private final List<UmumDetail> umumDetailL = new ArrayList<>();
     //[END] ---------------------------------------------------- [END]
 
     //ProgressBar
@@ -88,7 +88,7 @@ public class UmumDetailActivity extends SkinActivity {
      * Countdown for the user after they send the message,
      * and the button will disabled.
      */
-    private Runnable countDown = new Runnable() {
+    private final Runnable countDown = new Runnable() {
         @Override
         public void run() {
             while (c > 0) {

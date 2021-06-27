@@ -57,7 +57,7 @@ public class HubungiKamiActivity extends SkinActivity {
     private ProgressBar pB;
     private String senderUid;
     private boolean canSendMessage = true;
-    private Runnable countDown = new Runnable() {
+    private final Runnable countDown = new Runnable() {
         @Override
         public void run() {
             while (_count > 0) {

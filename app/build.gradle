@@ -1,13 +1,17 @@
-apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
 android {
     compileSdkVersion 30
     defaultConfig {
         applicationId "net.ticherhaz.karangancemerlangspm"
         minSdkVersion 16
         targetSdkVersion 30
-        versionCode 330
-        versionName "3.30"
+        versionCode 331
+        versionName "3.31"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -16,41 +20,85 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    buildFeatures {
+        viewBinding true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    //Android Legacy
+    implementation 'androidx.legacy:legacy-support-v13:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    testImplementation 'junit:junit:4.13.1'
-    androidTestImplementation 'androidx.test:runner:1.3.0'
+    //Android
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation "androidx.preference:preference-ktx:1.1.1"
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+    implementation 'androidx.percentlayout:percentlayout:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.work:work-runtime:2.7.0-alpha04'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    //------------------------------------------------------
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    //Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    //noinspection KtxExtensionAvailable
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.3.1' // For Java
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.5.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+
+    //Kotlin Coroutines
+    def coroutines_android_version = '1.5.0-native-mt'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_android_version"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0-native-mt'
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+
+    //Lifecycle
+    def lifecycle_version = "2.3.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
+    //Room
+    def room_version = "2.3.0"
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 
     //MultiDex
     implementation 'com.android.support:multidex:1.0.3'
     //Firebase
-    implementation 'com.google.firebase:firebase-database:19.5.1'
-    implementation 'com.google.firebase:firebase-messaging:21.0.0'
-    implementation 'com.google.firebase:firebase-storage:19.2.0'
-    implementation 'com.google.firebase:firebase-auth:20.0.1'
-    implementation 'com.google.firebase:firebase-analytics:18.0.0'
+    implementation 'com.google.firebase:firebase-database:20.0.0'
+    implementation 'com.google.firebase:firebase-messaging:22.0.0'
+    implementation 'com.google.firebase:firebase-storage:20.0.0'
+    implementation 'com.google.firebase:firebase-auth:21.0.1'
+    implementation 'com.google.firebase:firebase-analytics:19.0.0'
 
     //FirebaseUI
-    implementation 'com.firebaseui:firebase-ui-database:6.2.0'
+    implementation 'com.firebaseui:firebase-ui-database:7.2.0'
     //Image Glide
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     implementation project(path: ':lib')
     //For time
-    implementation 'com.github.ticherhaz:tarikhmasa:1.5.17'
+    implementation 'com.github.ticherhaz:tarikhmasa:1.5.20'
     //Image Crop
     implementation 'com.soundcloud.android:android-crop:1.0.1@aar'
-    implementation 'androidx.work:work-runtime:2.4.0'
     //App Billing
-    implementation 'com.android.billingclient:billing:3.0.2'
+    implementation 'com.android.billingclient:billing:4.0.0'
     //Lib for permission granted
-    implementation 'com.karumi:dexter:6.2.1'
+    implementation 'com.karumi:dexter:6.2.2'
 }
