@@ -56,18 +56,16 @@ public class UmumDetailActivity extends SkinActivity {
      *
      */
     private static int c = 30;
+    private final List<UmumDetail> umumDetailL = new ArrayList<>();
     //[START] Firebase [START]
     private FirebaseDatabase fDe;
     private DatabaseReference dRe;
     private FirebaseAuth fAh;
-    private FirebaseUser fUr;
     //[END] ---------- [END]
-
+    private FirebaseUser fUr;
     //[START] Make a recyclerview adapter to display umum detail [START]
     private UmumDetailRecyclerView umumDetailRV;
-    private final List<UmumDetail> umumDetailL = new ArrayList<>();
     //[END] ---------------------------------------------------- [END]
-
     //ProgressBar
     private ProgressBar pB;
     //RecyclerView

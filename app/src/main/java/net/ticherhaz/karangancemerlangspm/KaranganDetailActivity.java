@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -24,8 +23,6 @@ import com.android.billingclient.api.ConsumeParams;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.SkuDetailsParams;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,6 +40,7 @@ import net.ticherhaz.karangancemerlangspm.util.RunTransaction;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
 import static net.ticherhaz.karangancemerlangspm.util.Others.DismissProgressDialog;
@@ -101,6 +99,7 @@ public class KaranganDetailActivity extends SkinActivity implements PurchasesUpd
         buttonFont = findViewById(R.id.button_font);
         progressBarMain = findViewById(R.id.pb_main);
         recyclerView = findViewById(R.id.products);
+        recyclerView.setHasFixedSize(true);
 
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference().child("karangan");
@@ -155,12 +154,9 @@ public class KaranganDetailActivity extends SkinActivity implements PurchasesUpd
         billingClient.startConnection(new BillingClientStateListener() {
             @Override
             public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
-                Log.i("???", "onBillingSetupFinished: " + billingResult.getResponseCode());
                 //If the billing ready to display
                 if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                     if (billingClient.isReady()) {
-                        Log.i("???", "billingClient: " + billingClient.isReady());
-
                         //and then hide the progress bar once it finish loading the app billing
                         //so productId and title kena ikut urutan alphabet
 
@@ -170,26 +166,29 @@ public class KaranganDetailActivity extends SkinActivity implements PurchasesUpd
                                 .setType(BillingClient.SkuType.INAPP)
                                 .build();
                         billingClient.querySkuDetailsAsync(params, (billingResult1, list) -> {
-                            Log.i("???", "ssss: " + billingResult1.getResponseCode());
                             if (billingResult1.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                                 final MyProductDownloadKaranganAdapter adapter = new MyProductDownloadKaranganAdapter(KaranganDetailActivity.this, list, billingClient);
-                                recyclerView.setAdapter(adapter);
+                                runOnUiThread(() -> {
+                                    recyclerView.setAdapter(adapter);
+                                    progressBarMain.setVisibility(View.GONE);
+                                });
                             }
                         });
-
-                        progressBarMain.setVisibility(View.GONE);
                     } else {
-                        progressBarMain.setVisibility(View.GONE);
-                        ShowToast(KaranganDetailActivity.this, "Please try again later.");
+                        runOnUiThread(() -> {
+                            progressBarMain.setVisibility(View.GONE);
+                            ShowToast(KaranganDetailActivity.this, "Please try again later.");
+                        });
                     }
                 }
-
             }
 
             @Override
             public void onBillingServiceDisconnected() {
-                progressBarMain.setVisibility(View.GONE);
-                ShowToast(KaranganDetailActivity.this, getString(R.string.internet_connection));
+                runOnUiThread(() -> {
+                    progressBarMain.setVisibility(View.GONE);
+                    ShowToast(KaranganDetailActivity.this, getString(R.string.internet_connection));
+                });
             }
         });
     }
@@ -206,8 +205,10 @@ public class KaranganDetailActivity extends SkinActivity implements PurchasesUpd
         if (downloadManager != null) {
             downloadManager.enqueue(request);
         }
-        DismissProgressDialog();
-        ShowToast(KaranganDetailActivity.this, "Selesai Muat Turun " + tajuk + "\nSila semak di 'Download'");
+        runOnUiThread(() -> {
+            DismissProgressDialog();
+            ShowToast(KaranganDetailActivity.this, "Selesai Muat Turun " + tajuk + "\nSila semak di 'Download'");
+        });
     }
 
     private void handleConsume(final Purchase purchase) {
@@ -241,28 +242,24 @@ public class KaranganDetailActivity extends SkinActivity implements PurchasesUpd
                     final DownloadKarangan downloadKarangan = new DownloadKarangan(downloadKaranganUid, uidKarangan, orderUid, skutName, signature, originalJson, developerPayload, onPurchasedDateUTC, purchaseState, onPurchasedDate);
                     //Store info in database
                     assert userUid != null;
-                    databaseReference.child("downloadKarangan").child(userUid).setValue(downloadKarangan).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                final String description = "Sedang Muat Turun " + tajuk;
+                    databaseReference.child("downloadKarangan").child(userUid).setValue(downloadKarangan).addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            final String description = "Sedang Muat Turun " + tajuk;
 
-                                //and then we download the data from firebase storage
-                                storageReference.child(uidKarangan + ".pdf").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Uri> task) {
-                                        if (task.isSuccessful()) {
-                                            final String url = task.getResult().toString();
-                                            ShowToast(KaranganDetailActivity.this, description);
-                                            downloadFile(KaranganDetailActivity.this, tajuk, ".pdf", DIRECTORY_DOWNLOADS, url);
-                                        } else {
-                                            DismissProgressDialog();
-                                            ShowToast(KaranganDetailActivity.this, "Error: " + task.getException().getMessage() + "\nSila hubungi di ticherhaz@gmail.com");
-                                        }
-                                    }
-                                });
+                            //and then we download the data from firebase storage
+                            storageReference.child(uidKarangan + ".pdf").getDownloadUrl().addOnCompleteListener(task1 -> {
+                                if (task1.isSuccessful()) {
+                                    runOnUiThread(() -> {
+                                        final String url = Objects.requireNonNull(task1.getResult()).toString();
+                                        ShowToast(KaranganDetailActivity.this, description);
+                                        downloadFile(KaranganDetailActivity.this, tajuk, ".pdf", DIRECTORY_DOWNLOADS, url);
+                                    });
+                                } else {
+                                    DismissProgressDialog();
+                                    ShowToast(KaranganDetailActivity.this, "Error: " + task1.getException().getMessage() + "\nSila hubungi di ticherhaz@gmail.com");
+                                }
+                            });
 
-                            }
                         }
                     });
                 }

@@ -44,6 +44,7 @@ public class TipsActivity extends SkinActivity implements PurchasesUpdatedListen
         setContentView(R.layout.activity_tips);
         progressBarMain = findViewById(R.id.pb_main);
         recyclerView = findViewById(R.id.recycler_view_tips);
+        recyclerView.setHasFixedSize(true);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
         setBillingClient();
@@ -69,30 +70,32 @@ public class TipsActivity extends SkinActivity implements PurchasesUpdatedListen
                                 .setSkusList(Arrays.asList("sehelai_ringgit", "sejambak_ringgit", "sekantung_ringgit", "setimbun_ringgit"))
                                 .setType(BillingClient.SkuType.INAPP)
                                 .build();
+
                         billingClient.querySkuDetailsAsync(params, (billingResultIn, list) -> {
-
                             if (billingResultIn.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-
                                 final MyProductAdapter adapter = new MyProductAdapter(TipsActivity.this, list, billingClient);
-                                recyclerView.setAdapter(adapter);
+                                runOnUiThread(() -> {
+                                    recyclerView.setAdapter(adapter);
+                                    progressBarMain.setVisibility(View.GONE);
+                                });
                             }
-                            progressBarMain.setVisibility(View.GONE);
                         });
 
                     } else {
-                        progressBarMain.setVisibility(View.GONE);
-                        ShowToast(TipsActivity.this, "Please try again later.");
+                        runOnUiThread(() -> {
+                            progressBarMain.setVisibility(View.GONE);
+                            ShowToast(TipsActivity.this, "Please try again later.");
+                        });
                     }
-                } else {
-                    Log.i("???", "Failed to display list: " + billingResult.getResponseCode());
                 }
-
             }
 
             @Override
             public void onBillingServiceDisconnected() {
-                progressBarMain.setVisibility(View.GONE);
-                ShowToast(TipsActivity.this, getString(R.string.internet_connection));
+                runOnUiThread(() -> {
+                    progressBarMain.setVisibility(View.GONE);
+                    ShowToast(TipsActivity.this, getString(R.string.internet_connection));
+                });
             }
         });
     }
@@ -147,16 +150,15 @@ public class TipsActivity extends SkinActivity implements PurchasesUpdatedListen
                     final String finalDuitNakDisplay = duitNakDisplay;
                     databaseReference.child("donation2").child(userUid).setValue(upurcm).addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            final String description = "Menyumbang " + finalDuitNakDisplay + ". Terima kasih atas sumbangan anda :)";
-
-                            ShowToast(TipsActivity.this, description);
+                            runOnUiThread(() -> {
+                                final String description = "Menyumbang " + finalDuitNakDisplay + ". Terima kasih atas sumbangan anda :)";
+                                ShowToast(TipsActivity.this, description);
+                            });
                         }
                     });
                 } else {
                     Log.i("???", "handleConsume failed: " + billingResult.getResponseCode());
                 }
-
-                // DismissProgressDialog();
             });
         }
     }

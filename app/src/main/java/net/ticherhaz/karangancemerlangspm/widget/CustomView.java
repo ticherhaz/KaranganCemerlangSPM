@@ -13,13 +13,10 @@ import net.ticherhaz.karangancemerlangspm.R;
 
 public class CustomView extends View {
 
-    private int mLineColor = Color.BLACK;
-
     private final Paint mPaint;
-
-    private int mRadius = 0;
-
     private final PointF mCenter = new PointF();
+    private int mLineColor = Color.BLACK;
+    private int mRadius = 0;
 
     public CustomView(Context context) {
         this(context, null);
