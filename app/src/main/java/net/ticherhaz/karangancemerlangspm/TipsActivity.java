@@ -1,5 +1,8 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import static net.ticherhaz.karangancemerlangspm.util.Others.ShowToast;
+import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,9 +28,6 @@ import net.ticherhaz.karangancemerlangspm.util.MyProductAdapter;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static net.ticherhaz.karangancemerlangspm.util.Others.ShowToast;
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class TipsActivity extends SkinActivity implements PurchasesUpdatedListener {
 

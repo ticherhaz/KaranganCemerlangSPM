@@ -1,5 +1,8 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.dismissProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.showProgressDialog;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,9 +25,6 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
-
-import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.dismissProgressDialog;
-import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.showProgressDialog;
 
 public class SignInActivity extends SkinActivity implements View.OnClickListener {
 

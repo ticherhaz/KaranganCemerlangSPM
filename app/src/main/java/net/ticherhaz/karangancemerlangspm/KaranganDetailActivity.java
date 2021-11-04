@@ -1,5 +1,11 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import static android.os.Environment.DIRECTORY_DOWNLOADS;
+import static net.ticherhaz.karangancemerlangspm.util.Others.DismissProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.util.Others.ShowProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.util.Others.ShowToast;
+import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
+
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.Context;
@@ -41,12 +47,6 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-
-import static android.os.Environment.DIRECTORY_DOWNLOADS;
-import static net.ticherhaz.karangancemerlangspm.util.Others.DismissProgressDialog;
-import static net.ticherhaz.karangancemerlangspm.util.Others.ShowProgressDialog;
-import static net.ticherhaz.karangancemerlangspm.util.Others.ShowToast;
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class KaranganDetailActivity extends SkinActivity implements PurchasesUpdatedListener {
 

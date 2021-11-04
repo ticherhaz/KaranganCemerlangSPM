@@ -1,5 +1,8 @@
 package net.ticherhaz.karangancemerlangspm.util;
 
+import static net.ticherhaz.tarikhmasa.TarikhMasa.ConvertTarikhMasa2LocalTimePattern;
+import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
+
 import android.annotation.SuppressLint;
 
 import androidx.annotation.NonNull;
@@ -15,9 +18,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import static net.ticherhaz.tarikhmasa.TarikhMasa.ConvertTarikhMasa2LocalTimePattern;
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class OnlineStatusUtil {
 

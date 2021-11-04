@@ -1,5 +1,7 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import static net.ticherhaz.tarikhmasa.TarikhMasa.AndroidThreeTenBP;
+
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,8 +12,6 @@ import com.zxy.skin.sdk.SkinEngine;
 
 import net.ticherhaz.karangancemerlangspm.skinApplicator.SkinCustomViewApplicator;
 import net.ticherhaz.karangancemerlangspm.widget.CustomView;
-
-import static net.ticherhaz.tarikhmasa.TarikhMasa.AndroidThreeTenBP;
 
 
 public class MyApplication extends Application {

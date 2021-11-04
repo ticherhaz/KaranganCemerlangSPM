@@ -1,5 +1,10 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import static net.ticherhaz.karangancemerlangspm.util.Others.getIPAddress;
+import static net.ticherhaz.karangancemerlangspm.util.Others.isNetworkAvailable;
+import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
+import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
+
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -23,11 +28,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.model.System;
 import net.ticherhaz.karangancemerlangspm.model.UserFirst;
-
-import static net.ticherhaz.karangancemerlangspm.util.Others.getIPAddress;
-import static net.ticherhaz.karangancemerlangspm.util.Others.isNetworkAvailable;
-import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -183,8 +183,8 @@ public class SplashActivity extends AppCompatActivity {
                             toast.show();
                         }
                         //After that, we chat the value
-                        else if (system.getVersi() == 332) {
-                            //TODO: Version right now is 332. Please update when the new version is released. testing for beta forum (44)
+                        else if (system.getVersi() == 333) {
+                            //TODO: Version right now is 333. Please update when the new version is released. testing for beta forum (44)
                             //If all the condition above is met, it will NOT GOING THIS PART INSTEAD THEY WILL GO OUTSIDE FROM THE onDataChange
                             //It not met, then it will proceed here.
                             storeUserInfo(userUid);

@@ -1,5 +1,8 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import static net.ticherhaz.karangancemerlangspm.util.Others.isNetworkAvailable;
+import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -37,9 +40,6 @@ import com.zxy.skin.sdk.SkinActivity;
 import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
 
 import java.io.File;
-
-import static net.ticherhaz.karangancemerlangspm.util.Others.isNetworkAvailable;
-import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
 
 public class ProfileEditActivity extends SkinActivity {
 

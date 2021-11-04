@@ -86,6 +86,7 @@
         </activity>
         <activity
             android:name=".HubungiKamiActivity"
+            android:exported="true"
             android:label="Hubungi Kami"
             android:windowSoftInputMode="stateHidden">
 
@@ -179,7 +180,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".ForumSplashActivity">
+        <activity
+            android:name=".ForumSplashActivity"
+            android:exported="true">
 
             <!-- When the FCM Triggered and user pressed the notification, it will check the action name, and triggered, and will proceed to this activity -->
             <intent-filter>
@@ -226,6 +229,7 @@
         </activity>
         <activity
             android:name=".SplashActivity"
+            android:exported="true"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

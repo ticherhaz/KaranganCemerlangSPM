@@ -1,5 +1,7 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
+
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -37,8 +39,6 @@ import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.model.Phone;
 import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
-
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class SignUpActivity extends SkinActivity implements View.OnClickListener {
 

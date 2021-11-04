@@ -1,5 +1,10 @@
 package net.ticherhaz.karangancemerlangspm.recyclerview;
 
+import static net.ticherhaz.karangancemerlangspm.util.Others.setStatus;
+import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.dismissProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.showProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.util.UserTypeColor.setTextColorUserUmumDetail;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -34,11 +39,6 @@ import net.ticherhaz.karangancemerlangspm.viewHolder.UmumDetailHolder;
 import net.ticherhaz.tarikhmasa.TarikhMasa;
 
 import java.util.List;
-
-import static net.ticherhaz.karangancemerlangspm.util.Others.setStatus;
-import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.dismissProgressDialog;
-import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.showProgressDialog;
-import static net.ticherhaz.karangancemerlangspm.util.UserTypeColor.setTextColorUserUmumDetail;
 
 public class UmumDetailRecyclerView extends RecyclerView.Adapter<UmumDetailHolder> {
 

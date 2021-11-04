@@ -1,5 +1,8 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import static net.ticherhaz.karangancemerlangspm.util.Others.isNetworkAvailable;
+import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
+
 import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -33,9 +36,6 @@ import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.model.Peribahasa;
 import net.ticherhaz.karangancemerlangspm.viewHolder.PeribahasaViewHolder;
-
-import static net.ticherhaz.karangancemerlangspm.util.Others.isNetworkAvailable;
-import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
 
 public class PeribahasaActivity extends SkinActivity {
 

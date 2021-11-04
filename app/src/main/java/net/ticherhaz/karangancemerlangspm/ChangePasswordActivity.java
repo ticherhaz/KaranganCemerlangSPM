@@ -1,5 +1,8 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.dismissProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.showProgressDialog;
+
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -21,9 +24,6 @@ import com.zxy.skin.sdk.SkinActivity;
 import net.ticherhaz.karangancemerlangspm.util.Others;
 
 import java.util.Locale;
-
-import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.dismissProgressDialog;
-import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.showProgressDialog;
 
 public class ChangePasswordActivity extends SkinActivity {
 

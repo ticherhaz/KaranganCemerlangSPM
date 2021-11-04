@@ -1,5 +1,7 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasaTimeAgo;
+
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,8 +39,6 @@ import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.model.Umum;
 import net.ticherhaz.karangancemerlangspm.viewHolder.UmumHolder;
 import net.ticherhaz.tarikhmasa.TarikhMasa;
-
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasaTimeAgo;
 
 public class UmumActivity extends SkinActivity {
 

@@ -1,5 +1,7 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import static net.ticherhaz.karangancemerlangspm.util.UserTypeColor.setTextColorUserOnlineUserActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,8 +25,6 @@ import com.zxy.skin.sdk.SkinActivity;
 import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.util.Others;
 import net.ticherhaz.karangancemerlangspm.viewHolder.OnlineStatusViewHolder;
-
-import static net.ticherhaz.karangancemerlangspm.util.UserTypeColor.setTextColorUserOnlineUserActivity;
 
 public class OnlineUserActivity extends SkinActivity {
 

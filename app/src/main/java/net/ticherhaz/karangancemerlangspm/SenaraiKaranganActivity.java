@@ -1,5 +1,8 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import static net.ticherhaz.karangancemerlangspm.util.Others.isNetworkAvailable;
+import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,9 +28,6 @@ import net.ticherhaz.karangancemerlangspm.model.Karangan;
 import net.ticherhaz.karangancemerlangspm.util.Others;
 import net.ticherhaz.karangancemerlangspm.util.RunTransaction;
 import net.ticherhaz.karangancemerlangspm.viewHolder.KaranganViewHolder;
-
-import static net.ticherhaz.karangancemerlangspm.util.Others.isNetworkAvailable;
-import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
 
 public class SenaraiKaranganActivity extends SkinActivity {
 

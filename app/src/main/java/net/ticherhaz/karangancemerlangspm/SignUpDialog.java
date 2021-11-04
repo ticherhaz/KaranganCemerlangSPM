@@ -1,5 +1,7 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -41,8 +43,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.model.Phone;
 import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
-
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class SignUpDialog extends Dialog implements View.OnClickListener {
 

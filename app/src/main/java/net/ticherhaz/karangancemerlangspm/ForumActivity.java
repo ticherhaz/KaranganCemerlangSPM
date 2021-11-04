@@ -1,5 +1,10 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
+import static net.ticherhaz.karangancemerlangspm.util.Others.setStatus;
+import static net.ticherhaz.tarikhmasa.TarikhMasa.ConvertTarikhMasa2LocalTimePattern;
+import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -47,11 +52,6 @@ import net.ticherhaz.karangancemerlangspm.util.OnlineStatusUtil;
 import net.ticherhaz.karangancemerlangspm.viewHolder.ForumViewHolder;
 
 import java.util.Calendar;
-
-import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
-import static net.ticherhaz.karangancemerlangspm.util.Others.setStatus;
-import static net.ticherhaz.tarikhmasa.TarikhMasa.ConvertTarikhMasa2LocalTimePattern;
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class ForumActivity extends SkinActivity {
 

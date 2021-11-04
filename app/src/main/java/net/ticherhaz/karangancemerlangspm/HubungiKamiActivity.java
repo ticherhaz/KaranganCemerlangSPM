@@ -1,5 +1,9 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import static net.ticherhaz.karangancemerlangspm.util.Others.isNetworkAvailable;
+import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
+import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,10 +37,6 @@ import net.ticherhaz.karangancemerlangspm.model.HubungiKamiChat;
 import net.ticherhaz.karangancemerlangspm.model.HubungiKamiMessage;
 import net.ticherhaz.karangancemerlangspm.viewHolder.HubungiKamiViewHolder;
 import net.ticherhaz.tarikhmasa.TarikhMasa;
-
-import static net.ticherhaz.karangancemerlangspm.util.Others.isNetworkAvailable;
-import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class HubungiKamiActivity extends SkinActivity {
 

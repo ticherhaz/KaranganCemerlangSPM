@@ -1,5 +1,7 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,8 +37,6 @@ import net.ticherhaz.karangancemerlangspm.util.RunTransaction;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 /*
  * @@important

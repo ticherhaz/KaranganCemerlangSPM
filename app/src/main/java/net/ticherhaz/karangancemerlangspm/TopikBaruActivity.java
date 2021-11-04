@@ -1,5 +1,11 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import static net.ticherhaz.karangancemerlangspm.util.Others.isNetworkAvailable;
+import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
+import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.dismissProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.showProgressDialog;
+import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -29,12 +35,6 @@ import net.ticherhaz.karangancemerlangspm.model.Umum;
 import net.ticherhaz.karangancemerlangspm.model.UmumDetail;
 import net.ticherhaz.karangancemerlangspm.model.UmumPosUser;
 import net.ticherhaz.karangancemerlangspm.util.RunTransaction;
-
-import static net.ticherhaz.karangancemerlangspm.util.Others.isNetworkAvailable;
-import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
-import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.dismissProgressDialog;
-import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.showProgressDialog;
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 public class TopikBaruActivity extends SkinActivity {
 

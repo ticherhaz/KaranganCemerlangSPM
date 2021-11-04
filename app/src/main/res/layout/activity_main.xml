@@ -74,6 +74,7 @@
                 android:singleLine="true"
                 android:textColor="?attr/colorText"
                 android:textColorHint="?attr/colorText"
+                android:visibility="gone"
                 tools:ignore="UnusedAttribute" />
 
             <ProgressBar

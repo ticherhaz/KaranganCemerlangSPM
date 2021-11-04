@@ -1,6 +1,9 @@
 package net.ticherhaz.karangancemerlangspm.service;
 
 
+import static net.ticherhaz.karangancemerlangspm.service.NotificationUtil.AnnouncementNotification;
+import static net.ticherhaz.karangancemerlangspm.service.NotificationUtil.ForumNotification;
+
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -10,9 +13,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-
-import static net.ticherhaz.karangancemerlangspm.service.NotificationUtil.AnnouncementNotification;
-import static net.ticherhaz.karangancemerlangspm.service.NotificationUtil.ForumNotification;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 

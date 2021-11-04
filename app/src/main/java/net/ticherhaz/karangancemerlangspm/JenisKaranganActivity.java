@@ -1,5 +1,8 @@
 package net.ticherhaz.karangancemerlangspm;
 
+import static net.ticherhaz.karangancemerlangspm.util.Others.isNetworkAvailable;
+import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,9 +27,6 @@ import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.model.Jenis;
 import net.ticherhaz.karangancemerlangspm.viewHolder.JenisViewHolder;
-
-import static net.ticherhaz.karangancemerlangspm.util.Others.isNetworkAvailable;
-import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
 
 public class JenisKaranganActivity extends SkinActivity {
 
