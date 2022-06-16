@@ -1,9 +1,11 @@
 package net.ticherhaz.karangancemerlangspm;
 
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.PersistableBundle;
@@ -139,6 +141,18 @@ public class MainActivity extends SkinActivity {
         buttonForum = findViewById(R.id.button_forum);
         buttonPeribahasa = findViewById(R.id.button_peribahasa);
         buttonSumbangan = findViewById(R.id.button_sumbangan);
+
+        findViewById(R.id.button_kcpm_lite).setOnClickListener(v -> {
+            //Then we proceed to the playStore for user to download the lastest version
+            final String appPackageName = "net.ticherhaz.karangancemerlangspmlite"; // Can also use getPackageName(), as below
+            try {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+            } catch (ActivityNotFoundException ex) {
+                Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=net.ticherhaz.karangancemerlangspmlite");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
 
         textViewHow.setText(Html.fromHtml(getString(R.string.how)));
 

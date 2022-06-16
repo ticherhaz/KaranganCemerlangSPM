@@ -17,4 +17,7 @@
     <color name="colorCikgu">#6DA824</color>
     <color name="colorAhliPremium">#2E88FA</color>
     <color name="colorAhli">#B8ABAB</color>
+
+    <color name="colorPurple">#D0A2ED</color>
+    <color name="colorPurpleSoft">#EED4FF</color>
 </resources>

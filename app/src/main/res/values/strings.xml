@@ -54,10 +54,10 @@
         <p><b><i>Selamat beramal dan semoga maju jaya! :)</i></b></p>
 ]]></string>
     <string name="feedback">Maklum Balas</string>
-    <string name="about_title"> <!-- TODO v3.33 -->
+    <string name="about_title"> <!-- TODO v3.41 -->
         <![CDATA[
         <h3>Karangan Cemerlang SPM</h3>
-        <i>versi 3.33</i><br>
+        <i>versi 3.41</i><br>
         hazman45.blogspot.com<br>
         Ticherhaz©2021
 
@@ -254,8 +254,8 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
         <item>Perempuan</item>
     </string-array>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
-    <!-- TODO: Change apps version v3.33 -->
-    <string name="apps_version">Karangan Cemerlang SPM v3.33\nhazman45.blogspot.com\nTicherhaz©2021</string>
+    <!-- TODO: Change apps version v3.41 -->
+    <string name="apps_version">Karangan Cemerlang SPM v3.41\nhazman45.blogspot.com\nTicherhaz©2021</string>
     <string name="penarafan">Penarafan</string>
     <string name="app_name_tentang">Tentang Karangan Cemerlang SPM</string>
     <string name="internet_connection">Please Check Internet Connection</string>
@@ -269,4 +269,5 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
     <string name="interstitialTipsUid">ca-app-pub-7557499721953375/9445506063</string>
     <string name="interstitialKaranganUid">ca-app-pub-7557499721953375/8132424392</string>
     <string name="interstitialPeribahasaUid">ca-app-pub-7557499721953375/1351679037</string>
+    <string name="muat_turun_kcspm_lite">Muat Turun KCSPM Lite!</string>
 </resources>
