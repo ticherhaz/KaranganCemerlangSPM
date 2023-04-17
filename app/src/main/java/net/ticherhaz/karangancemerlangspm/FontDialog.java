@@ -56,24 +56,16 @@ public class FontDialog extends Dialog implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.button_default:
-                setButtonDefault();
-                break;
-            case R.id.button_merriweather:
-                setButtonMerriweather();
-                break;
-            case R.id.button_roboto:
-                setButtonRoboto();
-                break;
-            case R.id.button_timesnewroman:
-                setButtonTimesnewroman();
-                break;
-            case R.id.button_arial:
-                setButtonArial();
-                break;
-            default:
-                break;
+        if (v.getId() == R.id.button_default) {
+            setButtonDefault();
+        } else if (v.getId() == R.id.button_merriweather) {
+            setButtonMerriweather();
+        } else if (v.getId() == R.id.button_roboto) {
+            setButtonRoboto();
+        } else if (v.getId() == R.id.button_timesnewroman) {
+            setButtonTimesnewroman();
+        } else if (v.getId() == R.id.button_arial) {
+            setButtonArial();
         }
     }
 

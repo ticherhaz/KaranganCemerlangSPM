@@ -28,10 +28,8 @@ public class CustomView extends View {
         final int N = typedArray.getIndexCount();
         for (int i = 0; i < N; i++) {
             int attr = typedArray.getIndex(i);
-            switch (attr) {
-                case R.styleable.CustomView_lineColor:
-                    mLineColor = typedArray.getColor(attr, Color.BLACK);
-                    break;
+            if (attr == R.styleable.CustomView_lineColor) {
+                mLineColor = typedArray.getColor(attr, Color.BLACK);
             }
         }
 
