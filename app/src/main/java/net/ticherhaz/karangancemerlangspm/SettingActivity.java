@@ -46,35 +46,13 @@ public class SettingActivity extends SkinActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
                 }
             });
 
-        tvProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SettingActivity.this, ProfileEditActivity.class));
-            }
-        });
-        tvChangePassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SettingActivity.this, ChangePasswordActivity.class));
-            }
-        });
-        tvHubungiKami.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SettingActivity.this, HubungiKamiActivity.class));
-            }
-        });
-        tvSenaraiPengguna.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SettingActivity.this, HubungiKamiUserActivity.class));
-            }
-        });
-
+        tvProfile.setOnClickListener(view -> startActivity(new Intent(SettingActivity.this, ProfileEditActivity.class)));
+        tvChangePassword.setOnClickListener(view -> startActivity(new Intent(SettingActivity.this, ChangePasswordActivity.class)));
+        tvHubungiKami.setOnClickListener(view -> startActivity(new Intent(SettingActivity.this, HubungiKamiActivity.class)));
+        tvSenaraiPengguna.setOnClickListener(view -> startActivity(new Intent(SettingActivity.this, HubungiKamiUserActivity.class)));
     }
 
     @Override
