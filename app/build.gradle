@@ -11,8 +11,8 @@ android {
         applicationId "net.ticherhaz.karangancemerlangspm"
         minSdkVersion 19
         targetSdkVersion 34
-        versionCode 345
-        versionName "3.45"
+        versionCode 346
+        versionName "3.46"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -63,7 +63,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     //noinspection KtxExtensionAvailable
     implementation 'androidx.lifecycle:lifecycle-viewmodel:2.6.1' // For Java
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.7.1'
     implementation 'androidx.navigation:navigation-ui-ktx:2.7.1'
@@ -106,7 +105,7 @@ dependencies {
     //Image Crop
     implementation 'com.soundcloud.android:android-crop:1.0.1@aar'
     //App Billing
-    implementation 'com.android.billingclient:billing:6.0.0'
+    implementation 'com.android.billingclient:billing:6.0.1'
     //Lib for permission granted
     implementation 'com.karumi:dexter:6.2.3'
 }
