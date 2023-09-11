@@ -1,6 +1,6 @@
 package net.ticherhaz.karangancemerlangspm;
 
-import static net.ticherhaz.karangancemerlangspm.util.UserTypeColor.setTextColorUserOnlineUserActivity;
+import static net.ticherhaz.karangancemerlangspm.utils.UserTypeColor.setTextColorUserOnlineUserActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,7 +23,7 @@ import com.google.firebase.database.Query;
 import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
-import net.ticherhaz.karangancemerlangspm.util.Others;
+import net.ticherhaz.karangancemerlangspm.utils.Others;
 import net.ticherhaz.karangancemerlangspm.viewHolder.OnlineStatusViewHolder;
 
 public class OnlineUserActivity extends SkinActivity {

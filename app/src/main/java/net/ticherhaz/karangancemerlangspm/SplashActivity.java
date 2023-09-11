@@ -1,8 +1,8 @@
 package net.ticherhaz.karangancemerlangspm;
 
-import static net.ticherhaz.karangancemerlangspm.util.Others.getIPAddress;
-import static net.ticherhaz.karangancemerlangspm.util.Others.isNetworkAvailable;
-import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
+import static net.ticherhaz.karangancemerlangspm.utils.Others.getIPAddress;
+import static net.ticherhaz.karangancemerlangspm.utils.Others.isNetworkAvailable;
+import static net.ticherhaz.karangancemerlangspm.utils.Others.messageInternetMessage;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 import android.content.ActivityNotFoundException;
@@ -183,8 +183,8 @@ public class SplashActivity extends AppCompatActivity {
                             toast.show();
                         }
                         //After that, we chat the value
-                        else if (system.getVersi() == 346) {
-                            //TODO: Version right now is 346. Please update when the new version is released. testing for beta forum (44)
+                        else if (system.getVersi() == 347) {
+                            //TODO: Version right now is 347. Please update when the new version is released. testing for beta forum (44)
                             //If all the condition above is met, it will NOT GOING THIS PART INSTEAD THEY WILL GO OUTSIDE FROM THE onDataChange
                             //It not met, then it will proceed here.
                             storeUserInfo(userUid);

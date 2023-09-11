@@ -1,7 +1,7 @@
 package net.ticherhaz.karangancemerlangspm;
 
-import static net.ticherhaz.karangancemerlangspm.util.Others.isNetworkAvailable;
-import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
+import static net.ticherhaz.karangancemerlangspm.utils.Others.isNetworkAvailable;
+import static net.ticherhaz.karangancemerlangspm.utils.Others.messageInternetMessage;
 
 import android.content.Intent;
 import android.os.Bundle;

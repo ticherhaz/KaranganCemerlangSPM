@@ -1,7 +1,7 @@
 package net.ticherhaz.karangancemerlangspm;
 
-import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.dismissProgressDialog;
-import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.showProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.utils.ProgressDialogCustom.dismissProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.utils.ProgressDialogCustom.showProgressDialog;
 
 import android.content.Intent;
 import android.os.Bundle;

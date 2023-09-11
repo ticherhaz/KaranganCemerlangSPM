@@ -1,6 +1,6 @@
 package net.ticherhaz.karangancemerlangspm;
 
-import static net.ticherhaz.karangancemerlangspm.util.Others.ShowToast;
+import static net.ticherhaz.karangancemerlangspm.utils.Others.ShowToast;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 import android.os.Bundle;
@@ -24,7 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.model.Donat2;
-import net.ticherhaz.karangancemerlangspm.util.MyProductAdapter;
+import net.ticherhaz.karangancemerlangspm.utils.MyProductAdapter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,7 +35,6 @@ public class TipsActivity extends SkinActivity implements PurchasesUpdatedListen
     private RecyclerView recyclerView;
     private ProgressBar progressBarMain;
 
-    private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
 
     @Override
@@ -45,8 +44,10 @@ public class TipsActivity extends SkinActivity implements PurchasesUpdatedListen
         progressBarMain = findViewById(R.id.pb_main);
         recyclerView = findViewById(R.id.recycler_view_tips);
         recyclerView.setHasFixedSize(true);
-        firebaseDatabase = FirebaseDatabase.getInstance();
+
+        final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
+
         setBillingClient();
     }
 

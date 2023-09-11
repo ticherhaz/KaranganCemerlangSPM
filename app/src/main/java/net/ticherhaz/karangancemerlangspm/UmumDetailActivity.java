@@ -33,7 +33,7 @@ import com.zxy.skin.sdk.SkinActivity;
 import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.model.UmumDetail;
 import net.ticherhaz.karangancemerlangspm.recyclerview.UmumDetailRecyclerView;
-import net.ticherhaz.karangancemerlangspm.util.RunTransaction;
+import net.ticherhaz.karangancemerlangspm.utils.RunTransaction;
 
 import java.util.ArrayList;
 import java.util.List;

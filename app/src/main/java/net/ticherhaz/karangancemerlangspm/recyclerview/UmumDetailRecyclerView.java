@@ -1,9 +1,9 @@
 package net.ticherhaz.karangancemerlangspm.recyclerview;
 
-import static net.ticherhaz.karangancemerlangspm.util.Others.setStatus;
-import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.dismissProgressDialog;
-import static net.ticherhaz.karangancemerlangspm.util.ProgressDialogCustom.showProgressDialog;
-import static net.ticherhaz.karangancemerlangspm.util.UserTypeColor.setTextColorUserUmumDetail;
+import static net.ticherhaz.karangancemerlangspm.utils.Others.setStatus;
+import static net.ticherhaz.karangancemerlangspm.utils.ProgressDialogCustom.dismissProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.utils.ProgressDialogCustom.showProgressDialog;
+import static net.ticherhaz.karangancemerlangspm.utils.UserTypeColor.setTextColorUserUmumDetail;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -34,7 +34,7 @@ import net.ticherhaz.karangancemerlangspm.R;
 import net.ticherhaz.karangancemerlangspm.UmumDetailActivity;
 import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.model.UmumDetail;
-import net.ticherhaz.karangancemerlangspm.util.RunTransaction;
+import net.ticherhaz.karangancemerlangspm.utils.RunTransaction;
 import net.ticherhaz.karangancemerlangspm.viewHolder.UmumDetailHolder;
 import net.ticherhaz.tarikhmasa.TarikhMasa;
 

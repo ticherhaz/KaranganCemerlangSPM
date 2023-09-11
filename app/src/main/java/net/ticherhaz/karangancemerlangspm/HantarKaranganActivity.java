@@ -18,7 +18,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.zxy.skin.sdk.SkinActivity;
 
-import net.ticherhaz.karangancemerlangspm.util.MyUploadService;
+import net.ticherhaz.karangancemerlangspm.utils.MyUploadService;
 
 public class HantarKaranganActivity extends SkinActivity {
 

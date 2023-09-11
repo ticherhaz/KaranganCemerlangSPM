@@ -44,8 +44,9 @@ import com.zxy.skin.sdk.SkinActivity;
 import com.zxy.skin.sdk.SkinEngine;
 
 import net.ticherhaz.karangancemerlangspm.model.Karangan;
-import net.ticherhaz.karangancemerlangspm.util.Others;
-import net.ticherhaz.karangancemerlangspm.util.RunTransaction;
+import net.ticherhaz.karangancemerlangspm.utils.Others;
+import net.ticherhaz.karangancemerlangspm.utils.PermissionUtils;
+import net.ticherhaz.karangancemerlangspm.utils.RunTransaction;
 import net.ticherhaz.karangancemerlangspm.viewHolder.KaranganViewHolder;
 
 import java.util.Calendar;
@@ -190,6 +191,23 @@ public class MainActivity extends SkinActivity {
         setTextViewAnnouncement();
         setButtonPeribahasa();
         setButtonSumbangan();
+
+        setPermissions();
+    }
+
+    private void setPermissions() {
+        PermissionUtils.INSTANCE.storagePermissions(MainActivity.this, new PermissionUtils.IStoragePermission() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
+
     }
 
 //    private void loadBanner() {

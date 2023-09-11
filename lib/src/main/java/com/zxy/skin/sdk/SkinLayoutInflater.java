@@ -20,7 +20,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-//import android.util.ArrayMap;
+//import android.utils.ArrayMap;
 
 /**
  * @Description: 自定义的LayoutInflater，会收集需要换肤的控件及属性集，部分代码 copy from AOSP

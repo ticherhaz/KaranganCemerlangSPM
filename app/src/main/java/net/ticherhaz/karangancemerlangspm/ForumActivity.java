@@ -1,7 +1,7 @@
 package net.ticherhaz.karangancemerlangspm;
 
-import static net.ticherhaz.karangancemerlangspm.util.Others.messageInternetMessage;
-import static net.ticherhaz.karangancemerlangspm.util.Others.setStatus;
+import static net.ticherhaz.karangancemerlangspm.utils.Others.messageInternetMessage;
+import static net.ticherhaz.karangancemerlangspm.utils.Others.setStatus;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.ConvertTarikhMasa2LocalTimePattern;
 import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
@@ -48,7 +48,7 @@ import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.model.Forum;
 import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
-import net.ticherhaz.karangancemerlangspm.util.OnlineStatusUtil;
+import net.ticherhaz.karangancemerlangspm.utils.OnlineStatusUtil;
 import net.ticherhaz.karangancemerlangspm.viewHolder.ForumViewHolder;
 
 import java.util.Calendar;
