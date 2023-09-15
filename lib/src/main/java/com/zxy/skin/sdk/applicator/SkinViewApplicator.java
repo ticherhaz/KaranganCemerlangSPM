@@ -22,9 +22,9 @@ public class SkinViewApplicator {
 
     private static final String TAG = "SkinViewApplicator";
 
-    private HashMap<String, IAttributeApplicator<? extends View>> supportAttrs = new HashMap<>();
+    private final HashMap<String, IAttributeApplicator<? extends View>> supportAttrs = new HashMap<>();
 
-    private HashMap<String, Integer> mAttrIndexMap = new HashMap<>();
+    private final HashMap<String, Integer> mAttrIndexMap = new HashMap<>();
 
     private int[] attrArr;
 

@@ -21,9 +21,9 @@ import java.util.Iterator;
 public class SkinEngine {
 
 
-    private static HashSet<ISkinObserver> skinObservers = new HashSet<>();
+    private static final HashSet<ISkinObserver> skinObservers = new HashSet<>();
 
-    private static HashMap<View, SkinViewWrapper> skinViewMap = new HashMap<>();
+    private static final HashMap<View, SkinViewWrapper> skinViewMap = new HashMap<>();
 
     private static int themeId;
 

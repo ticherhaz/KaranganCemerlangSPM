@@ -37,7 +37,7 @@ public class SkinLayoutInflater extends LayoutInflater implements LayoutInflater
     };
     // copy from AOSP LayoutInflater.java
     private static final StackTraceElement[] EMPTY_STACK_TRACE = new StackTraceElement[0];
-    private static String TAG = "SkinLayoutInflater";
+    private static final String TAG = "SkinLayoutInflater";
     private static Field mConstructorArgsField;
 
     static {
@@ -49,7 +49,7 @@ public class SkinLayoutInflater extends LayoutInflater implements LayoutInflater
         }
     }
 
-    private ArrayList<SkinElement> skinElements = new ArrayList<>();
+    private final ArrayList<SkinElement> skinElements = new ArrayList<>();
 
     private Object[] mConstructorArgs;
 

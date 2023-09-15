@@ -16,9 +16,9 @@ public class SkinApplicatorManager {
 
     private static final String TAG = "SkinApplicatorManager";
 
-    private static SkinViewApplicator defaultSkinApplicator = new SkinViewApplicator();
+    private static final SkinViewApplicator defaultSkinApplicator = new SkinViewApplicator();
 
-    private static HashMap<Class, SkinViewApplicator> applicatorsMap = new HashMap<>();
+    private static final HashMap<Class, SkinViewApplicator> applicatorsMap = new HashMap<>();
 
     static {
 

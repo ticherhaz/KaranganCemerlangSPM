@@ -11,8 +11,8 @@ android {
         applicationId "net.ticherhaz.karangancemerlangspm"
         minSdkVersion 19
         targetSdkVersion 34
-        versionCode 347
-        versionName "3.47"
+        versionCode 348
+        versionName "3.48"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

@@ -21,12 +21,12 @@ import java.util.List;
 public class MyProductDownloadKaranganAdapter extends RecyclerView.Adapter<MyProductDownloadKaranganAdapter.MyViewHolder> {
 
     private final KaranganDetailActivity karanganDetailActivity;
-    private final List<ProductDetails> skuDetailsList;
+    private final List<ProductDetails> productDetailsList;
     private final BillingClient billingClient;
 
-    public MyProductDownloadKaranganAdapter(KaranganDetailActivity karanganDetailActivity, List<ProductDetails> skuDetailsList, BillingClient billingClient) {
+    public MyProductDownloadKaranganAdapter(KaranganDetailActivity karanganDetailActivity, List<ProductDetails> productDetailsList, BillingClient billingClient) {
         this.karanganDetailActivity = karanganDetailActivity;
-        this.skuDetailsList = skuDetailsList;
+        this.productDetailsList = productDetailsList;
         this.billingClient = billingClient;
     }
 
@@ -41,8 +41,8 @@ public class MyProductDownloadKaranganAdapter extends RecyclerView.Adapter<MyPro
     public void onBindViewHolder(@NonNull MyViewHolder holder, int positionNotUseful) {
         final int position = holder.getAbsoluteAdapterPosition();
 
-        //holder.getTextViewProduct().setText(skuDetailsList.get(position).getTitle());
-        //holder.getTextViewProduct().setText(skuDetailsList.get(position).getPrice());
+        //holder.getTextViewProduct().setText(productDetailsList.get(position).getTitle());
+        //holder.getTextViewProduct().setText(productDetailsList.get(position).getPrice());
 
         final String title = "Muat Turun Karangan Ini";
         holder.getButtonProduct().setText(title);
@@ -54,7 +54,7 @@ public class MyProductDownloadKaranganAdapter extends RecyclerView.Adapter<MyPro
                         ImmutableList.of(
                                 BillingFlowParams.ProductDetailsParams.newBuilder()
                                         // retrieve a value for "productDetails" by calling queryProductDetailsAsync()
-                                        .setProductDetails(skuDetailsList.get(position))
+                                        .setProductDetails(productDetailsList.get(position))
                                         // to get an offer token, call ProductDetails.getSubscriptionOfferDetails()
                                         // for a list of offers that are available to the user
                                         //.setOfferToken(offerToken)  //for subscribe
@@ -78,7 +78,7 @@ public class MyProductDownloadKaranganAdapter extends RecyclerView.Adapter<MyPro
 
     @Override
     public int getItemCount() {
-        return skuDetailsList.size();
+        return productDetailsList.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {

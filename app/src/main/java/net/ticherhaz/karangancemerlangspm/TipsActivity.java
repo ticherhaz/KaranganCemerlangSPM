@@ -18,7 +18,8 @@ import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.ConsumeParams;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesUpdatedListener;
-import com.android.billingclient.api.SkuDetailsParams;
+import com.android.billingclient.api.QueryProductDetailsParams;
+import com.google.common.collect.ImmutableList;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.zxy.skin.sdk.SkinActivity;
@@ -26,7 +27,6 @@ import com.zxy.skin.sdk.SkinActivity;
 import net.ticherhaz.karangancemerlangspm.model.Donat2;
 import net.ticherhaz.karangancemerlangspm.utils.MyProductAdapter;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class TipsActivity extends SkinActivity implements PurchasesUpdatedListener {
@@ -66,21 +66,43 @@ public class TipsActivity extends SkinActivity implements PurchasesUpdatedListen
                         //and then hide the progress bar once it finish loading the app billing
                         //so productId and title kena ikut urutan alphabet
 
-                        SkuDetailsParams params = SkuDetailsParams.newBuilder()
-                                // .setSkusList(skuList) //yg ni yg asal (24/2/2020)
-                                .setSkusList(Arrays.asList("sehelai_ringgit", "sejambak_ringgit", "sekantung_ringgit", "setimbun_ringgit"))
-                                .setType(BillingClient.SkuType.INAPP)
-                                .build();
+                        final List<QueryProductDetailsParams.Product> productList = ImmutableList.of(
+                                QueryProductDetailsParams.Product.newBuilder()
+                                        .setProductId("sehelai_ringgit")
+                                        .setProductType(BillingClient.ProductType.INAPP)
+                                        .build(),
+                                QueryProductDetailsParams.Product.newBuilder()
+                                        .setProductId("sejambak_ringgit")
+                                        .setProductType(BillingClient.ProductType.INAPP)
+                                        .build(),
+                                QueryProductDetailsParams.Product.newBuilder()
+                                        .setProductId("sekantung_ringgit")
+                                        .setProductType(BillingClient.ProductType.INAPP)
+                                        .build(),
+                                QueryProductDetailsParams.Product.newBuilder()
+                                        .setProductId("setimbun_ringgit")
+                                        .setProductType(BillingClient.ProductType.INAPP)
+                                        .build(),
+                                QueryProductDetailsParams.Product.newBuilder()
+                                        .setProductId("seulas_ringgit")
+                                        .setProductType(BillingClient.ProductType.INAPP)
+                                        .build());
 
-                        billingClient.querySkuDetailsAsync(params, (billingResultIn, list) -> {
-                            if (billingResultIn.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                                final MyProductAdapter adapter = new MyProductAdapter(TipsActivity.this, list, billingClient);
-                                runOnUiThread(() -> {
-                                    recyclerView.setAdapter(adapter);
-                                    progressBarMain.setVisibility(View.GONE);
-                                });
-                            }
-                        });
+                        final QueryProductDetailsParams queryProductDetailsParams =
+                                QueryProductDetailsParams.newBuilder()
+                                        .setProductList(productList)
+                                        .build();
+                        billingClient.queryProductDetailsAsync(queryProductDetailsParams, (billingResult2, productDetailsList) -> {
+
+                                    final MyProductAdapter adapter = new MyProductAdapter(TipsActivity.this, productDetailsList, billingClient);
+                                    runOnUiThread(() -> {
+                                        recyclerView.setAdapter(adapter);
+                                        progressBarMain.setVisibility(View.GONE);
+                                    });
+
+                                }
+                        );
+
 
                     } else {
                         runOnUiThread(() -> {
@@ -139,6 +161,9 @@ public class TipsActivity extends SkinActivity implements PurchasesUpdatedListen
                             break;
                         case "setimbun_ringgit":
                             duitNakDisplay = "RM10.00";
+                            break;
+                        case "seulas_ringgit":
+                            duitNakDisplay = "RM1500.00";
                             break;
                     }
 
