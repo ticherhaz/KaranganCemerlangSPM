@@ -54,12 +54,12 @@
         <p><b><i>Selamat beramal dan semoga maju jaya! :)</i></b></p>
 ]]></string>
     <string name="feedback">Maklum Balas</string>
-    <string name="about_title"> <!-- TODO v3.48 -->
+    <string name="about_title"> <!-- TODO v3.50 -->
         <![CDATA[
         <h3>Karangan Cemerlang SPM</h3>
-        <i>versi 3.48</i><br>
+        <i>versi 3.50</i><br>
         hazman45.blogspot.com<br>
-        Ticherhaz©2023
+        Ticherhaz©2024
 
         <p><i>Ucapan ribuan terima kasih kepada semua yang memberi sokongan aplikasi saya ini. :) </i></p>
 
@@ -202,7 +202,7 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
     <string name="memberi_reputasi">Memberi Reputasi</string>
     <string name="ubah">Ubah</string>
     <string name="batal">Batal</string>
-    <string name="spm_2022">SPM 2023</string>
+    <string name="spm_2022">SPM 2024</string>
     <string name="karangan">Karangan</string>
     <string name="tajuk">Tajuk</string>
     <string name="mod_gelap">Mod Gelap</string>
@@ -254,8 +254,8 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
         <item>Perempuan</item>
     </string-array>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
-    <!-- TODO: Change apps version v3.48 -->
-    <string name="apps_version">Karangan Cemerlang SPM v3.48\nhazman45.blogspot.com\nTicherhaz©2023</string>
+    <!-- TODO: Change apps version v3.50 -->
+    <string name="apps_version">Karangan Cemerlang SPM v3.50\nhazman45.blogspot.com\nTicherhaz©2024</string>
     <string name="penarafan">Penarafan</string>
     <string name="app_name_tentang">Tentang Karangan Cemerlang SPM</string>
     <string name="internet_connection">Please Check Internet Connection</string>

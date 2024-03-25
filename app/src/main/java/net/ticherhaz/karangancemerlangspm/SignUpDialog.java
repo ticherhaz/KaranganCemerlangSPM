@@ -327,7 +327,7 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
                                             } else {
                                                 //Exception if there is problem when to store the value in the database
                                                 if (task.getException() != null)
-                                                    Toast.makeText(context, "" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                                 progressDialog.dismiss();
                                             }
                                         }
@@ -337,7 +337,7 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
                                 } else {
                                     //Exception if there is problem when to store the value in the database
                                     if (task.getException() != null)
-                                        Toast.makeText(context, "" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                     progressDialog.dismiss();
                                 }
                             }
@@ -346,7 +346,7 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
                 } else {
                     //Exception for the Create Account
                     if (task.getException() != null)
-                        Toast.makeText(context, "" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                 }
             }

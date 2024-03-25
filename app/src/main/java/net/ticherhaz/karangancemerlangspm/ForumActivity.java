@@ -100,7 +100,7 @@ public class ForumActivity extends SkinActivity {
                 .build();
 
         //After that apply in the firebase recycler adapter
-        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Forum, ForumViewHolder>(firebaseRecyclerOptions) {
+        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<>(firebaseRecyclerOptions) {
             @SuppressLint("SetTextI18n")
             @Override
             protected void onBindViewHolder(@NonNull final ForumViewHolder holder, int position, @NonNull final Forum model) {
@@ -114,48 +114,50 @@ public class ForumActivity extends SkinActivity {
                 ok this is new, read last node.
                  */
                 //check if null or not
-                Query queryDibbalasOleh = databaseReference.child("umum").child(model.getForumUid()).orderByKey().limitToLast(1);
-                queryDibbalasOleh.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            //Get children
-                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                if (dataSnapshot1.exists()) {
+                if (model.getForumUid() != null) {
+                    final Query queryDibbalasOleh = databaseReference.child("umum").child(model.getForumUid()).orderByKey().limitToLast(1);
+                    queryDibbalasOleh.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                //Get children
+                                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                    if (dataSnapshot1.exists()) {
 
-                                    final String tajuk = dataSnapshot1.child("tajuk").getValue(String.class);
-                                    final String dimulaiOleh = dataSnapshot1.child("dimulaiOleh").getValue(String.class);
+                                        final String tajuk = dataSnapshot1.child("tajuk").getValue(String.class);
+                                        final String dimulaiOleh = dataSnapshot1.child("dimulaiOleh").getValue(String.class);
 
-                                    // String tajukTerbaru = model.getLastThreadPost();
-                                    if (tajuk == null) {
-                                        holder.getTextViewLastThreadPost().setVisibility(View.GONE);
-                                    } else {
-                                        holder.getTextViewLastThreadPost().setText("Tajuk Terbaru: " + model.getLastThreadPost());
+                                        // String tajukTerbaru = model.getLastThreadPost();
+                                        if (tajuk == null) {
+                                            holder.getTextViewLastThreadPost().setVisibility(View.GONE);
+                                        } else {
+                                            holder.getTextViewLastThreadPost().setText("Tajuk Terbaru: " + model.getLastThreadPost());
+                                        }
+
+                                        //  String lastThreadByUser = model.getLastThreadByUser();
+                                        if (dimulaiOleh == null) {
+                                            holder.getTextViewLastThreadByUser().setVisibility(View.GONE);
+                                        } else {
+                                            //making the name bold
+                                            String daripada = "Daripada <b>" + dimulaiOleh + "</b>";
+                                            holder.getTextViewLastThreadByUser().setText(Html.fromHtml(daripada));
+                                        }
+
+
                                     }
-
-                                    //  String lastThreadByUser = model.getLastThreadByUser();
-                                    if (dimulaiOleh == null) {
-                                        holder.getTextViewLastThreadByUser().setVisibility(View.GONE);
-                                    } else {
-                                        //making the name bold
-                                        String daripada = "Daripada <b>" + dimulaiOleh + "</b>";
-                                        holder.getTextViewLastThreadByUser().setText(Html.fromHtml(daripada));
-                                    }
-
-
                                 }
+                            } else {
+                                holder.getTextViewLastThreadPost().setVisibility(View.GONE);
+                                holder.getTextViewLastThreadByUser().setVisibility(View.GONE);
                             }
-                        } else {
-                            holder.getTextViewLastThreadPost().setVisibility(View.GONE);
-                            holder.getTextViewLastThreadByUser().setVisibility(View.GONE);
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    }
-                });
+                        }
+                    });
+                }
 
 
                 //value for the jumlah tajuk
@@ -207,33 +209,30 @@ public class ForumActivity extends SkinActivity {
                 }
 
                 //When it clicked
-                holder.getView().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //Onclick we update the number of the views
-                        databaseReferenceForum.child(model.getForumUid()).child("forumViews").runTransaction(new Transaction.Handler() {
-                            @NonNull
-                            @Override
-                            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
-                                if (mutableData.getValue() == null) {
-                                    mutableData.setValue(0);
-                                } else {
-                                    mutableData.setValue((Long) mutableData.getValue() + 1);
-                                }
-                                return Transaction.success(mutableData);
+                holder.getView().setOnClickListener(v -> {
+                    //Onclick we update the number of the views
+                    databaseReferenceForum.child(model.getForumUid()).child("forumViews").runTransaction(new Transaction.Handler() {
+                        @NonNull
+                        @Override
+                        public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
+                            if (mutableData.getValue() == null) {
+                                mutableData.setValue(0);
+                            } else {
+                                mutableData.setValue((Long) mutableData.getValue() + 1);
                             }
+                            return Transaction.success(mutableData);
+                        }
 
-                            @Override
-                            public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
+                        @Override
+                        public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
 
-                            }
-                        });
-                        Intent intent = new Intent(ForumActivity.this, UmumActivity.class);
-                        intent.putExtra("title", model.getForumTitle());
-                        intent.putExtra("userUid", userUid);
-                        intent.putExtra("forumUid", model.getForumUid());
-                        startActivities(new Intent[]{intent});
-                    }
+                        }
+                    });
+                    final Intent intent = new Intent(ForumActivity.this, UmumActivity.class);
+                    intent.putExtra("title", model.getForumTitle());
+                    intent.putExtra("userUid", userUid);
+                    intent.putExtra("forumUid", model.getForumUid());
+                    startActivities(new Intent[]{intent});
                 });
             }
 

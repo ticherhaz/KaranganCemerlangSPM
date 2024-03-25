@@ -359,7 +359,7 @@ public class SignUpActivity extends SkinActivity implements View.OnClickListener
                                             } else {
                                                 //Exception if there is problem when to store the value in the database
                                                 if (task.getException() != null)
-                                                    Toast.makeText(SignUpActivity.this, "" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                                 progressDialog.dismiss();
                                             }
                                         }
@@ -369,7 +369,7 @@ public class SignUpActivity extends SkinActivity implements View.OnClickListener
                                 } else {
                                     //Exception if there is problem when to store the value in the database
                                     if (task.getException() != null)
-                                        Toast.makeText(SignUpActivity.this, "" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                     progressDialog.dismiss();
                                 }
                             }
@@ -378,7 +378,7 @@ public class SignUpActivity extends SkinActivity implements View.OnClickListener
                 } else {
                     //Exception for the Create Account
                     if (task.getException() != null)
-                        Toast.makeText(SignUpActivity.this, "" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                 }
             }

@@ -8,7 +8,12 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.*
+import android.os.Build
+import android.os.Handler
+import android.os.Looper
+import android.os.SystemClock
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.util.Base64
 import android.view.View
 import android.view.ViewTreeObserver
@@ -22,7 +27,9 @@ import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 
 object Tools {

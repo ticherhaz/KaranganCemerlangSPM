@@ -4,38 +4,60 @@
     <shared>
       <config />
     </shared>
+    <layouts>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tips.xml">
+        <config>
+          <theme>@android:style/Theme.Material.Light</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/my_product.xml">
+        <config>
+          <theme>@android:style/Theme.Material.Light</theme>
+        </config>
+      </layout>
+    </layouts>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9abd2463-2841-4bbc-9170-e82435e56e6b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.3/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/release/app-release.aab" beforeDir="false" afterPath="$PROJECT_DIR$/app/release/app-release.aab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/ForumActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/ForumActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/SignUpActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/SignUpActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/SignUpDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/SignUpDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/SplashActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/SplashActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/TipsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/TipsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/utils/MyProductAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/utils/MyProductAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/utils/MyProductDownloadKaranganAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/utils/MyProductDownloadKaranganAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/utils/Tools.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/utils/Tools.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/lib/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/main/java/com/zxy/skin/sdk/SkinActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/java/com/zxy/skin/sdk/SkinActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/main/java/com/zxy/skin/sdk/SkinEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/java/com/zxy/skin/sdk/SkinEngine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/main/java/com/zxy/skin/sdk/SkinLayoutInflater.java" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/java/com/zxy/skin/sdk/SkinLayoutInflater.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/main/java/com/zxy/skin/sdk/applicator/SkinApplicatorManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/java/com/zxy/skin/sdk/applicator/SkinApplicatorManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/main/java/com/zxy/skin/sdk/applicator/SkinViewApplicator.java" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/main/java/com/zxy/skin/sdk/applicator/SkinViewApplicator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\Hazman\.android\avd\Pixel_7_Pro_API_33.avd]" />
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\Hazman\.android\avd\Pixel_7_Pro_API_34.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -47,9 +69,15 @@
     <option name="KEY_ALIAS" value="keyAlias" />
     <option name="REMEMBER_PASSWORDS" value="true" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2VC3pJiHh6ZCGczxexORGSzIg4o" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -60,6 +88,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;BundleExportedModule&quot;: &quot;KaranganCemerlangSPM.app&quot;,
     &quot;ExportBundle.BundlePathForKaranganCemerlangSPM.app&quot;: &quot;C:\\Ticherhaz\\Challenger\\AndroidStudio\\KaranganCemerlangSPM\\app&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
@@ -67,8 +96,10 @@
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;android-custom-viewC:/Program Files/Android/Android Studio/jbr/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.3.1/863be7264bcda9a6591b855b6219be040badb588/recyclerview-1.3.1-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED&quot;: &quot;RecyclerView&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Ticherhaz/Challenger/Note/keyAlias/karangancemerlangspm.jks&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Suggestions&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
@@ -104,6 +135,7 @@
       <option name="ALL_USERS" value="false" />
       <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
       <option name="CLEAR_APP_STORAGE" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
       <option name="CLEAR_LOGCAT" value="false" />
@@ -184,13 +216,21 @@
       <option name="project" value="LOCAL" />
       <updated>1694450251454</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="348">
+      <created>1694806165570</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1694806165570</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="updated" />
     <MESSAGE value="347.&#10;Updated In app billing for Download KaranganDetailActivity.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="347.&#10;Updated In app billing for Download KaranganDetailActivity.java" />
+    <MESSAGE value="348" />
+    <option name="LAST_COMMIT_MESSAGE" value="348" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
