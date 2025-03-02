@@ -247,7 +247,7 @@ public class Profile2Activity extends AppCompatActivity {
                         tvBirthday.setText(registeredUser.getBirthday());
 
                         tvMode.setText(registeredUser.getMode());
-                        new Others().setStatus(registeredUser.getMode(), tvMode);
+                        Others.setStatus(registeredUser.getMode(), tvMode);
 
                         tvPostCount.setText(String.format(Locale.getDefault(), "Jumlah Pos: %d", registeredUser.getPostCount()));
                         tvReputation.setText(String.format(Locale.getDefault(), "Reputasi: %d", registeredUser.getReputation()));

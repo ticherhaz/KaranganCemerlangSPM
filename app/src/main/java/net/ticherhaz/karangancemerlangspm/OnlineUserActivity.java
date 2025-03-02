@@ -81,7 +81,7 @@ public class OnlineUserActivity extends SkinActivity {
                 holder.getTextViewSekolah().setText(model.getSekolah());
                 holder.getTextViewSekolah().setSelected(true);
                 holder.getTextViewReputation().setText(String.valueOf(model.getReputation()));
-                new Others().setStatus(model.getMode(), holder.getTextViewStatus());
+                Others.setStatus(model.getMode(), holder.getTextViewStatus());
 
                 //change the color of the user
                 if (model.getTitleType() != null) {

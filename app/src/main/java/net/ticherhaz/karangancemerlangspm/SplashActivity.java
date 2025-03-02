@@ -263,8 +263,4 @@ public class SplashActivity extends AppCompatActivity {
 //            });
         }
     }
-
-
-    //AsyncTask to check the internet connection-------------------------------------
-
 }

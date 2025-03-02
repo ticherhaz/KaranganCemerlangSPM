@@ -210,84 +210,6 @@ public class MainActivity extends SkinActivity {
 
     }
 
-//    private void loadBanner() {
-//        // Create an ad request. Check your logcat output for the hashed device ID to
-//        // get test ads on a physical device. e.g.
-//        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
-//        adView = new AdView(this);
-//        adView.setAdUnitId(getString(R.string.bannerMainUid));
-//        //adView.setAdUnitId(AD_UNIT_ID_BANNER);
-//
-//        adContainerView.removeAllViews();
-//        adContainerView.addView(adView);
-//        AdSize adSize = getAdSize();
-//        adView.setAdSize(adSize);
-//        AdRequest adRequest =
-//                new AdRequest.Builder()
-//                        .build();
-//        // Start loading the ad in the background.
-//        adView.loadAd(adRequest);
-//        adView.setAdListener(new AdListener() {
-//            @Override
-//            public void onAdFailedToLoad(int errorCode) {
-//                // AdsChecker(dahPremium, imageViewAds, adContainerView, false);
-//            }
-//
-//            @Override
-//            public void onAdClosed() {
-//            }
-//
-//            @Override
-//            public void onAdLoaded() {
-//                // AdsChecker(dahPremium, imageViewAds, adContainerView, true);
-//            }
-//
-//        });
-//    }
-//
-//    private AdSize getAdSize() {
-//        // Determine the screen width (less decorations) to use for the ad width.
-//        Display display = getWindowManager().getDefaultDisplay();
-//        DisplayMetrics outMetrics = new DisplayMetrics();
-//        display.getMetrics(outMetrics);
-//
-//        float density = outMetrics.density;
-//
-//        float adWidthPixels = adContainerView.getWidth();
-//
-//        // If the ad hasn't been laid out, default to the full screen width.
-//        if (adWidthPixels == 0) {
-//            adWidthPixels = outMetrics.widthPixels;
-//        }
-//
-//        int adWidth = (int) (adWidthPixels / density);
-//
-//        return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidth);
-//    }
-//
-//    /**
-//     * Called when leaving the activity
-//     */
-//    @Override
-//    public void onPause() {
-//        if (adView != null) {
-//            adView.pause();
-//        }
-//        super.onPause();
-//    }
-//
-//
-//    /**
-//     * Called before the activity is destroyed
-//     */
-//    @Override
-//    public void onDestroy() {
-//        if (adView != null) {
-//            adView.destroy();
-//        }
-//        super.onDestroy();
-//    }
-
     private void setButtonSumbangan() {
         buttonSumbangan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -850,13 +772,6 @@ public class MainActivity extends SkinActivity {
         listID();
         if (savedInstanceState != null) {
             mod = savedInstanceState.getString(SAVED_MOD);
-//        } else {
-//            sharedPreferences = getSharedPreferences(SHARED_PREFERENCES,
-//                    Context.MODE_PRIVATE);
-//            if (sharedPreferences.contains(SHARED_PREFERENCES_MOD)) {
-//                //At this part, we called back the mod because we want to transfer the value of the mod and then change the tick at the menu item
-//                mod = sharedPreferences.getString(SHARED_PREFERENCES_MOD, "");
-//            }
         }
         setmCountDownTimer();
         setEditTextSearchEditor();
@@ -887,35 +802,7 @@ public class MainActivity extends SkinActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
-
-      /*      //23.6.2019: We will use new custom alert dialog.
-            //According to this tutor: https://stackoverflow.com/questions/23669296/create-a-alertdialog-in-android-with-custom-xml-view
-            final Dialog dialogAbout = new Dialog(MainActivity.this);
-            dialogAbout.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialogAbout.setContentView(R.layout.dialog_about);
-            TextView textViewTitle = dialogAbout.findViewById(R.id.text_view_about_title);
-            final TextView textViewCredit = dialogAbout.findViewById(R.id.text_view_about_credit);
-            textViewTitle.setText(Html.fromHtml(getString(R.string.about_title)));
-
-            textViewCredit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //textViewCredit.setText(R.string.about_credit);
-                    if (!isDisplaying) {
-                        textViewCredit.setText(R.string.about_credit); // Update version 3.21
-                        isDisplaying = true;
-                    } else {
-                        textViewCredit.setText(R.string.kredit);
-                        isDisplaying = false;
-                    }
-                }
-            });
-
-            dialogAbout.show();*/
-
             startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
-
-
             return true;
         }
         if (id == R.id.action_feedback) {
@@ -1017,14 +904,6 @@ public class MainActivity extends SkinActivity {
                 startActivity(new Intent(MainActivity.this, TipsKaranganActivity.class));
             }
         });
-//        buttonHantarKarangan.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, HantarKaranganActivity.class);
-//                intent.putExtra("userUid", userUid);
-//                startActivities(new Intent[]{intent});
-//            }
-//        });
         buttonForum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1040,9 +919,6 @@ public class MainActivity extends SkinActivity {
     protected void onResume() {
         super.onResume();
         FirebaseDatabase.getInstance().goOnline();
-//        if (adView != null) {
-//            adView.resume();
-//        }
     }
 
     private void setmCountDownTimer() {
@@ -1090,6 +966,4 @@ public class MainActivity extends SkinActivity {
 
         textViewCountdownSPM.setText("");
     }
-
-
 }

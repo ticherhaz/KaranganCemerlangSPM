@@ -1,10 +1,10 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdk 34
+    compileSdk 35
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 34
+        minSdkVersion 24
+        targetSdkVersion 35
     }
     buildTypes {
         release {
@@ -16,6 +16,6 @@ android {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    api 'androidx.fragment:fragment:1.6.2'
-    api 'androidx.appcompat:appcompat:1.6.1'
+    api 'androidx.fragment:fragment:1.8.6'
+    api 'androidx.appcompat:appcompat:1.7.0'
 }
