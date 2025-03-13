@@ -22,7 +22,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
-                android:textColor="?attr/colorText"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -30,8 +29,7 @@
             android:id="@+id/text_view_jenis_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:textColor="?attr/colorText" />
+            android:layout_margin="3dp" />
 
         <TextView
             android:id="@+id/text_view_viewer"
@@ -42,7 +40,6 @@
             android:drawableLeft="@drawable/ic_viewer"
             android:gravity="center_vertical"
             android:text="@string/kosong"
-            android:textColor="?attr/colorText"
             android:textSize="12sp" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorBackground"
+
     android:orientation="vertical"
     tools:context=".SettingActivity">
 
@@ -27,8 +27,7 @@
             android:focusable="true"
             android:gravity="center_vertical"
             android:padding="17dp"
-            android:text="@string/profile"
-            android:textColor="?attr/colorText" />
+            android:text="@string/profile" />
 
         <TextView
             android:id="@+id/tv_change_password"
@@ -45,8 +44,7 @@
             android:focusable="true"
             android:gravity="center_vertical"
             android:padding="17dp"
-            android:text="@string/change_password"
-            android:textColor="?attr/colorText" />
+            android:text="@string/change_password" />
 
         <TextView
             android:id="@+id/tv_contact_us"
@@ -63,8 +61,7 @@
             android:focusable="true"
             android:gravity="center_vertical"
             android:padding="17dp"
-            android:text="@string/contact_us"
-            android:textColor="?attr/colorText" />
+            android:text="@string/contact_us" />
 
         <TextView
             android:id="@+id/tv_admin_contact"
@@ -82,7 +79,7 @@
             android:gravity="center_vertical"
             android:padding="17dp"
             android:text="@string/senarai_user"
-            android:textColor="?attr/colorText"
+
             android:visibility="gone" />
     </LinearLayout>
 </ScrollView>

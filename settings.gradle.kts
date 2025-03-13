@@ -15,5 +15,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Karagan Cemerlang SPM"
-include(":app", ":lib")
+include(":app")
  

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorBackground"
+
     android:orientation="vertical"
     tools:context=".ProfileEditActivity">
 
@@ -33,7 +33,7 @@
                 android:id="@+id/iv_profile"
                 android:layout_width="210dp"
                 android:layout_height="210dp"
-                android:src="@drawable/emblem" />
+                android:src="@mipmap/ic_launcher_foreground" />
 
             <ImageView
                 android:id="@+id/iv_upload_profile"
@@ -56,8 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/sekolah"
-                android:inputType="text"
-                android:textColor="?attr/colorText" />
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -72,8 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/bio"
-                android:inputType="text"
-                android:textColor="?attr/colorText" />
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

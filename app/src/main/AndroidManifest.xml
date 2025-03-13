@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:dist="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <uses-sdk tools:overrideLibrary="com.zxy.skin.sdk" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -12,32 +9,40 @@
     <uses-permission android:name="com.android.vending.BILLING" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
-    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
-
-    <dist:module dist:instant="true" />
 
     <application
-        android:name=".MyApplication"
+        android:name=".version2025.MyApp"
         android:configChanges="orientation"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher"
+        android:theme="@style/AppThemeVersion2025"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,HardcodedDebugMode">
+        <meta-data
+            android:name="ScopedStorage"
+            android:value="true" />
+
         <activity
-            android:name=".version2025.ui.MainActivity"
-            android:exported="false"
-            android:theme="@style/AppThemeVersion2025" />
+            android:name=".version2025.ui.donation.DonationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".version2025.ui.main.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".SignUpActivity"
             android:label="Daftar Akaun">
@@ -69,13 +74,9 @@
         </activity>
 
         <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/admobAppUid" /> <!-- android:value="ca-app-pub-3940256099942544~3347511713" /> -->
-        <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 TODO: Change Admob APP ID -->
-        <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/icon_192dp"
-            android:value="@drawable/icon_192dp" />
+            android:resource="@drawable/ic_icon_128dp"
+            android:value="@drawable/ic_icon_128dp" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorPrimary" /> <!-- [START fcm_default_channel] -->
@@ -242,13 +243,7 @@
         <activity
             android:name=".SplashActivity"
             android:exported="true"
-            android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -149,7 +149,7 @@ public class UmumDetailRecyclerView extends RecyclerView.Adapter<UmumDetailHolde
                                         .into(holder.getImageViewProfile());
                             }
                         } else {
-                            holder.getImageViewProfile().setImageResource(R.drawable.emblem);
+                            holder.getImageViewProfile().setImageResource(R.drawable.ic_icon_128dp);
                         }
 
                         //Call another class to change color

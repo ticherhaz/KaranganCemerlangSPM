@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorBackground"
+
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -27,8 +27,7 @@
                 android:focusableInTouchMode="true"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
-                android:singleLine="true"
-                android:textColor="?attr/colorText" />
+                android:singleLine="true" />
 
             <ImageView
                 android:layout_width="90dp"
@@ -36,15 +35,15 @@
                 android:layout_gravity="center"
                 android:layout_margin="3dp"
                 android:contentDescription="@string/logo_kcspm"
-                android:src="@drawable/emblem" />
+                android:src="@mipmap/ic_launcher_foreground" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/merriweather"
-                android:text="@string/spm_2022"
-                android:textColor="?attr/colorText"
+                android:text="@string/spm_2025"
+
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
@@ -54,8 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="3dp"
-                android:fontFamily="@font/merriweather"
-                android:textColor="?attr/colorText" />
+                android:fontFamily="@font/merriweather" />
 
             <EditText
                 android:id="@+id/edit_text_search"
@@ -72,8 +70,8 @@
                 android:inputType="textNoSuggestions"
                 android:padding="7dp"
                 android:singleLine="true"
-                android:textColor="?attr/colorText"
-                android:textColorHint="?attr/colorText"
+
+
                 android:visibility="gone"
                 tools:ignore="UnusedAttribute" />
 
@@ -205,8 +203,7 @@
                     android:id="@+id/text_view_how"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="7dp"
-                    android:textColor="?attr/colorText" />
+                    android:layout_margin="7dp" />
             </LinearLayout>
 
             <LinearLayout

@@ -19,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:textColor="?attr/colorText" />
+            android:gravity="center" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

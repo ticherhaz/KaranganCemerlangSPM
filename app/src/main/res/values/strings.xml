@@ -54,12 +54,12 @@
         <p><b><i>Selamat beramal dan semoga maju jaya! :)</i></b></p>
 ]]></string>
     <string name="feedback">Maklum Balas</string>
-    <string name="about_title"> <!-- TODO v3.51 -->
+    <string name="about_title"> <!-- TODO v4.00 -->
         <![CDATA[
         <h3>Karangan Cemerlang SPM</h3>
-        <i>versi 3.51</i><br>
+        <i>versi 4.00</i><br>
         hazman45.blogspot.com<br>
-        Ticherhaz©2024
+        Ticherhaz©2025
 
         <p><i>Ucapan ribuan terima kasih kepada semua yang memberi sokongan aplikasi saya ini. :) </i></p>
 
@@ -202,7 +202,7 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
     <string name="memberi_reputasi">Memberi Reputasi</string>
     <string name="ubah">Ubah</string>
     <string name="batal">Batal</string>
-    <string name="spm_2022">SPM 2024</string>
+    <string name="spm_2025">SPM 2025</string>
     <string name="karangan">Karangan</string>
     <string name="tajuk">Tajuk</string>
     <string name="mod_gelap">Mod Gelap</string>
@@ -254,8 +254,8 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
         <item>Perempuan</item>
     </string-array>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
-    <!-- TODO: Change apps version v3.51 -->
-    <string name="apps_version">Karangan Cemerlang SPM v3.51\nhazman45.blogspot.com\nTicherhaz©2024</string>
+    <!-- TODO: Change apps version v4.00 -->
+    <string name="apps_version">Karangan Cemerlang SPM v4.00\nhazman45.blogspot.com\nTicherhaz©2025</string>
     <string name="penarafan">Penarafan</string>
     <string name="app_name_tentang">Tentang Karangan Cemerlang SPM</string>
     <string name="internet_connection">Please Check Internet Connection</string>
@@ -272,4 +272,43 @@ Semua mesej dan fail menyatakan pandangan penulis, dan pemilik atau kakitangan K
     <string name="muat_turun_kcspm_lite">Muat Turun KCSPM Lite!</string>
     <string name="cancel">Cancel</string>
     <string name="icon">Icon</string>
+
+
+    <!-- HttpCode -->
+    <string name="unauthorized">Unauthorized. Please check agent code / password is correct.</string>
+    <string name="not_found">Not Found</string>
+    <string name="server_error">Server error</string>
+    <string name="unknown_error">Unknown Error</string>
+    <string name="retry_to_connect">Retry to Connect</string>
+    <string name="connection_internet_problem">Connection/Internet problem</string>
+    <!-- HttpCode -->
+
+    <!-- Date Util -->
+    <string name="date_util_term_less">less than</string>
+    <string name="date_util_term_a">a</string>
+    <string name="date_util_term_an">an</string>
+
+    <string name="date_util_unit_second">second</string>
+    <string name="date_util_unit_seconds">seconds</string>
+    <string name="date_util_unit_minute">minute</string>
+    <string name="date_util_unit_minutes">minutes</string>
+    <string name="date_util_unit_hour">hour</string>
+    <string name="date_util_unit_hours">hours</string>
+    <string name="date_util_unit_day">day</string>
+    <string name="date_util_unit_days">days</string>
+    <string name="date_util_unit_month">month</string>
+    <string name="date_util_unit_months">months</string>
+    <string name="date_util_unit_year">year</string>
+    <string name="date_util_unit_years">years</string>
+
+    <string name="date_util_prefix_lt">less than a</string>
+    <string name="date_util_prefix_about">about</string>
+    <string name="date_util_prefix_over">over</string>
+    <string name="date_util_prefix_almost">almost</string>
+
+    <string name="date_util_suffix">ago</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="network_error">Network Error</string>
+    <string name="menu">Menu</string>
+    <!-- Date Util -->
 </resources>

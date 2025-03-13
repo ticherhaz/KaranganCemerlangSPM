@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorBackground"
+
     tools:context=".SignInActivity">
 
     <EditText
@@ -18,7 +18,7 @@
         android:hint="@string/email_or_username"
         android:inputType="textEmailAddress"
         android:singleLine="true"
-        android:textColor="?attr/colorText"
+
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,7 +34,7 @@
         android:hint="@string/password"
         android:inputType="textPassword"
         android:singleLine="true"
-        android:textColor="?attr/colorText"
+
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_text_email_username" />

@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,14 +32,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.model.HubungiKamiChat;
 import net.ticherhaz.karangancemerlangspm.model.HubungiKamiMessage;
 import net.ticherhaz.karangancemerlangspm.viewHolder.HubungiKamiViewHolder;
 import net.ticherhaz.tarikhmasa.TarikhMasa;
 
-public class HubungiKamiActivity extends SkinActivity {
+public class HubungiKamiActivity extends AppCompatActivity {
 
     public static final int VT_SENDER = 0;
     public static final int VT_RECIPIENT = 1;

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorBackground"
+
     tools:context=".SplashActivity">
 
     <LinearLayout
@@ -20,7 +20,7 @@
             android:layout_gravity="center"
             android:contentDescription="@string/logo_kcspm"
             android:scaleType="fitXY"
-            android:src="@drawable/emblem" />
+            android:src="@mipmap/ic_launcher_foreground" />
 
     </LinearLayout>
 </ScrollView>

@@ -24,6 +24,7 @@ public class MyProductAdapter extends RecyclerView.Adapter<MyProductAdapter.MyVi
     private final List<ProductDetails> productDetailsList;
     private final BillingClient billingClient;
 
+
     public MyProductAdapter(TipsActivity tipsActivity, List<ProductDetails> productDetailsList, BillingClient billingClient) {
         this.tipsActivity = tipsActivity;
         this.productDetailsList = productDetailsList;

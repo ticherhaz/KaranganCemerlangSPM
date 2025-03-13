@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorBackground"
+
         android:orientation="vertical">
 
         <LinearLayout
@@ -25,8 +25,7 @@
                 android:layout_marginTop="5dp"
                 android:hint="@string/username"
                 android:inputType="text"
-                android:singleLine="true"
-                android:textColor="?attr/colorText" />
+                android:singleLine="true" />
 
             <EditText
                 android:id="@+id/edit_text_sekolah"
@@ -35,8 +34,7 @@
                 android:layout_marginTop="5dp"
                 android:hint="@string/sekolah"
                 android:inputType="text"
-                android:singleLine="true"
-                android:textColor="?attr/colorText" />
+                android:singleLine="true" />
 
             <EditText
                 android:id="@+id/edit_text_email"
@@ -45,8 +43,7 @@
                 android:layout_marginTop="5dp"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
-                android:singleLine="true"
-                android:textColor="?attr/colorText" />
+                android:singleLine="true" />
 
             <EditText
                 android:id="@+id/edit_text_password"
@@ -54,8 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:hint="@string/password"
-                android:inputType="textPassword"
-                android:textColor="?attr/colorText" />
+                android:inputType="textPassword" />
 
             <EditText
                 android:id="@+id/edit_text_confirm_password"
@@ -63,8 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:hint="@string/confirm_password"
-                android:inputType="textPassword"
-                android:textColor="?attr/colorText" />
+                android:inputType="textPassword" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -72,8 +67,7 @@
                 android:layout_marginStart="3dp"
                 android:layout_marginLeft="3dp"
                 android:layout_marginTop="5dp"
-                android:text="@string/tarikh_lahir"
-                android:textColor="?attr/colorText" />
+                android:text="@string/tarikh_lahir" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -90,8 +84,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="number"
                     android:maxLength="2"
-                    android:padding="5dp"
-                    android:textColor="?attr/colorText" />
+                    android:padding="5dp" />
 
                 <EditText
                     android:id="@+id/edit_text_month"
@@ -103,8 +96,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="number"
                     android:maxLength="2"
-                    android:padding="5dp"
-                    android:textColor="?attr/colorText" />
+                    android:padding="5dp" />
 
                 <EditText
                     android:id="@+id/edit_text_year"
@@ -115,8 +107,7 @@
                     android:hint="@string/_2019"
                     android:inputType="number"
                     android:maxLength="4"
-                    android:padding="5dp"
-                    android:textColor="?attr/colorText" />
+                    android:padding="5dp" />
             </LinearLayout>
 
             <TextView
@@ -125,8 +116,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:text="@string/jantina"
-                android:textColor="?attr/colorText" />
+                android:text="@string/jantina" />
 
             <Spinner
                 android:id="@+id/spinner_gender"
@@ -134,8 +124,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="9dp"
                 android:layout_marginRight="9dp"
-                android:background="?attr/colorBackgroundRecyclerView"
-                android:popupBackground="?attr/colorBackgroundRecyclerView" />
+
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -143,8 +133,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:text="@string/negeri"
-                android:textColor="?attr/colorText" />
+                android:text="@string/negeri" />
 
             <Spinner
                 android:id="@+id/spinner_state"
@@ -152,8 +141,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="9dp"
                 android:layout_marginRight="9dp"
-                android:background="?attr/colorBackgroundRecyclerView"
-                android:popupBackground="?attr/colorBackgroundRecyclerView" />
+
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -161,8 +150,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:text="@string/status"
-                android:textColor="?attr/colorText" />
+                android:text="@string/status" />
 
             <Spinner
                 android:id="@+id/spinner_mode"
@@ -170,15 +158,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="9dp"
                 android:layout_marginRight="9dp"
-                android:background="?attr/colorBackgroundRecyclerView"
-                android:popupBackground="?attr/colorBackgroundRecyclerView" />
+
+                />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"
                 android:text="@string/main_terms"
-                android:textColor="?attr/colorText"
+
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
@@ -195,7 +183,7 @@
                         android:id="@+id/text_view_rules"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="?attr/colorText"
+
                         android:textSize="12sp" />
 
                 </ScrollView>
@@ -207,7 +195,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"
                 android:text="@string/patuh_peraturan"
-                android:textColor="?attr/colorText"
+
                 android:textSize="12sp" />
 
             <Button

@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,7 +45,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.model.Forum;
 import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
@@ -53,7 +53,7 @@ import net.ticherhaz.karangancemerlangspm.viewHolder.ForumViewHolder;
 
 import java.util.Calendar;
 
-public class ForumActivity extends SkinActivity {
+public class ForumActivity extends AppCompatActivity {
 
     //ActivitySessionUid
     private final String activitySessionUid = FirebaseDatabase.getInstance().getReference().push().getKey();
@@ -467,7 +467,7 @@ public class ForumActivity extends SkinActivity {
                                         .load(profileUrl)
                                         .into(ivProfile);
                             } else {
-                                ivProfile.setImageResource(R.drawable.emblem);
+                                ivProfile.setImageResource(R.drawable.ic_icon_128dp);
                             }
                             textViewUsername.setText(username);
                             textViewTotalPosCount.setText(totalPos);
@@ -620,6 +620,7 @@ public class ForumActivity extends SkinActivity {
     //OnBackPressed
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         new OnlineStatusUtil().updateUserOnlineStatus("Offline", registeredUid, firebaseUser, databaseReference, activitySessionUid, activityDate);
         new OnlineStatusUtil().onDisc(firebaseUser, databaseReference, registeredUid, activitySessionUid, activityDate);
         finish();
@@ -630,5 +631,4 @@ public class ForumActivity extends SkinActivity {
         onBackPressed();
         return true;
     }
-
 }

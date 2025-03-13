@@ -4,7 +4,7 @@
     android:id="@+id/swipe_refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorBackground"
+
     tools:context=".ProfileActivity">
 
     <ScrollView
@@ -30,7 +30,7 @@
                     android:layout_marginTop="7dp"
                     android:contentDescription="@string/profile"
                     android:scaleType="fitXY"
-                    android:src="@drawable/emblem" />
+                    android:src="@mipmap/ic_launcher_foreground" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -51,8 +51,7 @@
                     android:drawableLeft="@drawable/ic_sign_online"
                     android:focusable="true"
                     android:gravity="center_vertical"
-                    android:singleLine="true"
-                    android:textColor="?attr/colorText" />
+                    android:singleLine="true" />
 
                 <TextView
                     android:id="@+id/tv_mode"
@@ -64,8 +63,7 @@
                     android:drawableStart="@drawable/ic_status_neutral"
                     android:drawableLeft="@drawable/ic_status_neutral"
                     android:gravity="center_vertical"
-                    android:singleLine="true"
-                    android:textColor="?attr/colorText" />
+                    android:singleLine="true" />
 
             </RelativeLayout>
 
@@ -86,7 +84,7 @@
                     android:gravity="center"
                     android:padding="7dp"
                     android:singleLine="true"
-                    android:textColor="?attr/colorText"
+
                     android:textStyle="bold" />
 
                 <TextView
@@ -98,8 +96,7 @@
                     android:background="@drawable/text_view_shape"
                     android:gravity="center"
                     android:padding="7dp"
-                    android:singleLine="true"
-                    android:textColor="?attr/colorText" />
+                    android:singleLine="true" />
 
                 <TextView
                     android:id="@+id/tv_custom_title"
@@ -110,8 +107,7 @@
                     android:background="@drawable/text_view_shape"
                     android:gravity="center"
                     android:padding="7dp"
-                    android:singleLine="true"
-                    android:textColor="?attr/colorText" />
+                    android:singleLine="true" />
             </LinearLayout>
 
             <TextView
@@ -126,8 +122,7 @@
                 android:focusable="true"
                 android:gravity="center_vertical"
                 android:padding="7dp"
-                android:singleLine="true"
-                android:textColor="?attr/colorText" />
+                android:singleLine="true" />
 
             <TextView
                 android:id="@+id/tv_birthday"
@@ -141,8 +136,7 @@
                 android:focusable="true"
                 android:gravity="center_vertical"
                 android:padding="7dp"
-                android:singleLine="true"
-                android:textColor="?attr/colorText" />
+                android:singleLine="true" />
 
             <TextView
                 android:id="@+id/tv_sekolah"
@@ -156,8 +150,7 @@
                 android:focusable="true"
                 android:gravity="center_vertical"
                 android:padding="7dp"
-                android:singleLine="true"
-                android:textColor="?attr/colorText" />
+                android:singleLine="true" />
 
             <TextView
                 android:id="@+id/tv_state"
@@ -171,8 +164,7 @@
                 android:focusable="true"
                 android:gravity="center_vertical"
                 android:padding="7dp"
-                android:singleLine="true"
-                android:textColor="?attr/colorText" />
+                android:singleLine="true" />
 
             <TextView
                 android:id="@+id/tv_bio"
@@ -185,8 +177,7 @@
                 android:drawableLeft="@drawable/ic_bio"
                 android:focusable="true"
                 android:gravity="center_vertical"
-                android:padding="7dp"
-                android:textColor="?attr/colorText" />
+                android:padding="7dp" />
 
             <TextView
                 android:id="@+id/tv_created_date"
@@ -200,8 +191,7 @@
                 android:focusable="true"
                 android:gravity="center_vertical"
                 android:padding="7dp"
-                android:singleLine="true"
-                android:textColor="?attr/colorText" />
+                android:singleLine="true" />
 
             <TextView
                 android:id="@+id/tv_post_count"
@@ -215,8 +205,7 @@
                 android:focusable="true"
                 android:gravity="center_vertical"
                 android:padding="7dp"
-                android:singleLine="true"
-                android:textColor="?attr/colorText" />
+                android:singleLine="true" />
 
             <TextView
                 android:id="@+id/tv_reputation"
@@ -230,8 +219,7 @@
                 android:focusable="true"
                 android:gravity="center_vertical"
                 android:padding="7dp"
-                android:singleLine="true"
-                android:textColor="?attr/colorText" />
+                android:singleLine="true" />
 
             <TextView
                 android:id="@+id/tv_reputation_power"
@@ -246,8 +234,7 @@
                 android:focusable="true"
                 android:gravity="center_vertical"
                 android:padding="7dp"
-                android:singleLine="true"
-                android:textColor="?attr/colorText" />
+                android:singleLine="true" />
 
             <Button
                 android:id="@+id/b_disable"
@@ -256,7 +243,7 @@
                 android:layout_marginBottom="7dp"
                 android:background="@color/colorRed"
                 android:text="@string/disable"
-                android:textColor="?attr/colorText"
+
                 android:visibility="gone" />
         </LinearLayout>
     </ScrollView>

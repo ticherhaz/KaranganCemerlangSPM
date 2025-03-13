@@ -5,37 +5,27 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorPrimarySoft">@color/colorPrimarySoft</item>
-        <item name="colorBackground">@color/colorBackground</item>
-        <item name="colorBackgroundRecyclerView">@color/colorBackgroundRecyclerView</item>
-        <item name="colorButtonText">@color/colorButtonText</item>
-        <item name="colorText">@color/colorText</item>
-        <item name="colorLine">@color/colorLine</item>
-        <item name="android:textColorHint">?attr/colorText</item>
+        <item name="android:textColorHint"></item>
 
-        <item name="android:itemBackground">?attr/colorBackgroundRecyclerView</item>
         <item name="android:itemTextAppearance">@style/menuTextColor</item>]
 
-        <item name="android:actionMenuTextColor">?attr/colorText</item>
+        <item name="android:actionMenuTextColor"></item>
 
     </style>
 
     <style name="styleCardView">
-        <item name="cardBackgroundColor">?attr/colorBackgroundRecyclerView</item>
-        <item name="cardCornerRadius">11dp</item>
-        <item name="cardElevation">3dp</item>
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">4dp</item>
     </style>
 
     <style name="styleCardViewRight">
         <item name="android:gravity">right</item>
         <item name="android:layout_gravity">right</item>
-        <item name="cardBackgroundColor">?attr/colorBackgroundRecyclerView</item>
         <item name="cardCornerRadius">11dp</item>
         <item name="cardElevation">3dp</item>
     </style>
 
     <style name="styleSpinner" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
-        <item name="android:background">?attr/colorBackgroundRecyclerView</item>
         <item name="android:textColorHighlight">@color/colorTextWhite</item>
         <item name="android:textColorPrimary">@color/colorTextWhite</item>
         <item name="android:textColor">@color/colorTextWhite</item>
@@ -46,20 +36,13 @@
         <item name="colorPrimary">@color/colorPrimaryNight</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkNight</item>
         <item name="colorAccent">@color/colorAccentNight</item>
-        <item name="colorPrimarySoft">@color/colorPrimarySoftNight</item>
-        <item name="colorBackground">@color/colorBackgroundNight</item>
-        <item name="colorBackgroundRecyclerView">@color/colorBackgroundRecyclerViewNight</item>
-        <item name="colorButtonText">@color/colorButtonTextNight</item>
-        <item name="colorText">@color/colorTextNight</item>
-        <item name="colorLine">@color/colorLineNight</item>
 
         <!-- yang ni crucial part, walaupun nampak duplicate dgn yg app theme pertama tu, tapi dak, ini penting jugak , kena initialize untuk night jugak -->
-        <item name="android:textColorHint">?attr/colorText</item>
+        <item name="android:textColorHint"></item>
 
-        <item name="android:itemBackground">?attr/colorBackgroundRecyclerView</item>
         <item name="android:itemTextAppearance">@style/menuTextColor</item>
 
-        <item name="android:actionMenuTextColor">?attr/colorText</item>
+        <item name="android:actionMenuTextColor"></item>
 
     </style>
 
@@ -71,7 +54,7 @@
 
     <!-- This part for the app bar -->
     <style name="menuTextColor" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
-        <item name="android:textColor">?attr/colorText</item>
+        <item name="android:textColor"></item>
     </style>
 
     <style name="menuTextColorA" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -80,19 +63,7 @@
     </style>
 
     <style name="editTextColorText" parent="@android:style/TextAppearance">
-        <item name="android:textColor">?attr/colorText</item>
+        <item name="android:textColor"></item>
     </style>
 
-    <declare-styleable name="skin_attr">
-        <attr name="colorPrimarySoft" format="color|reference" />
-        <attr name="colorPrimary" format="color|reference" />
-        <attr name="colorPrimaryDark" format="color|reference" />
-        <attr name="colorAccent" format="color|reference" />
-        <attr name="colorBackground" format="color|reference" />
-        <attr name="colorBackgroundRecyclerView" format="color|reference" />
-        <attr name="colorButtonText" format="color|reference" />
-        <attr name="colorText" format="color|reference" />
-        <attr name="colorLine" format="color|reference" />
-        <attr name="cardBackgroundColor" format="color|reference" />
-    </declare-styleable>
 </resources>

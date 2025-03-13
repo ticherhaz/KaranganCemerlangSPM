@@ -29,6 +29,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,8 +41,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.zxy.skin.sdk.SkinActivity;
-import com.zxy.skin.sdk.SkinEngine;
 
 import net.ticherhaz.karangancemerlangspm.model.Karangan;
 import net.ticherhaz.karangancemerlangspm.utils.Others;
@@ -52,7 +51,7 @@ import net.ticherhaz.karangancemerlangspm.viewHolder.KaranganViewHolder;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
-public class MainActivity extends SkinActivity {
+public class MainActivity extends AppCompatActivity {
 
     //private static final String AD_UNIT_ID_BANNER = "ca-app-pub-3940256099942544/9214589741";
     //private static final String AD_UNIT_ID_INTERSTITIAL = "ca-app-pub-3940256099942544/1033173712";
@@ -816,7 +815,6 @@ public class MainActivity extends SkinActivity {
 
         if (id == R.id.action_skin) {
             if (item.isChecked()) {
-                SkinEngine.changeSkin(R.style.AppTheme);
                 item.setChecked(false);
 
                 //Shared Preference
@@ -830,7 +828,6 @@ public class MainActivity extends SkinActivity {
 
                 //we clear the text search to avoid the changes of the color night mode
             } else {
-                SkinEngine.changeSkin(R.style.AppNightTheme);
                 item.setChecked(true);
 
                 //Shared Preference

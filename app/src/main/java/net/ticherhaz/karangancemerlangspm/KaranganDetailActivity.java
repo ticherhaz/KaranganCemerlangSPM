@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.billingclient.api.BillingClient;
@@ -37,7 +38,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.model.DownloadKarangan;
 import net.ticherhaz.karangancemerlangspm.utils.DoubleClickListener;
@@ -48,7 +48,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Objects;
 
-public class KaranganDetailActivity extends SkinActivity implements PurchasesUpdatedListener {
+public class KaranganDetailActivity extends AppCompatActivity implements PurchasesUpdatedListener {
 
     private BillingClient billingClient;
     private RecyclerView recyclerView;
@@ -92,7 +92,6 @@ public class KaranganDetailActivity extends SkinActivity implements PurchasesUpd
         buttonFont = findViewById(R.id.button_font);
         progressBarMain = findViewById(R.id.pb_main);
         recyclerView = findViewById(R.id.products);
-        recyclerView.setHasFixedSize(true);
 
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference().child("karangan");

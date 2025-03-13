@@ -58,7 +58,7 @@ class NotificationUtil {
         String notificationChannelId =
                 NotificationUtil.createNotificationChannel(context, channelUid, channelName, channelDescription);
 
-        final Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_192dp);
+        final Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_icon_128dp);
 
         // 2. Build the BIG_TEXT_STYLE.
         NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle()
@@ -86,7 +86,7 @@ class NotificationUtil {
                 .setStyle(bigTextStyle)
                 .setContentTitle(title)
                 .setContentText(description)
-                .setSmallIcon(R.drawable.icon_192dp)
+                .setSmallIcon(R.drawable.ic_icon_128dp)
                 .setLargeIcon(bitmap)
                 .setContentIntent(notifyPendingIntent)
                 .setDefaults(NotificationCompat.DEFAULT_ALL) //ini untuk sound light and vibrate
@@ -125,7 +125,7 @@ class NotificationUtil {
         notifyIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent notifyPendingIntent = PendingIntent.getActivity(context, notificationUid, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        final Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_192dp);
+        final Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_icon_128dp);
 
         assert notificationChannelId != null;
         NotificationCompat.Builder notificationCompatBuilder =
@@ -136,7 +136,7 @@ class NotificationUtil {
                 .setStyle(bigTextStyle)
                 .setContentTitle(title)
                 .setContentText(description)
-                .setSmallIcon(R.drawable.icon_192dp)
+                .setSmallIcon(R.drawable.ic_icon_128dp)
                 .setLargeIcon(bitmap)
                 .setContentIntent(notifyPendingIntent)
                 .setDefaults(NotificationCompat.DEFAULT_ALL) //ini untuk sound light and vibrate

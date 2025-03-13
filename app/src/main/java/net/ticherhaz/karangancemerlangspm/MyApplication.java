@@ -8,11 +8,6 @@ import android.content.SharedPreferences;
 
 import androidx.multidex.MultiDex;
 
-import com.zxy.skin.sdk.SkinEngine;
-
-import net.ticherhaz.karangancemerlangspm.skinApplicator.SkinCustomViewApplicator;
-import net.ticherhaz.karangancemerlangspm.widget.CustomView;
-
 
 public class MyApplication extends Application {
 
@@ -25,8 +20,6 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         AndroidThreeTenBP(this);
-        SkinEngine.changeSkin(R.style.AppTheme);
-        SkinEngine.registerSkinApplicator(CustomView.class, new SkinCustomViewApplicator());
         setSharedPreferences();
     }
 
@@ -49,11 +42,7 @@ public class MyApplication extends Application {
 
         if (mod != null) {
             if (mod.equals("PUTIH")) {
-                SkinEngine.changeSkin(R.style.AppTheme);
-                SkinEngine.registerSkinApplicator(CustomView.class, new SkinCustomViewApplicator());
             } else {
-                SkinEngine.changeSkin(R.style.AppNightTheme);
-                SkinEngine.registerSkinApplicator(CustomView.class, new SkinCustomViewApplicator());
             }
         }
     }

@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,14 +34,13 @@ import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
-import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.model.Umum;
 import net.ticherhaz.karangancemerlangspm.viewHolder.UmumHolder;
 import net.ticherhaz.tarikhmasa.TarikhMasa;
 
-public class UmumActivity extends SkinActivity {
+public class UmumActivity extends AppCompatActivity {
 
     //Firebase
     private FirebaseDatabase firebaseDatabase;
@@ -125,7 +125,7 @@ public class UmumActivity extends SkinActivity {
                                             .load(profileUrl)
                                             .into(holder.getImageViewProfile());
                                 } else {
-                                    holder.getImageViewProfile().setImageResource(R.drawable.emblem);
+                                    holder.getImageViewProfile().setImageResource(R.drawable.ic_icon_128dp);
                                 }
                             }
                         }

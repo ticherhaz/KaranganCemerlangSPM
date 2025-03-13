@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
 
-import com.zxy.skin.sdk.SkinActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class ForumSplashActivity extends SkinActivity {
+public class ForumSplashActivity extends AppCompatActivity {
 
     private String userUid;
 

@@ -14,13 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
-import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.utils.MyUploadService;
 
-public class HantarKaranganActivity extends SkinActivity {
+public class HantarKaranganActivity extends AppCompatActivity {
 
     public static final String KEY_USER_UID = "key_user_uid";
     // private static final int PERMISSION_CAMERA = 45;

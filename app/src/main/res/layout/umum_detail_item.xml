@@ -16,7 +16,7 @@
             android:id="@+id/text_view_masa_dibalas_oleh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="?attr/colorText"
+
             android:textSize="12sp"
             android:textStyle="italic" />
 
@@ -31,7 +31,7 @@
                 android:layout_width="107dp"
                 android:layout_height="107dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/emblem" />
+                android:src="@mipmap/ic_launcher_foreground" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -51,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="3dp"
                         android:layout_marginLeft="3dp"
-                        android:textColor="?attr/colorText"
+
                         android:textSize="21sp"
                         android:textStyle="bold" />
 
@@ -61,8 +61,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="3dp"
                         android:layout_marginLeft="3dp"
-                        android:fontFamily="@font/merriweather"
-                        android:textColor="?attr/colorText" />
+                        android:fontFamily="@font/merriweather" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -74,8 +73,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="3dp"
-                        android:layout_marginLeft="3dp"
-                        android:textColor="?attr/colorText" />
+                        android:layout_marginLeft="3dp" />
 
                     <TextView
                         android:id="@+id/text_view_reputation"
@@ -83,8 +81,7 @@
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_reputation"
                         android:drawableLeft="@drawable/ic_reputation"
-                        android:gravity="center_vertical"
-                        android:textColor="?attr/colorText" />
+                        android:gravity="center_vertical" />
                 </LinearLayout>
 
                 <RelativeLayout
@@ -101,8 +98,7 @@
                         android:layout_marginLeft="3dp"
                         android:drawableStart="@drawable/ic_status_neutral"
                         android:drawableLeft="@drawable/ic_status_neutral"
-                        android:gravity="center_vertical"
-                        android:textColor="?attr/colorText" />
+                        android:gravity="center_vertical" />
                 </RelativeLayout>
 
                 <TextView
@@ -113,8 +109,7 @@
                     android:layout_marginLeft="3dp"
                     android:drawableStart="@drawable/ic_pos"
                     android:drawableLeft="@drawable/ic_pos"
-                    android:gravity="center_vertical"
-                    android:textColor="?attr/colorText" />
+                    android:gravity="center_vertical" />
             </LinearLayout>
         </LinearLayout>
 
@@ -139,15 +134,14 @@
                         android:layout_height="wrap_content"
                         android:maxLines="29"
                         android:scrollbars="vertical"
-                        android:textColor="?attr/colorText"
-                        android:textColorHint="?attr/colorText"
+
+
                         android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/text_view_deskripsi"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="?attr/colorText" />
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>

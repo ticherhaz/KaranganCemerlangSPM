@@ -3,13 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorBackground"
     android:orientation="vertical"
     tools:context=".ForumActivity">
 
     <ProgressBar
         android:id="@+id/progressbar"
-        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="-7dp"
@@ -32,7 +30,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
             android:text="@string/_0_online_s"
-            android:textColor="?attr/colorText"
             android:textStyle="italic" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -47,7 +44,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="?attr/colorPrimary"
         android:orientation="vertical">
 
         <LinearLayout
@@ -114,7 +110,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="3dp"
                     android:layout_marginLeft="3dp"
-                    android:src="@drawable/emblem" />
+                    android:src="@mipmap/ic_launcher_foreground" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

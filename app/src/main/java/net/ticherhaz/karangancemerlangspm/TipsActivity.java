@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.billingclient.api.BillingClient;
@@ -22,14 +23,13 @@ import com.android.billingclient.api.QueryProductDetailsParams;
 import com.google.common.collect.ImmutableList;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.model.Donat2;
 import net.ticherhaz.karangancemerlangspm.utils.MyProductAdapter;
 
 import java.util.List;
 
-public class TipsActivity extends SkinActivity implements PurchasesUpdatedListener {
+public class TipsActivity extends AppCompatActivity implements PurchasesUpdatedListener {
 
     private BillingClient billingClient;
     private RecyclerView recyclerView;

@@ -182,7 +182,7 @@ public class Profile2Activity extends AppCompatActivity {
                                     .load(profileUrl)
                                     .into(ivProfile);
                         } else {
-                            ivProfile.setImageResource(R.drawable.emblem);
+                            ivProfile.setImageResource(R.drawable.ic_icon_128dp);
                         }
 
                         tvUsername.setText(registeredUser.getUsername());

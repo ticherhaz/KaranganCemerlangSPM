@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
@@ -33,14 +34,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.zxy.skin.sdk.SkinActivity;
 
 import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.utils.Others;
 
 import java.util.Locale;
 
-public class ProfileActivity extends SkinActivity {
+public class ProfileActivity extends AppCompatActivity {
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private String registeredUid;
@@ -182,7 +182,7 @@ public class ProfileActivity extends SkinActivity {
                                     .load(profileUrl)
                                     .into(ivProfile);
                         } else {
-                            ivProfile.setImageResource(R.drawable.emblem);
+                            ivProfile.setImageResource(R.drawable.ic_icon_128dp);
                         }
                         tvUsername.setText(registeredUser.getUsername());
 

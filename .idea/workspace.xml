@@ -5,9 +5,39 @@
       <config />
     </shared>
     <layouts>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_about_us.xml">
+        <config>
+          <theme>@style/AppThemeVersion2025</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_donation.xml">
+        <config>
+          <theme>@style/AppThemeVersion2025</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_feedback.xml">
+        <config>
+          <theme>@style/AppThemeVersion2025</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_forum.xml">
+        <config>
+          <theme>@style/AppThemeVersion2025</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_hantar_karangan.xml">
+        <config>
+          <theme>@style/AppThemeVersion2025</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
         <config>
           <theme>@android:style/Theme.Material.Light</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_peribahasa.xml">
+        <config>
+          <theme>@style/AppThemeVersion2025</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tips.xml">
@@ -15,7 +45,42 @@
           <theme>@android:style/Theme.Material.Light</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tips_karangan.xml">
+        <config>
+          <theme>@style/AppThemeVersion2025</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_umum_detail.xml">
+        <config>
+          <theme>@style/AppThemeVersion2025</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_info_permissions.xml">
+        <config>
+          <theme>@style/AppThemeVersion2025</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/font_dialog.xml">
+        <config>
+          <theme>@style/AppThemeVersion2025</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/forum_item.xml">
+        <config>
+          <theme>@style/AppThemeVersion2025</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/item_menu.xml">
+        <config>
+          <theme>@style/AppThemeVersion2025</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/jenis_item.xml">
+        <config>
+          <theme>@style/AppThemeVersion2025</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/karangan_item.xml">
         <config>
           <theme>@style/AppThemeVersion2025</theme>
         </config>
@@ -25,9 +90,39 @@
           <theme>@android:style/Theme.Material.Light</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/my_product_download_karangan.xml">
+        <config>
+          <theme>@style/AppThemeVersion2025</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/online_user_item.xml">
+        <config>
+          <theme>@style/AppThemeVersion2025</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/peribahasa_item.xml">
+        <config>
+          <theme>@style/AppThemeVersion2025</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/spinner_item.xml">
+        <config>
+          <theme>@style/AppThemeVersion2025</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/status_dialog.xml">
+        <config>
+          <theme>@style/AppThemeVersion2025</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/umum_item.xml">
+        <config>
+          <theme>@style/AppThemeVersion2025</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/version2025_activity_main.xml">
         <config>
-          <theme>@android:style/Theme.Material.Light</theme>
+          <theme>@style/AppThemeVersion2025</theme>
         </config>
       </layout>
     </layouts>
@@ -36,79 +131,170 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9abd2463-2841-4bbc-9170-e82435e56e6b" name="Changes" comment="350">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/MyApp.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/model/Menu.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/tools/QuickSave.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/ui/MainActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/viewmodel/MainViewModel.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_essay_24dp.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/font/syne.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_menu.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/version2025_activity_main.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.3/checksums/checksums.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.3/checksums/md5-checksums.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.3/checksums/sha1-checksums.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.3/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.3/dependencies-accessors/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.3/executionHistory/executionHistory.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.3/executionHistory/executionHistory.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.3/fileChanges/last-build.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.3/fileHashes/fileHashes.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.3/fileHashes/fileHashes.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.3/fileHashes/resourceHashesCache.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.3/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/checksums/checksums.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/checksums/md5-checksums.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/checksums/sha1-checksums.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/dependencies-accessors/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileChanges/last-build.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/resourceHashesCache.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.7/checksums/checksums.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.7/checksums/md5-checksums.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.7/checksums/sha1-checksums.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.7/dependencies-accessors/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.7/executionHistory/executionHistory.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.7/executionHistory/executionHistory.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.7/fileChanges/last-build.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.7/fileHashes/fileHashes.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.7/fileHashes/fileHashes.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.7/fileHashes/resourceHashesCache.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.7/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/appInsightsSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/appInsightsSettings.xml" afterDir="false" />
+    <list default="true" id="9abd2463-2841-4bbc-9170-e82435e56e6b" name="Changes" comment="Prepare to update v1">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/adapter/MenuAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/adapter/MyProductAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/enumerator/HttpCode.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/enumerator/PermissionNotificationCondition.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/enumerator/SystemStatus.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/model/System.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/repository/AnnotationCustom.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/repository/ApplicationModule.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/retrofit/Resource.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/tools/ActivityResultLauncherUtils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/tools/Constant.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/tools/DialogUtils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/tools/Tools.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/ui/donation/DonationActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_donation_24dp.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_forum_24dp.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_icon_128dp.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_idiom_24dp.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_tips_24dp.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_donation.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/release/app-release.aab" beforeDir="false" afterPath="$PROJECT_DIR$/app/release/app-release.aab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/ic_launcher-playstore.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/ic_launcher-playstore.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/AboutUsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/AboutUsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/ChangePasswordActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/ChangePasswordActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/FeedbackActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/FeedbackActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/ForumActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/ForumActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/ForumSplashActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/ForumSplashActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/HantarKaranganActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/HantarKaranganActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/HubungiKamiActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/HubungiKamiActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/HubungiKamiUserActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/HubungiKamiUserActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/JenisKaranganActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/JenisKaranganActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/KaranganDetailActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/KaranganDetailActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/MyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/MyApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/OnlineUserActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/OnlineUserActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/PeribahasaActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/PeribahasaActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/Profile2Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/Profile2Activity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/ProfileActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/ProfileActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/ProfileEditActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/ProfileEditActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/SenaraiKaranganActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/SenaraiKaranganActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/SettingActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/SettingActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/SignInActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/SignInActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/SignUpActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/SignUpActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/SplashActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/SplashActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/TipsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/TipsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/TipsKaranganActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/TipsKaranganActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/TopikBaruActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/TopikBaruActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/UmumActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/UmumActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/UmumDetailActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/UmumDetailActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/recyclerview/UmumDetailRecyclerView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/recyclerview/UmumDetailRecyclerView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/service/NotificationUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/service/NotificationUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/skinApplicator/SkinCustomViewApplicator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/utils/MyProductAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/utils/MyProductAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/utils/PermissionUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/utils/PermissionUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/MyApp.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/MyApp.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/tools/QuickSave.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/tools/QuickSave.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/ui/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/ui/main/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/viewmodel/MainViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/ui/main/MainViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/emblem_noti.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/emblem.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/icon_192dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_about_us.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_about_us.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_change_password.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_change_password.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_feedback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_feedback.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_forum.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_forum.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_forum_splash.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_forum_splash.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_hantar_karangan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_hantar_karangan.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_hubungi_kami.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_hubungi_kami.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_hubungi_kami_user.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_hubungi_kami_user.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_jenis_karangan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_jenis_karangan.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_karangan_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_karangan_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_online_user.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_online_user.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_peribahasa.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_peribahasa.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_profile.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_profile2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_profile2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_profile_edit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_profile_edit.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_senarai_karangan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_senarai_karangan.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_setting.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_setting.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_sign_in.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sign_in.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_sign_up.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sign_up.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_splash.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_splash.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_tips.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_tips.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_tips_karangan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_tips_karangan.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_topik_baru.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_topik_baru.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_umum.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_umum.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_umum_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_umum_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/dialog_about.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_about.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/font_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/font_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/forum_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/forum_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/hubungi_kami_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/hubungi_kami_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/hubungi_kami_sender_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/hubungi_kami_sender_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/jenis_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/jenis_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/karangan_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/karangan_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/my_product.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/my_product.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/online_user_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/online_user_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/peribahasa_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/peribahasa_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/sign_in_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/sign_in_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/sign_up_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/sign_up_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/spinner_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/spinner_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/status_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/status_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/umum_detail_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/umum_detail_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/umum_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/umum_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/version2025_activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/version2025_activity_main.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/ic_launcher_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/ic_launcher_background.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/skins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/skins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/lib/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/java/com/zxy/skin/sdk/Logger.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/java/com/zxy/skin/sdk/SkinActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/java/com/zxy/skin/sdk/SkinEngine.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/java/com/zxy/skin/sdk/SkinFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/java/com/zxy/skin/sdk/SkinLayoutInflater.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/java/com/zxy/skin/sdk/applicator/SkinApplicatorManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/java/com/zxy/skin/sdk/applicator/SkinTextViewApplicator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/java/com/zxy/skin/sdk/applicator/SkinViewApplicator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +304,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\Hazman\.android\avd\Pixel_6a_API_28_A9.avd)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\Hazman\.android\avd\Pixel_7_Pro_A15_API35.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -127,9 +313,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin Class" />
-        <option value="Kotlin Data Class" />
         <option value="layoutResourceFile" />
+        <option value="Kotlin Class" />
+        <option value="Kotlin Object" />
+        <option value="Kotlin Data Class" />
+        <option value="Kotlin Enum" />
       </list>
     </option>
   </component>
@@ -156,6 +344,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -167,50 +358,62 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Android App.app.executor&quot;: &quot;Run&quot;,
-    &quot;BundleExportedModule&quot;: &quot;KaranganCemerlangSPM.app&quot;,
-    &quot;ExportBundle.BundlePathForKaranganCemerlangSPM.app&quot;: &quot;C:\\Ticherhaz\\Challenger\\AndroidStudio\\KaranganCemerlangSPM\\app&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;android-custom-viewC:/Program Files/Android/Android Studio/jbr/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.3.1/863be7264bcda9a6591b855b6219be040badb588/recyclerview-1.3.1-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED&quot;: &quot;RecyclerView&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Ticherhaz/Challenger/AndroidStudio/Tarikh&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Android App.app.executor": "Run",
+    "BundleExportedModule": "Karagan_Cemerlang_SPM.app",
+    "ExportBundle.BundlePathForKaragan_Cemerlang_SPM.app": "C:\\Ticherhaz\\Challenger\\AndroidStudio\\KaranganCemerlangSPM\\app",
+    "ExportBundle.BundlePathForKaranganCemerlangSPM.app": "C:\\Ticherhaz\\Challenger\\AndroidStudio\\KaranganCemerlangSPM\\app",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "android-custom-viewC:/Program Files/Android/Android Studio/jbr/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.3.1/863be7264bcda9a6591b855b6219be040badb588/recyclerview-1.3.1-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED": "RecyclerView",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Ticherhaz/Challenger/AndroidStudio/KaranganCemerlangSPM/app/src/main/java/net/ticherhaz/karangancemerlangspm/version2025/repository",
+    "project.structure.last.edited": "Suggestions",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "show.migrate.to.gradle.popup": "false"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;ExportApk.BuildVariants&quot;: [
-      &quot;release&quot;
+  "keyToStringList": {
+    "ExportApk.BuildVariants": [
+      "release"
     ],
-    &quot;android.recentlyUsedThemes&quot;: [
-      &quot;Base.Theme.Material3.Light&quot;
+    "android.recentlyUsedThemes": [
+      "Base.Theme.Material3.Light"
     ]
   }
-}</component>
+}]]></component>
   <component name="PsdUISettings">
     <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Ticherhaz\Challenger\AndroidStudio\KaranganCemerlangSPM\app\src\main\java\net\ticherhaz\karangancemerlangspm\version2025\repository" />
       <recent name="C:\Ticherhaz\Challenger\AndroidStudio\KaranganCemerlangSPM\app\src\main\res\drawable" />
       <recent name="C:\Ticherhaz\Challenger\AndroidStudio\KaranganCemerlangSPM\app\src\main\res\layout" />
     </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="net.ticherhaz.karangancemerlangspm.version2025.ui.main" />
+    </key>
+    <key name="android.template.-328281747">
+      <recent name="net.ticherhaz.karangancemerlangspm.version2025.ui.donation" />
+    </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
       <recent name="net.ticherhaz.karangancemerlangspm.version2025.tools" />
+      <recent name="net.ticherhaz.karangancemerlangspm.version2025.enumerator" />
+      <recent name="net.ticherhaz.karangancemerlangspm.version2025.repository" />
+      <recent name="net.ticherhaz.karangancemerlangspm.version2025.retrofit" />
       <recent name="net.ticherhaz.karangancemerlangspm.util" />
     </key>
     <key name="android.template.1125336903">
@@ -235,6 +438,7 @@
       <option name="MODE" value="default_activity" />
       <option name="RESTORE_ENABLED" value="false" />
       <option name="RESTORE_FILE" value="" />
+      <option name="RESTORE_FRESH_INSTALL_ONLY" value="false" />
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
@@ -349,17 +553,29 @@
       <option name="project" value="LOCAL" />
       <updated>1713859233355</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Prepare to update v1">
+      <option name="closed" value="true" />
+      <created>1740903518836</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1740903518836</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="updated" />
     <MESSAGE value="347.&#10;Updated In app billing for Download KaranganDetailActivity.java" />
     <MESSAGE value="348" />
     <MESSAGE value="350" />
     <MESSAGE value="351" />
-    <option name="LAST_COMMIT_MESSAGE" value="351" />
+    <MESSAGE value="Prepare to update v1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Prepare to update v1" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -367,14 +583,19 @@
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
       <map>
+        <entry key="com.zxy.skin.sdk.test">
+          <value>
+            <CheckInfo lastCheckTimestamp="1741666050728" />
+          </value>
+        </entry>
         <entry key="net.ticherhaz.karangancemerlangspm">
           <value>
-            <CheckInfo lastCheckTimestamp="1740899628682" />
+            <CheckInfo lastCheckTimestamp="1741794107959" />
           </value>
         </entry>
         <entry key="net.ticherhaz.karangancemerlangspm.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1740899628697" />
+            <CheckInfo lastCheckTimestamp="1741794107989" />
           </value>
         </entry>
       </map>

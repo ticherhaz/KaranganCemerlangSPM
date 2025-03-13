@@ -35,9 +35,7 @@ object PermissionUtils {
                         override fun onBtnContinueClicked() {
 
                             XXPermissions.with(activity)
-                                .permission(Permission.READ_MEDIA_IMAGES)
-                                .permission(Permission.READ_MEDIA_VIDEO)
-                                .permission(Permission.READ_MEDIA_AUDIO)
+                                .permission(Permission.WRITE_EXTERNAL_STORAGE)
                                 .permission(Permission.POST_NOTIFICATIONS)
                                 .permission(Permission.CAMERA)
                                 .request(object : OnPermissionCallback {

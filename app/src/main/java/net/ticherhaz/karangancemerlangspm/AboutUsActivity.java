@@ -6,9 +6,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 
-import com.zxy.skin.sdk.SkinActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class AboutUsActivity extends SkinActivity {
+public class AboutUsActivity extends AppCompatActivity {
 
     private Button btnRating;
 

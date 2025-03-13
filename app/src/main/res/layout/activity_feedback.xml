@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorBackground"
+
     tools:context=".FeedbackActivity">
 
     <LinearLayout
@@ -18,9 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="9dp"
             android:layout_marginTop="11dp"
-            android:layout_marginRight="9dp"
-            android:background="?attr/colorBackgroundRecyclerView"
-            android:popupBackground="?attr/colorBackgroundRecyclerView" />
+            android:layout_marginRight="9dp" />
 
         <EditText
             android:id="@+id/edit_text_email"
@@ -33,7 +31,7 @@
             android:inputType="textEmailAddress"
             android:padding="7dp"
             android:singleLine="true"
-            android:textColor="?attr/colorText"
+
             tools:targetApi="o" />
 
         <EditText
@@ -49,7 +47,7 @@
             android:padding="7dp"
             android:scrollbars="vertical"
             android:scrollHorizontally="false"
-            android:textColor="?attr/colorText"
+
             tools:targetApi="o" />
 
         <Button
