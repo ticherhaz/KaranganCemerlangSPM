@@ -9,7 +9,6 @@
     <uses-permission android:name="com.android.vending.BILLING" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -27,6 +26,11 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:theme="@style/AppThemeVersion2025"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,HardcodedDebugMode">
+
+        <activity
+            android:name=".version2025.ui.forum.SignUpActivity"
+            android:exported="false" />
+
         <meta-data
             android:name="ScopedStorage"
             android:value="true" />

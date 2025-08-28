@@ -4,7 +4,6 @@ import static net.ticherhaz.karangancemerlangspm.utils.Others.isNetworkAvailable
 import static net.ticherhaz.karangancemerlangspm.utils.Others.messageInternetMessage;
 import static net.ticherhaz.karangancemerlangspm.utils.ProgressDialogCustom.dismissProgressDialog;
 import static net.ticherhaz.karangancemerlangspm.utils.ProgressDialogCustom.showProgressDialog;
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import net.ticherhaz.karangancemerlangspm.model.Feedback;
+import net.ticherhaz.tarikhmasa.TarikhMasa;
 
 public class FeedbackActivity extends AppCompatActivity {
 
@@ -87,7 +87,7 @@ public class FeedbackActivity extends AppCompatActivity {
                     String typeProblem = spinner.getSelectedItem().toString();
                     String email = editTextEmail.getText().toString();
                     String description = editTextDescription.getText().toString();
-                    String date = GetTarikhMasa();
+                    String date = TarikhMasa.INSTANCE.GetTarikhMasa();
                     String uid = databaseReference.push().getKey();
 
                     Feedback feedback = new Feedback(uid, userUid, phoneModel, typeProblem, email, description, date);
@@ -125,6 +125,7 @@ public class FeedbackActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         finish();
     }
 

@@ -1,7 +1,6 @@
 package net.ticherhaz.karangancemerlangspm;
 
 import static net.ticherhaz.karangancemerlangspm.utils.Others.ShowToast;
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +16,8 @@ import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.ConsumeParams;
+import com.android.billingclient.api.PendingPurchasesParams;
+import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.QueryProductDetailsParams;
@@ -26,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import net.ticherhaz.karangancemerlangspm.model.Donat2;
 import net.ticherhaz.karangancemerlangspm.utils.MyProductAdapter;
+import net.ticherhaz.tarikhmasa.TarikhMasa;
 
 import java.util.List;
 
@@ -52,8 +54,9 @@ public class TipsActivity extends AppCompatActivity implements PurchasesUpdatedL
     }
 
     private void setBillingClient() {
+        final PendingPurchasesParams pendingPurchasesParams = PendingPurchasesParams.newBuilder().enablePrepaidPlans().build();
         billingClient = BillingClient.newBuilder(this)
-                .enablePendingPurchases()
+                .enablePendingPurchases(pendingPurchasesParams)
                 .setListener(this)
                 .build();
         billingClient.startConnection(new BillingClientStateListener() {
@@ -92,8 +95,8 @@ public class TipsActivity extends AppCompatActivity implements PurchasesUpdatedL
                                 QueryProductDetailsParams.newBuilder()
                                         .setProductList(productList)
                                         .build();
-                        billingClient.queryProductDetailsAsync(queryProductDetailsParams, (billingResult2, productDetailsList) -> {
-
+                        billingClient.queryProductDetailsAsync(queryProductDetailsParams, (billingResult2, queryProductDetailsResult) -> {
+                            final List<ProductDetails> productDetailsList = queryProductDetailsResult.getProductDetailsList();
                                     final MyProductAdapter adapter = new MyProductAdapter(TipsActivity.this, productDetailsList, billingClient);
                                     runOnUiThread(() -> {
                                         recyclerView.setAdapter(adapter);
@@ -138,7 +141,7 @@ public class TipsActivity extends AppCompatActivity implements PurchasesUpdatedL
                 if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                     //Success purchased
                     final String userPurchasedCoinsMoreUid = FirebaseDatabase.getInstance().getReference().push().getKey();
-                    final String onPurchasedDateUTC = GetTarikhMasa();
+                    final String onPurchasedDateUTC = TarikhMasa.INSTANCE.GetTarikhMasa();
                     final long onPurchasedDate = System.currentTimeMillis();
 
                     final String orderUid = purchase.getOrderId();

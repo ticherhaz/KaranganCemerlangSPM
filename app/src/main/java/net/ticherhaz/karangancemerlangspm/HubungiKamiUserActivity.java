@@ -1,7 +1,6 @@
 package net.ticherhaz.karangancemerlangspm;
 
 import static net.ticherhaz.karangancemerlangspm.utils.Others.messageInternetMessage;
-import static net.ticherhaz.tarikhmasa.TarikhMasa.ConvertTarikhMasa2LocalTime;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import net.ticherhaz.karangancemerlangspm.model.HubungiKamiChat;
 import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.viewHolder.HubungiKamiViewHolder;
+import net.ticherhaz.tarikhmasa.TarikhMasa;
 
 public class HubungiKamiUserActivity extends AppCompatActivity {
 
@@ -60,7 +60,7 @@ public class HubungiKamiUserActivity extends AppCompatActivity {
         fRa = new FirebaseRecyclerAdapter<HubungiKamiChat, HubungiKamiViewHolder>(fRO) {
             @Override
             protected void onBindViewHolder(@NonNull final HubungiKamiViewHolder hubungiKamiViewHolder, final int i, @NonNull final HubungiKamiChat hubungiKamiChat) {
-                hubungiKamiViewHolder.getTvDate().setText(ConvertTarikhMasa2LocalTime(hubungiKamiChat.getLastUpdated()));
+                hubungiKamiViewHolder.getTvDate().setText(TarikhMasa.INSTANCE.ConvertTarikhMasa2LocalTime(hubungiKamiChat.getLastUpdated()));
 
                 dRe.child("registeredUser").child(hubungiKamiChat.getSenderUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -132,6 +132,7 @@ public class HubungiKamiUserActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         finish();
     }
 

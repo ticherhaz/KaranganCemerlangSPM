@@ -1,12 +1,13 @@
 package net.ticherhaz.karangancemerlangspm;
 
-import static net.ticherhaz.tarikhmasa.TarikhMasa.AndroidThreeTenBP;
 
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import androidx.multidex.MultiDex;
+
+import net.ticherhaz.tarikhmasa.TarikhMasa;
 
 
 public class MyApplication extends Application {
@@ -19,7 +20,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        AndroidThreeTenBP(this);
+        TarikhMasa.INSTANCE.AndroidThreeTenBP(this);
         setSharedPreferences();
     }
 

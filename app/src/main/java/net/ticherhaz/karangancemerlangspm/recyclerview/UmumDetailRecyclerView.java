@@ -104,7 +104,7 @@ public class UmumDetailRecyclerView extends RecyclerView.Adapter<UmumDetailHolde
         final UmumDetail model = umumDetailList.get(position);
 
         holder.getTextViewDeskripsi().setText(model.getDeskripsi());
-        holder.getTextViewMasaDibalasOleh().setText(TarikhMasa.GetTarikhMasaTimeAgo(model.getPostCreatedDate(), "MY", true, false));
+        holder.getTextViewMasaDibalasOleh().setText(TarikhMasa.INSTANCE.GetTarikhMasaTimeAgo(model.getPostCreatedDate(), "MY", true, false));
         //Click to the user
         holder.getTextViewUsername().setOnClickListener(new View.OnClickListener() {
             @Override

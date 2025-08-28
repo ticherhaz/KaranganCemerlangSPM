@@ -2,8 +2,6 @@ package net.ticherhaz.karangancemerlangspm;
 
 import static net.ticherhaz.karangancemerlangspm.utils.Others.messageInternetMessage;
 import static net.ticherhaz.karangancemerlangspm.utils.Others.setStatus;
-import static net.ticherhaz.tarikhmasa.TarikhMasa.ConvertTarikhMasa2LocalTimePattern;
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -50,6 +48,7 @@ import net.ticherhaz.karangancemerlangspm.model.Forum;
 import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.utils.OnlineStatusUtil;
 import net.ticherhaz.karangancemerlangspm.viewHolder.ForumViewHolder;
+import net.ticherhaz.tarikhmasa.TarikhMasa;
 
 import java.util.Calendar;
 
@@ -57,7 +56,7 @@ public class ForumActivity extends AppCompatActivity {
 
     //ActivitySessionUid
     private final String activitySessionUid = FirebaseDatabase.getInstance().getReference().push().getKey();
-    private final String activityDate = ConvertTarikhMasa2LocalTimePattern(GetTarikhMasa(), "dd:MM:yyyy");
+    private String activityDate;
     //Database
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -335,6 +334,7 @@ public class ForumActivity extends AppCompatActivity {
     }
 
     private void listID() {
+        activityDate = TarikhMasa.INSTANCE.ConvertTarikhMasa2LocalTimePattern(TarikhMasa.INSTANCE.GetTarikhMasa(), "dd:MM:yyyy");
         textViewUsername = findViewById(R.id.text_view_username);
         //This is for the textview auto gerak kalau nama dia panjang sangat
         textViewUsername.setSelected(true);

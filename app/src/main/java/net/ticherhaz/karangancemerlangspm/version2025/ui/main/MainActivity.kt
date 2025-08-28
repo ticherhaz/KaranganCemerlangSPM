@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onForumClicked() {
                 showToast("Coming Soon")
-                //startActivity(Intent(this@MainActivity, ForumActivity::class.java))
+                //startActivity(Intent(this@MainActivity, SignUpActivity::class.java))
             }
 
             override fun onDonationClicked() {

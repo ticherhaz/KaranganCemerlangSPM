@@ -1,6 +1,5 @@
 package net.ticherhaz.karangancemerlangspm;
 
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 import android.content.Context;
 import android.content.Intent;
@@ -34,6 +33,7 @@ import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.model.UmumDetail;
 import net.ticherhaz.karangancemerlangspm.recyclerview.UmumDetailRecyclerView;
 import net.ticherhaz.karangancemerlangspm.utils.RunTransaction;
+import net.ticherhaz.tarikhmasa.TarikhMasa;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -231,7 +231,7 @@ public class UmumDetailActivity extends AppCompatActivity {
                      * Init variables to store the database umum detail model class
                      */
                     final String umumDetailUid = dRe.push().getKey();
-                    final String onCreatedDate = GetTarikhMasa();
+                    final String onCreatedDate = TarikhMasa.INSTANCE.GetTarikhMasa();
                     final String reply = etMessage.getText().toString();
                     final UmumDetail umumDetail = new UmumDetail(umumDetailUid, registeredUidReply, onCreatedDate, reply);
 
@@ -285,7 +285,7 @@ public class UmumDetailActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         finish();
     }
-
 }

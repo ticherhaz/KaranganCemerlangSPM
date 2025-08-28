@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    tools:context=".version2025.ui.forum.SignUpActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Username eg: Ticherhaz"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords"
+                android:maxLength="64"
+                android:maxLines="1"
+                android:minLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email eg: ticherhaz@gmail.com"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:maxLength="64"
+                android:maxLines="1"
+                android:minLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_school"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="School eg: SMK Seri Mahawangsa"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords"
+                android:maxLength="64"
+                android:maxLines="1"
+                android:minLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Bio eg: I love this app :D"
+                android:imeOptions="actionDone"
+                android:inputType="textCapCharacters"
+                android:maxLength="64"
+                android:maxLines="1"
+                android:minLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/grey_20" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Sign Up" />
+    </LinearLayout>
+
+</ScrollView>

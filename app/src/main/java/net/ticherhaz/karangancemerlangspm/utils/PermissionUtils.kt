@@ -15,7 +15,7 @@ object PermissionUtils {
 
             if (!XXPermissions.isGranted(
                     activity,
-                    listOf(
+                    mutableListOf(
                         Permission.READ_MEDIA_IMAGES,
                         Permission.READ_MEDIA_VIDEO,
                         Permission.READ_MEDIA_AUDIO,

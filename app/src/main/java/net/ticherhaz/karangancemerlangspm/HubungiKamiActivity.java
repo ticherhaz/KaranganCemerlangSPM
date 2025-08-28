@@ -2,7 +2,6 @@ package net.ticherhaz.karangancemerlangspm;
 
 import static net.ticherhaz.karangancemerlangspm.utils.Others.isNetworkAvailable;
 import static net.ticherhaz.karangancemerlangspm.utils.Others.messageInternetMessage;
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -108,7 +107,7 @@ public class HubungiKamiActivity extends AppCompatActivity {
         fRa = new FirebaseRecyclerAdapter<HubungiKamiMessage, HubungiKamiViewHolder>(fRo) {
             @Override
             protected void onBindViewHolder(@NonNull HubungiKamiViewHolder hubungiKamiViewHolder, int i, @NonNull HubungiKamiMessage hubungiKami) {
-                hubungiKamiViewHolder.getTvDate().setText(TarikhMasa.GetTarikhMasaTimeAgo(hubungiKami.getDate(), "MY", true, false));
+                hubungiKamiViewHolder.getTvDate().setText(TarikhMasa.INSTANCE.GetTarikhMasaTimeAgo(hubungiKami.getDate(), "MY", true, false));
                 hubungiKamiViewHolder.getTvMessage().setText(hubungiKami.getMessage());
             }
 
@@ -170,7 +169,7 @@ public class HubungiKamiActivity extends AppCompatActivity {
         fRa = new FirebaseRecyclerAdapter<HubungiKamiMessage, HubungiKamiViewHolder>(fRo) {
             @Override
             protected void onBindViewHolder(@NonNull HubungiKamiViewHolder hubungiKamiViewHolder, int i, @NonNull HubungiKamiMessage hubungiKami) {
-                hubungiKamiViewHolder.getTvDate().setText(TarikhMasa.GetTarikhMasaTimeAgo(hubungiKami.getDate(), "MY", true, false));
+                hubungiKamiViewHolder.getTvDate().setText(TarikhMasa.INSTANCE.GetTarikhMasaTimeAgo(hubungiKami.getDate(), "MY", true, false));
                 hubungiKamiViewHolder.getTvMessage().setText(hubungiKami.getMessage());
             }
 
@@ -250,7 +249,7 @@ public class HubungiKamiActivity extends AppCompatActivity {
                         //Send message
                         final String messageUid = dRe.push().push().getKey();
                         final String hkUid = dRe.push().getKey();
-                        final String date = GetTarikhMasa();
+                        final String date = TarikhMasa.INSTANCE.GetTarikhMasa();
                         final String message = etSend.getText().toString();
 
                         //Class
@@ -324,7 +323,7 @@ public class HubungiKamiActivity extends AppCompatActivity {
                             //Send message
                             //final String chatUid = dRe.push().push().getKey();
                             final String hkUid = dRe.push().getKey();
-                            final String date = GetTarikhMasa();
+                            final String date = TarikhMasa.INSTANCE.GetTarikhMasa();
                             final String message = etSend.getText().toString();
 
                             //Class
@@ -383,6 +382,7 @@ public class HubungiKamiActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         finish();
     }
 

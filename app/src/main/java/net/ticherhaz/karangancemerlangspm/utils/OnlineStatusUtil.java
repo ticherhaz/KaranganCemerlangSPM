@@ -1,7 +1,5 @@
 package net.ticherhaz.karangancemerlangspm.utils;
 
-import static net.ticherhaz.tarikhmasa.TarikhMasa.ConvertTarikhMasa2LocalTimePattern;
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 import android.annotation.SuppressLint;
 
@@ -14,6 +12,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+
+import net.ticherhaz.tarikhmasa.TarikhMasa;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,7 +40,7 @@ public class OnlineStatusUtil {
     private void checkOnlineStatus(final String registeredUid, final String onlineStatusA, final DatabaseReference databaseReference, final String activitySessionUid, final String activityDate) {
         //After that we make a new session which is when the user online, then we start take the date that he online than make a new table.
         // String onlineTime = String.valueOf(android.text.format.DateFormat.format("hh:mm:ss a", new Date()));
-        final String onlineTime = ConvertTarikhMasa2LocalTimePattern(GetTarikhMasa(), "hh:mm:ss a");
+        final String onlineTime = TarikhMasa.INSTANCE.ConvertTarikhMasa2LocalTimePattern(TarikhMasa.INSTANCE.GetTarikhMasa(), "hh:mm:ss a");
 
 
         //After the user is updating to ONLINE then it proceed here
@@ -60,7 +60,7 @@ public class OnlineStatusUtil {
             databaseReferenceLastOnline.child("lastOnline").setValue(ServerValue.TIMESTAMP);
             // final String offlineTime = String.valueOf(android.text.format.DateFormat.format("hh:mm:ss a", new Date()));
 
-            final String offlineTime = ConvertTarikhMasa2LocalTimePattern(GetTarikhMasa(), "hh:mm:ss a");
+            final String offlineTime = TarikhMasa.INSTANCE.ConvertTarikhMasa2LocalTimePattern(TarikhMasa.INSTANCE.GetTarikhMasa(), "hh:mm:ss a");
 
             if (activitySessionUid != null) {
                 databaseReference.child("activitySession").child(registeredUid).child(activityDate).child(activitySessionUid).child("offlineTime").setValue(offlineTime);
@@ -125,7 +125,7 @@ public class OnlineStatusUtil {
 
                         //Then we update the activity after he want to close
                         //    final String offlineTime = String.valueOf(android.text.format.DateFormat.format("hh:mm:ss a", new Date()));
-                        final String offlineTime = ConvertTarikhMasa2LocalTimePattern(GetTarikhMasa(), "hh:mm:ss a");
+                        final String offlineTime = TarikhMasa.INSTANCE.ConvertTarikhMasa2LocalTimePattern(TarikhMasa.INSTANCE.GetTarikhMasa(), "hh:mm:ss a");
 
                         if (activitySessionUid != null) {
 

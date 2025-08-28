@@ -2,9 +2,6 @@ package net.ticherhaz.karangancemerlangspm;
 
 import static net.ticherhaz.karangancemerlangspm.utils.ProgressDialogCustom.dismissProgressDialog;
 import static net.ticherhaz.karangancemerlangspm.utils.ProgressDialogCustom.showProgressDialog;
-import static net.ticherhaz.tarikhmasa.TarikhMasa.ConvertTarikhMasa2LocalTimePattern;
-import static net.ticherhaz.tarikhmasa.TarikhMasa.ConvertTimeStamp2TarikhMasa;
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasaTimeAgo;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -37,6 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
 import net.ticherhaz.karangancemerlangspm.utils.Others;
+import net.ticherhaz.tarikhmasa.TarikhMasa;
 
 import java.util.Locale;
 
@@ -254,12 +252,12 @@ public class ProfileActivity extends AppCompatActivity {
 
                         //Check if online or not
                         if (registeredUser.getOnlineStatus().equals("Offline")) {
-                            final String lastOnline = ConvertTimeStamp2TarikhMasa(registeredUser.getLastOnline());
-                            final String getAgo = GetTarikhMasaTimeAgo(lastOnline, "MY", true, false);
+                            final String lastOnline = TarikhMasa.INSTANCE.ConvertTimeStamp2TarikhMasa(registeredUser.getLastOnline());
+                            final String getAgo = TarikhMasa.INSTANCE.GetTarikhMasaTimeAgo(lastOnline, "MY", true, false);
                             tvOnlineStatus.setText(String.format(Locale.getDefault(), "%s", getAgo));
                         }
 
-                        tvOnCreatedDate.setText(String.format(Locale.getDefault(), "Tarikh Sertai: %s", ConvertTarikhMasa2LocalTimePattern(registeredUser.getOnDateCreated(), "MMM yyyy")));
+                        tvOnCreatedDate.setText(String.format(Locale.getDefault(), "Tarikh Sertai: %s", TarikhMasa.INSTANCE.ConvertTarikhMasa2LocalTimePattern(registeredUser.getOnDateCreated(), "MMM yyyy")));
                     }
                 }
             }
@@ -343,6 +341,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         finish();
     }
 

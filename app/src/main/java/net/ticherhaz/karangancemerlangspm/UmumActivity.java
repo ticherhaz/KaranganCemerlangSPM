@@ -1,7 +1,5 @@
 package net.ticherhaz.karangancemerlangspm;
 
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasaTimeAgo;
-
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -101,7 +99,7 @@ public class UmumActivity extends AppCompatActivity {
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Umum, UmumHolder>(firebaseRecyclerOptions) {
             @SuppressLint("SetTextI18n")
             @Override
-            protected void onBindViewHolder(@NonNull final UmumHolder holder, final int position, @NonNull final Umum model) {
+            protected void onBindViewHolder(@NonNull final UmumHolder holder, int position, @NonNull final Umum model) {
 
                 /*Kita tukar pakai yg class untuk tukar time to text
 
@@ -115,7 +113,7 @@ public class UmumActivity extends AppCompatActivity {
                         if (dataSnapshot.exists()) {
                             RegisteredUser registeredUser = dataSnapshot.getValue(RegisteredUser.class);
                             if (registeredUser != null) {
-                                final String dimulaiOleh = "Dimulai Oleh <b>" + registeredUser.getUsername() + "</b>, " + GetTarikhMasaTimeAgo(model.getOnCreatedDate(), "MY", true, false);
+                                final String dimulaiOleh = "Dimulai Oleh <b>" + registeredUser.getUsername() + "</b>, " + TarikhMasa.INSTANCE.GetTarikhMasaTimeAgo(model.getOnCreatedDate(), "MY", true, false);
                                 holder.getTextViewDimulaiOleh().setText(Html.fromHtml(dimulaiOleh));
 
                                 final String profileUrl = registeredUser.getProfileUrl();
@@ -196,7 +194,7 @@ public class UmumActivity extends AppCompatActivity {
 
                 if (model.getMasaDibalasOleh() != null) {
                     //This for the masa dibalas oleh
-                    holder.getTextViewMasaDibalasOleh().setText(TarikhMasa.GetTarikhMasaTimeAgo(model.getMasaDibalasOleh(), "MY", true, false));
+                    holder.getTextViewMasaDibalasOleh().setText(TarikhMasa.INSTANCE.GetTarikhMasaTimeAgo(model.getMasaDibalasOleh(), "MY", true, false));
                 } else {
                     holder.getTextViewMasaDibalasOleh().setVisibility(View.GONE);
                 }
@@ -385,6 +383,7 @@ public class UmumActivity extends AppCompatActivity {
     //OnBackPressed
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         setTotalOnlineSpecific(userUid, "Offline");
         finish();
     }

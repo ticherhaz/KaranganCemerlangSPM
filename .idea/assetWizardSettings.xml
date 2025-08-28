@@ -62,6 +62,17 @@
                                 <PersistentState>
                                   <option name="children">
                                     <map>
+                                      <entry key="backgroundImage">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="imagePath" value="C:\Ticherhaz\Challenger\AndroidStudio\KaranganCemerlangSPM\app\src\main\res\drawable\ic_launcher_background.xml" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
                                       <entry key="foregroundClipArt">
                                         <value>
                                           <PersistentState>
@@ -80,7 +91,7 @@
                                               <map>
                                                 <entry key="color" value="000000" />
                                                 <entry key="imagePath" value="C:\Users\Hazman\Desktop\KCSPM Upgrade 2025\ic_icon_512dp.png" />
-                                                <entry key="scalingPercent" value="81" />
+                                                <entry key="scalingPercent" value="84" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -112,8 +123,8 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="ffffff" />
+                                      <entry key="legacyIconShape" value="CIRCLE" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -304,7 +315,7 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="outputName" value="ic_icon_128dp" />
-                            <entry key="sourceFile" value="C:\Users\Hazman\Desktop\KCSPM Upgrade 2025\ic_icon_128dp.svg" />
+                            <entry key="sourceFile" value="C:\Users\Hazman\Desktop\KCSPM Upgrade 2025\emblem_128_no_bg.svg" />
                           </map>
                         </option>
                       </PersistentState>

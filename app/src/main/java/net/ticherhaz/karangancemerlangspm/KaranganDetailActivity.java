@@ -4,7 +4,6 @@ import static android.os.Environment.DIRECTORY_DOWNLOADS;
 import static net.ticherhaz.karangancemerlangspm.utils.Others.DismissProgressDialog;
 import static net.ticherhaz.karangancemerlangspm.utils.Others.ShowProgressDialog;
 import static net.ticherhaz.karangancemerlangspm.utils.Others.ShowToast;
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
@@ -27,6 +26,8 @@ import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.ConsumeParams;
+import com.android.billingclient.api.PendingPurchasesParams;
+import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.QueryProductDetailsParams;
@@ -43,6 +44,7 @@ import net.ticherhaz.karangancemerlangspm.model.DownloadKarangan;
 import net.ticherhaz.karangancemerlangspm.utils.DoubleClickListener;
 import net.ticherhaz.karangancemerlangspm.utils.MyProductDownloadKaranganAdapter;
 import net.ticherhaz.karangancemerlangspm.utils.RunTransaction;
+import net.ticherhaz.tarikhmasa.TarikhMasa;
 
 import java.io.File;
 import java.util.List;
@@ -111,8 +113,13 @@ public class KaranganDetailActivity extends AppCompatActivity implements Purchas
     }
 
     private void setBillingClient() {
+        final PendingPurchasesParams pendingPurchasesParams =
+                PendingPurchasesParams
+                        .newBuilder()
+                        .enableOneTimeProducts().build();
+
         billingClient = BillingClient.newBuilder(this)
-                .enablePendingPurchases()
+                .enablePendingPurchases(pendingPurchasesParams)
                 .setListener(this)
                 .build();
 
@@ -132,7 +139,8 @@ public class KaranganDetailActivity extends AppCompatActivity implements Purchas
                                     .build();
 
 
-                    billingClient.queryProductDetailsAsync(queryProductDetailsParams, (billingResult2, productDetailsList) -> {
+                    billingClient.queryProductDetailsAsync(queryProductDetailsParams, (billingResult2, queryProductDetailsResult) -> {
+                        final List<ProductDetails> productDetailsList = queryProductDetailsResult.getProductDetailsList();
 
                                 final MyProductDownloadKaranganAdapter adapter = new MyProductDownloadKaranganAdapter(KaranganDetailActivity.this, productDetailsList, billingClient);
                                 runOnUiThread(() -> {
@@ -212,7 +220,7 @@ public class KaranganDetailActivity extends AppCompatActivity implements Purchas
 
                     //Success purchased
                     final String downloadKaranganUid = FirebaseDatabase.getInstance().getReference().push().getKey();
-                    final String onPurchasedDateUTC = GetTarikhMasa();
+                    final String onPurchasedDateUTC = TarikhMasa.INSTANCE.GetTarikhMasa();
                     final long onPurchasedDate = System.currentTimeMillis();
 
                     final String orderUid = purchase.getOrderId();
@@ -368,6 +376,7 @@ public class KaranganDetailActivity extends AppCompatActivity implements Purchas
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         finish();
     }
 

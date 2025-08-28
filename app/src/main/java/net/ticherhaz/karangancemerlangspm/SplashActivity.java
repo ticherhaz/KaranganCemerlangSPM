@@ -3,7 +3,6 @@ package net.ticherhaz.karangancemerlangspm;
 import static net.ticherhaz.karangancemerlangspm.utils.Others.getIPAddress;
 import static net.ticherhaz.karangancemerlangspm.utils.Others.isNetworkAvailable;
 import static net.ticherhaz.karangancemerlangspm.utils.Others.messageInternetMessage;
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -28,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.model.System;
 import net.ticherhaz.karangancemerlangspm.model.UserFirst;
+import net.ticherhaz.tarikhmasa.TarikhMasa;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -55,7 +55,7 @@ public class SplashActivity extends AppCompatActivity {
         //Assign the IP Address
         ipAddress = getIPAddress(true);
         //Assign the lastSeen
-        onLoginDate = GetTarikhMasa();
+        onLoginDate = TarikhMasa.INSTANCE.GetTarikhMasa();
 
 
         //Call back the shared preference
@@ -123,7 +123,7 @@ public class SplashActivity extends AppCompatActivity {
         //So the new user enter the system, then we collect the new information for the user
         String brand = Build.BRAND;
         String model = Build.MODEL;
-        String onCreatedDate = GetTarikhMasa();
+        String onCreatedDate = TarikhMasa.INSTANCE.GetTarikhMasa();
 
         //then we call the model class
         final UserFirst userFirst = new UserFirst(userUid, brand, model, ipAddress, onCreatedDate);

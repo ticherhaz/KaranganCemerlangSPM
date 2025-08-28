@@ -4,7 +4,6 @@ import static net.ticherhaz.karangancemerlangspm.utils.Others.isNetworkAvailable
 import static net.ticherhaz.karangancemerlangspm.utils.Others.messageInternetMessage;
 import static net.ticherhaz.karangancemerlangspm.utils.ProgressDialogCustom.dismissProgressDialog;
 import static net.ticherhaz.karangancemerlangspm.utils.ProgressDialogCustom.showProgressDialog;
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,6 +34,7 @@ import net.ticherhaz.karangancemerlangspm.model.Umum;
 import net.ticherhaz.karangancemerlangspm.model.UmumDetail;
 import net.ticherhaz.karangancemerlangspm.model.UmumPosUser;
 import net.ticherhaz.karangancemerlangspm.utils.RunTransaction;
+import net.ticherhaz.tarikhmasa.TarikhMasa;
 
 public class TopikBaruActivity extends AppCompatActivity {
 
@@ -154,7 +154,7 @@ public class TopikBaruActivity extends AppCompatActivity {
          *
          * */
 
-        final String onCreatedDate = GetTarikhMasa();
+        final String onCreatedDate = TarikhMasa.INSTANCE.GetTarikhMasa();
 
         String registeredUidLastReply = null;
 

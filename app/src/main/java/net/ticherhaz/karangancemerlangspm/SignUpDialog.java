@@ -1,6 +1,5 @@
 package net.ticherhaz.karangancemerlangspm;
 
-import static net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -43,6 +42,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import net.ticherhaz.karangancemerlangspm.model.Phone;
 import net.ticherhaz.karangancemerlangspm.model.RegisteredUser;
+import net.ticherhaz.tarikhmasa.TarikhMasa;
 
 public class SignUpDialog extends Dialog implements View.OnClickListener {
 
@@ -221,7 +221,7 @@ public class SignUpDialog extends Dialog implements View.OnClickListener {
                                     final int reputationPower = 0;
                                     final String onlineStatus = "Online";
                                     final String lastCreatedThread = null;
-                                    final String onDateCreated = GetTarikhMasa();
+                                    final String onDateCreated = TarikhMasa.INSTANCE.GetTarikhMasa();
 
                                     //UpperCase
                                     final String emailUpperCase = email.toUpperCase();

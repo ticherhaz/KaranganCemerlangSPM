@@ -23,7 +23,7 @@ import net.ticherhaz.karangancemerlangspm.databinding.ActivityDonationBinding
 import net.ticherhaz.karangancemerlangspm.model.Donat2
 import net.ticherhaz.karangancemerlangspm.utils.Others.ShowToast
 import net.ticherhaz.karangancemerlangspm.version2025.adapter.MyProductAdapter
-import net.ticherhaz.tarikhmasa.TarikhMasa.GetTarikhMasa
+import net.ticherhaz.tarikhmasa.TarikhMasa
 
 class DonationActivity : AppCompatActivity(), PurchasesUpdatedListener {
 
@@ -89,7 +89,8 @@ class DonationActivity : AppCompatActivity(), PurchasesUpdatedListener {
 
         val params = QueryProductDetailsParams.newBuilder().setProductList(productList).build()
 
-        billingClient.queryProductDetailsAsync(params) { _, productDetailsList ->
+        billingClient.queryProductDetailsAsync(params) { _, queryProductDetailsResult ->
+            val productDetailsList = queryProductDetailsResult.productDetailsList
             runOnUiThread {
                 binding.recyclerViewTips.adapter =
                     MyProductAdapter(this@DonationActivity, productDetailsList, billingClient)
@@ -123,7 +124,7 @@ class DonationActivity : AppCompatActivity(), PurchasesUpdatedListener {
                 purchase.signature,
                 purchase.originalJson,
                 purchase.developerPayload,
-                GetTarikhMasa(),
+                TarikhMasa.GetTarikhMasa(),
                 purchase.purchaseState,
                 System.currentTimeMillis()
             )
