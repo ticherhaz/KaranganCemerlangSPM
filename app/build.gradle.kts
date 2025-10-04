@@ -16,8 +16,8 @@ android {
         minSdk = 26
         targetSdk = 36
 
-        versionCode = 511
-        versionName = "5.11"
+        versionCode = 512
+        versionName = "5.12"
 
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -34,7 +34,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -45,7 +45,7 @@ android {
         }
         debug {
             isMinifyEnabled = false
-            isDebuggable = true
+            isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

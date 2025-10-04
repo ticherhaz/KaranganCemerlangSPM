@@ -1,0 +1,1 @@
+-keep class net.ticherhaz.karangancemerlangspm.model.** { *; }
