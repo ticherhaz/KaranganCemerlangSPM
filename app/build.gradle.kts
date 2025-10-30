@@ -16,8 +16,8 @@ android {
         minSdk = 26
         targetSdk = 36
 
-        versionCode = 512
-        versionName = "5.12"
+        versionCode = 513
+        versionName = "5.13"
 
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -78,7 +78,7 @@ dependencies {
     implementation("androidx.viewpager2:viewpager2:1.1.0")
     implementation("androidx.percentlayout:percentlayout:1.0.0")
     implementation("androidx.constraintlayout:constraintlayout:2.2.1")
-    implementation("androidx.work:work-runtime:2.10.5")
+    implementation("androidx.work:work-runtime:2.11.0")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.activity:activity-ktx:1.11.0")
     implementation("androidx.activity:activity:1.11.0")
@@ -88,7 +88,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
 
     //Kotlin
-    val kotlinVersion = "2.2.20"
+    val kotlinVersion = "2.2.21"
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
     implementation("androidx.core:core-ktx:1.17.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.9.5")
@@ -107,7 +107,7 @@ dependencies {
     implementation("androidx.multidex:multidex:2.0.1")
 
     // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:34.3.0"))
+    implementation(platform("com.google.firebase:firebase-bom:34.4.0"))
     implementation("com.google.firebase:firebase-analytics")
     //implementation("com.google.firebase:firebase-crashlytics")
     implementation("com.google.firebase:firebase-auth")
@@ -117,7 +117,7 @@ dependencies {
     implementation("com.google.firebase:firebase-messaging")
 
     //FirebaseUI
-    implementation("com.firebaseui:firebase-ui-database:9.0.0")
+    implementation("com.firebaseui:firebase-ui-database:9.1.1")
 
     //Image Glide
     implementation("com.github.bumptech.glide:glide:5.0.5")
@@ -147,7 +147,7 @@ dependencies {
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:5.1.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.2.1")
 
     //For Logging
     implementation("com.github.ticherhaz:FireLog:1.2.1")
