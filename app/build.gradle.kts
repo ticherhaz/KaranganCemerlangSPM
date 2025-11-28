@@ -17,8 +17,8 @@ android {
         minSdk = 26
         targetSdk = 36
 
-        versionCode = 520
-        versionName = "5.20"
+        versionCode = 523
+        versionName = "5.23"
 
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -74,7 +74,6 @@ dependencies {
     //Android
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.4.0")
-    implementation("androidx.appcompat:appcompat:1.7.1")
     implementation("com.google.android.material:material:1.13.0")
     implementation("androidx.viewpager2:viewpager2:1.1.0")
     implementation("androidx.percentlayout:percentlayout:1.0.0")
@@ -135,7 +134,7 @@ dependencies {
     implementation("com.google.guava:guava:33.5.0-android")
 
     // For permissions
-    implementation("com.github.getActivity:XXPermissions:18.5")
+    implementation("com.github.getActivity:XXPermissions:26.8")
 
 
     // -------------------------------------------------------------------------------------
@@ -156,9 +155,8 @@ dependencies {
     implementation("com.github.ticherhaz:FireLog:1.2.1")
 
     // Huawei
-    implementation("com.huawei.agconnect:agconnect-core:1.9.3.301")
-    implementation("com.huawei.agconnect:agconnect-auth:1.9.3.300")
-    //noinspection Aligned16KB
-    implementation("com.huawei.agconnect:agconnect-cloud-database:1.9.3.300")
+    implementation("com.huawei.agconnect:agconnect-core:1.9.4.300")
+    implementation("com.huawei.agconnect:agconnect-auth:1.9.4.300")
+    implementation("com.huawei.agconnect:agconnect-cloud-database:1.9.4.300")
 }
 apply(plugin = "com.huawei.agconnect")

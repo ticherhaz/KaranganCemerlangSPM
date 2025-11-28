@@ -167,21 +167,6 @@ public class MainActivity extends AppCompatActivity {
             mod = intent.getExtras().getString("mod");
         }
 
-//        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-//            @Override
-//            public void onInitializationComplete(InitializationStatus initializationStatus) {
-//            }
-//        });
-//        adContainerView = findViewById(R.id.ad_view_container);
-//        // Since we're loading the banner based on the adContainerView size, we need to wait until this
-//        // view is laid out before we can get the width.
-//        adContainerView.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                loadBanner();
-//            }
-//        });
-
 
         //Firebase Database
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();

@@ -86,18 +86,12 @@ class MainActivity : AppCompatActivity() {
 
         initAdView()
 
-        binding.buttonCrash.setOnClickListener {
-            throw RuntimeException("Test Crash") // Force a crash
-        }
-
         startLifeCycle()
     }
 
     override fun onStart() {
         super.onStart()
-        lifecycleScope.launch {
-            askNotificationPermission()
-        }
+        askNotificationPermission()
     }
 
     private fun startLifeCycle() {
@@ -131,8 +125,8 @@ class MainActivity : AppCompatActivity() {
                             showToast("System is under maintenance.")
                         }
 
-                        // TODO: Version right now is 520. Please update when the new version is released.
-                        if (system.versi != 520) {
+                        // TODO: Version right now is 523. Please update when the new version is released.
+                        if (system.versi != 523) {
                             showAlertDialog()
                         }
                     }

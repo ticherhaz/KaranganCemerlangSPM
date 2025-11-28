@@ -1,11 +1,13 @@
 package net.ticherhaz.karangancemerlangspm.service;
 
+import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.AudioAttributes;
@@ -13,6 +15,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
@@ -99,6 +102,9 @@ class NotificationUtil {
                 .setChannelId(channelUid)
                 .build();
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context.getApplicationContext());
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
         notificationManagerCompat.notify(notificationUid, notification);
     }
 
@@ -149,6 +155,9 @@ class NotificationUtil {
                 .setChannelId(channelUid)
                 .build();
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context.getApplicationContext());
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
         notificationManagerCompat.notify(notificationUid, notification);
     }
 }

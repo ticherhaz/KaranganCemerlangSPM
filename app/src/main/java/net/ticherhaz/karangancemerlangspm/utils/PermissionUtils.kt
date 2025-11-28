@@ -1,26 +1,25 @@
 package net.ticherhaz.karangancemerlangspm.utils
 
 import android.app.Activity
-import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Build
 import com.hjq.permissions.OnPermissionCallback
-import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
+import com.hjq.permissions.permission.PermissionLists
+import com.hjq.permissions.permission.base.IPermission
 
 object PermissionUtils {
 
     fun storagePermissions(activity: Activity, iStoragePermission: IStoragePermission) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 
-            if (!XXPermissions.isGranted(
+            if (!XXPermissions.isGrantedPermissions(
                     activity,
                     mutableListOf(
-                        Permission.READ_MEDIA_IMAGES,
-                        Permission.READ_MEDIA_VIDEO,
-                        Permission.READ_MEDIA_AUDIO,
-                        Permission.POST_NOTIFICATIONS,
-                        Permission.CAMERA
+                        PermissionLists.getReadMediaImagesPermission(),
+                        PermissionLists.getReadMediaVideoPermission(),
+                        PermissionLists.getReadMediaAudioPermission(),
+                        PermissionLists.getCameraPermission(),
+                        PermissionLists.getPostNotificationsPermission()
                     )
                 )
             ) {
@@ -35,64 +34,30 @@ object PermissionUtils {
                         override fun onBtnContinueClicked() {
 
                             XXPermissions.with(activity)
-                                .permission(Permission.WRITE_EXTERNAL_STORAGE)
-                                .permission(Permission.POST_NOTIFICATIONS)
-                                .permission(Permission.CAMERA)
+                                .permission(PermissionLists.getWriteExternalStoragePermission())
+                                .permission(PermissionLists.getPostNotificationsPermission())
+                                .permission(PermissionLists.getCameraPermission())
                                 .request(object : OnPermissionCallback {
-                                    override fun onGranted(
-                                        permissions: MutableList<String>,
-                                        allGranted: Boolean
+                                    override fun onResult(
+                                        grantedList: List<IPermission?>,
+                                        deniedList: List<IPermission?>
                                     ) {
+
+                                        val allGranted = deniedList.isEmpty()
                                         if (!allGranted) {
                                             Tools.showToast(
                                                 activity,
                                                 "Some permissions were obtained successfully, but some permissions were not granted normally"
                                             )
 
-                                            iStoragePermission.onSuccess()
+                                            iStoragePermission.onFailure()
                                             return
                                         }
                                         Tools.showToast(
                                             activity,
                                             "Acquired permissions successfully"
                                         )
-
                                         iStoragePermission.onSuccess()
-                                    }
-
-                                    override fun onDenied(
-                                        permissions: MutableList<String>,
-                                        doNotAskAgain: Boolean
-                                    ) {
-                                        if (doNotAskAgain) {
-
-                                            // navigate user to app settings
-                                            val alertDialog = AlertDialog.Builder(activity)
-                                                .setTitle("Info")
-                                                .setMessage("Authorization denied permanently, please grant permissions manually")
-                                                .setPositiveButton("Proceed") { _: DialogInterface?, _: Int ->
-
-                                                    // If it is permanently denied, jump to the application permission system settings page
-                                                    XXPermissions.startPermissionActivity(
-                                                        activity,
-                                                        permissions
-                                                    )
-
-
-                                                }
-                                                .create()
-                                            alertDialog.show()
-
-                                            iStoragePermission.onFailure()
-
-                                        } else {
-                                            Tools.showToast(
-                                                activity,
-                                                "Failed to get permissions"
-                                            )
-
-                                            iStoragePermission.onFailure()
-                                        }
                                     }
                                 })
                         }
@@ -104,13 +69,13 @@ object PermissionUtils {
 
         } else {
 
-            if (!XXPermissions.isGranted(
+            if (!XXPermissions.isGrantedPermissions(
                     activity,
                     listOf(
-                        Permission.READ_MEDIA_IMAGES,
-                        Permission.READ_MEDIA_VIDEO,
-                        Permission.READ_MEDIA_AUDIO,
-                        Permission.CAMERA
+                        PermissionLists.getReadMediaImagesPermission(),
+                        PermissionLists.getReadMediaVideoPermission(),
+                        PermissionLists.getReadMediaAudioPermission(),
+                        PermissionLists.getCameraPermission(),
                     )
                 )
             ) {
@@ -125,21 +90,24 @@ object PermissionUtils {
                         override fun onBtnContinueClicked() {
 
                             XXPermissions.with(activity)
-                                .permission(Permission.READ_MEDIA_IMAGES)
-                                .permission(Permission.READ_MEDIA_VIDEO)
-                                .permission(Permission.READ_MEDIA_AUDIO)
-                                .permission(Permission.CAMERA)
+                                .permission(PermissionLists.getReadMediaImagesPermission())
+                                .permission(PermissionLists.getReadMediaVideoPermission())
+                                .permission(PermissionLists.getReadMediaAudioPermission())
+                                .permission(PermissionLists.getCameraPermission())
                                 .request(object : OnPermissionCallback {
-                                    override fun onGranted(
-                                        permissions: MutableList<String>,
-                                        allGranted: Boolean
+                                    override fun onResult(
+                                        grantedList: List<IPermission?>,
+                                        deniedList: List<IPermission?>
                                     ) {
+
+                                        val allGranted = deniedList.isEmpty()
                                         if (!allGranted) {
                                             Tools.showToast(
                                                 activity,
                                                 "Some permissions were obtained successfully, but some permissions were not granted normally"
                                             )
-                                            iStoragePermission.onSuccess()
+
+                                            iStoragePermission.onFailure()
                                             return
                                         }
                                         Tools.showToast(
@@ -147,41 +115,6 @@ object PermissionUtils {
                                             "Acquired permissions successfully"
                                         )
                                         iStoragePermission.onSuccess()
-                                    }
-
-                                    override fun onDenied(
-                                        permissions: MutableList<String>,
-                                        doNotAskAgain: Boolean
-                                    ) {
-                                        if (doNotAskAgain) {
-
-                                            // navigate user to app settings
-                                            val alertDialog = AlertDialog.Builder(activity)
-                                                .setTitle("Info")
-                                                .setMessage("Authorization denied permanently, please grant permissions manually")
-                                                .setPositiveButton("Proceed") { _: DialogInterface?, _: Int ->
-
-                                                    // If it is permanently denied, jump to the application permission system settings page
-                                                    XXPermissions.startPermissionActivity(
-                                                        activity,
-                                                        permissions
-                                                    )
-
-
-                                                }
-                                                .create()
-                                            alertDialog.show()
-
-                                            iStoragePermission.onFailure()
-
-                                        } else {
-                                            Tools.showToast(
-                                                activity,
-                                                "Failed to get permissions"
-                                            )
-
-                                            iStoragePermission.onFailure()
-                                        }
                                     }
                                 })
                         }
