@@ -12,7 +12,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +33,14 @@ import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.QueryProductDetailsParams;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.common.collect.ImmutableList;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -80,6 +90,8 @@ public class KaranganDetailActivity extends AppCompatActivity implements Purchas
     private String tarikh;
     private int vote;
     private int mostVisited;
+    private AdView adView;
+    private InterstitialAd interstitialAd;
 
     //Method listID
     private void listID() {
@@ -370,8 +382,115 @@ public class KaranganDetailActivity extends AppCompatActivity implements Purchas
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_karangan_detail);
         listID();
+
+        initAdView();
+        initInterstitialAd();
+
         setTextViewLike();
         setTextViewKarangan();
+    }
+
+    private void initAdView() {
+        // Create a new ad view.
+        adView = new AdView(this);
+        adView.setAdUnitId("ca-app-pub-1320314109772118/8415549785");
+
+        // Request an anchored adaptive banner with a width of 360.
+        AdSize adSize = AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, 360);
+        adView.setAdSize(adSize);
+
+        FrameLayout adViewContainer = findViewById(R.id.ad_view_container);
+        adViewContainer.removeAllViews();
+        adViewContainer.addView(adView);
+
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+    }
+
+    private void destroyBanner() {
+        // Remove banner from view hierarchy.
+        if (adView != null) {
+            ViewGroup parentView = (ViewGroup) adView.getParent();
+            if (parentView != null) {
+                parentView.removeView(adView);
+            }
+            // Destroy the banner ad resources.
+            adView.destroy();
+            // Drop reference to the banner ad.
+            adView = null;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        destroyBanner();
+        super.onDestroy();
+    }
+
+    private void initInterstitialAd() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        InterstitialAd.load(
+                this,
+                "ca-app-pub-1320314109772118/9205887271",
+                adRequest,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd ad) {
+                        // The mInterstitialAd reference will be null until an ad is loaded.
+                        interstitialAd = ad;
+                        showInterstitialAd();
+
+                        interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                            @Override
+                            public void onAdDismissedFullScreenContent() {
+                                // Called when fullscreen content is dismissed.
+                                // Don't forget to set the ad reference to null so you
+                                // don't show the ad a second time.
+                                interstitialAd = null;
+                            }
+
+                            @Override
+                            public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                                // Called when fullscreen content failed to show.
+                                // Don't forget to set the ad reference to null so you
+                                // don't show the ad a second time.
+                                interstitialAd = null;
+                            }
+
+                            @Override
+                            public void onAdShowedFullScreenContent() {
+                                // Called when fullscreen content is shown.
+                            }
+
+                            @Override
+                            public void onAdImpression() {
+                                // Called when an impression is recorded for an ad.
+                                super.onAdImpression();
+                            }
+
+                            @Override
+                            public void onAdClicked() {
+                                // Called when a click is recorded for an ad.
+                                super.onAdClicked();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error
+                        interstitialAd = null;
+                    }
+                }
+        );
+    }
+
+    private void showInterstitialAd() {
+        if (interstitialAd != null) {
+            interstitialAd.show(KaranganDetailActivity.this);
+        }
     }
 
     @Override

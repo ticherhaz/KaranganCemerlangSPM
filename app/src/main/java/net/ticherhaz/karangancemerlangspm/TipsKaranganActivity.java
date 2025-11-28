@@ -2,10 +2,16 @@ package net.ticherhaz.karangancemerlangspm;
 
 import android.os.Bundle;
 import android.text.Html;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 
 public class TipsKaranganActivity extends AppCompatActivity {
 
@@ -13,6 +19,7 @@ public class TipsKaranganActivity extends AppCompatActivity {
     private Button buttonDecreaseSize;
     private Button buttonFont;
     private TextView textViewTips;
+    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +34,8 @@ public class TipsKaranganActivity extends AppCompatActivity {
         setButtonIncreaseSize();
         setButtonDecreaseSizeSize();
         setButtonFont();
+
+        initAdView();
     }
 
     private void setButtonIncreaseSize() {
@@ -43,6 +52,44 @@ public class TipsKaranganActivity extends AppCompatActivity {
             fontDialog.setTextViewKarangan(textViewTips);
             fontDialog.show();
         });
+    }
+
+    private void initAdView() {
+        // Create a new ad view.
+        adView = new AdView(this);
+        adView.setAdUnitId("ca-app-pub-1320314109772118/5458213955");
+
+        // Request an anchored adaptive banner with a width of 360.
+        AdSize adSize = AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, 360);
+        adView.setAdSize(adSize);
+
+        FrameLayout adViewContainer = findViewById(R.id.ad_view_container);
+        adViewContainer.removeAllViews();
+        adViewContainer.addView(adView);
+
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+    }
+
+    private void destroyBanner() {
+        // Remove banner from view hierarchy.
+        if (adView != null) {
+            ViewGroup parentView = (ViewGroup) adView.getParent();
+            if (parentView != null) {
+                parentView.removeView(adView);
+            }
+            // Destroy the banner ad resources.
+            adView.destroy();
+            // Drop reference to the banner ad.
+            adView = null;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        destroyBanner();
+        super.onDestroy();
     }
 
     @Override

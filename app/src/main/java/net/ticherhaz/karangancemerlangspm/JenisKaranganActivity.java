@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,6 +46,7 @@ public class JenisKaranganActivity extends AppCompatActivity {
     private String userUid;
     private String karanganJenis;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private AdView adView;
 
     private void setSwipeRefreshLayout() {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -84,7 +89,6 @@ public class JenisKaranganActivity extends AppCompatActivity {
             karanganJenis = intent.getExtras().getString("karanganJenis");
         }
     }
-
 
     //Set firebaseAdapter
     private void setFirebaseRecyclerAdapter() {
@@ -171,7 +175,46 @@ public class JenisKaranganActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jenis_karangan);
+        initAdView();
         listID();
+    }
+
+    private void initAdView() {
+        // Create a new ad view.
+        adView = new AdView(this);
+        adView.setAdUnitId("ca-app-pub-1320314109772118/2832050618");
+
+        // Request an anchored adaptive banner with a width of 360.
+        AdSize adSize = AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, 360);
+        adView.setAdSize(adSize);
+
+        FrameLayout adViewContainer = findViewById(R.id.ad_view_container);
+        adViewContainer.removeAllViews();
+        adViewContainer.addView(adView);
+
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+    }
+
+    private void destroyBanner() {
+        // Remove banner from view hierarchy.
+        if (adView != null) {
+            ViewGroup parentView = (ViewGroup) adView.getParent();
+            if (parentView != null) {
+                parentView.removeView(adView);
+            }
+            // Destroy the banner ad resources.
+            adView.destroy();
+            // Drop reference to the banner ad.
+            adView = null;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        destroyBanner();
+        super.onDestroy();
     }
 
     @Override

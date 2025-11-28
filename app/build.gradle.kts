@@ -5,6 +5,7 @@ plugins {
     id("kotlin-parcelize")
 
     id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
     id("com.google.dagger.hilt.android")
 }
 
@@ -16,8 +17,8 @@ android {
         minSdk = 26
         targetSdk = 36
 
-        versionCode = 513
-        versionName = "5.13"
+        versionCode = 520
+        versionName = "5.20"
 
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -80,8 +81,8 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.2.1")
     implementation("androidx.work:work-runtime:2.11.0")
     implementation("androidx.cardview:cardview:1.0.0")
-    implementation("androidx.activity:activity-ktx:1.11.0")
-    implementation("androidx.activity:activity:1.11.0")
+    implementation("androidx.activity:activity-ktx:1.12.0")
+    implementation("androidx.activity:activity:1.12.0")
     //------------------------------------------------------
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.3.0")
@@ -91,13 +92,13 @@ dependencies {
     val kotlinVersion = "2.2.21"
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
     implementation("androidx.core:core-ktx:1.17.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.9.5")
-    implementation("androidx.navigation:navigation-ui-ktx:2.9.5")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.9.6")
+    implementation("androidx.navigation:navigation-ui-ktx:2.9.6")
 
     //Kotlin Coroutines
 
     //Lifecycle
-    val lifecycleVersion = "2.9.4"
+    val lifecycleVersion = "2.10.0"
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion")
@@ -107,14 +108,16 @@ dependencies {
     implementation("androidx.multidex:multidex:2.0.1")
 
     // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:34.4.0"))
+    implementation(platform("com.google.firebase:firebase-bom:34.6.0"))
     implementation("com.google.firebase:firebase-analytics")
-    //implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-crashlytics")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-functions")
     implementation("com.google.firebase:firebase-database")
     implementation("com.google.firebase:firebase-storage")
     implementation("com.google.firebase:firebase-messaging")
+
+    implementation("com.google.android.gms:play-services-ads:24.8.0")
 
     //FirebaseUI
     implementation("com.firebaseui:firebase-ui-database:9.1.1")
@@ -128,7 +131,7 @@ dependencies {
     //Image Crop
     implementation("com.soundcloud.android:android-crop:1.0.1@aar")
     //App Billing
-    implementation("com.android.billingclient:billing:8.0.0")
+    implementation("com.android.billingclient:billing:8.1.0")
     implementation("com.google.guava:guava:33.5.0-android")
 
     // For permissions
@@ -147,7 +150,7 @@ dependencies {
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:5.2.1")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.3.2")
 
     //For Logging
     implementation("com.github.ticherhaz:FireLog:1.2.1")

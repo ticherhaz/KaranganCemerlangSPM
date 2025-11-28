@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -52,6 +56,7 @@ public class PeribahasaActivity extends AppCompatActivity {
     private TextInputEditText tPeri;
     private TextView tvPeriRekod;
     private Toast toast;
+    private AdView adView;
 
     private void settPeri() {
         tPeri.addTextChangedListener(new TextWatcher() {
@@ -234,12 +239,50 @@ public class PeribahasaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_peribahasa);
         listID();
+        initAdView();
+    }
+
+    private void initAdView() {
+        // Create a new ad view.
+        adView = new AdView(this);
+        adView.setAdUnitId("ca-app-pub-1320314109772118/5346533317");
+
+        // Request an anchored adaptive banner with a width of 360.
+        AdSize adSize = AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, 360);
+        adView.setAdSize(adSize);
+
+        FrameLayout adViewContainer = findViewById(R.id.ad_view_container);
+        adViewContainer.removeAllViews();
+        adViewContainer.addView(adView);
+
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+    }
+
+    private void destroyBanner() {
+        // Remove banner from view hierarchy.
+        if (adView != null) {
+            ViewGroup parentView = (ViewGroup) adView.getParent();
+            if (parentView != null) {
+                parentView.removeView(adView);
+            }
+            // Destroy the banner ad resources.
+            adView.destroy();
+            // Drop reference to the banner ad.
+            adView = null;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        destroyBanner();
+        super.onDestroy();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
     }
 
     @Override

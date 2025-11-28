@@ -15,6 +15,13 @@
         android:clipChildren="false"
         android:orientation="vertical">
 
+        <Button
+            android:id="@+id/button_crash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Test Crash" />
+
         <TextView
             android:id="@+id/tv_announcement"
             android:layout_width="match_parent"
@@ -61,5 +68,10 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="4"
             tools:listitem="@layout/item_menu" />
+
+        <FrameLayout
+            android:id="@+id/ad_view_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

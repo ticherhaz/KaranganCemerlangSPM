@@ -24,10 +24,16 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <FrameLayout
+                    android:id="@+id/ad_view_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
                 <TextView
                     android:id="@+id/text_view_tips"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
@@ -37,6 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 

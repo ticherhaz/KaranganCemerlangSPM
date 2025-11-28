@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.view.ViewGroup
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -15,6 +16,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -80,6 +84,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(root)
         initWindowInsets()
 
+        initAdView()
+
+        binding.buttonCrash.setOnClickListener {
+            throw RuntimeException("Test Crash") // Force a crash
+        }
+
         startLifeCycle()
     }
 
@@ -121,8 +131,8 @@ class MainActivity : AppCompatActivity() {
                             showToast("System is under maintenance.")
                         }
 
-                        // TODO: Version right now is 400. Please update when the new version is released.
-                        if (system.versi != 400) {
+                        // TODO: Version right now is 520. Please update when the new version is released.
+                        if (system.versi != 520) {
                             showAlertDialog()
                         }
                     }
@@ -187,6 +197,46 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private var adView: AdView? = null
+
+    private fun initAdView() {
+        // Create a new ad view.
+        adView = AdView(this@MainActivity)
+        adView?.adUnitId = "ca-app-pub-1320314109772118/3718413418"
+        // Request an anchored adaptive banner with a width of 360.
+        adView?.setAdSize(
+            AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
+                this@MainActivity,
+                360
+            )
+        )
+        // Replace ad container with new ad view.
+        binding.adViewContainer.removeAllViews()
+        binding.adViewContainer.addView(adView)
+
+        val adRequest = AdRequest.Builder().build()
+        adView?.loadAd(adRequest)
+    }
+
+    private fun destroyBanner() {
+        // Remove banner from view hierarchy.
+        val parentView = adView?.parent
+        if (parentView is ViewGroup) {
+            parentView.removeView(adView)
+        }
+
+        // Destroy the banner ad resources.
+        adView?.destroy()
+
+        // Drop reference to the banner ad.
+        adView = null
+    }
+
+    override fun onDestroy() {
+        destroyBanner()
+        super.onDestroy()
     }
 
     private val requestPermissionLauncher = registerForActivityResult(

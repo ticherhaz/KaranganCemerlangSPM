@@ -78,6 +78,9 @@
         </activity>
 
         <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-1320314109772118~6457075638" />
+        <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_icon_128dp"
             android:value="@drawable/ic_icon_128dp" />

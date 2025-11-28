@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -30,13 +34,6 @@ import net.ticherhaz.karangancemerlangspm.utils.RunTransaction;
 import net.ticherhaz.karangancemerlangspm.viewHolder.KaranganViewHolder;
 
 public class SenaraiKaranganActivity extends AppCompatActivity {
-
-    //private static final String AD_UNIT_ID_BANNER = "ca-app-pub-3940256099942544/9214589741";
-    //private static final String AD_UNIT_ID_INTERSTITIAL = "ca-app-pub-3940256099942544/1033173712";
-    //---BANNER START ----
-    //private FrameLayout adContainerView;
-    //private AdView adView;
-    //---BANNER END ----
 
     //Database
     private FirebaseDatabase firebaseDatabase;
@@ -58,9 +55,7 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private String karanganJenis;
-
-    //Ads
-    //private InterstitialAd mInterstitialAd;
+    private AdView adView;
 
     //Method listID
     private void listID() {
@@ -75,7 +70,6 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
         retrieveData();
         setFirebaseRecyclerAdapter();
     }
-
 
     //Method retrieve the data
     private void retrieveData() {
@@ -157,9 +151,6 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
             public void run() {
                 if (progressBar.getVisibility() == View.VISIBLE) {
                     messageInternetMessage(SenaraiKaranganActivity.this);
-//                    Toast toast = Toast.makeText(getApplicationContext(), new InternetMessage().getMessage(), Toast.LENGTH_SHORT);
-//                    toast.setGravity(Gravity.CENTER, 0, 0);
-//                    toast.show();
                 }
 
             }
@@ -177,6 +168,8 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_senarai_karangan);
         listID();
+
+        initAdView();
     }
 
     private void setSwipeRefreshLayout() {
@@ -199,6 +192,44 @@ public class SenaraiKaranganActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void initAdView() {
+        // Create a new ad view.
+        adView = new AdView(this);
+        adView.setAdUnitId("ca-app-pub-1320314109772118/6975309751");
+
+        // Request an anchored adaptive banner with a width of 360.
+        AdSize adSize = AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, 360);
+        adView.setAdSize(adSize);
+
+        FrameLayout adViewContainer = findViewById(R.id.ad_view_container);
+        adViewContainer.removeAllViews();
+        adViewContainer.addView(adView);
+
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+    }
+
+    private void destroyBanner() {
+        // Remove banner from view hierarchy.
+        if (adView != null) {
+            ViewGroup parentView = (ViewGroup) adView.getParent();
+            if (parentView != null) {
+                parentView.removeView(adView);
+            }
+            // Destroy the banner ad resources.
+            adView.destroy();
+            // Drop reference to the banner ad.
+            adView = null;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        destroyBanner();
+        super.onDestroy();
     }
 
 
